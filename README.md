@@ -43,9 +43,9 @@ O controle dos personagens é realizado através do teclado, onde só é possív
  Os inimigos são os mesmos em todas as fases, alterando apenas a quantidade em cada uma delas e seus posicionamentos.
  Existem 3 tipos de inimigos, os guardas do ministério, repórteres e as câmeras de segurança do local.
 	
-Guardas: Podem ficar parados ou se movimentando em uma trajetória fixa. Se algum dos alienígenas, exceto E.Temer, for visto, o jogador perde.
-Repórteres: Podem ficar parados ou se movimentando em uma trajetória fixa. Se E.Temer for visto, ele fica conversando por 20 segundos e se os outros alienígenas forem vistos o jogador perde.
-Câmeras: Só podem ficar paradas em um local fixo, vigiando determinado trecho. O E.T. de Varginha é o único que não pode ser visto pelas câmeras, os outros, se forem vistos. o jogador perde.
+* Guardas: Podem ficar parados ou se movimentando em uma trajetória fixa. Se algum dos alienígenas, exceto E.Temer, for visto, o jogador perde.
+* Repórteres: Podem ficar parados ou se movimentando em uma trajetória fixa. Se E.Temer for visto, ele fica conversando por 20 segundos e se os outros alienígenas forem vistos o jogador perde.
+* Câmeras: Só podem ficar paradas em um local fixo, vigiando determinado trecho. O E.T. de Varginha é o único que não pode ser visto pelas câmeras, os outros, se forem vistos. o jogador perde.
 
 O jogador tem a opção de matar os guardas e os repórteres, porém irá disparar um cronômetro de 60 segundos para o término da fase.
 
