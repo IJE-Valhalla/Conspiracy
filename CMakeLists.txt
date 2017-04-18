@@ -48,7 +48,7 @@ include_directories(${ENGINE_INCLUDE_DIR})
 
 add_executable(conspiracy ${SOURCES})
 
-target_link_libraries(litigium
+target_link_libraries(conspiracy
                       engine
                       SDL2 SDL2_image SDL2_ttf SDL2_mixer)
 
