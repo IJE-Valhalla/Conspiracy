@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(litigium LANGUAGES CXX)
+project(conspiracy LANGUAGES CXX)
 
 
 
@@ -46,7 +46,7 @@ include_directories(${ENGINE_INCLUDE_DIR})
 
 #### Executable ####
 
-add_executable(litigium ${SOURCES})
+add_executable(conspiracy ${SOURCES})
 
 target_link_libraries(litigium
                       engine
@@ -57,6 +57,6 @@ target_link_libraries(litigium
 #### Custom Commands ####
 
 # Copy assets folder to build
-add_custom_command(TARGET litigium POST_BUILD
+add_custom_command(TARGET conspiracy POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
                    ${PROJECT_ASSETS_DIR} ${CMAKE_BINARY_DIR}/assets)
