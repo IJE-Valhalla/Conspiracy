@@ -1,7 +1,7 @@
 #include <engine.hpp>
 #include <iostream>
 
-Engine::InitSDL(){
+bool Engine::InitSDL(){
     std::cout << "SDL init";
 
     std::cout << "SDL audio and video init";
@@ -20,7 +20,7 @@ Engine::InitSDL(){
       return false;
     }
 
-    std::cout << "SDL mixer init"
+    std::cout << "SDL mixer init";
     if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0){
       return false;
     }
