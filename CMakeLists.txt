@@ -42,6 +42,11 @@ set (PROJECT_ENGINE_DIR "${PROJECT_SOURCE_DIR}/engine")
 add_subdirectory(${PROJECT_ENGINE_DIR})
 include_directories(${ENGINE_INCLUDE_DIR})
 
+# Add game
+set (PROJECT_GAME_DIR "${PROJECT_SOURCE_DIR}/game")
+add_subdirectory(${PROJECT_GAME_DIR})
+include_directories(${GAME_INCLUDE_DIR})
+
 
 
 #### Executable ####
@@ -50,6 +55,7 @@ add_executable(conspiracy ${SOURCES})
 
 target_link_libraries(conspiracy
                       engine
+		      game
                       SDL2 SDL2_image SDL2_ttf SDL2_mixer)
 
 
