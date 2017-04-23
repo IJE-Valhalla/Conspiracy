@@ -27,3 +27,28 @@ bool Engine::InitSDL(){
 
     return true;
 }
+
+bool Engine::FinalizeSDL(){
+  std::cout << "Finalizing SDL";
+
+  std::cout << "Finalizing Mixer";
+  Mix_Quit();
+
+  std::cout << "Finalizing TTF";
+  TTF_Quit();
+
+  std::cout << "Finalizing Mixer";
+  IMG_Quit();
+
+  std::cout << "Finalizing audio and video";
+  SDL_Quit();
+
+  return true;
+}
+
+Engine* Engine::GetInstance(){
+  if(!instance){
+    instance = new Engine;
+  }
+  return instance;
+}
