@@ -7,11 +7,9 @@
 
 namespace engine{
 
-  SDL_Window *gameWindow;
-  SDL_Renderer *gameCanvas;
-
   bool InitSDL();
   bool FinalizeSDL();
   bool CreateWindow(std::string windowTitle, std::pair<int, int> windowSize);
+  SDL_Window* GetGameWindow();
 }
 #endif
