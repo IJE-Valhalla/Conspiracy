@@ -1,7 +1,9 @@
 #include <engine.hpp>
 #include <iostream>
 
-bool Engine::InitSDL(){
+using namespace engine;
+
+bool InitSDL(){
     std::cout << "SDL init";
 
     std::cout << "SDL audio and video init";
@@ -28,7 +30,7 @@ bool Engine::InitSDL(){
     return true;
 }
 
-bool Engine::FinalizeSDL(){
+bool FinalizeSDL(){
   std::cout << "Finalizing SDL";
 
   std::cout << "Finalizing Mixer";
@@ -46,9 +48,24 @@ bool Engine::FinalizeSDL(){
   return true;
 }
 
-Engine* Engine::GetInstance(){
-  if(!instance){
-    instance = new Engine;
+bool CreateWindow(std::string windowTitle, std::pair<int, int> windowSize){
+  std::cout << "Create window";
+  gameWindow = SDL_CreateWindow(windowTitle.c_str(), SDL_WINDOWPOS_CENTERED,
+                                SDL_WINDOWPOS_CENTERED, windowSize.first,
+                                windowSize.second, SDL_WINDOW_SHOWN);
+
+  if(gameWindow == NULL){
+    return false;
   }
-  return instance;
+
+  std::cout << "Create canvas";
+  gameCanvas = SDL_CreateRenderer(gameWindow, -1,
+                                  SDL_RENDERER_ACCELERATED |
+                                  SDL_RENDERER_PRESENTVSYNC);
+
+  if(gameCanvas == NULL){
+    return false;
+  }
+  
+  return true;
 }

@@ -2,16 +2,16 @@
 #define ENGINE_HPP
 
 #include <sdl2includes.hpp>
+#include <string>
+#include <utility>
 
-class Engine{
+namespace engine{
 
-public:
+  SDL_Window *gameWindow;
+  SDL_Renderer *gameCanvas;
+
   bool InitSDL();
   bool FinalizeSDL();
-  static Engine* GetInstance();
-
-private:
-  static Engine *instance;
-  Engine();
-};
+  bool CreateWindow(std::string windowTitle, std::pair<int, int> windowSize);
+}
 #endif
