@@ -54,8 +54,6 @@ namespace engine{
 
     INFO("Finalizing audio and video");
     SDL_Quit();
-    gameWindow = NULL;
-    gameCanvas = NULL;
 
     return true;
   }
@@ -88,6 +86,19 @@ namespace engine{
   }
 
 
+  bool DestroyWindow(){
+    INFO("Destroying canvas");
+    SDL_DestroyRenderer(gameCanvas);
+    gameCanvas = NULL;
+
+    INFO("Destroying window");
+    SDL_DestroyWindow(gameWindow);
+    gameWindow = NULL;
+
+    return true;
+  }
+
+
   void Run(){
     bool isRunning = true;
 
@@ -105,6 +116,7 @@ namespace engine{
         if (evt.type == SDL_QUIT){
           isRunning = false;
           FinalizeSDL();
+          DestroyWindow();
         }
       }
     }
