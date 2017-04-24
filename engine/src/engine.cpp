@@ -54,6 +54,8 @@ namespace engine{
 
     INFO("Finalizing audio and video");
     SDL_Quit();
+    gameWindow = NULL;
+    gameCanvas = NULL;
 
     return true;
   }
@@ -97,12 +99,13 @@ namespace engine{
       exit(-1);
     }
 
-    char var;
     while(isRunning){
-      std::cin >> var;
-      if(var == 'a'){
-        isRunning = false;
-        FinalizeSDL();
+      SDL_Event evt;
+      while(SDL_PollEvent(&evt) != 0){
+        if (evt.type == SDL_QUIT){
+          isRunning = false;
+          FinalizeSDL();
+        }
       }
     }
   }
