@@ -3,8 +3,12 @@
 
 namespace engine{
 
+  const std::string GAME_NAME = "Default";
+  const std::pair <int, int> WINDOW_SIZE (800, 600);
+
   SDL_Window *gameWindow;
   SDL_Renderer *gameCanvas;
+
 
   bool InitSDL(){
     std::cout << "SDL init" << std::endl;
@@ -33,6 +37,7 @@ namespace engine{
     return true;
   }
 
+
   bool FinalizeSDL(){
     std::cout << "Finalizing SDL" << std::endl;
 
@@ -50,6 +55,7 @@ namespace engine{
 
     return true;
   }
+
 
   bool CreateWindow(std::string windowTitle, std::pair<int, int> windowSize){
     std::cout << "Create window" << std::endl;
@@ -70,8 +76,34 @@ namespace engine{
       return false;
     }
 
+    SDL_SetRenderDrawColor(gameCanvas, 0, 0, 0, 0);
+    SDL_RenderClear(gameCanvas);
+    SDL_RenderPresent(gameCanvas);
+
     return true;
   }
+
+
+  bool Run(){
+    bool isRunning = true;
+
+    if(!InitSDL()){
+      std::cout << "ERRO AO INICIAR SDL" << std::endl;
+      exit(-1);
+    }else if(!CreateWindow(GAME_NAME, WINDOW_SIZE)){
+      std::cout << "ERRO AO CRIAR JANELA" << std::endl;
+      exit(-1);
+    }
+    char var;
+    while(isRunning){
+      std::cin >> var;
+      if(var == 'a'){
+        isRunning = false;
+        FinalizeSDL();
+      }
+    }
+  }
+
 
   SDL_Window* GetGameWindow(){
     return gameWindow;
