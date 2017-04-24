@@ -4,13 +4,14 @@
 #include <sdl2includes.hpp>
 #include <string>
 #include <utility>
+#include "log.h"
 
 namespace engine{
 
   bool InitSDL();
   bool FinalizeSDL();
   bool CreateWindow(std::string windowTitle, std::pair<int, int> windowSize);
-  bool Run();
+  void Run();
   SDL_Window* GetGameWindow();
 }
 #endif

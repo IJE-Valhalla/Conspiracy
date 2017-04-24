@@ -1,5 +1,6 @@
 #include <engine.hpp>
-#include <iostream>
+//#include <iostream>
+//#include "log.hpp"
 
 namespace engine{
 
@@ -11,25 +12,26 @@ namespace engine{
 
 
   bool InitSDL(){
-    std::cout << "SDL init" << std::endl;
 
-    std::cout << "SDL audio and video init" << std::endl;
+    INFO("SDL init");
+
+    INFO("SDL audio and video init");
     if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0){
       return false;
     }
 
     int imgFlags = IMG_INIT_PNG;
-    std::cout << "SDL image init" << std::endl;
+    INFO("SDL image init");
     if(!(IMG_Init(imgFlags) & imgFlags)){
       return false;
     }
 
-    std::cout << "SDL TTF init" << std::endl;
+    INFO("SDL TTF init");
     if(TTF_Init() == -1){
       return false;
     }
 
-    std::cout << "SDL mixer init" << std::endl;
+    INFO("SDL mixer init");
     if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0){
       return false;
     }
@@ -39,18 +41,18 @@ namespace engine{
 
 
   bool FinalizeSDL(){
-    std::cout << "Finalizing SDL" << std::endl;
+    INFO("Finalizing SDL");
 
-    std::cout << "Finalizing Mixer" << std::endl;
+    INFO("Finalizing Mixer");
     Mix_Quit();
 
-    std::cout << "Finalizing TTF" << std::endl;
+    INFO("Finalizing TTF");
     TTF_Quit();
 
-    std::cout << "Finalizing Mixer" << std::endl;
+    INFO("Finalizing Mixer");
     IMG_Quit();
 
-    std::cout << "Finalizing audio and video" << std::endl;
+    INFO("Finalizing audio and video");
     SDL_Quit();
 
     return true;
@@ -58,7 +60,7 @@ namespace engine{
 
 
   bool CreateWindow(std::string windowTitle, std::pair<int, int> windowSize){
-    std::cout << "Create window" << std::endl;
+    INFO("Create window");
     gameWindow = SDL_CreateWindow(windowTitle.c_str(), SDL_WINDOWPOS_CENTERED,
                                   SDL_WINDOWPOS_CENTERED, windowSize.first,
                                   windowSize.second, SDL_WINDOW_SHOWN);
@@ -67,7 +69,7 @@ namespace engine{
       return false;
     }
 
-    std::cout << "Create canvas" << std::endl;
+    INFO("Create canvas");
     gameCanvas = SDL_CreateRenderer(gameWindow, -1,
                                     SDL_RENDERER_ACCELERATED |
                                     SDL_RENDERER_PRESENTVSYNC);
@@ -84,16 +86,17 @@ namespace engine{
   }
 
 
-  bool Run(){
+  void Run(){
     bool isRunning = true;
 
     if(!InitSDL()){
-      std::cout << "ERRO AO INICIAR SDL" << std::endl;
+      ERROR("ERRO AO INICIAR SDL");
       exit(-1);
     }else if(!CreateWindow(GAME_NAME, WINDOW_SIZE)){
-      std::cout << "ERRO AO CRIAR JANELA" << std::endl;
+      ERROR("ERRO AO CRIAR JANELA");
       exit(-1);
     }
+
     char var;
     while(isRunning){
       std::cin >> var;
