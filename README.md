@@ -26,7 +26,13 @@ $ ./conspiracy
 
 ## Authors
 
+### Developers
 - Rodrigo Oliveira Campos (@rodrigocam)
 - Pablo Diego Silva da Silva (@pablodiegoss)
 - Ronyell Henrique dos Santos (@Ronyell)
 
+### Artist
+ - Vitor Paz Guedes (vitor.paz.guedes@gmail.com)
+ 
+### Musician
+ - Daniel Gillez Araújo Silva
