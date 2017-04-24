@@ -19,7 +19,7 @@ More informations in our GDD - https://github.com/IJE-Valhalla/Conspiracy/wiki/G
 ```
 $ git clone https://github.com/IJE-Valhalla/Conspiracy.git
 $ cd Conspiracy
-$ cmake ..
+$ cmake .
 $ make
 $ ./conspiracy
 ```
