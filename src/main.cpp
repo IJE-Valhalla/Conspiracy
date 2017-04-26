@@ -1,18 +1,11 @@
 #include <iostream>
 
-#include "game.hpp"
-#include "scene.hpp"
-#include "sprite.hpp"
+#include "engine.hpp"
 
 using namespace engine;
 
 int main(int, char**){
-  Game::instance.setGameProperties("Litigium", 1024, 600);
-
-  Scene scene("Colorful");
-
-  Game::instance.addScene(scene);
-  Game::instance.run();
+  Run();
 
   return 0;
 }
