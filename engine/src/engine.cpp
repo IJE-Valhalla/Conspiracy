@@ -10,8 +10,7 @@ namespace engine{
   SDL_Renderer *gameCanvas;
   SceneManager* sceneManager;
 
-
-  bool InitSDL(){
+  bool initSDL(){
 
     INFO("SDL init");
 
@@ -40,7 +39,7 @@ namespace engine{
   }
 
 
-  bool FinalizeSDL(){
+  bool finalizeSDL(){
     INFO("Finalizing SDL");
 
     INFO("Finalizing Mixer");
@@ -59,7 +58,7 @@ namespace engine{
   }
 
 
-  bool CreateWindow(std::string windowTitle, std::pair<int, int> windowSize){
+  bool createWindow(std::string windowTitle, std::pair<int, int> windowSize){
     INFO("Create window");
     gameWindow = SDL_CreateWindow(windowTitle.c_str(), SDL_WINDOWPOS_CENTERED,
                                   SDL_WINDOWPOS_CENTERED, windowSize.first,
@@ -86,7 +85,7 @@ namespace engine{
   }
 
 
-  bool DestroyWindow(){
+  bool destroyWindow(){
     INFO("Destroying canvas");
     SDL_DestroyRenderer(gameCanvas);
     gameCanvas = NULL;
@@ -98,17 +97,16 @@ namespace engine{
     return true;
   }
 
-
-  void Run(){
   void loadEngine(){
       sceneManager = new SceneManager();
   }
+  void run(){
     bool isRunning = true;
 
-    if(!InitSDL()){
+    if(!initSDL()){
       ERROR("ERRO AO INICIAR SDL");
       exit(-1);
-    }else if(!CreateWindow(GAME_NAME, WINDOW_SIZE)){
+    }else if(!createWindow(GAME_NAME, WINDOW_SIZE)){
       ERROR("ERRO AO CRIAR JANELA");
       exit(-1);
     }
@@ -118,8 +116,8 @@ namespace engine{
       while(SDL_PollEvent(&evt) != 0){
         if (evt.type == SDL_QUIT){
           isRunning = false;
-          FinalizeSDL();
-          DestroyWindow();
+          finalizeSDL();
+          destroyWindow();
         }
       }
       if(sceneManager->getCurrentScene() != NULL){
