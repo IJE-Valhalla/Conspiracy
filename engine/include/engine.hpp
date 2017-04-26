@@ -14,5 +14,7 @@ namespace engine{
   bool DestroyWindow();
   void Run();
   SDL_Window* GetGameWindow();
+  SDL_Renderer* getGameCanvas();
+
 }
 #endif

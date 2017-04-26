@@ -126,4 +126,9 @@ namespace engine{
   SDL_Window* GetGameWindow(){
     return gameWindow;
   }
+
+  SDL_Renderer* GetGameCanvas(){
+      return gameCanvas;
+  }
+
 }
