@@ -13,6 +13,7 @@ namespace engine{
   bool CreateWindow(std::string windowTitle, std::pair<int, int> windowSize);
   bool DestroyWindow();
   void Run();
+  void loadEngine();
   SDL_Window* GetGameWindow();
 }
 #endif

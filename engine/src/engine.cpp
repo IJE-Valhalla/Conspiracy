@@ -1,6 +1,5 @@
 #include <engine.hpp>
-//#include <iostream>
-//#include "log.hpp"
+#include "scene_manager.hpp"
 
 namespace engine{
 
@@ -9,6 +8,7 @@ namespace engine{
 
   SDL_Window *gameWindow;
   SDL_Renderer *gameCanvas;
+  SceneManager* sceneManager;
 
 
   bool InitSDL(){
@@ -100,6 +100,9 @@ namespace engine{
 
 
   void Run(){
+  void loadEngine(){
+      sceneManager = new SceneManager();
+  }
     bool isRunning = true;
 
     if(!InitSDL()){
@@ -118,6 +121,12 @@ namespace engine{
           FinalizeSDL();
           DestroyWindow();
         }
+      }
+      if(sceneManager->getCurrentScene() != NULL){
+          //To do: Calculate timeElapsed
+          int timeElapsed = 5;
+          sceneManager->getCurrentScene()->update(timeElapsed);
+          sceneManager->getCurrentScene()->draw();
       }
     }
   }
