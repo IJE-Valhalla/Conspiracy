@@ -29,7 +29,7 @@ namespace engine{
             exit(-1);
         }
 
-        texture = SDL_CreateTextureFromSurface(getGameCanvas(), image);
+        texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), image);
 
         if(texture == NULL){
             ERROR("CREATE TEXTURE SPRITE ERROR.");
@@ -57,7 +57,7 @@ namespace engine{
         // Rendering in screen
         SDL_Rect renderQuad = {x, y, clipRect.w, clipRect.h };
 
-        SDL_RenderCopy(getGameCanvas(), texture, &clipRect, &renderQuad);
+        SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
     }
 
     void Sprite::setInterval(int firstPosition, int lastPosition){
@@ -87,7 +87,7 @@ namespace engine{
         // Rendering in screen
         SDL_Rect renderQuad = {x, y, clipRect.w, clipRect.h };
 
-        SDL_RenderCopy(getGameCanvas(), texture, &clipRect, &renderQuad);
+        SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
     }
 
     void Sprite::setCurrentPositionFrame(int positionFrame){
