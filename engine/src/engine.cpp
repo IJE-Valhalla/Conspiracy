@@ -1,6 +1,8 @@
 #include "engine.hpp"
 #include "sprite.hpp"
 #include "scene_manager.hpp"
+#include "input_manager.hpp"
+
 
 namespace engine{
 
@@ -16,6 +18,7 @@ namespace engine{
       windowManager = new WindowManager();
       sdlManager = new SDLManager();
     }
+
     void run(){
         bool isRunning = true;
 
@@ -26,15 +29,35 @@ namespace engine{
             ERROR("ERRO AO CRIAR JANELA");
             exit(-1);
         }
+        ///////////////
+            srand(time(NULL));
+            int x = 0;
+            int y = 250;
+            engine::Sprite sprite("assets/sprite/runner.png", 8, 108, 140);
+            sprite.init();
+            sprite.draw(x, y);
+///////////////
+        engine::InputManager * inputManager = new engine::InputManager();
+        SDL_Event event;
         while(isRunning){
-            SDL_Event evt;
-            while(SDL_PollEvent(&evt) != 0){
-                if (evt.type == SDL_QUIT){
-                    isRunning = false;
-                    sdlManager->finalizeSDL();
-                    windowManager->destroyWindow();
-                }
+            inputManager->update(event);
+            if(inputManager->getQuitRequest()){
+                isRunning = false;
+                sdlManager->finalizeSDL();
+                windowManager->destroyWindow();
             }
+            engine::InputManager::KeyPress keyPress = inputManager->getKeyPress();
+            if(keyPress == engine::InputManager::KeyPress::KEY_PRESS_RIGHT){
+                x+=5;
+            }
+
+            //////////////
+                SDL_Delay(90);
+                SDL_RenderClear(WindowManager::getGameCanvas());
+                sprite.update(x,y);
+                SDL_RenderPresent(WindowManager::getGameCanvas());
+//////////////////
+
             if(sceneManager->getCurrentScene() != NULL){
                 //To do: Calculate timeElapsed
                 int timeElapsed = 5;
