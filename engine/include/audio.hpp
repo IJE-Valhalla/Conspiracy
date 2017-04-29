@@ -6,6 +6,7 @@ namespace engine{
     class Audio{
     public:
         Audio(const std::string audioPath, const std::string audioType);
+        ~Audio();
         play(const int timesToPlay);
         pause();
         resume();
