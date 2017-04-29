@@ -3,12 +3,14 @@
 
 using namespace engine;
 
-GameObject::GameObject(std::string objectName, int positionX, int positionY, int width, int height){
+GameObject::GameObject(std::string objectName, int positionX, int positionY,
+                       int width, int height, Sprite* objectSprite){
     setName(objectName);
     setPositionX(positionX);
     setPositionY(positionY);
     setWidth(width);
     setHeight(height);
+    setSprite(objectSprite);
 }
 
 std::string GameObject::getName(){
@@ -31,6 +33,10 @@ int GameObject::getHeight(){
     return size.second;
 }
 
+Sprite* GameObject::getSprite(){
+    return sprite;
+}
+
 void GameObject::setName(std::string newName){
     name = newName;
 }
@@ -49,4 +55,8 @@ void GameObject::setWidth(int newWidth){
 
 void GameObject::setHeight(int newHeight){
     size.second = newHeight;
+}
+
+void GameObject::setSprite(Sprite* newSprite){
+    sprite = newSprite;
 }
