@@ -5,7 +5,8 @@
 using namespace engine;
 
 int main(int, char**){
-  Run();
+    loadEngine();
+    run();
 
-  return 0;
+    return 0;
 }
