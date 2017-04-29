@@ -17,8 +17,7 @@ namespace engine{
             KEY_PRESS_SPACE,
             KEY_PRESS_ONE,
             KEY_PRESS_TWO,
-            KEY_PRESS_THREE,
-            QUIT
+            KEY_PRESS_THREE
         };
 
         InputManager();
@@ -26,6 +25,7 @@ namespace engine{
 
         void update(SDL_Event event);
         InputManager::KeyPress getKeyPress();
+        void setKeyPress(InputManager::KeyPress key);
         bool getQuitRequest();
 
     private:

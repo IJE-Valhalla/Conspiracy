@@ -61,9 +61,12 @@ namespace engine{
     }
 
     void Sprite::setInterval(int firstPosition, int lastPosition){
-        interval.first = firstPosition;
-        interval.second = lastPosition;
-        currentPositionFrame = interval.first;
+        if(firstPosition != interval.first || lastPosition != interval.second){
+            currentPositionFrame = firstPosition;
+            interval.first = firstPosition;
+            interval.second = lastPosition;
+            DEBUG("First Position: " << firstPosition << " Last Position: " << lastPosition);
+        }
     }
 
     int Sprite::next(){

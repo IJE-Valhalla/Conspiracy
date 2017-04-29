@@ -1,15 +1,15 @@
 #ifndef GAME_OBJECT_HPP
 #define GAME_OBJECT_HPP
 
-#include <engine.hpp>
-#include <sprite.hpp>
+#include <iostream>
+#include <string>
+#include "sprite.hpp"
 
 namespace engine{
     class GameObject{
     public:
-        GameObject(std::string objectName, int positionX, int positionY,
-                                           int width, int height,
-                                           Sprite* objectSprite);
+       GameObject(std::string objectName, int positionX, int positionY,
+               int width, int height, Sprite* objectSprite);
         ~GameObject();
 
         void draw();

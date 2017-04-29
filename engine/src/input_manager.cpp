@@ -14,7 +14,6 @@ namespace engine{
     }
 
     void InputManager::update(SDL_Event event){
-        keyPress =  KeyPress::KEY_PRESS_DEFAULT;
         while(SDL_PollEvent(&event)){
             switch (event.key.keysym.sym){
                 case SDLK_UP:
@@ -51,11 +50,8 @@ namespace engine{
                 break;
             }
 
-            switch(event.type){
-                case SDL_QUIT:
-                    keyPress = KeyPress::QUIT;
-                    quitRequest = true;
-                break;
+            if(event.type == SDL_QUIT){
+                quitRequest = true;
             }
         }
     }
@@ -64,6 +60,9 @@ namespace engine{
          return keyPress;
     }
 
+    void InputManager::setKeyPress(InputManager::KeyPress key){
+        keyPress = key;
+   }
     bool InputManager::getQuitRequest(){
         return quitRequest;
     }

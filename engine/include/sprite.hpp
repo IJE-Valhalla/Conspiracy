@@ -32,6 +32,7 @@ namespace engine{
         int currentPositionFrame;
         int quantity;
         std::pair<int, int> interval;
+        std::pair<int, int> axis;
     };
 }
 
