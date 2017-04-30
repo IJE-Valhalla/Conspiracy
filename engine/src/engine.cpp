@@ -93,7 +93,6 @@ namespace engine{
             }
 /////////////////////////////////////////////////////////////////////////////////
 
-            engine::InputManager::KeyPress keyPress = inputManager->getKeyPress();
                 //
                 // if(keyPress == engine::InputManager::KeyPress::KEY_PRESS_ONE){
                 //     actual = 1;
@@ -203,7 +202,7 @@ namespace engine{
                 gameObject2.getSprite()->draw(x1,y1);
                 gameObject3.getSprite()->draw(x2,y2);
                 SDL_RenderPresent(WindowManager::getGameCanvas());
-                SDL_Delay(40);
+                SDL_Delay(55);
 ///////////////////////////////////////////////////////////////////////////////////
 
             if(sceneManager->getCurrentScene() != NULL){

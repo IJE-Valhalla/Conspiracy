@@ -24,26 +24,16 @@ namespace engine{
         ~InputManager();
 
         void update(SDL_Event event);
-        InputManager::KeyPress getKeyPress();
-        void setKeyPress(InputManager::KeyPress key);
         bool getQuitRequest();
         void Update(void);
 
-        ///--- Keyboars state function
-        bool isKeyTriggered(int iKeyCode);
-        bool isKeyPressed(int iKeyCode);
-        bool isKeyReleased(int iKeyCode);
+        bool isKeyTriggered(SDL_Keycode iKeyCode);
+        bool isKeyPressed(SDL_Keycode iKeyCode);
+        bool isKeyReleased(SDL_Keycode iKeyCode);
 
     private:
-        KeyPress keyPress;
         bool quitRequest;
-
         std::unordered_map<int, bool> keyActive;
-
-        ///--- Last frame Keyboard state
-        Uint8 m_piPreviousInput[SDL_NUM_SCANCODES];
-        ///--- Current frame keyboard state
-        Uint8 m_piCurrentInput[SDL_NUM_SCANCODES];
     };
 }
 #endif

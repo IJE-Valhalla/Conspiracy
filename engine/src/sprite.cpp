@@ -83,13 +83,7 @@ namespace engine{
     void Sprite::update(int x, int y){
         abscissa = next();
 
-        // //Crop image
-        // SDL_Rect clipRect = {abscissa, 0 , widthFrame, heightFrame};
-        //
-        // // Rendering in screen
-        // SDL_Rect renderQuad = {x, y, clipRect.w, clipRect.h };
-        //
-        // SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
+        // draw(x,y);
     }
 
     void Sprite::setCurrentPositionFrame(int positionFrame){

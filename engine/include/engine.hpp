@@ -9,7 +9,6 @@
 namespace engine{
 
   void run();
-  double getDelta();
   void loadEngine();
 
 }
