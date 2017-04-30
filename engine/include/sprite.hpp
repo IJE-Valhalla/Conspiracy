@@ -10,7 +10,7 @@ namespace engine{
 
     class Sprite{
     public:
-        Sprite(std::string newDirectory, int newQuantity, int width, int height);
+        Sprite(std::string newDirectory, int newQuantity, int width, int height,int space);
         ~Sprite();
 
         void init();
@@ -32,7 +32,8 @@ namespace engine{
         int currentPositionFrame;
         int quantity;
         std::pair<int, int> interval;
-        std::pair<int, int> axis;
+        int spaceFrame;
+        int abscissa;
     };
 }
 

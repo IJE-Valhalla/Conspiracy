@@ -6,56 +6,52 @@ namespace engine{
 
     InputManager::InputManager(){
         quitRequest = false;
-        keyPress = KeyPress::KEY_PRESS_DEFAULT;
+        ///--- Initialize the las frame array to 0
+       memset(m_piPreviousInput, 0, sizeof(Uint8)*SDL_NUM_SCANCODES);
+       ///--- Copy the current status
+       memcpy(m_piCurrentInput, SDL_GetKeyboardState(NULL), sizeof(Uint8)*SDL_NUM_SCANCODES);
     }
 
     InputManager::~InputManager(){
 
     }
 
-    void InputManager::update(SDL_Event event){
-        while(SDL_PollEvent(&event)){
-            switch (event.key.keysym.sym){
-                case SDLK_UP:
-                    keyPress = KeyPress::KEY_PRESS_UP;
-                    INFO("UP");
-                break;
-                case SDLK_DOWN:
-                    keyPress = KeyPress::KEY_PRESS_DOWN;
-                    INFO("DOWN");
-                break;
-                case SDLK_RIGHT:
-                    keyPress = KeyPress::KEY_PRESS_RIGHT;
-                    INFO("RIGHT");
-                break;
-                case SDLK_LEFT:
-                    keyPress = KeyPress::KEY_PRESS_LEFT;
-                    INFO("LEFT");
-                break;
-                case SDLK_SPACE:
-                    keyPress = KeyPress::KEY_PRESS_SPACE;
-                    INFO("SPACE");
-                break;
-                case SDLK_1:
-                    keyPress = KeyPress::KEY_PRESS_ONE;
-                    INFO("ONE");
-                break;
-                case SDLK_2:
-                    keyPress = KeyPress::KEY_PRESS_TWO;
-                    INFO("TWO");
-                break;
-                case SDLK_3:
-                    keyPress = KeyPress::KEY_PRESS_THREE;
-                    INFO("THREE");
-                break;
-            }
-
-            if(event.type == SDL_QUIT){
-                quitRequest = true;
-            }
-        }
+    void InputManager::Update(void){
+        INFO("KEY PUSH");
+        memcpy(m_piPreviousInput, m_piCurrentInput, sizeof(Uint8)*SDL_NUM_SCANCODES);
+        memcpy(m_piCurrentInput, SDL_GetKeyboardState(NULL), sizeof(Uint8)*SDL_NUM_SCANCODES);
     }
 
+    bool InputManager::isKeyPressed(int iKeyCode) {
+        int i = (int)iKeyCode;
+        return keyActive[i];
+    }
+
+    bool InputManager::isKeyReleased(int iKeyCode){
+        return (m_piCurrentInput[iKeyCode]==0 && m_piPreviousInput[iKeyCode]==1);
+    }
+
+    bool InputManager::isKeyTriggered(int iKeyCode){
+        return (m_piCurrentInput[iKeyCode]==1 && m_piPreviousInput[iKeyCode]==0);
+    }
+
+    void InputManager::update(SDL_Event event){
+        while(SDL_PollEvent(&event)){
+            switch (event.type) {
+                case SDL_QUIT:
+                    quitRequest = true;
+                break;
+                case SDL_KEYDOWN:
+                    keyActive[event.key.keysym.sym] = true;
+                    INFO("PRESS" << event.key.keysym.sym);
+                break;
+                case SDL_KEYUP:
+                    keyActive[event.key.keysym.sym] = false;
+                    INFO("PUSH");
+                break;
+        }
+    }
+}
      InputManager::KeyPress InputManager::getKeyPress(){
          return keyPress;
     }
@@ -66,4 +62,5 @@ namespace engine{
     bool InputManager::getQuitRequest(){
         return quitRequest;
     }
+
 }
