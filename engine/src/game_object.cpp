@@ -1,62 +1,69 @@
+#include "game_object.hpp"
 #include <game_object.hpp>
 #include <log.h>
 
-using namespace engine;
+namespace engine{
 
-GameObject::GameObject(std::string objectName, int positionX, int positionY,
-                       int width, int height, Sprite* objectSprite){
-    setName(objectName);
-    setPositionX(positionX);
-    setPositionY(positionY);
-    setWidth(width);
-    setHeight(height);
-    setSprite(objectSprite);
-}
+    GameObject::GameObject(std::string objectName, int positionX, int positionY,
+            int width, int height, Sprite* objectSprite){
+            setName(objectName);
+            setPositionX(positionX);
+            setPositionY(positionY);
+            setWidth(width);
+            setHeight(height);
+            setSprite(objectSprite);
+        }
 
-std::string GameObject::getName(){
-    return name;
-}
+        GameObject::~GameObject(){
 
-int GameObject::getPositionX(){
-    return position.first;
-}
+        }
 
-int GameObject::getPositionY(){
-    return position.second;
-}
 
-int GameObject::getWidth(){
-    return size.first;
-}
+        std::string GameObject::getName(){
+            return name;
+        }
 
-int GameObject::getHeight(){
-    return size.second;
-}
+        int GameObject::getPositionX(){
+            return position.first;
+        }
 
-Sprite* GameObject::getSprite(){
-    return sprite;
-}
+        int GameObject::getPositionY(){
+            return position.second;
+        }
 
-void GameObject::setName(std::string newName){
-    name = newName;
-}
+        int GameObject::getWidth(){
+            return size.first;
+        }
 
-void GameObject::setPositionX(int newX){
-    position.first = newX;
-}
+        int GameObject::getHeight(){
+            return size.second;
+        }
 
-void GameObject::setPositionY(int newY){
-    position.second = newY;
-}
+        Sprite* GameObject::getSprite(){
+            return sprite;
+        }
 
-void GameObject::setWidth(int newWidth){
-    size.first = newWidth;
-}
+        void GameObject::setName(std::string newName){
+            name = newName;
+        }
 
-void GameObject::setHeight(int newHeight){
-    size.second = newHeight;
-}
+        void GameObject::setPositionX(int newX){
+            position.first = newX;
+        }
 
-void GameObject::setSprite(Sprite* newSprite){
-    sprite = newSprite;
-}
+        void GameObject::setPositionY(int newY){
+            position.second = newY;
+        }
+
+        void GameObject::setWidth(int newWidth){
+            size.first = newWidth;
+        }
+
+        void GameObject::setHeight(int newHeight){
+            size.second = newHeight;
+        }
+
+        void GameObject::setSprite(Sprite* newSprite){
+            sprite = newSprite;
+        }
+    }
