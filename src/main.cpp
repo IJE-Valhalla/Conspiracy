@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "engine.hpp"
+#include "game_object.hpp"
 
 using namespace engine;
 
