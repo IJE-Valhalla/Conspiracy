@@ -5,16 +5,8 @@
 
 namespace engine{
 
-    Sprite::Sprite(std::string newDirectory, int newQuantity, int width, int height,int space){
+    Sprite::Sprite(std::string newDirectory){
         directory = newDirectory;
-        quantity = newQuantity;
-        widthFrame = width;
-        heightFrame = height;
-        interval.first = 1;
-        interval.second = quantity;
-        currentPositionFrame = interval.first;
-        spaceFrame = space;
-        abscissa = 0;
     }
 
     Sprite::~Sprite(){
@@ -38,9 +30,8 @@ namespace engine{
             exit(-1);
         }
 
-        totalWidth = image->w;
-        totalHeight = image->h;
-
+        lenght.first = image->w;
+        lenght.second = image->h;
         SDL_FreeSurface(image);
 
     }
@@ -51,41 +42,19 @@ namespace engine{
         texture = NULL;
     }
 
-    void Sprite::draw(int x, int y){
+    void Sprite::update(int x, int y){
+        axis.first = x;
+        axis.second = y;
+    }
+
+
+    void Sprite::draw(){
          //Crop image
-        SDL_Rect clipRect = {abscissa, 0 , widthFrame, heightFrame};
+        clipRect = {0, 0, lenght.first, lenght.second};
 
         // Rendering in screen
-        SDL_Rect renderQuad = {x, y, clipRect.w, clipRect.h };
+        renderQuad = {axis.first, axis.second, clipRect.w, clipRect.h };
 
         SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
     }
-
-    void Sprite::setInterval(int firstPosition, int lastPosition){
-        if(firstPosition != interval.first || lastPosition != interval.second){
-            currentPositionFrame = firstPosition;
-            interval.first = firstPosition;
-            interval.second = lastPosition;
-            DEBUG("First Position: " << firstPosition << " Last Position: " << lastPosition);
-        }
-    }
-
-    void Sprite::next(){
-        if(currentPositionFrame > interval.second){
-            currentPositionFrame = interval.first;
-        }
-        abscissa = (widthFrame + spaceFrame) * (currentPositionFrame - 1);
-        currentPositionFrame ++;
-    }
-
-    void Sprite::update(){
-        next();
-
-    }
-
-    void Sprite::setCurrentPositionFrame(int positionFrame){
-        currentPositionFrame = positionFrame;
-        next();
-    }
-
 }
