@@ -1,16 +1,17 @@
-#include <audio.hpp>
-#include <log.h>
+
+#include "audio.hpp"
+#include "log.h"
 
 using namespace engine;
 
-Audio::Audio(const std::string audioPath, const std::string audioType){
+Audio::Audio(std::string audioPath, std::string audioType){
     if(audioType.compare("MUSIC") == 0){
-        audioMusic = Mix_LoadMUS(audioPath);
+        audioMusic = Mix_LoadMUS(audioPath.c_str());
         if(audioMusic == NULL){
             ERROR("Audio file could not be loaded");
         }
     }else if(audioType.compare("EFFECT") == 0){
-        audioEffect = Mix_LoadWAV(audioPath);
+        audioEffect = Mix_LoadWAV(audioPath.c_str());
         if(audioEffect == NULL){
             ERROR("Audio file could not be loaded");
         }
@@ -19,7 +20,7 @@ Audio::Audio(const std::string audioPath, const std::string audioType){
     }
 }
 
-Audio::play(const int timesToPlay){
+void Audio::play(const int timesToPlay){
     if(audioMusic != NULL){
         if(Mix_PlayMusic(audioMusic, timesToPlay) == -1){
             ERROR("Audio could not be played");
@@ -31,7 +32,7 @@ Audio::play(const int timesToPlay){
     }
 }
 
-Audio::pause(){
+void Audio::pause(){
     if(audioMusic != NULL){
         if(Mix_PausedMusic() != 1){
             Mix_PauseMusic();
@@ -43,7 +44,7 @@ Audio::pause(){
     }
 }
 
-Audio::resume(){
+void Audio::resume(){
     if(audioMusic != NULL){
         if(Mix_PausedMusic() == 1){
             Mix_ResumeMusic();
@@ -55,10 +56,10 @@ Audio::resume(){
     }
 }
 
-Audio::stop(){
+void Audio::stop(){
     if(audioMusic != NULL){
         Mix_HaltMusic();
     }else{
-        ERROR("Audio effects can not be stopped")
+        ERROR("Audio effects can not be stopped");
     }
 }
