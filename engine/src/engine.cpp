@@ -14,28 +14,23 @@ namespace engine{
     SceneManager* sceneManager;
     WindowManager* windowManager;
     SDLManager* sdlManager;
-    double prevTime = 0.0;
-
+    double startTime;
+    double stepTime;
+    double timeElapsed;
+    double frameTime;
+    double frameRate = 3.0;
 
     void loadEngine(){
         sceneManager = new SceneManager();
         windowManager = new WindowManager();
         sdlManager = new SDLManager();
+        startTime = SDL_GetTicks();
+        stepTime = startTime;
+        frameTime = 1000.0/frameRate;
     }
-
-    double getDelta(){
-        double currentTime = SDL_GetTicks();
-        double deltaTime = (currentTime - prevTime)/100.0;
-
-        prevTime = currentTime;
-
-        return deltaTime;
-    }
-
 
     void run(){
         bool isRunning = true;
-
         if(!sdlManager->initSDL()){
             ERROR("ERRO AO INICIAR SDL");
             exit(-1);
@@ -57,17 +52,18 @@ namespace engine{
                 windowManager->destroyWindow();
             }
             SDL_RenderPresent(WindowManager::getGameCanvas());
-            SDL_Delay(55);
 
             if(sceneManager->getCurrentScene() != NULL){
-                //To do: Calculate timeElapsed
-                int timeElapsed = 5;
                 sceneManager->getCurrentScene()->update(timeElapsed);
                 sceneManager->getCurrentScene()->draw();
             }
+
+            timeElapsed = SDL_GetTicks() - stepTime;
+            if(frameTime > timeElapsed){
+                SDL_Delay(frameTime - timeElapsed);
+            }
+            printf("HUE!\n");
+            stepTime = SDL_GetTicks();
         }
     }
-
-
-
 }
