@@ -20,9 +20,7 @@ namespace engine{
             KEY_PRESS_THREE = SDLK_3
         };
 
-        InputManager();
-        ~InputManager();
-
+        static InputManager instance;
         void update(SDL_Event event);
         bool getQuitRequest();
         void Update(void);
@@ -32,8 +30,10 @@ namespace engine{
         bool isKeyReleased(SDL_Keycode iKeyCode);
 
     private:
+        InputManager(): quitRequest(false){}
         bool quitRequest;
         std::unordered_map<int, bool> keyActive;
+        std::unordered_map<int, bool> keyPrevious;
     };
 }
 #endif

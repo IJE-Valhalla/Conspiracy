@@ -70,20 +70,17 @@ namespace engine{
         }
     }
 
-    int Sprite::next(){
+    void Sprite::next(){
         if(currentPositionFrame > interval.second){
             currentPositionFrame = interval.first;
         }
         abscissa = (widthFrame + spaceFrame) * (currentPositionFrame - 1);
         currentPositionFrame ++;
-
-        return abscissa;
     }
 
-    void Sprite::update(int x, int y){
-        abscissa = next();
+    void Sprite::update(){
+        next();
 
-        // draw(x,y);
     }
 
     void Sprite::setCurrentPositionFrame(int positionFrame){

@@ -17,8 +17,8 @@ namespace engine{
         void shutdown();
         void draw(int x, int y);
         void setCurrentPositionFrame(int positionFrame);
-        int next();
-        void update(int x, int y);
+        void next();
+        void update();
         void setInterval(int firstPositionFrame, int lastPositionFrame);
 
 
