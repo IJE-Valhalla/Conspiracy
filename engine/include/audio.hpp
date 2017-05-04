@@ -2,6 +2,8 @@
 #define AUDIO_HPP
 
 #include "sdl2includes.hpp"
+#include <string>
+
 
 namespace engine{
 

@@ -18,7 +18,7 @@ namespace engine{
     double stepTime;
     double timeElapsed;
     double frameTime;
-    double frameRate = 3.0;
+    double frameRate = 60.0;
 
     void loadEngine(){
         sceneManager = new SceneManager();
