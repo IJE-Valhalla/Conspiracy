@@ -22,7 +22,7 @@ namespace engine{
     protected:
         SDL_Texture * texture;
         std::string directory;
-        std::pair<int, int> lenght;
+        std::pair<int, int> lenght; // Width and height from image.
         std::pair<int, int> axis;
         SDL_Rect renderQuad;
         SDL_Rect clipRect;

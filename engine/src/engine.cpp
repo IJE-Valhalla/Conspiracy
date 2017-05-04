@@ -45,9 +45,8 @@ namespace engine{
             exit(-1);
         }
 
-        engine::Animation animation("assets/sprites/bomberman2.png", 4, 6, 15.0);
+        engine::Animation animation("assets/sprites/bomberman2.png", 4, 9, 15.0);
         animation.init();
-        animation.setInterval(6,11);
         int x=0, y=0, actual = 1;;
         animation.update(0,0);
 
@@ -66,31 +65,32 @@ namespace engine{
 
             if(engine::InputManager::instance.isKeyPressed(SDLK_RIGHT) && actual == 1){
                     x+=5;
-                    animation.setInterval(0,5);
+                    animation.setInterval(27,35);
                     animation.update(x,y);
+                    animation.next();
                 }
                 if(engine::InputManager::instance.isKeyPressed(SDLK_LEFT) && actual == 1){
                     x-=5;
-                    animation.setInterval(18,22);
+                    animation.setInterval(9,17);
                     animation.update(x,y);
+                    animation.next();
                 }
 
                 if(engine::InputManager::instance.isKeyPressed(SDLK_UP)  && actual == 1){
                     y-=5;
-                    animation.setInterval(12,17);
+                    animation.setInterval(0,8);
                     animation.update(x,y);
-
+                    animation.next();
                 }
 
                 if(engine::InputManager::instance.isKeyPressed(SDLK_DOWN)  && actual == 1){
                     y+=5;
-                    animation.setInterval(6,11);
+                    animation.setInterval(18,26);
                     animation.update(x,y);
-
+                    animation.next();
                 }
             animation.draw();
             SDL_RenderPresent(WindowManager::getGameCanvas());
-            animation.next();
             SDL_Delay(50);
 
             if(sceneManager->getCurrentScene() != NULL){
