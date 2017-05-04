@@ -12,6 +12,7 @@ namespace engine{
         void init();
         void update(int x, int y);
         void draw();
+        void next();
         void shutdown();
 
         void setCurrentPositionFrame(int positionFrame);
@@ -20,10 +21,11 @@ namespace engine{
     private:
         int currentPositionFrame;
         int quantity;
+        int widthFrame;
+        int heightFrame;
         double totalTime;
         std::pair<int, int> interval;
-        std::pair<int, int> matrix;
-        std::pair<int, int> lenght;
+        std::pair<int, int> matrix; // rows and columns
     };
 }
 #endif

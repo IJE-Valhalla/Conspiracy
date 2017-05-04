@@ -10,15 +10,16 @@ namespace engine{
 
     class Sprite{
     public:
+        Sprite(){}
         Sprite(std::string newDirectory);
-        ~Sprite();
+        virtual ~Sprite(){}
 
         virtual void init();
         virtual void update(int x, int y);
         virtual void draw();
         virtual void shutdown();
 
-    private:
+    protected:
         SDL_Texture * texture;
         std::string directory;
         std::pair<int, int> lenght;

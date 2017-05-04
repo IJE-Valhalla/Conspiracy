@@ -9,10 +9,6 @@ namespace engine{
         directory = newDirectory;
     }
 
-    Sprite::~Sprite(){
-
-    }
-
     void Sprite::init(){
         INFO("Init sprite.");
         SDL_Surface * image = NULL;
