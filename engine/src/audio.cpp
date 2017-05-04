@@ -1,5 +1,5 @@
-#include <audio.hpp>
-#include <log.h>
+#include "audio.hpp"
+#include "log.h"
 
 using namespace engine;
 
@@ -19,7 +19,7 @@ Audio::Audio(const std::string audioPath, const std::string audioType){
     }
 }
 
-Audio::play(const int timesToPlay){
+void Audio::play(const int timesToPlay){
     if(audioMusic != NULL){
         if(Mix_PlayMusic(audioMusic, timesToPlay) == -1){
             ERROR("Audio could not be played");
@@ -31,7 +31,7 @@ Audio::play(const int timesToPlay){
     }
 }
 
-Audio::pause(){
+void Audio::pause(){
     if(audioMusic != NULL){
         if(Mix_PausedMusic() != 1){
             Mix_PauseMusic();
@@ -43,7 +43,7 @@ Audio::pause(){
     }
 }
 
-Audio::resume(){
+void Audio::resume(){
     if(audioMusic != NULL){
         if(Mix_PausedMusic() == 1){
             Mix_ResumeMusic();
@@ -55,10 +55,10 @@ Audio::resume(){
     }
 }
 
-Audio::stop(){
+void Audio::stop(){
     if(audioMusic != NULL){
         Mix_HaltMusic();
     }else{
-        ERROR("Audio effects can not be stopped")
+        ERROR("Audio effects can not be stopped");
     }
 }

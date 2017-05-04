@@ -13,7 +13,7 @@ namespace engine{
         Sprite(std::string newDirectory);
         ~Sprite();
 
-        void init();
+        virtual void init();
         virtual void update(int x, int y);
         virtual void draw();
         virtual void shutdown();
