@@ -9,11 +9,11 @@ namespace engine{
     class InputManager{
 
     public:
-        enum class KeyPress{
+        enum KeyPress{
             KEY_PRESS_UP = SDLK_UP,
             KEY_PRESS_DOWN = SDLK_DOWN,
             KEY_PRESS_RIGHT = SDLK_RIGHT,
-            KEY_PRESS_LEFT = SDLK_SPACE,
+            KEY_PRESS_LEFT = SDLK_LEFT,
             KEY_PRESS_SPACE = SDLK_SPACE,
             KEY_PRESS_ONE = SDLK_1,
             KEY_PRESS_TWO = SDLK_2,
@@ -25,9 +25,9 @@ namespace engine{
         bool getQuitRequest();
         void Update(void);
 
-        bool isKeyTriggered(SDL_Keycode iKeyCode);
-        bool isKeyPressed(SDL_Keycode iKeyCode);
-        bool isKeyReleased(SDL_Keycode iKeyCode);
+        bool isKeyTriggered(int iKeyCode);
+        bool isKeyPressed(int iKeyCode);
+        bool isKeyReleased(int iKeyCode);
 
     private:
         InputManager(): quitRequest(false){}

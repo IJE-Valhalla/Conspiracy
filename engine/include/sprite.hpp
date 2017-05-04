@@ -10,30 +10,22 @@ namespace engine{
 
     class Sprite{
     public:
-        Sprite(std::string newDirectory, int newQuantity, int width, int height,int space);
-        ~Sprite();
+        Sprite(){}
+        Sprite(std::string newDirectory);
+        virtual ~Sprite(){}
 
-        void init();
-        void shutdown();
-        void draw(int x, int y);
-        void setCurrentPositionFrame(int positionFrame);
-        void next();
-        void update();
-        void setInterval(int firstPositionFrame, int lastPositionFrame);
+        virtual void init();
+        virtual void update(int x, int y);
+        virtual void draw();
+        virtual void shutdown();
 
-
-    private:
+    protected:
         SDL_Texture * texture;
         std::string directory;
-        int widthFrame;
-        int heightFrame;
-        int totalWidth;
-        int totalHeight;
-        int currentPositionFrame;
-        int quantity;
-        std::pair<int, int> interval;
-        int spaceFrame;
-        int abscissa;
+        std::pair<int, int> lenght; // Width and height from image.
+        std::pair<int, int> axis;
+        SDL_Rect renderQuad;
+        SDL_Rect clipRect;
     };
 }
 

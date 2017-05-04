@@ -37,15 +37,15 @@ namespace engine{
         return quitRequest;
     }
 
-    bool InputManager::isKeyPressed(SDL_Keycode iKeyCode) {
+    bool InputManager::isKeyPressed(int iKeyCode) {
         return keyActive[iKeyCode];
     }
 
-    bool InputManager::isKeyReleased(SDL_Keycode iKeyCode){
+    bool InputManager::isKeyReleased(int iKeyCode){
         return (!keyActive[iKeyCode] && keyPrevious[iKeyCode]);
     }
 
-    bool InputManager::isKeyTriggered(SDL_Keycode iKeyCode){
+    bool InputManager::isKeyTriggered(int iKeyCode){
         return (keyActive[iKeyCode] && !keyPrevious[iKeyCode]);
     }
 
