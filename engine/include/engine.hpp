@@ -5,6 +5,7 @@
 #include "log.h"
 #include "window_manager.hpp"
 #include "sdl_manager.hpp"
+#include "sdl2includes.hpp"
 
 namespace engine{
 

@@ -1,9 +1,11 @@
 #include "audio.hpp"
 #include "log.h"
+#include "string"
 
 using namespace engine;
+
 //
-// Audio::Audio(const std::string audioPath, const std::string audioType){
+// Audio::Audio(std::string audioPath, std::string audioType){
 //     if(audioType.compare("MUSIC") == 0){
 //         audioMusic = Mix_LoadMUS(audioPath);
 //         if(audioMusic == NULL){

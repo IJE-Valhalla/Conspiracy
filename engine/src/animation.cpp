@@ -50,7 +50,12 @@ namespace engine{
     void Animation::update(int x, int y){
         axis.first = x;
         axis.second = y;
-        // TODO Calculate time per frame.
+
+        double timePerFrame = interval.second - interval.first;
+
+        // if(timePerFrame >){
+        //
+        // }
         int Y = (currentPositionFrame / (lenght.first / widthFrame));
         int X = (currentPositionFrame % (lenght.first  / widthFrame));
 

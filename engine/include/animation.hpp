@@ -24,6 +24,7 @@ namespace engine{
         int widthFrame;
         int heightFrame;
         double totalTime;
+        double startTime;
         std::pair<int, int> interval;
         std::pair<int, int> matrix; // rows and columns
     };
