@@ -51,11 +51,17 @@ namespace engine{
         axis.first = x;
         axis.second = y;
 
-        double timePerFrame = interval.second - interval.first;
+        double timePerFrame = static_cast<double> (totalTime / (interval.second - interval.first + 1));
 
-        // if(timePerFrame >){
-        //
-        // }
+        timeElapsed = (SDL_GetTicks() - stepTime) / 1000.0f;
+        DEBUG("Time Per Frame: " << timePerFrame << "Time elapsed: " << timeElapsed);
+
+        while(timeElapsed > timePerFrame){
+            next();
+            timeElapsed -= timePerFrame;
+            stepTime = SDL_GetTicks();
+        }
+
         int Y = (currentPositionFrame / (lenght.first / widthFrame));
         int X = (currentPositionFrame % (lenght.first  / widthFrame));
 
@@ -84,6 +90,8 @@ namespace engine{
 
     void Animation::setInterval(int firstPosition, int lastPosition){
         if(firstPosition != interval.first || lastPosition != interval.second){
+            startTime = SDL_GetTicks();
+            stepTime = SDL_GetTicks();
             currentPositionFrame = firstPosition;
             interval.first = firstPosition;
             interval.second = lastPosition;
@@ -95,5 +103,9 @@ namespace engine{
         INFO("Destroy sprite.");
         SDL_DestroyTexture(texture);
         texture = NULL;
+    }
+
+    std::pair<int,int> Animation::getInterval(){
+        return interval;
     }
 }

@@ -17,6 +17,7 @@ namespace engine{
 
         void setCurrentPositionFrame(int positionFrame);
         void setInterval(int firstPositionFrame, int lastPositionFrame);
+        std::pair<int,int> getInterval();
 
     private:
         int currentPositionFrame;
@@ -25,6 +26,8 @@ namespace engine{
         int heightFrame;
         double totalTime;
         double startTime;
+        double timeElapsed;
+        double stepTime;
         std::pair<int, int> interval;
         std::pair<int, int> matrix; // rows and columns
     };

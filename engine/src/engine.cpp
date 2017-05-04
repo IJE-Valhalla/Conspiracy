@@ -40,7 +40,7 @@ namespace engine{
             exit(-1);
         }
 
-        engine::Animation animation("assets/sprites/bomberman2.png", 4, 9, 15.0);
+        engine::Animation animation("assets/sprites/bomberman2.png", 4, 9, 1.0);
         animation.init();
         int x=0, y=0, actual = 1;;
         animation.update(0,0);
@@ -58,32 +58,30 @@ namespace engine{
                 windowManager->destroyWindow();
             }
 
-            if(engine::InputManager::instance.isKeyPressed(SDLK_RIGHT) && actual == 1){
-                    x+=5;
+                if(engine::InputManager::instance.isKeyPressed(SDLK_RIGHT) && actual == 1){
+                    x+=2;
                     animation.setInterval(27,35);
-                    animation.update(x,y);
-                    animation.next();
                 }
-                if(engine::InputManager::instance.isKeyPressed(SDLK_LEFT) && actual == 1){
-                    x-=5;
+                else if(engine::InputManager::instance.isKeyPressed(SDLK_LEFT) && actual == 1){
+                    x-=2;
                     animation.setInterval(9,17);
-                    animation.update(x,y);
-                    animation.next();
                 }
 
-                if(engine::InputManager::instance.isKeyPressed(SDLK_UP)  && actual == 1){
-                    y-=5;
+                else if(engine::InputManager::instance.isKeyPressed(SDLK_UP)  && actual == 1){
+                    y-=2;
                     animation.setInterval(0,8);
-                    animation.update(x,y);
-                    animation.next();
                 }
 
-                if(engine::InputManager::instance.isKeyPressed(SDLK_DOWN)  && actual == 1){
-                    y+=5;
+                else if(engine::InputManager::instance.isKeyPressed(SDLK_DOWN)  && actual == 1){
+                    y+=2;
                     animation.setInterval(18,26);
-                    animation.update(x,y);
-                    animation.next();
                 }
+                else {
+                    std::pair <int, int> interval = animation.getInterval();
+                    animation.setInterval(interval.first,interval.first);
+                }
+
+            animation.update(x,y);
             animation.draw();
             SDL_RenderPresent(WindowManager::getGameCanvas());
 
@@ -96,7 +94,6 @@ namespace engine{
             if(frameTime > timeElapsed){
                 SDL_Delay(frameTime - timeElapsed);
             }
-            printf("HUE!\n");
             stepTime = SDL_GetTicks();
         }
     }
