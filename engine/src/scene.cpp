@@ -1,7 +1,10 @@
 #include "scene.hpp"
 
-using namespace engine;
-
-int Scene::getId(){
-    return sceneId;
+namespace engine{
+    int Scene::getId(){
+        return sceneId;
+    }
+    void Scene::setId(int new_id){
+        sceneId = new_id;
+    }
 }

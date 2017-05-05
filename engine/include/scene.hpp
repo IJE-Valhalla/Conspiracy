@@ -7,13 +7,15 @@
 namespace engine{
     class Scene{
     public:
-        Scene(int id): sceneId(id){}
+        Scene(int id):sceneId(id){}
+        ~Scene(){}
         virtual void load();
         virtual void draw();
         virtual void update(int timeElapsed);
         virtual void unload();
         int getId();
-    private:
+        void setId(int id);
+    protected:
         int sceneId;
         //vector<GameObject *> gameObjects;
     };
