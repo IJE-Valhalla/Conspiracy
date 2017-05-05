@@ -3,17 +3,16 @@
 
 #include <iostream>
 #include <string>
-#include "sprite.hpp"
 
 namespace engine{
     class GameObject{
     public:
+        GameObject() {}
         GameObject(std::string objectName, int positionX, int positionY,int width, int height);
-        GameObject(){}
-        virtual ~GameObject(){}
+        virtual ~GameObject() {}
 
-        virtual void draw();
-        virtual void update(int timeElapsed);
+        virtual void draw(){}
+        virtual void update(){}
 
         std::string getName();
         int getPositionX();
@@ -38,5 +37,4 @@ namespace engine{
 
     };
 }
-
 #endif

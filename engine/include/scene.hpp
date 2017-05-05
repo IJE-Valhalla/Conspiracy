@@ -7,12 +7,14 @@
 namespace engine{
     class Scene{
     public:
-        Scene(int id):sceneId(id){}
+        Scene(int id);
+        Scene(){}
         ~Scene(){}
-        virtual void load();
-        virtual void draw();
-        virtual void update(int timeElapsed);
-        virtual void unload();
+        virtual void load(){}
+        virtual void draw(){}
+        virtual void update(int timeElapsed) = 0;
+        virtual void unload(){}
+        virtual void init(){}
         int getId();
         void setId(int id);
     protected:
