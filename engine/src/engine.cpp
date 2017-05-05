@@ -7,6 +7,7 @@
 #include <vector>
 #include <iostream>
 
+
 namespace engine{
 
     const std::string GAME_NAME = "Default";
@@ -20,7 +21,9 @@ namespace engine{
     double timeElapsed;
     double frameTime;
     double frameRate = 60.0;
-
+    SceneManager* getSceneManager(){
+        return sceneManager;
+    }
     void loadEngine(){
         sceneManager = new SceneManager();
         windowManager = new WindowManager();
@@ -57,6 +60,7 @@ namespace engine{
                 sceneManager->getCurrentScene()->update(timeElapsed);
                 sceneManager->getCurrentScene()->draw();
             }
+
 
             timeElapsed = SDL_GetTicks() - stepTime;
             if(frameTime > timeElapsed){
