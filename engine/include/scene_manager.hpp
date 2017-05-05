@@ -7,7 +7,7 @@
 namespace engine{
     class SceneManager{
     public:
-        void addScene(Scene &scene);
+        void addScene(Scene* scene);
         void loadScene(int id);
         Scene* getCurrentScene();
     private:

@@ -3,11 +3,11 @@
 
 using namespace engine;
 
-void SceneManager::addScene(Scene &scene){
-    if(scenes.find(scene.getId()) != scenes.end()){
+void SceneManager::addScene(Scene* scene){
+    if(scenes.find(scene->getId()) != scenes.end()){
         INFO("Failed to load scene");
     }else{
-        scenes[scene.getId()] = &scene;
+        scenes[scene->getId()] = scene;
     }
 }
 
