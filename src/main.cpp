@@ -2,17 +2,19 @@
 
 #include "engine.hpp"
 #include "game_scene.hpp"
+#include "alien.hpp"
+
+using namespace engine;
 
 
+int main(){
+    loadEngine();
 
-int main(int, char**){
     GameScene* scene = new GameScene(0);
-    engine::loadEngine();
-
     engine::getSceneManager()->addScene(scene);
-
     engine::getSceneManager()->loadScene(0);
-    engine::run();
+
+    run();
 
     return 0;
 }

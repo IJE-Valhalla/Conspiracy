@@ -12,12 +12,21 @@ Player::Player(){
 
 Player::~Player(){}
 
+void Player::init(){
+    bilu->init();
+    bilu->update(0);
+    varginha->init();
+    varginha->update(0);
+    etemer->init();
+    etemer->update(0);
+}
+
 void Player::update(int timeElapsed){
     if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_ONE)){
         selectedAlien = 1;
     } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_TWO)){
         selectedAlien = 2;
-    } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_ONE)){
+    } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_THREE)){
         selectedAlien = 3;
     }
 

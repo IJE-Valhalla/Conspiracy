@@ -2,22 +2,21 @@
 #include "player.hpp"
 #include "scene.hpp"
 
-
-GameScene::GameScene(int id){
-    setSceneId(id);
-}
-
 GameScene::~GameScene(){}
 
-GameScene::draw(){
+void GameScene::draw(){
     player->draw();
 }
-GameScene::update(int timeElapsed){
+void GameScene::update(int timeElapsed){
     player->update(timeElapsed);
 }
-GameScene::load(){
+void GameScene::load(){
     player = new Player();
 }
-GameScene::unload(){
+void GameScene::unload(){
     free(player);
+}
+
+void GameScene::init(){
+    player->init();
 }
