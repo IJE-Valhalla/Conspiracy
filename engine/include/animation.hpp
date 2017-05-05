@@ -10,8 +10,8 @@ namespace engine{
         ~Animation();
 
         void init();
-        void update(int x, int y);
-        void draw();
+        void update();
+        void draw(int x, int y);
         void next();
         void shutdown();
 

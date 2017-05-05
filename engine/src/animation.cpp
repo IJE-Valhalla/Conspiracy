@@ -11,6 +11,7 @@ namespace engine{
         matrix.second = columns;
         totalTime = allTime;
         currentPositionFrame = 0;
+        init();
     }
 
     Animation::~Animation(){
@@ -47,10 +48,7 @@ namespace engine{
 
     }
 
-    void Animation::update(int x, int y){
-        axis.first = x;
-        axis.second = y;
-
+    void Animation::update(){
         double timePerFrame = static_cast<double> (totalTime / (interval.second - interval.first + 1));
 
         timeElapsed = (SDL_GetTicks() - stepTime) / 1000.0f;
@@ -69,7 +67,9 @@ namespace engine{
         DEBUG("Axis in X:" << X*widthFrame << " Axis in Y:" << Y*heightFrame << " Position:" << currentPositionFrame);
     }
 
-    void Animation::draw(){
+    void Animation::draw(int x, int y){
+        axis.first = x;
+        axis.second = y;
         // Rendering in screen
         renderQuad = {axis.first, axis.second, clipRect.w, clipRect.h };
 
