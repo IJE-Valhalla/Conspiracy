@@ -44,6 +44,8 @@ namespace engine{
         }
         SDL_Event event;
 
+        sceneManager->getCurrentScene()->init();
+
         while(isRunning){
 
             engine::InputManager::instance.update(event);
@@ -54,18 +56,22 @@ namespace engine{
                 sdlManager->finalizeSDL();
                 windowManager->destroyWindow();
             }
-            SDL_RenderPresent(WindowManager::getGameCanvas());
 
+
+
+            timeElapsed = SDL_GetTicks() - stepTime;
             if(sceneManager->getCurrentScene() != NULL){
                 sceneManager->getCurrentScene()->update(timeElapsed);
                 sceneManager->getCurrentScene()->draw();
             }
-
-
-            timeElapsed = SDL_GetTicks() - stepTime;
+            
             if(frameTime > timeElapsed){
                 SDL_Delay(frameTime - timeElapsed);
             }
+
+            SDL_RenderPresent(WindowManager::getGameCanvas());
+
+
             stepTime = SDL_GetTicks();
         }
     }

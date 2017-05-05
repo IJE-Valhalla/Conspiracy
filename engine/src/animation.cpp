@@ -3,15 +3,13 @@
 #include "engine.hpp"
 #include "log.h"
 
-namespace engine{
-
+using namespace engine;
     Animation::Animation(std::string newDirectory, int rows, int columns, double allTime){
         directory = newDirectory;
         matrix.first = rows;
         matrix.second = columns;
         totalTime = allTime;
         currentPositionFrame = 0;
-        init();
     }
 
     Animation::~Animation(){
@@ -108,4 +106,3 @@ namespace engine{
     std::pair<int,int> Animation::getInterval(){
         return interval;
     }
-}

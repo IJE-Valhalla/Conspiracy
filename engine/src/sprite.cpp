@@ -2,8 +2,7 @@
 #include "engine.hpp"
 #include "log.h"
 
-
-namespace engine{
+using namespace engine;
 
     Sprite::Sprite(std::string newDirectory){
         directory = newDirectory;
@@ -49,4 +48,3 @@ namespace engine{
 
         SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
     }
-}

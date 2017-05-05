@@ -5,8 +5,6 @@ using namespace engine;
 
 InputManager InputManager::instance;
 
-namespace engine{
-
     void InputManager::update(SDL_Event event){
         int keyAction = 0, previousAction = 0;
 
@@ -48,5 +46,3 @@ namespace engine{
     bool InputManager::isKeyTriggered(int iKeyCode){
         return (keyActive[iKeyCode] && !keyPrevious[iKeyCode]);
     }
-
-}
