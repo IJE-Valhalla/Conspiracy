@@ -1,13 +1,18 @@
 #include <iostream>
 
 #include "engine.hpp"
-#include "game_object.hpp"
+#include "game_scene.hpp"
 
-using namespace engine;
+
 
 int main(int, char**){
-    loadEngine();
-    run();
+    GameScene* scene = new GameScene(0);
+    engine::loadEngine();
+
+    engine::getSceneManager()->addScene(scene);
+
+    engine::getSceneManager()->loadScene(0);
+    engine::run();
 
     return 0;
 }
