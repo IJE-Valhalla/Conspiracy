@@ -58,13 +58,12 @@ namespace engine{
             }
 
 
-
             timeElapsed = SDL_GetTicks() - stepTime;
             if(sceneManager->getCurrentScene() != NULL){
-                sceneManager->getCurrentScene()->update(timeElapsed);
+                sceneManager->getCurrentScene()->update(3);
                 sceneManager->getCurrentScene()->draw();
             }
-            
+
             if(frameTime > timeElapsed){
                 SDL_Delay(frameTime - timeElapsed);
             }

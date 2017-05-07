@@ -7,7 +7,7 @@ Alien::Alien(std::string objectName, int positionX, int positionY, int width, in
     setPositionY(positionY);
     setWidth(width);
     setHeight(height);
-    animator = new Animation("assets/sprites/bomberman2.png", 4, 9, 1.0);
+    animator = new Animation("assets/sprites/bomberman2.png", 4, 9, 0.9);
 }
 
 Alien::~Alien(){
