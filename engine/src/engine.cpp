@@ -31,10 +31,7 @@ namespace engine{
         startTime = SDL_GetTicks();
         stepTime = startTime;
         frameTime = 1000.0/frameRate;
-    }
-
-    void run(){
-        bool isRunning = true;
+        
         if(!sdlManager->initSDL()){
             ERROR("ERRO AO INICIAR SDL");
             exit(-1);
@@ -42,6 +39,10 @@ namespace engine{
             ERROR("ERRO AO CRIAR JANELA");
             exit(-1);
         }
+    }
+
+    void run(){
+        bool isRunning = true;
         SDL_Event event;
 
         while(isRunning){

@@ -1,19 +1,23 @@
 #include "game_object.hpp"
-#include <game_object.hpp>
-#include <log.h>
-
-#include "engine.hpp"
+#include "log.h"
 
 using namespace engine;
 
 GameObject::GameObject(std::string objectName, int positionX, int positionY,
-            int width, int height){
-            setName(objectName);
-            setPositionX(positionX);
-            setPositionY(positionY);
-            setWidth(width);
-            setHeight(height);
-        }
+                                               int width, int height){
+        setName(objectName);
+        setPositionX(positionX);
+        setPositionY(positionY);
+        setWidth(width);
+        setHeight(height);
+}
+
+GameObject::GameObject(){}
+
+GameObject::~GameObject(){}
+
+void GameObject::draw(){}
+void GameObject::update(){}
 
 std::string GameObject::getName(){
     return name;

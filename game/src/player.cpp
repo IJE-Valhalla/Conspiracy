@@ -1,6 +1,7 @@
 
 #include "player.hpp"
-#include "input_manager.hpp"
+
+using namespace engine;
 
 Player::Player(){
 

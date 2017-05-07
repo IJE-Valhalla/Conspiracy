@@ -2,7 +2,8 @@
 #define PLAYER_HPP
 
 #include "alien.hpp"
-#include "game_object.hpp"
+#include "input_manager.hpp"
+//#include "game_object.hpp"
 #include "engine.hpp"
 
 using namespace engine;

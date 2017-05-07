@@ -13,7 +13,7 @@ public:
     ~GameScene();
     void load();
     void draw();
-    void update(int timeElapsed);
+    void update(double timeElapsed);
     void unload();
 private:
     Player* player;

@@ -1,15 +1,14 @@
 #include "alien.hpp"
-#include "input_manager.hpp"
 
-Alien::Alien(std::string objectName, int positionX, int positionY, int width, int height){
-    setName(objectName);
-    setPositionX(positionX);
-    setPositionY(positionY);
-    setWidth(width);
-    setHeight(height);
+Alien::Alien(std::string objectName, int positionX, int positionY,
+                                     int width, int height) : GameObject(objectName,
+                                                                         positionX,
+                                                                         positionY,
+                                                                         width, height){
 
     animator = new Animation("assets/sprites/bomberman2.png", 4, 9, 1.0);
 }
+
 Alien::~Alien(){}
 
 void Alien::update(int timeElapsed){
@@ -35,8 +34,7 @@ void Alien::update(int timeElapsed){
         animator->setInterval(18,26);
     }
     else {
-        std::pair <int, int> interval = animator->getInterval();
-        animator->setInterval(interval.first,interval.first);
+        animator->setInterval(18, 26);
     }
 
     animator->update();

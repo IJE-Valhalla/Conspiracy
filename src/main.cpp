@@ -6,13 +6,14 @@
 
 
 int main(int, char**){
+    loadEngine();
+
     GameScene* scene = new GameScene(0);
-    engine::loadEngine();
+    getSceneManager()->addScene(scene);
+    getSceneManager()->loadScene(0);
 
-    engine::getSceneManager()->addScene(scene);
+    run();
 
-    engine::getSceneManager()->loadScene(0);
-    engine::run();
 
     return 0;
 }

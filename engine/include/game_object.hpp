@@ -9,11 +9,11 @@ namespace engine{
     class GameObject{
     public:
         GameObject(std::string objectName, int positionX, int positionY,int width, int height);
-        GameObject(){}
-        virtual ~GameObject(){}
+        GameObject();
+        ~GameObject();
 
         virtual void draw();
-        virtual void update(int timeElapsed);
+        virtual void update();
 
         std::string getName();
         int getPositionX();

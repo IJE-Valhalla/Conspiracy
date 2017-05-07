@@ -7,7 +7,9 @@ void SceneManager::addScene(Scene* scene){
     if(scenes.find(scene->getId()) != scenes.end()){
         INFO("Failed to load scene");
     }else{
+        std::cout << "LIXO" << std::endl;
         scenes[scene->getId()] = scene;
+        //std::cout << "LIXO" << std::endl;
     }
 }
 

@@ -2,16 +2,17 @@
 #define SCENE_HPP
 
 #include <vector>
+#include "game_object.hpp"
 #include "log.h"
 
 namespace engine{
     class Scene{
     public:
-        Scene(int id):sceneId(id){}
+        Scene(int id);
         ~Scene(){}
         virtual void load();
         virtual void draw();
-        virtual void update(int timeElapsed);
+        virtual void update(double timeElapsed);
         virtual void unload();
         int getId();
         void setId(int id);

@@ -55,7 +55,7 @@ add_executable(conspiracy ${SOURCES})
 
 target_link_libraries(conspiracy
                       engine
-		      game
+		              game
                       SDL2 SDL2_image SDL2_ttf SDL2_mixer)
 
 
