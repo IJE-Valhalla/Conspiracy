@@ -2,7 +2,9 @@
 
 #include "engine.hpp"
 #include "game_scene.hpp"
+#include "alien.hpp"
 
+using namespace engine;
 
 
 int main(int, char**){
@@ -13,7 +15,5 @@ int main(int, char**){
     getSceneManager()->loadScene(0);
 
     run();
-
-
     return 0;
 }

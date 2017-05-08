@@ -8,7 +8,6 @@ Scene::Scene(int id){
 
 void Scene::load(){}
 void Scene::draw(){}
-void Scene::update(double timeElapsed){}
 void Scene::unload(){}
 
 int Scene::getId(){

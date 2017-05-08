@@ -55,6 +55,7 @@ namespace engine{
                 isRunning = false;
                 sdlManager->finalizeSDL();
                 windowManager->destroyWindow();
+                continue;
             }
 
             if(sceneManager->getCurrentScene() != NULL){

@@ -12,7 +12,7 @@ namespace engine{
         ~Scene(){}
         virtual void load();
         virtual void draw();
-        virtual void update(double timeElapsed);
+        virtual void update(double timeElapsed) = 0;
         virtual void unload();
         int getId();
         void setId(int id);

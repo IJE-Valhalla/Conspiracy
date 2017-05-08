@@ -14,6 +14,7 @@ public:
     ~Alien();
     void update(int timeElapsed);
     void draw();
+    void init();
 private:
     Animation* animator;
 };
