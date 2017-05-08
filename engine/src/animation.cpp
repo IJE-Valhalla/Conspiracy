@@ -2,6 +2,7 @@
 #include "sprite.hpp"
 #include "engine.hpp"
 #include "log.h"
+#include <string.h>
 
 namespace engine{
 
@@ -68,10 +69,13 @@ namespace engine{
     }
 
     void Animation::draw(int x, int y){
+        INFO("ANIMATOR DRAW");
         axis.first = x;
         axis.second = y;
         // Rendering in screen
         renderQuad = {axis.first, axis.second, clipRect.w, clipRect.h };
+        DEBUG("X: " + std::to_string(axis.first));
+        DEBUG("Y: " + std::to_string(axis.second));
 
         SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
     }

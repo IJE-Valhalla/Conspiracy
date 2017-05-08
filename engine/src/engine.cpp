@@ -31,7 +31,7 @@ namespace engine{
         startTime = SDL_GetTicks();
         stepTime = startTime;
         frameTime = 1000.0/frameRate;
-        
+
         if(!sdlManager->initSDL()){
             ERROR("ERRO AO INICIAR SDL");
             exit(-1);
@@ -55,12 +55,12 @@ namespace engine{
                 sdlManager->finalizeSDL();
                 windowManager->destroyWindow();
             }
-            SDL_RenderPresent(WindowManager::getGameCanvas());
 
             if(sceneManager->getCurrentScene() != NULL){
                 sceneManager->getCurrentScene()->update(timeElapsed);
                 sceneManager->getCurrentScene()->draw();
             }
+            SDL_RenderPresent(WindowManager::getGameCanvas());
 
 
             timeElapsed = SDL_GetTicks() - stepTime;

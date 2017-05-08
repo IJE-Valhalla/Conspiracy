@@ -18,4 +18,5 @@ public:
 private:
     Player* player;
 };
+
 #endif

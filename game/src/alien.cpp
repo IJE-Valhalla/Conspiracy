@@ -12,24 +12,26 @@ Alien::Alien(std::string objectName, int positionX, int positionY,
 Alien::~Alien(){}
 
 void Alien::update(int timeElapsed){
-    if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::KEY_PRESS_RIGHT)){
-        auto inc = 1*timeElapsed;
+    // To Do: Use Time Elapsed in inc.
+    timeElapsed = timeElapsed;
+    if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_RIGHT)){
+        auto inc = 2;
         setPositionX(getPositionX()+inc);
         animator->setInterval(27,35);
     }
-    else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::KEY_PRESS_LEFT)){
-        auto inc = 1*timeElapsed;
+    else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_LEFT)){
+        auto inc = 2;
         setPositionX(getPositionX()-inc);
         animator->setInterval(9,17);
     }
 
-    else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::KEY_PRESS_UP)){
-        auto inc = 1*timeElapsed;
+    else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)){
+        auto inc = 2;
         setPositionY(getPositionY()-inc);
         animator->setInterval(0,8);
     }
     else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::KEY_PRESS_DOWN)){
-        auto inc = 1*timeElapsed;
+        auto inc = 2;
         setPositionY(getPositionY()+inc);
         animator->setInterval(18,26);
     }
@@ -41,5 +43,6 @@ void Alien::update(int timeElapsed){
 }
 
 void Alien::draw(){
+    INFO("ALIEN DRAW");
     animator->draw(getPositionX(), getPositionY());
 }
