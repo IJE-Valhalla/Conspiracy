@@ -46,6 +46,7 @@ namespace engine{
         SDL_Event event;
 
         while(isRunning){
+            stepTime = SDL_GetTicks();
 
             engine::InputManager::instance.update(event);
             SDL_RenderClear(WindowManager::getGameCanvas());
@@ -64,10 +65,13 @@ namespace engine{
 
 
             timeElapsed = SDL_GetTicks() - stepTime;
+            DEBUG("TICKS:" + std::to_string(SDL_GetTicks()));
+            DEBUG("frameTime:" + std::to_string(frameTime));
+            DEBUG("timeElapsed: " + std::to_string(timeElapsed));
             if(frameTime > timeElapsed){
+                DEBUG("SDL_DELAY: " + std::to_string(frameTime - timeElapsed));
                 SDL_Delay(frameTime - timeElapsed);
             }
-            stepTime = SDL_GetTicks();
         }
     }
 }
