@@ -17,12 +17,17 @@ Player::Player(){
 Player::~Player(){}
 
 void Player::update(int timeElapsed){
+    int beforeAlien = selectedAlien;
     if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_ONE)){
         selectedAlien = 1;
     } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_TWO)){
         selectedAlien = 2;
     } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_THREE)){
         selectedAlien = 3;
+    }
+
+    if(beforeAlien != selectedAlien){
+      waitAnimation(timeElapsed, beforeAlien);
     }
 
     switch(selectedAlien){
@@ -37,4 +42,17 @@ void Player::draw(){
     bilu->draw();
     varginha->draw();
     etemer->draw();
+}
+
+void Player::waitAnimation(int timeElapsed, int beforeAlien){
+    if(beforeAlien==1){
+      bilu->getAnimation()->setInterval(bilu->getAnimation()->getInterval().first, bilu->getAnimation()->getInterval().first);
+      bilu->update(timeElapsed);
+    }else if(beforeAlien==2){
+      varginha->getAnimation()->setInterval(varginha->getAnimation()->getInterval().first, varginha->getAnimation()->getInterval().first);
+      varginha->update(timeElapsed);
+    } else if(beforeAlien==3){
+      etemer->getAnimation()->setInterval(etemer->getAnimation()->getInterval().first, etemer->getAnimation()->getInterval().first);
+      etemer->update(timeElapsed);
+    }
 }

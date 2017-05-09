@@ -46,3 +46,7 @@ void Alien::draw(){
     INFO("ALIEN DRAW");
     animator->draw(getPositionX(), getPositionY());
 }
+
+Animation * Alien::getAnimation(){
+  return animator;
+}
