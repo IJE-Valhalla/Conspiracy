@@ -4,9 +4,9 @@
 using namespace engine;
 
 Player::Player(){
-    bilu = new Alien("Bilu", 0, 0, 50, 50);
-    varginha = new Alien("Varginha", 0,70, 50, 50);
-    etemer = new Alien("ETemer", 0,130, 50, 50);
+    bilu = new Alien("assets/sprites/alien1.png", 0, 0, 50, 50);
+    varginha = new Alien("assets/sprites/alien2.png", 0,70, 50, 50);
+    etemer = new Alien("assets/sprites/alien3.png", 0,130, 50, 50);
     selectedAlien = 1;
 
     bilu->update(0);

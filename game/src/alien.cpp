@@ -6,7 +6,7 @@ Alien::Alien(std::string objectName, int positionX, int positionY,
                                                                          positionY,
                                                                          width, height){
 
-    animator = new Animation("assets/sprites/bomberman2.png", 4, 9, 1.0);
+    animator = new Animation(objectName, 4, 9, 0.9);
 }
 
 Alien::~Alien(){}
@@ -36,7 +36,7 @@ void Alien::update(int timeElapsed){
         animator->setInterval(18,26);
     }
     else {
-        animator->setInterval(18, 26);
+        animator->setInterval(animator->getInterval().first, animator->getInterval().first);
     }
 
     animator->update();
