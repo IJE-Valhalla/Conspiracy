@@ -2,8 +2,7 @@
 #include "engine.hpp"
 #include "log.h"
 
-
-namespace engine{
+using namespace engine;
 
     Sprite::Sprite(std::string newDirectory){
         directory = newDirectory;
@@ -38,13 +37,9 @@ namespace engine{
         texture = NULL;
     }
 
-    void Sprite::update(int x, int y){
+    void Sprite::draw(int x, int y){
         axis.first = x;
         axis.second = y;
-    }
-
-
-    void Sprite::draw(){
          //Crop image
         clipRect = {0, 0, lenght.first, lenght.second};
 
@@ -53,4 +48,3 @@ namespace engine{
 
         SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
     }
-}

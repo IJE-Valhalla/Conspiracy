@@ -16,8 +16,7 @@ bool WindowManager::createWindow(std::string windowTitle, std::pair<int, int> wi
 
     INFO("Create canvas");
     gameCanvas = SDL_CreateRenderer(gameWindow, -1,
-        SDL_RENDERER_ACCELERATED |
-        SDL_RENDERER_PRESENTVSYNC);
+        SDL_RENDERER_ACCELERATED);
 
         if(gameCanvas == NULL){
             return false;

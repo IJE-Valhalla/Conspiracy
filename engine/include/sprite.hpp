@@ -15,8 +15,7 @@ namespace engine{
         virtual ~Sprite(){}
 
         virtual void init();
-        virtual void update(int x, int y);
-        virtual void draw();
+        virtual void draw(int x, int y);
         virtual void shutdown();
 
     protected:

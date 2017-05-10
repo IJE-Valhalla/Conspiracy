@@ -2,6 +2,7 @@
 #include "sprite.hpp"
 #include "engine.hpp"
 #include "log.h"
+#include <string.h>
 
 namespace engine{
 
@@ -11,6 +12,7 @@ namespace engine{
         matrix.second = columns;
         totalTime = allTime;
         currentPositionFrame = 0;
+        init();
     }
 
     Animation::~Animation(){
@@ -47,10 +49,7 @@ namespace engine{
 
     }
 
-    void Animation::update(int x, int y){
-        axis.first = x;
-        axis.second = y;
-
+    void Animation::update(){
         double timePerFrame = static_cast<double> (totalTime / (interval.second - interval.first + 1));
 
         timeElapsed = (SDL_GetTicks() - stepTime) / 1000.0f;
@@ -69,9 +68,14 @@ namespace engine{
         DEBUG("Axis in X:" << X*widthFrame << " Axis in Y:" << Y*heightFrame << " Position:" << currentPositionFrame);
     }
 
-    void Animation::draw(){
+    void Animation::draw(int x, int y){
+        INFO("ANIMATOR DRAW");
+        axis.first = x;
+        axis.second = y;
         // Rendering in screen
         renderQuad = {axis.first, axis.second, clipRect.w, clipRect.h };
+        DEBUG("X: " + std::to_string(axis.first));
+        DEBUG("Y: " + std::to_string(axis.second));
 
         SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
     }
