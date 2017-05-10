@@ -10,7 +10,7 @@ using namespace engine;
 
 class Alien: public GameObject{
 public:
-    Alien(std::string objectName, int positionX, int positionY, int width, int height);
+    Alien(std::string objectName, double positionX, double positionY, int width, int height);
     ~Alien();
     void update(int timeElapsed);
     void draw();

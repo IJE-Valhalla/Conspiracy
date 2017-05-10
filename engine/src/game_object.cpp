@@ -3,7 +3,7 @@
 
 using namespace engine;
 
-GameObject::GameObject(std::string objectName, int positionX, int positionY,
+GameObject::GameObject(std::string objectName, double positionX, double positionY,
                                                int width, int height){
         setName(objectName);
         setPositionX(positionX);
@@ -23,11 +23,11 @@ std::string GameObject::getName(){
     return name;
 }
 
-int GameObject::getPositionX(){
+double GameObject::getPositionX(){
     return position.first;
 }
 
-int GameObject::getPositionY(){
+double GameObject::getPositionY(){
     return position.second;
 }
 
@@ -43,11 +43,11 @@ void GameObject::setName(std::string newName){
     name = newName;
 }
 
-void GameObject::setPositionX(int newX){
+void GameObject::setPositionX(double newX){
     position.first = newX;
 }
 
-void GameObject::setPositionY(int newY){
+void GameObject::setPositionY(double newY){
     position.second = newY;
 }
 

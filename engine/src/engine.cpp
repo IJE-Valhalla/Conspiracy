@@ -58,12 +58,6 @@ namespace engine{
                 continue;
             }
 
-            if(sceneManager->getCurrentScene() != NULL){
-                sceneManager->getCurrentScene()->update(timeElapsed);
-                sceneManager->getCurrentScene()->draw();
-            }
-            SDL_RenderPresent(WindowManager::getGameCanvas());
-
 
             timeElapsed = SDL_GetTicks() - stepTime;
             DEBUG("TICKS:" + std::to_string(SDL_GetTicks()));
@@ -72,7 +66,14 @@ namespace engine{
             if(frameTime > timeElapsed){
                 DEBUG("SDL_DELAY: " + std::to_string(frameTime - timeElapsed));
                 SDL_Delay(frameTime - timeElapsed);
+                timeElapsed = SDL_GetTicks() - stepTime;
             }
+
+            if(sceneManager->getCurrentScene() != NULL){
+              sceneManager->getCurrentScene()->update(timeElapsed);
+              sceneManager->getCurrentScene()->draw();
+            }
+            SDL_RenderPresent(WindowManager::getGameCanvas());
         }
     }
 }
