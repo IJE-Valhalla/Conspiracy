@@ -1,18 +1,19 @@
 #include <iostream>
 
-#include "game.hpp"
-#include "scene.hpp"
-#include "sprite.hpp"
+#include "engine.hpp"
+#include "game_scene.hpp"
+#include "alien.hpp"
 
 using namespace engine;
 
+
 int main(int, char**){
-  Game::instance.setGameProperties("Litigium", 1024, 600);
+    loadEngine();
 
-  Scene scene("Colorful");
+    GameScene* scene = new GameScene(0);
+    getSceneManager()->addScene(scene);
+    getSceneManager()->loadScene(0);
 
-  Game::instance.addScene(scene);
-  Game::instance.run();
-
-  return 0;
+    run();
+    return 0;
 }

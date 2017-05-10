@@ -19,13 +19,20 @@ More informations in our GDD - https://github.com/IJE-Valhalla/Conspiracy/wiki/G
 ```
 $ git clone https://github.com/IJE-Valhalla/Conspiracy.git
 $ cd Conspiracy
-$ cmake ..
+$ cmake .
 $ make
 $ ./conspiracy
 ```
 
 ## Authors
 
+### Developers
 - Rodrigo Oliveira Campos (@rodrigocam)
 - Pablo Diego Silva da Silva (@pablodiegoss)
 - Ronyell Henrique dos Santos (@Ronyell)
+
+### Artist
+ - Vitor Paz Guedes (vitor.paz.guedes@gmail.com)
+ 
+### Musician
+ - Daniel Gillez Araújo Silva
