@@ -8,7 +8,7 @@
 namespace engine{
     class GameObject{
     public:
-        GameObject(std::string objectName, int positionX, int positionY,int width, int height);
+        GameObject(std::string objectName, double positionX, double positionY,int width, int height);
         GameObject();
         ~GameObject();
 
@@ -16,14 +16,14 @@ namespace engine{
         virtual void update();
 
         std::string getName();
-        int getPositionX();
-        int getPositionY();
+        double getPositionX();
+        double getPositionY();
         int getWidth();
         int getHeight();
 
         void setName(std::string newName);
-        void setPositionX(int newPosition);
-        void setPositionY(int newPosition);
+        void setPositionX(double newPosition);
+        void setPositionY(double newPosition);
         void setWidth(int newWidth);
         void setHeight(int newHeight);
 
@@ -31,7 +31,7 @@ namespace engine{
         std::string name;
 
         // X position and Y position in pixels
-        std::pair <int, int> position;
+        std::pair <double, double> position;
 
         // Width and Height in pixels
         std::pair <int, int> size;

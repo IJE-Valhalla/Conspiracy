@@ -55,9 +55,8 @@ namespace engine{
         timeElapsed = (SDL_GetTicks() - stepTime) / 1000.0f;
         DEBUG("Time Per Frame: " << timePerFrame << "Time elapsed: " << timeElapsed);
 
-        while(timeElapsed > timePerFrame){
+        if(timeElapsed >= timePerFrame){
             next();
-            timeElapsed -= timePerFrame;
             stepTime = SDL_GetTicks();
         }
 
@@ -95,7 +94,7 @@ namespace engine{
     void Animation::setInterval(int firstPosition, int lastPosition){
         if(firstPosition != interval.first || lastPosition != interval.second){
             startTime = SDL_GetTicks();
-            stepTime = SDL_GetTicks();
+            stepTime = startTime;
             currentPositionFrame = firstPosition;
             interval.first = firstPosition;
             interval.second = lastPosition;
