@@ -1,12 +1,11 @@
 #include "log.h"
 #include "player.hpp"
-
 using namespace engine;
 
 Player::Player(){
-    bilu = new Alien("assets/sprites/alien1.png", 100, 0, 50, 50);
-    varginha = new Alien("assets/sprites/alien2.png", 200,70, 50, 50);
-    etemer = new Alien("assets/sprites/alien3.png", 300,130, 50, 50);
+    bilu = new Alien("assets/sprites/bilu_sheet.png", 100, 0, 39, 39);
+    varginha = new Alien("assets/sprites/bilu_sheet.png", 200,70, 39, 39);
+    etemer = new Alien("assets/sprites/bilu_sheet.png", 300,130, 39, 39);
     selectedAlien = 1;
 
     bilu->update(0);

@@ -6,7 +6,7 @@ Alien::Alien(std::string objectName, double positionX, double positionY,
                                                                          positionY,
                                                                          width, height){
 
-    animator = new Animation(objectName, 4, 9, 1.0);
+    animator = new Animation(objectName, 1, 4, 0.5);
 }
 
 Alien::~Alien(){}
@@ -16,12 +16,12 @@ void Alien::update(int timeElapsed){
     if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_RIGHT)){
         auto inc = 0.15*timeElapsed;
         setPositionX(getPositionX()+inc);
-        animator->setInterval(27,35);
+        animator->setInterval(0,3);
     }
     else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_LEFT)){
         auto inc = 0.15*timeElapsed;
         setPositionX(getPositionX()-inc);
-        animator->setInterval(9,17);
+        animator->setInterval(0,3);
     }
 
     else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)){
@@ -29,14 +29,14 @@ void Alien::update(int timeElapsed){
         WARN("INCREMENTO//:" << inc <<"POSITION" << getPositionY());
         setPositionY(getPositionY()-inc);
         WARN("INCREMENTO//:" << inc <<"POSITION" << getPositionY());
-        animator->setInterval(0,8);
+        animator->setInterval(0,3);
     }
     else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::KEY_PRESS_DOWN)){
         auto inc = 0.15*timeElapsed;
         WARN("INCREMENTO//:" << inc <<"POSITION" << getPositionY());
         setPositionY(getPositionY()+inc);
         WARN("INCREMENTO//:" << inc <<"POSITION" << getPositionY());
-        animator->setInterval(18,26);
+        animator->setInterval(0,3);
     }
     else {
         animator->setInterval(animator->getInterval().first, animator->getInterval().first);
