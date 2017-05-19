@@ -12,7 +12,7 @@ class Player: public GameObject{
 public:
     Player();
     ~Player();
-    void update(int timeElapsed);
+    void update(double timeElapsed);
     void draw();
 private:
     Alien *bilu, *varginha, *etemer;

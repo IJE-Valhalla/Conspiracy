@@ -11,7 +11,7 @@ Alien::Alien(std::string objectName, double positionX, double positionY,
 
 Alien::~Alien(){}
 
-void Alien::update(int timeElapsed){
+void Alien::update(double timeElapsed){
     // To Do: Use Time Elapsed in inc.
     if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_RIGHT)){
         auto inc = 0.15*timeElapsed;

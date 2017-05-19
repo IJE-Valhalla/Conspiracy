@@ -12,8 +12,8 @@ namespace engine{
         GameObject();
         ~GameObject();
 
-        virtual void draw();
-        virtual void update();
+        virtual void draw() = 0;
+        virtual void update(double timeElapsed) = 0;
 
         std::string getName();
         double getPositionX();

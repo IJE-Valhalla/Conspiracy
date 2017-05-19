@@ -15,7 +15,7 @@ Player::Player(){
 
 Player::~Player(){}
 
-void Player::update(int timeElapsed){
+void Player::update(double timeElapsed){
     int beforeAlien = selectedAlien;
     if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_ONE)){
         selectedAlien = 1;
