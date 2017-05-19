@@ -3,6 +3,7 @@
 #include "scene.hpp"
 #include "engine.hpp"
 #include "wall.hpp"
+#include <iostream>
 
 using namespace engine;
 
@@ -27,6 +28,7 @@ void GameScene::update(double timeElapsed){
 }
 void GameScene::load(){
     gameObjectsList.push_back(new Player());
+    gameObjectsList.push_back(new Wall("assets/sprites/MYP.png", 100, 200, 10, 10));
 }
 void GameScene::unload(){
 }
