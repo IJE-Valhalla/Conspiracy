@@ -18,6 +18,8 @@ public:
     void init();
     Animation * getAnimation();
 private:
+    void walkInX(double & incX);
+    void walkInY(double & incY);
     Animation* animator;
 };
 

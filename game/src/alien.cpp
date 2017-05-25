@@ -13,8 +13,20 @@ Alien::~Alien(){}
 
 void Alien::update(double timeElapsed){
     // To Do: Use Time Elapsed in inc.
-    auto incX = 0.15*timeElapsed;
     auto incY = 0.15*timeElapsed;
+    auto incX = 0.15*timeElapsed;
+
+    walkInX(incX);
+    walkInY(incY);
+
+    if(incX == 0 && incY == 0){
+        animator->setInterval(animator->getInterval().first, animator->getInterval().first);
+    }
+    animator->update();
+}
+
+void Alien::walkInX(double & incX){
+
     if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_RIGHT)){
         incX = incX;
         animator->setInterval(0,3);
@@ -26,10 +38,14 @@ void Alien::update(double timeElapsed){
     else {
         incX = 0;
     }
+
     setPositionX(getPositionX()+incX);
     if(CollisionManager::instance.verifyCollisionWithWalls(this)){
         setPositionX(getPositionX()+(incX*(0-1)));
     }
+}
+
+void Alien::walkInY(double & incY){
 
     if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)){
         incY = incY * (0-1);
@@ -42,15 +58,12 @@ void Alien::update(double timeElapsed){
     else {
         incY = 0;
     }
+
+
     setPositionY(getPositionY()+incY);
     if(CollisionManager::instance.verifyCollisionWithWalls(this)){
         setPositionY(getPositionY()+(incY*(0-1)));
     }
-
-    if(incX == 0 && incY == 0){
-        animator->setInterval(animator->getInterval().first, animator->getInterval().first);
-    }
-    animator->update();
 }
 
 void Alien::draw(){
