@@ -27,6 +27,9 @@ void Alien::update(double timeElapsed){
         incX = 0;
     }
     setPositionX(getPositionX()+incX);
+    if(CollisionManager::instance.verifyCollisionWithWalls(this)){
+        setPositionX(getPositionX()+(incX*(0-1)));
+    }
 
     if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)){
         incY = incY * (0-1);
@@ -40,6 +43,9 @@ void Alien::update(double timeElapsed){
         incY = 0;
     }
     setPositionY(getPositionY()+incY);
+    if(CollisionManager::instance.verifyCollisionWithWalls(this)){
+        setPositionY(getPositionY()+(incY*(0-1)));
+    }
 
     if(incX == 0 && incY == 0){
         animator->setInterval(animator->getInterval().first, animator->getInterval().first);

@@ -3,6 +3,8 @@
 #include "scene.hpp"
 #include "engine.hpp"
 #include "wall.hpp"
+#include "collision_manager.hpp"
+
 #include <iostream>
 
 using namespace engine;
@@ -28,7 +30,8 @@ void GameScene::update(double timeElapsed){
 }
 void GameScene::load(){
     gameObjectsList.push_back(new Player());
-    gameObjectsList.push_back(new Wall("assets/sprites/MYP.png", 100, 200, 10, 10));
+    gameObjectsList.push_back(new Wall("assets/sprites/MYP.png", 100, 200, 100, 100));
+    CollisionManager::instance.addWall(gameObjectsList.back());
 }
 void GameScene::unload(){
 }
