@@ -3,9 +3,9 @@
 using namespace engine;
 
 Player::Player(){
-    bilu = new Alien("assets/sprites/bilu_sheet.png", 100, 0, 39, 39);
-    varginha = new Alien("assets/sprites/bilu_sheet.png", 200,70, 39, 39);
-    etemer = new Alien("assets/sprites/bilu_sheet.png", 300,130, 39, 39);
+    bilu = new Alien("assets/sprites/bilu_sheet.png", 100, 0, 40, 43);
+    varginha = new Alien("assets/sprites/varginha_sheet.png", 200,70, 40, 41);
+    etemer = new Alien("assets/sprites/etemer_sheet.png", 300,130, 40, 40);
     selectedAlien = 1;
 
     bilu->update(0);

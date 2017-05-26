@@ -20,7 +20,9 @@ public:
 private:
     void walkInX(double & incX);
     void walkInY(double & incY);
+    void specialAction();
     Animation* animator;
+    int idleAnimationNumber;
 };
 
 #endif
