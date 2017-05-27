@@ -44,6 +44,26 @@ The game has three alternate characters and unique abilities.
 
 ## Enemies
 
+The enemies are the same in all phases, changing only the amount in each of them and their positions. There are 3 types of enemies, the guards of the ministry, reporters and the local security cameras.
+
+* Guards: They can stand or move in a fixed trajectory. If any of the aliens, except E. Temer, is seen, the player loses.
+* Reporters: They can stand or move on a fixed path. If E. Temer is seen, he is talking for 20 seconds and if the other aliens are seen the player loses.
+* Cameras: They can only be stopped at a fixed location, watching certain sections. The E.T. de Varginha is the only one that can not be seen by the cameras, the others, if they are seen. The player loses.
+
+The player has the option of killing guards and reporters, but will trigger a 60 second chronometer to the end of the phase.
+
+## Controls
+
+| Key | Action |
+|:-----:|:----:|
+|![Remotos](https://raw.githubusercontent.com/wiki/IJE-Valhalla/Conspiracy/image/key_up.png)|Move character up|
+|![Remotos](https://raw.githubusercontent.com/wiki/IJE-Valhalla/Conspiracy/image/key_down.png)|Move character down|
+|![Remotos](https://raw.githubusercontent.com/wiki/IJE-Valhalla/Conspiracy/image/key_left.png)|Move character left|
+|![Remotos](https://raw.githubusercontent.com/wiki/IJE-Valhalla/Conspiracy/image/key_right.png)|Move character right|
+|![Remotos](https://raw.githubusercontent.com/wiki/IJE-Valhalla/Conspiracy/image/key_one.png)|Select the ETemer character|
+|![Remotos](https://raw.githubusercontent.com/wiki/IJE-Valhalla/Conspiracy/image/key_two.png)|Select the E.T. de Varginha character|
+|![Remotos](https://raw.githubusercontent.com/wiki/IJE-Valhalla/Conspiracy/image/key_three.png)|Select the E.T. Bilu character|
+|![Remotos](https://raw.githubusercontent.com/wiki/IJE-Valhalla/Conspiracy/image/key_space.png)|Interaction with objects and enemies of the phase|
 
 ## Dependencies
 
