@@ -101,6 +101,9 @@ namespace engine{
             DEBUG("First Position: " << firstPosition << " Last Position: " << lastPosition);
         }
     }
+    void Animation::setTotalTime(double newTotalTime){
+        totalTime = newTotalTime;
+    }
 
     void Animation::shutdown(){
         INFO("Destroy sprite.");
