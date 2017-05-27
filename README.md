@@ -33,6 +33,18 @@ Interactions occur between a character and an element during the game. The inter
 * If an E.T kills a human and does not end the phase in 60 seconds.
 * If any E.T is detected by humans or a security system.
 
+## Characters
+The game has three alternate characters and unique abilities.
+
+* E.T. Bilu: He is the head of the team, being responsible for the intellectual work of the coup. He also wrote the future speeches of E. Temer for the aftermath of the aliens. Bilu is able to alter documents and intrude on security systems in buildings.
+
+* E.T de Varginha: He is less agile than the others, but, his fame amplified his powers. The E.T de Varginha is capable of lowering and being undetectable by humans, even in recorded images the human brain is not able to perceive it.
+
+* E.Temer: This alien may not be the smartest, or even not be able to stay invisible. But his oratorical skills impress even the most elegant journalist. Despite its exotic appearance, E. Temer was able to obtain a very convincing mask for interacting with humans and distracting them during the activities of the coup.
+
+## Enemies
+
+
 ## Dependencies
 
 - CMake 3.5.1
