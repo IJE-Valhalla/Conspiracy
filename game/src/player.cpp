@@ -45,13 +45,25 @@ void Player::draw(){
 
 void Player::waitAnimation(int timeElapsed, int beforeAlien){
     if(beforeAlien==1){
-      bilu->getAnimation()->setInterval(bilu->getAnimation()->getInterval().first, bilu->getAnimation()->getInterval().first);
+      edleAnimation(*bilu);
       bilu->update(timeElapsed);
     }else if(beforeAlien==2){
-      varginha->getAnimation()->setInterval(varginha->getAnimation()->getInterval().first, varginha->getAnimation()->getInterval().first);
+      edleAnimation(*varginha);
       varginha->update(timeElapsed);
     } else if(beforeAlien==3){
-      etemer->getAnimation()->setInterval(etemer->getAnimation()->getInterval().first, etemer->getAnimation()->getInterval().first);
+      edleAnimation(*etemer);
       etemer->update(timeElapsed);
     }
+}
+
+void Player::edleAnimation(Alien & alien){
+  if(alien.getAnimation()->getInterval().first == "right"){
+    alien.getAnimation()->setInterval("idle_right");
+  } else if(alien.getAnimation()->getInterval().first == "left"){
+    alien.getAnimation()->setInterval("idle_left");
+  } else if(alien.getAnimation()->getInterval().first == "up"){
+    alien.getAnimation()->setInterval("idle_up");
+  }else if(alien.getAnimation()->getInterval().first == "down"){
+    alien.getAnimation()->setInterval("idle_down");
+  }
 }
