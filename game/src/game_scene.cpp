@@ -4,6 +4,7 @@
 #include "engine.hpp"
 #include "wall.hpp"
 #include "collision_manager.hpp"
+#include "enemy.hpp"
 
 #include <iostream>
 
@@ -18,7 +19,7 @@ GameScene::~GameScene(){}
 void GameScene::draw(){
     std::vector<GameObject*>::iterator it;
     for(it=gameObjectsList.begin() ; it < gameObjectsList.end(); it++) {
-        std::cout << "AQUI" << std::endl;
+        //std::cout << "AQUI" << std::endl;
         (*it)->draw();
     }
 }
@@ -29,6 +30,7 @@ void GameScene::update(double timeElapsed){
     }
 }
 void GameScene::load(){
+    gameObjectsList.push_back(new Enemy("assets/sprites/seguranca_sheet.png", 400, 400, 100, 100));
     gameObjectsList.push_back(new Player());
     gameObjectsList.push_back(new Wall("assets/sprites/MYP.png", 100, 200, 100, 100));
     CollisionManager::instance.addWall(gameObjectsList.back());

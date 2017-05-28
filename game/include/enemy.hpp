@@ -11,13 +11,13 @@ using namespace engine;
 
 class Enemy: public GameObject{
 public:
-    Enemy();
+    Enemy(){};
     Enemy(std::string objectName, double positionX, double positionY, int width, int height);
-    virtual ~Enemy();
-    virtual void update(double timeElapsed);
-    virtual void draw();
-    virtual void init();
-    virtual Animation * getAnimation();
+    ~Enemy();
+    void update(double timeElapsed);
+    void draw();
+    void init();
+    Animation * getAnimation();
 private:
     void walkInX(double & incX);
     void walkInY(double & incY);
