@@ -6,6 +6,7 @@
 #include "collision_manager.hpp"
 #include "guard.hpp"
 
+#include <typeinfo>
 #include <iostream>
 
 using namespace engine;
@@ -30,10 +31,18 @@ void GameScene::update(double timeElapsed){
     }
 }
 void GameScene::load(){
-    gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 400, 400, 100, 100));
     gameObjectsList.push_back(new Player());
-    gameObjectsList.push_back(new Wall("assets/sprites/MYP.png", 100, 200, 100, 100));
-    CollisionManager::instance.addWall(gameObjectsList.back());
+    gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 400, 400, 40, 40, "right"));
+    gameObjectsList.push_back(new Wall("assets/sprites/MYP.png", 0, 0, 100, 100));
+    gameObjectsList.push_back(new Wall("assets/sprites/MYP.png", 0, 400, 100, 100));
+    gameObjectsList.push_back(new Wall("assets/sprites/MYP.png", 600, 400, 100, 100));
+
+    for(auto gameObject: gameObjectsList){
+      if(typeid(*gameObject) == typeid(Wall)){
+        CollisionManager::instance.addWall(gameObject);
+      }
+    }
+
 }
 void GameScene::unload(){
 }

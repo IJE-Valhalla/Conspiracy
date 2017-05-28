@@ -1,7 +1,7 @@
 #include "guard.hpp"
 
 Guard::Guard(std::string objectName, double positionX, double positionY,
-                                     int width, int height) : Enemy(objectName,
+                                     int width, int height, std::string initialDirection) : Enemy(objectName,
                                                                          positionX,
                                                                          positionY,
                                                                          width, height){
@@ -18,14 +18,15 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
     animator->addAction("idle_down",0,0);
 
     idleAnimationNumber = 0;
+    direction = initialDirection;
 }
 
 Guard::~Guard(){}
 
 void Guard::update(double timeElapsed){
     // To Do: Use Time Elapsed in inc.
-    auto incY = 0.15*timeElapsed;
-    auto incX = 0.15*timeElapsed;
+    auto incY = 0.1*timeElapsed;
+    auto incX = 0.1*timeElapsed;
 
     walkInX(incX);
     walkInY(incY);
@@ -44,21 +45,24 @@ void Guard::update(double timeElapsed){
 
 void Guard::walkInX(double & incX){
 
-    if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_RIGHT)){
-        incX = incX;
+    if(direction == "right"){
+        incX = incX * (1);
         idleAnimationNumber = 5;
-        animator->setInterval("right");
-    }
-    else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_LEFT)){
-        incX = incX * (0-1);
+        animator->setInterval(direction);
+    }else if(direction == "left"){
+        incX = incX * (-1);
         idleAnimationNumber = 0;
-        animator->setInterval("left");
-    }
-    else {
+        animator->setInterval(direction);
+    }else {
         incX = 0;
     }
     setPositionX(getPositionX()+incX);
     if(CollisionManager::instance.verifyCollisionWithWalls(this)){
+        if(direction == "left"){
+          direction = "right";
+        }else{
+          direction = "left";
+        }
         setPositionX(getPositionX()+(incX*(0-1)));
     }
 }
