@@ -69,23 +69,26 @@ void Guard::walkInX(double & incX){
 
 void Guard::walkInY(double & incY){
 
-    if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)){
-        incY = incY * (0-1);
-        idleAnimationNumber = 5;
-        animator->setInterval("up");
-    }
-    else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::KEY_PRESS_DOWN)){
-        incY = incY;
-        idleAnimationNumber = 0;
-        animator->setInterval("down");
-    }
-    else {
-        incY = 0;
-    }
-    setPositionY(getPositionY()+incY);
-    if(CollisionManager::instance.verifyCollisionWithWalls(this)){
-        setPositionY(getPositionY()+(incY*(0-1)));
-    }
+  if(direction == "down"){
+      incY = incY * (1);
+      idleAnimationNumber = 5;
+      animator->setInterval(direction);
+  }else if(direction == "up"){
+      incY = incY * (-1);
+      idleAnimationNumber = 0;
+      animator->setInterval(direction);
+  }else {
+      incY = 0;
+  }
+  setPositionY(getPositionY()+incY);
+  if(CollisionManager::instance.verifyCollisionWithWalls(this)){
+      if(direction == "down"){
+        direction = "up";
+      }else{
+        direction = "down";
+      }
+      setPositionY(getPositionY()+(incY*(0-1)));
+  }
 }
 
 void Guard::specialAction(){

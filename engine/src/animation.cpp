@@ -98,7 +98,7 @@ namespace engine{
             interval.second =  list_actions[action];
             interval.first = action;
             currentPositionFrame = interval.second.first;
-            INFO("ACTION: " << action);
+            INFO("ACTION: " << action << currentPositionFrame);
         }
     }
 

@@ -33,6 +33,7 @@ void GameScene::update(double timeElapsed){
 void GameScene::load(){
     gameObjectsList.push_back(new Player());
     gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 400, 400, 40, 40, "right"));
+    gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 0, 100, 40, 40, "down"));
     gameObjectsList.push_back(new Wall("assets/sprites/MYP.png", 0, 0, 100, 100));
     gameObjectsList.push_back(new Wall("assets/sprites/MYP.png", 0, 400, 100, 100));
     gameObjectsList.push_back(new Wall("assets/sprites/MYP.png", 600, 400, 100, 100));
