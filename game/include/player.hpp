@@ -17,7 +17,7 @@ public:
 private:
     Alien *bilu, *varginha, *etemer;
     int selectedAlien;
-    void edleAnimation(Alien & alien);
+    void idleAnimation(Alien & alien);
     void waitAnimation(int timeElapsed, int beforeAlien);
 };
 #endif

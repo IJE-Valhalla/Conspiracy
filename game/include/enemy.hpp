@@ -13,17 +13,9 @@ class Enemy: public GameObject{
 public:
     Enemy(){};
     Enemy(std::string objectName, double positionX, double positionY, int width, int height);
-    ~Enemy();
-    void update(double timeElapsed);
-    void draw();
-    void init();
-    Animation * getAnimation();
-private:
-    void walkInX(double & incX);
-    void walkInY(double & incY);
-    void specialAction();
-    Animation* animator;
-    int idleAnimationNumber;
+    virtual ~Enemy();
+    virtual void update(double timeElapsed) = 0;
+    virtual void draw() = 0;
 };
 
 #endif

@@ -6,6 +6,8 @@
 #include "player.hpp"
 #include "wall.hpp"
 #include "game_object.hpp"
+#include "guard.hpp"
+
 #include <vector>
 
 using namespace engine;
