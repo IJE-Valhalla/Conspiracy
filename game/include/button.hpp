@@ -10,7 +10,7 @@ using namespace engine;
 
 class Button: public GameObject{
 public:
-    Button(std::string objectName, double positionX, double positionY, int width, int height, std::string title, int size);
+    Button(std::string objectName, double positionX, double positionY, int width, int height, std::string title, int sizeTitle);
     ~Button();
     void update(double timeElapsed);
     void draw();
