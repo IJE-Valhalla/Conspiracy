@@ -40,6 +40,11 @@ void Alien::update(double timeElapsed){
         }
     }
     specialAction();
+
+    if(CollisionManager::instance.verifyCollisionWithEnemies(this)){
+        WARN("Colidiu");
+    }
+
     animator->update();
 }
 
