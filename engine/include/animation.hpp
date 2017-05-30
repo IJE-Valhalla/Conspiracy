@@ -17,6 +17,7 @@ namespace engine{
 
         void setCurrentPositionFrame(int positionFrame);
         void setInterval(int firstPositionFrame, int lastPositionFrame);
+        void setTotalTime(double newTotalTime);
         std::pair<int,int> getInterval();
 
     private:
