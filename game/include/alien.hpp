@@ -19,7 +19,7 @@ public:
     Animation * getAnimation();
 protected:
     void walkInX(double & incX);
-    void walkInY(double & incY);
+    void walkInY(double & incY, double incX);
     virtual void specialAction() = 0;
     Animation* animator;
     int idleAnimationNumber;

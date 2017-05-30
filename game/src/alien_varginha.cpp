@@ -5,7 +5,11 @@ Varginha::Varginha(std::string objectName, double positionX, double positionY,
                                                                        positionX,
                                                                        positionY,
                                                                        width, height){
-    isInvisible = false;
+   animator->addAction("special_right",12,13);
+   animator->addAction("special_left",10,11);
+   animator->addAction("invisible_right", 13, 13);
+   animator->addAction("invisible_left", 11, 11);
+   isInvisible = false;
 }
 
 void Varginha::specialAction(){
@@ -13,19 +17,17 @@ void Varginha::specialAction(){
 
     if(isInvisible){
         if(idleAnimationNumber == 5){
-            animator->setInterval(13, 13);
+            animator->setInterval("invisible_right");
         }else{
-            animator->setInterval(11, 11);
+            animator->setInterval("invisible_left");
         }
     }else if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE)){
         blockMovement = true;
         isInvisible = true;
         if(idleAnimationNumber == 5){
-            interval.first = 12;
-            interval.second = 13;
+            animator->setInterval("special_right");
         }else{
-            interval.first = 10;
-            interval.second = 11;
+            animator->setInterval("special_left");
         }
     }
     if(InputManager::instance.isKeyReleased(InputManager::KEY_PRESS_SPACE)){

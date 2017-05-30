@@ -18,8 +18,6 @@ Alien::Alien(std::string objectName, double positionX, double positionY,
     animator->addAction("left",1,4);
     animator->addAction("up",6,9);
     animator->addAction("down",1,4);
-    animator->addAction("special_right",14,16);
-    animator->addAction("special_left",10,13);
     animator->addAction("idle_right",5,5);
     animator->addAction("idle_left",0,0);
     animator->addAction("idle_up",5,5);
@@ -39,10 +37,10 @@ void Alien::update(double timeElapsed){
 
     if(!blockMovement){
         walkInX(incX);
-        walkInY(incY);
+        walkInY(incY, incX);
     }
 
-    if(incX == 0 && incY == 0 && animator->getInterval().first !="special_right" && animator->getInterval().first !="special_left"){
+    if(incX == 0 && incY == 0){
         if(idleAnimationNumber){
           animator->setInterval("idle_right");
         }else{
@@ -79,17 +77,21 @@ void Alien::walkInX(double & incX){
     }
 }
 
-void Alien::walkInY(double & incY){
+void Alien::walkInY(double & incY, double incX){
 
     if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)){
         incY = incY * (0-1);
         idleAnimationNumber = 5;
-        animator->setInterval("up");
+        if(incX == 0){
+            animator->setInterval("up");
+        }
     }
     else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::KEY_PRESS_DOWN)){
         incY = incY;
         idleAnimationNumber = 0;
-        animator->setInterval("down");
+        if(incX == 0){
+            animator->setInterval("down");
+        }
     }
     else {
         incY = 0;

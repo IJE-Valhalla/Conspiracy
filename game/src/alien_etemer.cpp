@@ -5,6 +5,8 @@ Etemer::Etemer(std::string objectName, double positionX, double positionY,
                                                                        positionX,
                                                                        positionY,
                                                                        width, height){
+    animator->addAction("special_right",14,17);
+    animator->addAction("special_left",10,13);
 }
 
 void Etemer::specialAction(){
@@ -13,13 +15,10 @@ void Etemer::specialAction(){
     if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE)){
         blockMovement = true;
         if(idleAnimationNumber == 5){
-            interval.first = 14;
-            interval.second = 17;
+            animator->setInterval("special_right");
         }else{
-            interval.first = 10;
-            interval.second = 13;
+            animator->setInterval("special_left");
         }
-        animator->setInterval(interval.first,interval.second);
         animator->setTotalTime(1.5);
     }else{
         blockMovement = false;

@@ -15,7 +15,7 @@ namespace engine{
         void draw(int x, int y);
         void next();
         void shutdown();
-
+        void setTotalTime(double newTotalTime); 
         void setCurrentPositionFrame(int positionFrame);
         void setInterval(std::string action);
         void addAction(std::string name_action, int initial, int last);
