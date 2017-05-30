@@ -22,7 +22,7 @@ bool WindowManager::createWindow(std::string windowTitle, std::pair<int, int> wi
             return false;
         }
 
-        SDL_SetRenderDrawColor(gameCanvas, 0, 0, 0, 0);
+        SDL_SetRenderDrawColor(gameCanvas, 100, 100, 100, 255);
         SDL_RenderClear(gameCanvas);
         SDL_RenderPresent(gameCanvas);
 

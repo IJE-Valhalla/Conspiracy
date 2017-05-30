@@ -50,7 +50,7 @@ namespace engine{
     }
 
     void Animation::update(){
-        double timePerFrame = static_cast<double> (totalTime / (interval.second - interval.first + 1));
+        double timePerFrame = static_cast<double> (totalTime / (interval.second.second - interval.second.first + 1));
 
         timeElapsed = (SDL_GetTicks() - stepTime) / 1000.0f;
         DEBUG("Time Per Frame: " << timePerFrame << "Time elapsed: " << timeElapsed);
@@ -82,8 +82,8 @@ namespace engine{
     void Animation::next(){
         currentPositionFrame ++;
 
-        if(currentPositionFrame > interval.second){
-           currentPositionFrame = interval.first;
+        if(currentPositionFrame > interval.second.second){
+           currentPositionFrame = interval.second.first;
         }
     }
 
@@ -91,15 +91,18 @@ namespace engine{
         currentPositionFrame = positionFrame;
     }
 
-    void Animation::setInterval(int firstPosition, int lastPosition){
-        if(firstPosition != interval.first || lastPosition != interval.second){
+    void Animation::setInterval(std::string action){
+        if(action != interval.first){
             startTime = SDL_GetTicks();
             stepTime = startTime;
-            currentPositionFrame = firstPosition;
-            interval.first = firstPosition;
-            interval.second = lastPosition;
-            DEBUG("First Position: " << firstPosition << " Last Position: " << lastPosition);
+            interval.second =  list_actions[action];
+            interval.first = action;
+            currentPositionFrame = interval.second.first;
+            INFO("ACTION: " << action << currentPositionFrame);
         }
+    }
+    void Animation::setTotalTime(double newTotalTime){
+        totalTime = newTotalTime;
     }
 
     void Animation::shutdown(){
@@ -108,7 +111,11 @@ namespace engine{
         texture = NULL;
     }
 
-    std::pair<int,int> Animation::getInterval(){
+    std::pair<std::string, std::pair<int, int>> Animation::getInterval(){
         return interval;
+    }
+
+    void Animation::addAction(std::string name_action, int initial, int last){
+      list_actions[name_action] = std::pair<int, int>(initial, last);
     }
 }

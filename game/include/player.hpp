@@ -2,8 +2,10 @@
 #define PLAYER_HPP
 
 #include "alien.hpp"
+#include "alien_bilu.hpp"
+#include "alien_etemer.hpp"
+#include "alien_varginha.hpp"
 #include "input_manager.hpp"
-//#include "game_object.hpp"
 #include "engine.hpp"
 
 using namespace engine;
@@ -17,7 +19,7 @@ public:
 private:
     Alien *bilu, *varginha, *etemer;
     int selectedAlien;
-
-    void waitAnimation(int timeElapsed, int beforeAlien);
+    void idleAnimation(Alien * alien);
+    void waitAnimation(int beforeAlien);
 };
 #endif

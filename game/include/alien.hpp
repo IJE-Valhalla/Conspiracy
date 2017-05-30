@@ -17,12 +17,14 @@ public:
     void draw();
     void init();
     Animation * getAnimation();
-private:
+protected:
     void walkInX(double & incX);
-    void walkInY(double & incY);
-    void specialAction();
+    void walkInY(double & incY, double incX);
+    virtual void specialAction() = 0;
     Animation* animator;
     int idleAnimationNumber;
+    std::string alienName;
+    bool blockMovement;
 };
 
 #endif

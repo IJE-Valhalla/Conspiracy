@@ -9,10 +9,23 @@ CollisionManager CollisionManager::instance;
         wallList.push_back(g);
     }
 
+    void CollisionManager::addEnemy(GameObject* g){
+        enemyList.push_back(g);
+    }
+
     bool CollisionManager::verifyCollisionWithWalls(GameObject* g1){
         std::vector<GameObject*>::iterator wall;
         for(wall=wallList.begin() ; wall < wallList.end(); wall++) {
             if(verifyCollision((*wall), g1)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool CollisionManager::verifyCollisionWithEnemies(GameObject* g1){
+        for(GameObject * enemy : enemyList) {
+            if(verifyCollision((enemy), g1)){
                 return true;
             }
         }
