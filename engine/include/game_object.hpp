@@ -20,15 +20,19 @@ namespace engine{
         double getPositionY();
         int getWidth();
         int getHeight();
+        bool isEnabled();
 
         void setName(std::string newName);
         void setPositionX(double newPosition);
         void setPositionY(double newPosition);
         void setWidth(int newWidth);
         void setHeight(int newHeight);
+        void setEnabled(bool paramEnabled);
 
     private:
         std::string name;
+
+        bool enabled;
 
         // X position and Y position in pixels
         std::pair <double, double> position;

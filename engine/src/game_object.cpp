@@ -10,6 +10,7 @@ GameObject::GameObject(std::string objectName, double positionX, double position
         setPositionY(positionY);
         setWidth(width);
         setHeight(height);
+        setEnabled(true);
 }
 
 GameObject::GameObject(){}
@@ -56,4 +57,12 @@ void GameObject::setWidth(int newWidth){
 
 void GameObject::setHeight(int newHeight){
     size.second = newHeight;
+}
+
+void GameObject::setEnabled(bool paramEnabled){
+    enabled = paramEnabled;
+}
+
+bool GameObject::isEnabled(){
+    return enabled;
 }
