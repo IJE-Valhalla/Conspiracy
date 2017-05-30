@@ -85,7 +85,6 @@ void GameScene::load(){
         gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", 415, j, 5, 5));
     }
 
-    //PABLO LIXO gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", 415, 260, 20, 65));
     for(int j=260; j>=180; j-=5){
         gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", 415, j, 5, 5));
     }
@@ -134,6 +133,15 @@ void GameScene::load(){
     for(int j=75; j>=0; j-=5){
         gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", 855, j, 5, 5));
     }
+
+    //Door edge 1
+    gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_door.png", 200, 5, 5, 65));
+
+    //Door edge 2
+    gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_door.png", 415, 200, 5, 65));
+
+    //Door edge 3
+    gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_door.png", 855, 20, 5, 65));
 
     std::pair<int,int> doorOnePosition (360, 270);
     std::pair<int,int> switchOnePosition (150, 150);
