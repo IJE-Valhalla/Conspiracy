@@ -6,6 +6,7 @@
 #include "collision_manager.hpp"
 #include "guard.hpp"
 
+
 #include <typeinfo>
 #include <iostream>
 
@@ -36,6 +37,7 @@ void GameScene::load(){
     gameObjectsList.push_back(new Wall("assets/sprites/MYP.png", 0, 0, 100, 100));
     gameObjectsList.push_back(new Wall("assets/sprites/MYP.png", 0, 400, 100, 100));
     gameObjectsList.push_back(new Wall("assets/sprites/MYP.png", 600, 400, 100, 100));
+
 
     for(auto gameObject: gameObjectsList){
         if(typeid(*gameObject) == typeid(Wall)){
