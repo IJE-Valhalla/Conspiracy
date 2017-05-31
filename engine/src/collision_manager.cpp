@@ -13,6 +13,10 @@ CollisionManager CollisionManager::instance;
         enemyList.push_back(g);
     }
 
+    void CollisionManager::addPaper(GameObject* g){
+        paperList.push_back(g);
+    }
+
     bool CollisionManager::verifyCollisionWithWalls(GameObject* g1){
         std::vector<GameObject*>::iterator wall;
         for(wall=wallList.begin() ; wall < wallList.end(); wall++) {
@@ -32,8 +36,18 @@ CollisionManager CollisionManager::instance;
         return false;
     }
 
-    void CollisionManager::resetWallList(){
+    GameObject* CollisionManager::verifyCollisionWithPapers(GameObject* g1){
+        for(GameObject * paper : paperList) {
+            if(verifyCollision((paper), g1)){
+                return paper;
+            }
+        }
+        return NULL;
+    }
+    void CollisionManager::resetLists(){
         wallList.clear();
+        enemyList.clear();
+        paperList.clear();
     }
 
     bool CollisionManager::verifyCollision( GameObject* g1, GameObject* g2){

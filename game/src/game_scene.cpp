@@ -6,6 +6,7 @@
 #include "ground.hpp"
 #include "collision_manager.hpp"
 #include "guard.hpp"
+#include "paper.hpp"
 
 #include <typeinfo>
 #include <iostream>
@@ -27,6 +28,21 @@ void GameScene::draw(){
 void GameScene::update(double timeElapsed){
     for(auto gameObject : gameObjectsList) {
         (*gameObject).update(timeElapsed);
+    }
+    verifyWin();
+}
+
+void GameScene::verifyWin(){
+    bool allPapersEdited = true;
+    for(auto gameObject : gameObjectsList){
+        if(typeid(*gameObject) == typeid(Paper)){
+            if(!((Paper*)(gameObject))->isEdited()){
+                allPapersEdited = false;
+            }
+        }
+    }
+    if(allPapersEdited){
+        WARN("YOU WIN!!!");
     }
 }
 
@@ -52,9 +68,13 @@ void GameScene::load(){
     std::pair <int, int> varginhaPos (50, 500);
 
     gameObjectsList.push_back(new Player(biluPos, etemerPos, varginhaPos));
+
     gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 900, 10, 40, 40, "down"));
     gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 220, 100, 40, 40, "right"));
-    //gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", 0, 0, 100, 100));
+
+    gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 100,300, 19, 21));
+    gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 800,300, 19, 21));
+
 
     for(int i=0; i<=400; i+=20){
         gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", i, 400, 20, 65));
@@ -114,12 +134,13 @@ void GameScene::load(){
     }
 
 
-
     for(auto gameObject: gameObjectsList){
         if(typeid(*gameObject) == typeid(Wall)){
             CollisionManager::instance.addWall(gameObject);
         }else if(typeid(*gameObject) == typeid(Guard)){
             CollisionManager::instance.addEnemy(gameObject);
+        }else if(typeid(*gameObject) == typeid(Paper)){
+            CollisionManager::instance.addPaper(gameObject);
         }
     }
 

@@ -1,5 +1,6 @@
 #include "alien_bilu.hpp"
-
+#include "collision_manager.hpp"
+#include "paper.hpp"
 Bilu::Bilu(std::string objectName, double positionX, double positionY,
                                    int width, int height) : Alien(objectName,
                                                                        positionX,
@@ -14,6 +15,10 @@ void Bilu::specialAction(){
 
     if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE)){
         blockMovement = true;
+        GameObject* paper = CollisionManager::instance.verifyCollisionWithPapers(this);
+        if(paper != NULL){
+            ((Paper*)paper)->animate();
+        }
         if(idleAnimationNumber == 5){
             animator->setInterval("special_right");
         }else{
