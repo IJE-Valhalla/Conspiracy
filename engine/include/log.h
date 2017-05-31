@@ -9,11 +9,11 @@
 #include <cstdlib>
 
 /* In the release version define NDEBUG macro */
-// #define NDEBUG  // Clears out the DEBUG macro
+#define NDEBUG  // Clears out the DEBUG macro
 // #define NWARN   // Clears out the WARN macro
 // #define NASSERT // Clears out the ASSERT macro
- // #define NINFO   // Clears out the INFO macro
-// #define NERROR  // Clears out the ERROR macro
+ #define NINFO   // Clears out the INFO macro
+#define NERROR  // Clears out the ERROR macro
 
 
 /*

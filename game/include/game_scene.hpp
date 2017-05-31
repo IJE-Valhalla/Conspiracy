@@ -4,6 +4,11 @@
 #include "engine.hpp"
 #include "scene.hpp"
 #include "player.hpp"
+#include "wall.hpp"
+#include "game_object.hpp"
+#include "guard.hpp"
+
+#include <vector>
 
 using namespace engine;
 
@@ -15,8 +20,9 @@ public:
     void draw();
     void update(double timeElapsed);
     void unload();
+    void verifyWinOrLose();
 private:
-    Player* player;
+    std::vector<GameObject*> gameObjectsList;
 };
 
 #endif

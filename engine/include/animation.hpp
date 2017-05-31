@@ -2,6 +2,7 @@
 #define ANIMATION_HPP
 
 #include "sprite.hpp"
+#include <unordered_map>
 
 namespace engine{
     class Animation : public Sprite{
@@ -14,10 +15,11 @@ namespace engine{
         void draw(int x, int y);
         void next();
         void shutdown();
-
+        void setTotalTime(double newTotalTime); 
         void setCurrentPositionFrame(int positionFrame);
-        void setInterval(int firstPositionFrame, int lastPositionFrame);
-        std::pair<int,int> getInterval();
+        void setInterval(std::string action);
+        void addAction(std::string name_action, int initial, int last);
+        std::pair<std::string, std::pair<int, int>> getInterval();
 
     private:
         int currentPositionFrame;
@@ -28,8 +30,9 @@ namespace engine{
         double startTime;
         double timeElapsed;
         double stepTime;
-        std::pair<int, int> interval;
+        std::pair<std::string, std::pair<int, int>> interval;
         std::pair<int, int> matrix; // rows and columns
+        std::unordered_map<std::string, std::pair<int,int>> list_actions;
     };
 }
 #endif
