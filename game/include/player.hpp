@@ -12,7 +12,8 @@ using namespace engine;
 
 class Player: public GameObject{
 public:
-    Player();
+    Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosition,
+          std::pair<int,int> varginhaPosition);
     ~Player();
     void update(double timeElapsed);
     void draw();

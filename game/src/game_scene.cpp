@@ -3,6 +3,7 @@
 #include "scene.hpp"
 #include "engine.hpp"
 #include "wall.hpp"
+#include "ground.hpp"
 #include "collision_manager.hpp"
 #include "guard.hpp"
 
@@ -30,12 +31,77 @@ void GameScene::update(double timeElapsed){
 }
 
 void GameScene::load(){
-    gameObjectsList.push_back(new Player());
-    gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 400, 400, 40, 40, "right"));
-    gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 0, 100, 40, 40, "down"));
-    gameObjectsList.push_back(new Wall("assets/sprites/MYP.png", 0, 0, 100, 100));
-    gameObjectsList.push_back(new Wall("assets/sprites/MYP.png", 0, 400, 100, 100));
-    gameObjectsList.push_back(new Wall("assets/sprites/MYP.png", 600, 400, 100, 100));
+    for(int i=0; i<=960; i+=20){
+        for(int j=0; j<=600; j+=20){
+            gameObjectsList.push_back(new Ground("assets/sprites/cenary/chao.png", i, j, 20, 20));
+        }
+    }
+    std::pair <int, int> biluPos (10, 500);
+    std::pair <int, int> etemerPos (20, 500);
+    std::pair <int, int> varginhaPos (30, 500);
+    gameObjectsList.push_back(new Player(biluPos, etemerPos, varginhaPos));
+    gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 900, 10, 40, 40, "down"));
+    gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 220, 100, 40, 40, "right"));
+    //gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", 0, 0, 100, 100));
+
+    for(int i=0; i<=400; i+=20){
+        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", i, 400, 20, 65));
+    }
+    for(int j=400; j>=320; j-=5){
+        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", 415, j, 5, 5));
+    }
+
+    //PABLO LIXO gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", 415, 260, 20, 65));
+    for(int j=260; j>=180; j-=5){
+        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", 415, j, 5, 5));
+    }
+
+    for(int i=395; i>=0; i-=20){
+        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", i, 180, 20, 65));
+    }
+    gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", 0, 180, 20, 65));
+
+    for(int j=400; j>=180; j-=5){
+        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", 0, j, 5, 5));
+    }
+
+    for(int j=180; j>=120; j-=5){
+        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", 200, j, 5, 5));
+    }
+
+    for(int j=60; j>=0; j-=5){
+        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", 200, j, 5, 5));
+    }
+    for(int i=180; i>=0; i-=20){
+        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", i, 0, 20, 65));
+    }
+    for(int j=180; j>=0; j-=5){
+        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", 0, j, 5, 5));
+    }
+    for(int i=835; i>=535; i-=20){
+        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", i, 200, 20, 65));
+    }
+    for(int i=835; i>=535; i-=20){
+        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", i, 0, 20, 65));
+    }
+    for(int j=0; j<=395; j+=5){
+        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", 535, j, 5, 5));
+    }
+    for(int i=535; i<=635; i+=20){
+        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", i, 400, 20, 65));
+    }
+    gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", 640, 400, 20, 65));
+    for(int i=720; i<=855; i+=20){
+        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", i, 400, 20, 65));
+    }
+    for(int j=400; j>=140; j-=5){
+        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", 855, j, 5, 5));
+    }
+    for(int j=75; j>=0; j-=5){
+        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", 855, j, 5, 5));
+    }
+
+
 
     for(auto gameObject: gameObjectsList){
         if(typeid(*gameObject) == typeid(Wall)){
