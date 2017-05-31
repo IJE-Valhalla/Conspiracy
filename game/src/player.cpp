@@ -2,10 +2,11 @@
 #include "player.hpp"
 using namespace engine;
 
-Player::Player(){
-    bilu = new Bilu("assets/sprites/bilu_sheet.png", 100, 0, 40, 43);
-    varginha = new Varginha("assets/sprites/varginha_sheet.png", 200,70, 40, 41);
-    etemer = new Etemer("assets/sprites/etemer_sheet.png", 300,130, 40, 40);
+Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosition,
+      std::pair<int,int> varginhaPosition){
+    bilu = new Bilu("assets/sprites/bilu_sheet.png", biluPosition.first, biluPosition.second, 40, 43);
+    varginha = new Varginha("assets/sprites/varginha_sheet.png", varginhaPosition.first, varginhaPosition.second, 40, 41);
+    etemer = new Etemer("assets/sprites/etemer_sheet.png", etemerPosition.first, etemerPosition.second, 40, 40);
     selectedAlien = 1;
 
     bilu->update(0);
@@ -67,4 +68,14 @@ void Player::idleAnimation(Alien * alien){
     }else if(alien->getAnimation()->getInterval().first == "down"){
         alien->getAnimation()->setInterval("idle_down");
     }
+}
+bool Player::isDead(){
+    if(!varginha->isEnabled()){
+        return true;
+    }else if(!bilu->isEnabled()){
+        return true;
+    }else if(!etemer->isEnabled()){
+        return true;
+    }
+    return false;
 }
