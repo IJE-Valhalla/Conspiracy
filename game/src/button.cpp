@@ -6,13 +6,13 @@ Button::Button(std::string objectName, double positionX, double positionY,
                                                                          positionY,
                                                                          width, height){
 
-    text = new Text(title, objectName, sizeTitle, true, new Color(255,255,255,255), new Color(0,0,0,0));
+    text = new Text(title, objectName, sizeTitle, true, new Color(100,100,100,255), new Color(0,0,0,0));
 }
 
 Button::~Button(){}
 
 void Button::update(double timeElapsed){
-    // To Do: Use Time Elapsed in inc.
+    timeElapsed = timeElapsed;
     INFO(timeElapsed);
 
 }
