@@ -59,6 +59,6 @@ Audio::stop(){
     if(audioMusic != NULL){
         Mix_HaltMusic();
     }else{
-        ERROR("Audio effects can not be stopped")
+        ERROR("Audio effects can not be stopped");
     }
 }
