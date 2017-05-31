@@ -7,6 +7,7 @@
 #include "collision_manager.hpp"
 #include "guard.hpp"
 #include "paper.hpp"
+#include "door_system.hpp"
 
 #include <typeinfo>
 #include <iostream>
@@ -133,6 +134,14 @@ void GameScene::load(){
         gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", 855, j, 5, 5));
     }
 
+    std::pair<int,int> doorOnePosition (360, 270);
+    std::pair<int,int> switchOnePosition (150, 150);
+
+    std::pair<int,int> doorTwoPosition (660, 460);
+    std::pair<int,int> switchTwoPosition (600, 150);
+
+    gameObjectsList.push_back(new DoorSystem(doorOnePosition,switchOnePosition));
+    gameObjectsList.push_back(new DoorSystem(doorTwoPosition,switchTwoPosition));
 
     for(auto gameObject: gameObjectsList){
         if(typeid(*gameObject) == typeid(Wall)){
@@ -141,6 +150,9 @@ void GameScene::load(){
             CollisionManager::instance.addEnemy(gameObject);
         }else if(typeid(*gameObject) == typeid(Paper)){
             CollisionManager::instance.addPaper(gameObject);
+        }else if(typeid(*gameObject) == typeid(DoorSystem)){
+            CollisionManager::instance.addDoor(((DoorSystem*)(gameObject))->getDoor());
+            CollisionManager::instance.addSwitch(((DoorSystem*)(gameObject))->getSwitch());
         }
     }
 

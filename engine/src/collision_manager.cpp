@@ -17,10 +17,23 @@ CollisionManager CollisionManager::instance;
         paperList.push_back(g);
     }
 
+    void CollisionManager::addDoor(GameObject* g){
+        doorList.push_back(g);
+    }
+
+    void CollisionManager::addSwitch(GameObject* g){
+        switchList.push_back(g);
+    }
+
+
     bool CollisionManager::verifyCollisionWithWalls(GameObject* g1){
-        std::vector<GameObject*>::iterator wall;
-        for(wall=wallList.begin() ; wall < wallList.end(); wall++) {
-            if(verifyCollision((*wall), g1)){
+        for(GameObject * wall : wallList) {
+            if(verifyCollision(wall, g1)){
+                return true;
+            }
+        }
+        for(GameObject* door: doorList){
+            if(door->isEnabled() && verifyCollision(door,g1)){
                 return true;
             }
         }
@@ -29,16 +42,25 @@ CollisionManager CollisionManager::instance;
 
     bool CollisionManager::verifyCollisionWithEnemies(GameObject* g1){
         for(GameObject * enemy : enemyList) {
-            if(verifyCollision((enemy), g1)){
+            if(verifyCollision(enemy, g1)){
                 return true;
             }
         }
         return false;
     }
 
+    GameObject* CollisionManager::verifyCollisionWithSwitches(GameObject* g1){
+        for(GameObject * doorSwitch : switchList) {
+            if(verifyCollision(doorSwitch, g1)){
+                return doorSwitch;
+            }
+        }
+        return NULL;
+    }
+
     GameObject* CollisionManager::verifyCollisionWithPapers(GameObject* g1){
         for(GameObject * paper : paperList) {
-            if(verifyCollision((paper), g1)){
+            if(verifyCollision(paper, g1)){
                 return paper;
             }
         }
