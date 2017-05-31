@@ -13,7 +13,6 @@ void DoorSystem::update(double timeElapsed){
     door->update(timeElapsed);
     doorSwitch->update(timeElapsed);
     if(!doorSwitch->isEnabled() && door->isEnabled()){
-        WARN("HEUHEHUE");
         door->setEnabled(false);
     }
 }
