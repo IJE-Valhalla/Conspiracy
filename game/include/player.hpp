@@ -17,6 +17,8 @@ public:
     ~Player();
     void update(double timeElapsed);
     void draw();
+    bool isDead();
+
 private:
     Alien *bilu, *varginha, *etemer;
     int selectedAlien;

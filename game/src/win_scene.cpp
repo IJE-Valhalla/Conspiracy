@@ -1,4 +1,4 @@
-#include "lose_scene.hpp"
+#include "win_scene.hpp"
 #include "button.hpp"
 
 #include <typeinfo>
@@ -6,19 +6,19 @@
 
 using namespace engine;
 
-LoseScene::LoseScene(int id) : Scene(id){
+WinScene::WinScene(int id) : Scene(id){
 
 }
 
-LoseScene::~LoseScene(){}
+WinScene::~WinScene(){}
 
-void LoseScene::draw(){
+void WinScene::draw(){
     for(auto gameObject : gameObjectsList) {
         (*gameObject).draw();
     }
 }
 
-void LoseScene::update(double timeElapsed){
+void WinScene::update(double timeElapsed){
     for(auto gameObject : gameObjectsList) {
         (*gameObject).update(timeElapsed);
     }
@@ -28,12 +28,12 @@ void LoseScene::update(double timeElapsed){
     }
 }
 
-void LoseScene::load(){
-    gameObjectsList.push_back(new Button("assets/fonts/font.ttf", 100, 100, 500, 500, "You Lose", 200));
+void WinScene::load(){
+    gameObjectsList.push_back(new Button("assets/fonts/font.ttf", 100, 100, 500, 500, "You Win", 200));
 
 
 
 }
 
-void LoseScene::unload(){
+void WinScene::unload(){
 }

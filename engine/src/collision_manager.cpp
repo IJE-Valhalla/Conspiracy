@@ -70,6 +70,8 @@ CollisionManager CollisionManager::instance;
         wallList.clear();
         enemyList.clear();
         paperList.clear();
+        doorList.clear();
+        switchList.clear();
     }
 
     bool CollisionManager::verifyCollision( GameObject* g1, GameObject* g2){

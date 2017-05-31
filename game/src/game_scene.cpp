@@ -31,22 +31,29 @@ void GameScene::update(double timeElapsed){
     for(auto gameObject : gameObjectsList) {
         (*gameObject).update(timeElapsed);
     }
-    verifyWin();
+    verifyWinOrLose();
 }
 
-void GameScene::verifyWin(){
+void GameScene::verifyWinOrLose(){
     bool allPapersEdited = true;
+    bool isDead = true;
     for(auto gameObject : gameObjectsList){
+        if(typeid(*gameObject) == typeid(Player)){
+            isDead = ((Player *) gameObject)->isDead();
+        }
         if(typeid(*gameObject) == typeid(Paper)){
             if(!((Paper*)(gameObject))->isEdited()){
                 allPapersEdited = false;
             }
         }
     }
-    if(allPapersEdited){
-        WARN("YOU WIN!!!");
+    if(isDead){
+        getSceneManager()->loadScene(1);
+    }else if(allPapersEdited){
+        getSceneManager()->loadScene(2);
     }
 }
+
 
 void GameScene::load(){
     for(int i=0; i<=960; i+=20){
@@ -74,8 +81,8 @@ void GameScene::load(){
     gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 900, 10, 40, 40, "down"));
     gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 220, 100, 40, 40, "right"));
 
-    gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 100,300, 19, 21));
-    gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 800,300, 19, 21));
+    gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 200,500, 19, 21));
+    gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 70,500, 19, 21));
 
 
     for(int i=0; i<=400; i+=20){
@@ -168,4 +175,6 @@ void GameScene::load(){
 
 }
 void GameScene::unload(){
+    CollisionManager::instance.resetLists();
+    gameObjectsList.clear();
 }

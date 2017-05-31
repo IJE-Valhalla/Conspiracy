@@ -69,3 +69,13 @@ void Player::idleAnimation(Alien * alien){
         alien->getAnimation()->setInterval("idle_down");
     }
 }
+bool Player::isDead(){
+    if(!varginha->isEnabled()){
+        return true;
+    }else if(!bilu->isEnabled()){
+        return true;
+    }else if(!etemer->isEnabled()){
+        return true;
+    }
+    return false;
+}

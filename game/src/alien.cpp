@@ -31,7 +31,7 @@ Alien::~Alien(){}
 
 void Alien::update(double timeElapsed){
     // To Do: Use Time Elapsed in inc.
-    animator->setTotalTime(0.5);
+    animator->setTotalTime(0.3);
     auto incY = 0.15*timeElapsed;
     auto incX = 0.15*timeElapsed;
 
@@ -50,7 +50,7 @@ void Alien::update(double timeElapsed){
     specialAction();
 
     if(CollisionManager::instance.verifyCollisionWithEnemies(this)){
-        WARN("Colidiu");
+        setEnabled(false);
     }
 
     animator->update();
