@@ -6,6 +6,7 @@
 #include "collision_manager.hpp"
 #include "guard.hpp"
 #include "paper.hpp"
+#include "door_system.hpp"
 
 #include <typeinfo>
 #include <iostream>
@@ -55,6 +56,9 @@ void GameScene::load(){
     gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 400,500, 19, 21));
     gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 800,20, 19, 21));
     gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 50,500, 19, 21));
+    std::pair<int,int> doorPosition (150, 50);
+    std::pair<int,int> switchPosition (150, 150);
+    gameObjectsList.push_back(new DoorSystem(doorPosition,switchPosition));
     for(auto gameObject: gameObjectsList){
         if(typeid(*gameObject) == typeid(Wall)){
             CollisionManager::instance.addWall(gameObject);
@@ -62,6 +66,9 @@ void GameScene::load(){
             CollisionManager::instance.addEnemy(gameObject);
         }else if(typeid(*gameObject) == typeid(Paper)){
             CollisionManager::instance.addPaper(gameObject);
+        }else if(typeid(*gameObject) == typeid(DoorSystem)){
+            CollisionManager::instance.addDoor(((DoorSystem*)(gameObject))->getDoor());
+            CollisionManager::instance.addSwitch(((DoorSystem*)(gameObject))->getSwitch());
         }
     }
 
