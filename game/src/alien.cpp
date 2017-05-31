@@ -23,7 +23,7 @@ Alien::Alien(std::string objectName, double positionX, double positionY,
     animator->addAction("idle_up",5,5);
     animator->addAction("idle_down",0,0);
 
-    idleAnimationNumber = 0;
+    idleAnimationNumber = 5;
     blockMovement = false;
 }
 
