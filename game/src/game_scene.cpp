@@ -8,6 +8,7 @@
 #include "guard.hpp"
 #include "paper.hpp"
 #include "door_system.hpp"
+#include "audio.hpp"
 
 #include <typeinfo>
 #include <iostream>
@@ -48,6 +49,8 @@ void GameScene::verifyWin(){
 }
 
 void GameScene::load(){
+    Audio background_music = Audio("assets/sounds/stage_one_music.wav", "MUSIC");
+    background_music.play(0);
     for(int i=0; i<=960; i+=20){
         for(int j=0; j<=600; j+=20){
             gameObjectsList.push_back(new Ground("assets/sprites/cenary/chao.png", i, j, 20, 20));
