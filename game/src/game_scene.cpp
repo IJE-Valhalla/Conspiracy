@@ -57,8 +57,8 @@ void GameScene::verifyWinOrLose(){
 
 
 void GameScene::load(){
-    Audio background_music = Audio("assets/sounds/stage_one_music.wav", "MUSIC");
-    background_music.play(0);
+    Audio background_music = Audio("assets/sounds/tema1demo.wav", "MUSIC");
+    background_music.play(-1);
     for(int i=0; i<=960; i+=20){
         for(int j=0; j<=600; j+=20){
             gameObjectsList.push_back(new Ground("assets/sprites/cenary/chao.png", i, j, 20, 20));
