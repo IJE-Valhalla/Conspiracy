@@ -35,7 +35,7 @@ void Alien::update(double timeElapsed){
     auto incY = 0.15*timeElapsed;
     auto incX = 0.15*timeElapsed;
 
-    if(!blockMovement){
+    if(!blockMovement && isSelected){
         walkInX(incX);
         walkInY(incY, incX);
     }
@@ -119,4 +119,12 @@ void Alien::draw(){
 
 Animation * Alien::getAnimation(){
   return animator;
+}
+
+void Alien::setAlienSelected(){
+    isSelected = true;
+}
+
+void Alien::setAlienDeselect(){
+    isSelected = false;
 }
