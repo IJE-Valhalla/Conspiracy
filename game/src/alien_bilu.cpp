@@ -37,3 +37,8 @@ void Bilu::specialAction(){
         blockMovement = false;
     }
 }
+
+void Bilu::draw(){
+    INFO("Bilu DRAW");
+    animator->draw(getPositionX()-11, getPositionY()-20);
+}
