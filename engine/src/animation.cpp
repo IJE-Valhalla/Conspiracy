@@ -73,7 +73,14 @@ void Animation::draw(int x, int y){
     AnimationManager::instance.add_animation_quad(newQuad);
 }
 
+void Animation::draw_instant(int x, int y){
+    INFO("ANIMATOR DRAW");
+    // Rendering in screen
+    renderQuad = {x, y, clipRect.w, clipRect.h };
+    DEBUG("X: " + std::to_string(axis.first));
+    DEBUG("Y: " + std::to_string(axis.second));
     SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
+
 }
 
 void Animation::next(){

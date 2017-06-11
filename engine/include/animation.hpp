@@ -18,6 +18,7 @@ namespace engine{
         void init();
         void update();
         void draw(int x, int y);
+        void draw_instant(int x, int y);
         void next();
         void shutdown();
         void setTotalTime(double newTotalTime);
