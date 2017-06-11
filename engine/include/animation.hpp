@@ -3,6 +3,11 @@
 
 #include "sprite.hpp"
 #include <unordered_map>
+#include "animation_quad.hpp"
+#include "animation_manager.hpp"
+#include "log.h"
+#include <string.h>
+#include "window_manager.hpp"
 
 namespace engine{
     class Animation : public Sprite{
@@ -15,7 +20,7 @@ namespace engine{
         void draw(int x, int y);
         void next();
         void shutdown();
-        void setTotalTime(double newTotalTime); 
+        void setTotalTime(double newTotalTime);
         void setCurrentPositionFrame(int positionFrame);
         void setInterval(std::string action);
         void addAction(std::string name_action, int initial, int last);
@@ -34,5 +39,6 @@ namespace engine{
         std::pair<int, int> matrix; // rows and columns
         std::unordered_map<std::string, std::pair<int,int>> list_actions;
     };
+
 }
 #endif

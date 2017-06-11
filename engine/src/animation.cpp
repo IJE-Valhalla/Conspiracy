@@ -1,71 +1,67 @@
 #include "animation.hpp"
-#include "sprite.hpp"
-#include "engine.hpp"
-#include "log.h"
-#include <string.h>
 
-namespace engine{
+using namespace engine;
 
-    Animation::Animation(std::string newDirectory, int rows, int columns, double allTime){
-        directory = newDirectory;
-        matrix.first = rows;
-        matrix.second = columns;
-        totalTime = allTime;
-        currentPositionFrame = 0;
-        init();
+Animation::Animation(std::string newDirectory, int rows, int columns, double allTime){
+    directory = newDirectory;
+    matrix.first = rows;
+    matrix.second = columns;
+    totalTime = allTime;
+    currentPositionFrame = 0;
+    init();
+}
+
+Animation::~Animation(){
+
+}
+
+
+void Animation::init(){
+    INFO("Init sprite.");
+    SDL_Surface * image = NULL;
+    image = IMG_Load(directory.c_str());
+
+    if(image == NULL){
+        ERROR("INIT SPRITE ERROR.");
+        exit(-1);
     }
 
-    Animation::~Animation(){
+    texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), image);
 
+    if(texture == NULL){
+        ERROR("CREATE TEXTURE SPRITE ERROR.");
+        exit(-1);
     }
 
+    lenght.first = image->w;
+    lenght.second = image->h;
 
-    void Animation::init(){
-        INFO("Init sprite.");
-        SDL_Surface * image = NULL;
-        image = IMG_Load(directory.c_str());
+    widthFrame = lenght.first/matrix.second;
+    heightFrame = lenght.second/matrix.first;
 
-        if(image == NULL){
-            ERROR("INIT SPRITE ERROR.");
-            exit(-1);
-        }
+    quantity = static_cast<int>(lenght.first/matrix.second * lenght.second/matrix.first);
 
-        texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), image);
+    SDL_FreeSurface(image);
 
-        if(texture == NULL){
-            ERROR("CREATE TEXTURE SPRITE ERROR.");
-            exit(-1);
-        }
+}
 
-        lenght.first = image->w;
-        lenght.second = image->h;
+void Animation::update(){
+    double timePerFrame = static_cast<double> (totalTime / (interval.second.second - interval.second.first + 1));
 
-        widthFrame = lenght.first/matrix.second;
-        heightFrame = lenght.second/matrix.first;
+    timeElapsed = (SDL_GetTicks() - stepTime) / 1000.0f;
+    DEBUG("Time Per Frame: " << timePerFrame << "Time elapsed: " << timeElapsed);
 
-        quantity = static_cast<int>(lenght.first/matrix.second * lenght.second/matrix.first);
-
-        SDL_FreeSurface(image);
-
+    if(timeElapsed >= timePerFrame){
+        next();
+        stepTime = SDL_GetTicks();
     }
 
-    void Animation::update(){
-        double timePerFrame = static_cast<double> (totalTime / (interval.second.second - interval.second.first + 1));
+    int Y = (currentPositionFrame / (lenght.first / widthFrame));
+    int X = (currentPositionFrame % (lenght.first  / widthFrame));
 
-        timeElapsed = (SDL_GetTicks() - stepTime) / 1000.0f;
-        DEBUG("Time Per Frame: " << timePerFrame << "Time elapsed: " << timeElapsed);
-
-        if(timeElapsed >= timePerFrame){
-            next();
-            stepTime = SDL_GetTicks();
-        }
-
-        int Y = (currentPositionFrame / (lenght.first / widthFrame));
-        int X = (currentPositionFrame % (lenght.first  / widthFrame));
-
-        clipRect = {X*widthFrame, Y*heightFrame, widthFrame, heightFrame};
-        DEBUG("Axis in X:" << X*widthFrame << " Axis in Y:" << Y*heightFrame << " Position:" << currentPositionFrame);
-    }
+    clipRect = {X*widthFrame, Y*heightFrame, widthFrame, heightFrame};
+    DEBUG("Axis in X:" << X*widthFrame << " Axis in Y:" << Y*heightFrame << " Position:" << currentPositionFrame);
+}
 
     void Animation::draw(int x, int y){
         INFO("ANIMATOR DRAW");
@@ -76,46 +72,45 @@ namespace engine{
         DEBUG("X: " + std::to_string(axis.first));
         DEBUG("Y: " + std::to_string(axis.second));
 
-        SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
-    }
+    SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
+}
 
-    void Animation::next(){
-        currentPositionFrame ++;
+void Animation::next(){
+    currentPositionFrame ++;
 
-        if(currentPositionFrame > interval.second.second){
-           currentPositionFrame = interval.second.first;
-        }
+    if(currentPositionFrame > interval.second.second){
+       currentPositionFrame = interval.second.first;
     }
+}
 
-    void Animation::setCurrentPositionFrame(int positionFrame){
-        currentPositionFrame = positionFrame;
-    }
+void Animation::setCurrentPositionFrame(int positionFrame){
+    currentPositionFrame = positionFrame;
+}
 
-    void Animation::setInterval(std::string action){
-        if(action != interval.first){
-            startTime = SDL_GetTicks();
-            stepTime = startTime;
-            interval.second =  list_actions[action];
-            interval.first = action;
-            currentPositionFrame = interval.second.first;
-            INFO("ACTION: " << action << currentPositionFrame);
-        }
+void Animation::setInterval(std::string action){
+    if(action != interval.first){
+        startTime = SDL_GetTicks();
+        stepTime = startTime;
+        interval.second =  list_actions[action];
+        interval.first = action;
+        currentPositionFrame = interval.second.first;
+        INFO("ACTION: " << action << currentPositionFrame);
     }
-    void Animation::setTotalTime(double newTotalTime){
-        totalTime = newTotalTime;
-    }
+}
+void Animation::setTotalTime(double newTotalTime){
+    totalTime = newTotalTime;
+}
 
-    void Animation::shutdown(){
-        INFO("Destroy sprite.");
-        SDL_DestroyTexture(texture);
-        texture = NULL;
-    }
+void Animation::shutdown(){
+    INFO("Destroy sprite.");
+    SDL_DestroyTexture(texture);
+    texture = NULL;
+}
 
-    std::pair<std::string, std::pair<int, int>> Animation::getInterval(){
-        return interval;
-    }
+std::pair<std::string, std::pair<int, int>> Animation::getInterval(){
+    return interval;
+}
 
-    void Animation::addAction(std::string name_action, int initial, int last){
-      list_actions[name_action] = std::pair<int, int>(initial, last);
-    }
+void Animation::addAction(std::string name_action, int initial, int last){
+  list_actions[name_action] = std::pair<int, int>(initial, last);
 }
