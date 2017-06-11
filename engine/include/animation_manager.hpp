@@ -3,7 +3,9 @@
 
 #include "animation_quad.hpp"
 #include "window_manager.hpp"
+#include <algorithm>
 #include <vector>
+#include "log.h"
 
 namespace engine{
 

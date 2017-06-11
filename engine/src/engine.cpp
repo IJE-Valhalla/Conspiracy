@@ -65,6 +65,7 @@ namespace engine{
               sceneManager->getCurrentScene()->update(timeElapsed);
               sceneManager->getCurrentScene()->draw();
             }
+            AnimationManager::instance.draw_quads();
             SDL_RenderPresent(WindowManager::getGameCanvas());
         }
     }

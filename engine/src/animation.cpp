@@ -15,7 +15,6 @@ Animation::~Animation(){
 
 }
 
-
 void Animation::init(){
     INFO("Init sprite.");
     SDL_Surface * image = NULL;
@@ -63,14 +62,16 @@ void Animation::update(){
     DEBUG("Axis in X:" << X*widthFrame << " Axis in Y:" << Y*heightFrame << " Position:" << currentPositionFrame);
 }
 
-    void Animation::draw(int x, int y){
-        INFO("ANIMATOR DRAW");
-        axis.first = x;
-        axis.second = y;
-        // Rendering in screen
-        renderQuad = {axis.first, axis.second, clipRect.w, clipRect.h };
-        DEBUG("X: " + std::to_string(axis.first));
-        DEBUG("Y: " + std::to_string(axis.second));
+void Animation::draw(int x, int y){
+    INFO("ANIMATOR DRAW");
+    // Rendering in screen
+    renderQuad = {x, y, clipRect.w, clipRect.h };
+    DEBUG("X: " + std::to_string(axis.first));
+    DEBUG("Y: " + std::to_string(axis.second));
+
+    AnimationQuad* newQuad = new AnimationQuad(x,y,&renderQuad,&clipRect,texture);
+    AnimationManager::instance.add_animation_quad(newQuad);
+}
 
     SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
 }

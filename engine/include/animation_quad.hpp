@@ -13,12 +13,12 @@ public:
     SDL_Texture* getTexture();
     double getX();
     double getY();
+    double x;
+    double y;
 private:
     SDL_Rect* renderQuad;
     SDL_Rect* clipRect;
     SDL_Texture* texture;
-    double x;
-    double y;
 };
 }
 #endif
