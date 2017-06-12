@@ -73,6 +73,11 @@ void Animation::draw(int x, int y){
     AnimationManager::instance.add_animation_quad(newQuad);
 }
 
+void Animation::draw_collider(int x, int y, int width, int height){
+    SDL_Rect* quad = new SDL_Rect();
+    *quad = {x,y,width,height};
+    AnimationManager::instance.add_collider(quad);
+}
 void Animation::draw_instant(int x, int y){
     INFO("ANIMATOR DRAW");
     // Rendering in screen

@@ -14,9 +14,12 @@ public:
     static AnimationManager instance;
     void add_animation_quad(AnimationQuad *newQuad);
     void draw_quads();
+    void add_collider(SDL_Rect* renderQuad);
 private:
     std::vector<AnimationQuad*> animationQuads;
+    std::vector<SDL_Rect*> colliderRects;
     void clearAnimationQuads();
+    void draw_colliders();
 };
 
 }

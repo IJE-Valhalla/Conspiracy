@@ -19,6 +19,7 @@ namespace engine{
         void update();
         void draw(int x, int y);
         void draw_instant(int x, int y);
+        void draw_collider(int x, int y, int width, int height);
         void next();
         void shutdown();
         void setTotalTime(double newTotalTime);
