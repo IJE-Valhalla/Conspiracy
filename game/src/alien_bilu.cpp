@@ -10,7 +10,7 @@ Bilu::Bilu(std::string objectName, double positionX, double positionY,
                                                                        width, height){
    animator->addAction("special_right",14,17);
    animator->addAction("special_left",10,13);
-   
+
    isSelected = true;
 }
 
@@ -41,4 +41,5 @@ void Bilu::specialAction(){
 void Bilu::draw(){
     INFO("Bilu DRAW");
     animator->draw(getPositionX()-11, getPositionY()-20);
+    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
 }
