@@ -11,6 +11,7 @@ Door::Door(std::string objectName, double positionX, double positionY,
 Door::~Door(){}
 
 void Door::update(double timeElapsed){
+    timeElapsed = timeElapsed;
     animator->update();
 }
 

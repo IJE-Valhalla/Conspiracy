@@ -6,6 +6,7 @@
 #include "alien_etemer.hpp"
 #include "alien_varginha.hpp"
 #include "input_manager.hpp"
+#include "audio.hpp"
 #include "engine.hpp"
 
 using namespace engine;
@@ -21,6 +22,7 @@ public:
 
 private:
     Alien *bilu, *varginha, *etemer;
+    Audio *varginha_sound_effect, *etemer_sound_effect;
     int selectedAlien;
     void idleAnimation(Alien * alien);
     void waitAnimation(int beforeAlien);

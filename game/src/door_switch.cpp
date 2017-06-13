@@ -5,7 +5,7 @@ DoorSwitch::DoorSwitch(std::string objectName, double positionX, double position
                                                                          positionX,
                                                                          positionY,
                                                                          width, height){
-    animator = new Animation(objectName, 1, 6, 1.5);
+    animator = new Animation(objectName, 1, 6, 0.5);
     animator->addAction("beingHacked", 1,5);
     animator->addAction("idle", 0, 0);
 }

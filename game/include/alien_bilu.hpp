@@ -6,6 +6,7 @@
 class Bilu: public Alien{
 public:
     Bilu(std::string objectName, double positionX, double positionY, int width, int height);
+    void draw();
 protected:
     void specialAction();
 };

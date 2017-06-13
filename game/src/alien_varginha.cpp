@@ -10,6 +10,7 @@ Varginha::Varginha(std::string objectName, double positionX, double positionY,
    animator->addAction("invisible_right", 13, 13);
    animator->addAction("invisible_left", 11, 11);
    isInvisible = false;
+   isSelected = false;
 }
 
 void Varginha::specialAction(){

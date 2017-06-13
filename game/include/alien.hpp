@@ -17,6 +17,9 @@ public:
     void draw();
     void init();
     Animation * getAnimation();
+    void setAlienSelected();
+    void setAlienDeselect();
+
 protected:
     void walkInX(double & incX);
     void walkInY(double & incY, double incX);
@@ -25,6 +28,7 @@ protected:
     int idleAnimationNumber;
     std::string alienName;
     bool blockMovement;
+    bool isSelected;
 };
 
 #endif
