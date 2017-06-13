@@ -30,37 +30,25 @@ void Bilu::specialAction(){
 
         // PC interaction
         if(doorSwitch != NULL){
-            hacking = true;
+            if(!hacking){
+                hacking = true;
+                blockMovement = true;
+                ((DoorSwitch*)(doorSwitch))->playEffect();
+            }
         }
 
     }else if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_ESC)){
-        hacking = false;
-    }else{
-        blockMovement = false;
-    }
-
-    if(doorSwitch != NULL){
         if(hacking){
-            blockMovement = true;
-            ((DoorSwitch*)(doorSwitch))->animate();
-
-            if(idleAnimationNumber == 5){
-                animator->setInterval("special_right");
-            }else{
-                animator->setInterval("special_left");
-            }
-            animator->setTotalTime(0.6);
-
-            if(!lastAction){
-                ((DoorSwitch*)(doorSwitch))->playEffect();
-            }
-        }else{
+            hacking = false;
             blockMovement = false;
+            ((DoorSwitch*)(doorSwitch))->stopEffect();
             ((DoorSwitch*)(doorSwitch))->stopAnimation();
-            if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_ESC)){
-                ((DoorSwitch*)(doorSwitch))->stopEffect();
-            }
         }
+    }
+    
+    if(hacking){
+        ((DoorSwitch*)(doorSwitch))->animate();
+        setSpecialActionAnimator();
     }
     lastAction = hacking;
 }
@@ -68,5 +56,13 @@ void Bilu::specialAction(){
 void Bilu::draw(){
     INFO("Bilu DRAW");
     animator->draw(getPositionX()-11, getPositionY()-20);
-    //animator->draw(getPositionX(), getPositionY());
+}
+
+void Bilu::setSpecialActionAnimator(){
+    if(idleAnimationNumber == 5){
+        animator->setInterval("special_right");
+    }else{
+        animator->setInterval("special_left");
+    }
+    animator->setTotalTime(0.6);
 }
