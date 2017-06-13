@@ -23,8 +23,6 @@ void Bilu::specialAction(){
     GameObject* doorSwitch = CollisionManager::instance.verifyCollisionWithSwitches(this);
 
     if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE)){
-        blockMovement = true;
-
         // Paper interaction
         if(paper != NULL){
             ((Paper*)paper)->animate();
@@ -35,12 +33,6 @@ void Bilu::specialAction(){
             hacking = true;
         }
 
-        if(idleAnimationNumber == 5){
-            animator->setInterval("special_right");
-        }else{
-            animator->setInterval("special_left");
-        }
-        animator->setTotalTime(1.5);
     }else if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_ESC)){
         hacking = false;
     }else{
@@ -49,13 +41,25 @@ void Bilu::specialAction(){
 
     if(doorSwitch != NULL){
         if(hacking){
+            blockMovement = true;
             ((DoorSwitch*)(doorSwitch))->animate();
+
+            if(idleAnimationNumber == 5){
+                animator->setInterval("special_right");
+            }else{
+                animator->setInterval("special_left");
+            }
+            animator->setTotalTime(0.6);
+
             if(!lastAction){
                 ((DoorSwitch*)(doorSwitch))->playEffect();
             }
         }else{
+            blockMovement = false;
             ((DoorSwitch*)(doorSwitch))->stopAnimation();
-            //((DoorSwitch*)(doorSwitch))->stopEffect();
+            if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_ESC)){
+                ((DoorSwitch*)(doorSwitch))->stopEffect();
+            }
         }
     }
     lastAction = hacking;
@@ -64,4 +68,5 @@ void Bilu::specialAction(){
 void Bilu::draw(){
     INFO("Bilu DRAW");
     animator->draw(getPositionX()-11, getPositionY()-20);
+    //animator->draw(getPositionX(), getPositionY());
 }

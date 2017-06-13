@@ -49,9 +49,9 @@ bool DoorSwitch::isPressed(){
 }
 
 void DoorSwitch::playEffect(){
-    hacking_effect->play(4);
+    hacking_effect->play(2);
 }
 
-// void DoorSwitch::stopEffect(){
-//     hacking_effect->stop();
-// }
+void DoorSwitch::stopEffect(){
+    hacking_effect->stop();
+}
