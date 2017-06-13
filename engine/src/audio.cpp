@@ -62,7 +62,9 @@ void Audio::resume(){
 
 void Audio::stop(){
     if(audioMusic != NULL){
-        Mix_HaltMusic();
+        Mix_HaltChannel(0);
+    }else if(audioEffect != NULL){
+        Mix_HaltChannel(1);
     }else{
         ERROR("Audio effects can not be stopped");
     }

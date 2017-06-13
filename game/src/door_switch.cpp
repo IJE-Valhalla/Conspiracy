@@ -6,8 +6,10 @@ DoorSwitch::DoorSwitch(std::string objectName, double positionX, double position
                                                                          positionY,
                                                                          width, height){
     animator = new Animation(objectName, 1, 6, 0.5);
+    hacking_effect = new Audio("assets/sounds/PCNOISE.wav", "EFFECT", 128);
     animator->addAction("beingHacked", 1,5);
     animator->addAction("idle", 0, 0);
+    pressed = false;
 }
 
 DoorSwitch::~DoorSwitch(){}
@@ -20,7 +22,7 @@ void DoorSwitch::update(double timeElapsed){
 void DoorSwitch::draw(){
     INFO("DoorSwitch DRAW");
     if(isPressed()){
-        pressed = false;
+        // pressed = false;
         animator->setInterval("beingHacked");
     }else{
         animator->setInterval("idle");
@@ -37,6 +39,19 @@ void DoorSwitch::animate(){
     setEnabled(false);
 }
 
+void DoorSwitch::stopAnimation(){
+    pressed = false;
+    setEnabled(true);
+}
+
 bool DoorSwitch::isPressed(){
     return pressed;
 }
+
+void DoorSwitch::playEffect(){
+    hacking_effect->play(4);
+}
+
+// void DoorSwitch::stopEffect(){
+//     hacking_effect->stop();
+// }

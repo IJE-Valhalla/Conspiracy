@@ -4,6 +4,7 @@
 #include "engine.hpp"
 #include "animation.hpp"
 #include "game_object.hpp"
+#include "audio.hpp"
 
 using namespace engine;
 
@@ -16,10 +17,15 @@ public:
     void init();
     Animation * getAnimation();
     void animate();
+    void stopAnimation();
     bool isPressed();
+    void playEffect();
+    void stopEffect();
 protected:
     bool pressed;
     Animation* animator;
+private:
+    Audio *hacking_effect;
 };
 
 #endif

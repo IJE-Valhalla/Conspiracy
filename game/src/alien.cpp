@@ -63,7 +63,6 @@ void Alien::walkInX(double & incX){
         incX = incX;
         idleAnimationNumber = 5;
         animator->setInterval("right");
-        movement_sound_effect->stop();
     }
     else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_LEFT)){
         //movement_sound_effect->play(-1);

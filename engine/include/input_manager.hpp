@@ -17,7 +17,8 @@ namespace engine{
             KEY_PRESS_SPACE = SDLK_SPACE,
             KEY_PRESS_ONE = SDLK_1,
             KEY_PRESS_TWO = SDLK_2,
-            KEY_PRESS_THREE = SDLK_3
+            KEY_PRESS_THREE = SDLK_3,
+            KEY_PRESS_ESC = SDLK_ESCAPE
         };
 
         static InputManager instance;
