@@ -6,6 +6,7 @@
 #include "animation.hpp"
 #include "game_object.hpp"
 #include "collision_manager.hpp"
+#include "audio.hpp"
 
 using namespace engine;
 
@@ -29,6 +30,7 @@ protected:
     std::string alienName;
     bool blockMovement;
     bool isSelected;
+    Audio *movement_sound_effect;
 };
 
 #endif

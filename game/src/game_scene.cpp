@@ -57,7 +57,7 @@ void GameScene::verifyWinOrLose(){
 
 
 void GameScene::load(){
-    Audio background_music = Audio("assets/sounds/tema1demo.wav", "MUSIC");
+    Audio background_music = Audio("assets/sounds/tema1demo.wav", "MUSIC", 50);
     background_music.play(-1);
     for(int i=0; i<=960; i+=20){
         for(int j=0; j<=600; j+=20){

@@ -9,7 +9,7 @@ namespace engine{
 
     class Audio{
     public:
-        Audio(std::string audioPath, std::string audioType);
+        Audio(std::string audioPath, std::string audioType, int volume);
         ~Audio();
         void play(const int timesToPlay);
         void pause();

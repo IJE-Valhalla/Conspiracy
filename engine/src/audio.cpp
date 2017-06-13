@@ -4,14 +4,16 @@
 
 using namespace engine;
 
-Audio::Audio(std::string audioPath, std::string audioType){
+Audio::Audio(std::string audioPath, std::string audioType, int volume){
     if(audioType.compare("MUSIC") == 0){
         audioMusic = Mix_LoadMUS(audioPath.c_str());
+        Mix_VolumeMusic(volume);
         if(audioMusic == NULL){
             ERROR("Audio file could not be loaded");
         }
     }else if(audioType.compare("EFFECT") == 0){
         audioEffect = Mix_LoadWAV(audioPath.c_str());
+        Mix_VolumeChunk(audioEffect, volume);
         if(audioEffect == NULL){
             ERROR("Audio file could not be loaded");
         }
@@ -28,7 +30,7 @@ void Audio::play(const int timesToPlay){
             ERROR("Audio could not be played");
         }
     }else{
-        if(Mix_PlayChannel(-1, audioEffect, 0) == -1){
+        if(Mix_PlayChannel(-1, audioEffect, timesToPlay) == -1){
             ERROR("Audio could not be played");
         }
     }
