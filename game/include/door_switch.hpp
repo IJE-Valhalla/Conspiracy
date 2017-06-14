@@ -5,6 +5,7 @@
 #include "animation.hpp"
 #include "game_object.hpp"
 #include "audio.hpp"
+#include "progress_bar.hpp"
 
 using namespace engine;
 
@@ -21,11 +22,13 @@ public:
     bool isPressed();
     void playEffect();
     void stopEffect();
+    double getHackingBarPercent();
 protected:
     bool pressed;
     Animation* animator;
 private:
     Audio *hacking_effect;
+    ProgressBar *hacking_bar;
 };
 
 #endif

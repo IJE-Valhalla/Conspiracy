@@ -45,10 +45,17 @@ void Bilu::specialAction(){
             ((DoorSwitch*)(doorSwitch))->stopAnimation();
         }
     }
-    
+
     if(hacking){
         ((DoorSwitch*)(doorSwitch))->animate();
         setSpecialActionAnimator();
+        if(((DoorSwitch*)(doorSwitch))->getHackingBarPercent() <= 0.0){
+            hacking = false;
+            ((DoorSwitch*)(doorSwitch))->stopAnimation();
+            ((DoorSwitch*)(doorSwitch))->stopEffect();
+            Alien::animator->setInterval("idle");
+            blockMovement = false;
+        }
     }
     lastAction = hacking;
 }

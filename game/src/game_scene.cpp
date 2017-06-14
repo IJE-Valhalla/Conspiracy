@@ -59,11 +59,15 @@ void GameScene::verifyWinOrLose(){
 void GameScene::load(){
     Audio background_music = Audio("assets/sounds/tema1demo.wav", "MUSIC", 50);
     background_music.play(-1);
+
     for(int i=0; i<=960; i+=20){
         for(int j=0; j<=600; j+=20){
             gameObjectsList.push_back(new Ground("assets/sprites/cenary/chao.png", i, j, 20, 20));
         }
     }
+
+    //gameObjectsList.push_back(new ProgressBar(100, 500, 45, 5));
+
     for(int i=0; i<=960; i+=5){
         gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", i, 0, 5, 5));
     }
