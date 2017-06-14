@@ -118,6 +118,7 @@ void Guard::walkInXSpecial(double & incX){
                                 wayActual++;
                         }else{
                                 wayActual = 1;
+                                wayActive = false;
                         }
                 }
         }else if(ways[wayActual].first == "left") {
@@ -130,6 +131,7 @@ void Guard::walkInXSpecial(double & incX){
                                 wayActual++;
                         }else{
                                 wayActual = 1;
+                                wayActive = false;
                         }
                 }
         }else {
@@ -148,6 +150,7 @@ void Guard::walkInYSpecial(double & incY){
                                 wayActual++;
                         }else{
                                 wayActual = 1;
+                                wayActive = false;
                         }
                 }
         }else if(ways[wayActual].first == "up") {
@@ -160,6 +163,7 @@ void Guard::walkInYSpecial(double & incY){
                                 wayActual++;
                         }else{
                                 wayActual = 1;
+                                wayActive = false;
                         }
                 }
         }else {
@@ -182,4 +186,12 @@ void Guard::draw(){
 
 void Guard::addWay(int key, std::pair<std::string, int> way){
         ways[key] = way;
+}
+
+void Guard::verifyDistance(GameObject* alien){
+    double distance = sqrt((pow(getPositionX() - alien->getPositionX(), 2.0)) +  (pow(getPositionY() - alien->getPositionY(), 2.0)));
+// TODO Definir quando irá iniciar o percurso especial do guarda
+    if(distance < 60){
+        wayActive = true;
+    }
 }

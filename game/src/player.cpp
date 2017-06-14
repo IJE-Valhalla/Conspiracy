@@ -91,3 +91,15 @@ bool Player::isDead(){
     }
     return false;
 }
+
+Alien * Player::getBilu(){
+    return bilu;
+}
+
+Alien * Player::getVarginha(){
+    return varginha;
+}
+
+Alien * Player::getEtemer(){
+    return etemer;
+}

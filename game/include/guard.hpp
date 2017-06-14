@@ -17,6 +17,7 @@ public:
     void draw();
     void addWay(int key, std::pair<std::string, int> way);
     void setWayActive(bool isActive);
+    void verifyDistance(GameObject* alien);
     Animation * getAnimation();
 private:
     void walkInX(double & incX);
