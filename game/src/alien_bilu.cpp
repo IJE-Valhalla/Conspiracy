@@ -43,6 +43,7 @@ void Bilu::specialAction(){
             blockMovement = false;
             ((DoorSwitch*)(doorSwitch))->stopEffect();
             ((DoorSwitch*)(doorSwitch))->stopAnimation();
+            ((DoorSwitch*)(doorSwitch))->resetHackingProgress();
         }
     }
 
@@ -53,6 +54,7 @@ void Bilu::specialAction(){
             hacking = false;
             ((DoorSwitch*)(doorSwitch))->stopAnimation();
             ((DoorSwitch*)(doorSwitch))->stopEffect();
+            ((DoorSwitch*)(doorSwitch))->resetHackingProgress();
             Alien::animator->setInterval("idle");
             blockMovement = false;
         }

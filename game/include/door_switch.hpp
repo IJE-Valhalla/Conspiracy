@@ -23,6 +23,7 @@ public:
     void playEffect();
     void stopEffect();
     double getHackingBarPercent();
+    void resetHackingProgress();
 protected:
     bool pressed;
     Animation* animator;

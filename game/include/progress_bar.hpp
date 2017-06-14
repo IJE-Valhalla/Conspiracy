@@ -13,6 +13,7 @@ namespace engine{
         void update(double timeElapsed);
         void draw();
         double getPercent();
+        void resetPercent();
 
     private:
         double percent;

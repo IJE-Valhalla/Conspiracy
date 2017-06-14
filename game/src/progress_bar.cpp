@@ -22,8 +22,9 @@ ProgressBar::ProgressBar(double positionX, double positionY, int width, int heig
     frontRect->w =  width;
     frontRect->h =  height;
 
-    backColor = {0, 255, 0, 255};
-    frontColor = {255, 0, 0, 255};
+    //backColor = {0, 255, 0, 255};
+    backColor = {31, 65, 158, 1};
+    frontColor = {161, 181, 236, 50};
     SDL_GetRenderDrawColor(WindowManager::getGameCanvas(),
                                  &oldColor.r, &oldColor.g,
                                  &oldColor.g, &oldColor.a);
@@ -70,4 +71,8 @@ void ProgressBar::draw(){
 
 double ProgressBar::getPercent(){
     return percent;
+}
+
+void ProgressBar::resetPercent(){
+    percent = 1.0;
 }

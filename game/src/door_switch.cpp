@@ -8,7 +8,7 @@ DoorSwitch::DoorSwitch(std::string objectName, double positionX, double position
     animator = new Animation(objectName, 1, 6, 0.5);
 
     hacking_effect = new Audio("assets/sounds/PCNOISE.wav", "EFFECT", 128);
-    hacking_bar = new ProgressBar(positionX, positionY-5, 45, 5);
+    hacking_bar = new ProgressBar(positionX-7, positionY-5, 45, 5);
 
     animator->addAction("beingHacked", 1,5);
     animator->addAction("idle", 0, 0);
@@ -32,6 +32,7 @@ void DoorSwitch::draw(){
         hacking_bar->draw();
         if(hacking_bar->getPercent() <= 0.0){
             pressed = false;
+            setEnabled(false);
         }
     }else{
         animator->setInterval("idle");
@@ -45,12 +46,12 @@ Animation * DoorSwitch::getAnimation(){
 
 void DoorSwitch::animate(){
     pressed = true;
-    setEnabled(false);
+    //setEnabled(false);
 }
 
 void DoorSwitch::stopAnimation(){
     pressed = false;
-    setEnabled(true);
+    //setEnabled(true);
 }
 
 bool DoorSwitch::isPressed(){
@@ -67,4 +68,8 @@ void DoorSwitch::stopEffect(){
 
 double DoorSwitch::getHackingBarPercent(){
     return hacking_bar->getPercent();
+}
+
+void DoorSwitch::resetHackingProgress(){
+    hacking_bar->resetPercent();
 }
