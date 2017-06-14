@@ -26,35 +26,40 @@ void GameScene::draw(){
     for(auto gameObject : gameObjectsList) {
         (*gameObject).draw();
     }
-    player->draw();
 }
 
 void GameScene::update(double timeElapsed){
     for(auto gameObject : gameObjectsList) {
         (*gameObject).update(timeElapsed);
     }
-    player->update(timeElapsed);
     verifyWinOrLose();
 }
 
 void GameScene::verifyWinOrLose(){
     bool allPapersEdited = true;
+    std::vector<Guard *> guards;
+    Player * player = NULL;
     for(auto gameObject : gameObjectsList){
         if(typeid(*gameObject) == typeid(Guard)){
-            ((Guard *)(gameObject))->verifyDistance(player->getBilu());
-            ((Guard *)(gameObject))->verifyDistance(player->getVarginha());
-            ((Guard *)(gameObject))->verifyDistance(player->getEtemer());
-        }
-        if(typeid(*gameObject) == typeid(Paper)){
+            guards.push_back((Guard *)(gameObject));
+        }else if(typeid(*gameObject) == typeid(Paper)){
             if(!((Paper*)(gameObject))->isEdited()){
                 allPapersEdited = false;
             }
+        }else if(typeid(*gameObject) == typeid(Player)){
+            player = (Player *)(gameObject);
         }
     }
     if(player->isDead()){
         getSceneManager()->loadScene(1);
     }else if(allPapersEdited){
         getSceneManager()->loadScene(2);
+    }
+
+    for(Guard * guard : guards){
+        guard->verifyDistance(player->getVarginha());
+        guard->verifyDistance(player->getBilu());
+        guard->verifyDistance(player->getEtemer());
     }
 }
 
@@ -82,7 +87,7 @@ void GameScene::load(){
     std::pair <int, int> etemerPos (30, 510);
     std::pair <int, int> varginhaPos (50, 500);
 
-    player = new Player(biluPos, etemerPos, varginhaPos);
+    gameObjectsList.push_back(new Player(biluPos, etemerPos, varginhaPos));
 
     std::pair <std::string, int> wayOne ("right", 480);
     std::pair <std::string, int> wayTwo ("up", 20);

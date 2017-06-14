@@ -6,6 +6,7 @@
 #include "sprite.hpp"
 #include "game_object.hpp"
 #include "color.hpp"
+#include "audio.hpp"
 
 #include <vector>
 
@@ -27,6 +28,7 @@ private:
     Sprite * background;
     Color * select;
     Color * notSelect;
+    Audio * soundEffect;
 };
 
 #endif
