@@ -81,8 +81,19 @@ void GameScene::load(){
 
     gameObjectsList.push_back(new Player(biluPos, etemerPos, varginhaPos));
 
-    gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 900, 10, 40, 40, "down"));
-    gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 220, 100, 40, 40, "right"));
+    std::pair <std::string, int> wayOne ("right", 480);
+    std::pair <std::string, int> wayTwo ("up", 20);
+    std::pair <std::string, int> wayThree ("left", 220);
+    std::pair <std::string, int> wayFour ("down", 120);
+
+    Guard * guard = new Guard("assets/sprites/seguranca_sheet.png", 220, 120, 40, 40);
+    guard->addWay(1, wayOne);
+    guard->addWay(2, wayTwo);
+    guard->addWay(3, wayThree);
+    guard->addWay(4, wayFour);
+
+    gameObjectsList.push_back(guard);
+    // gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 900, 10, 40, 40));
 
     gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 100,300, 19, 21));
     gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 800,300, 19, 21));
