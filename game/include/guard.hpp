@@ -11,15 +11,18 @@ using namespace engine;
 
 class Guard: public Enemy{
 public:
-    Guard(std::string objectName, double positionX, double positionY, int width, int height);
+    Guard(std::string objectName, double positionX, double positionY, int width, int height, std::string initialDirection);
     ~Guard();
     void update(double timeElapsed);
     void draw();
     void addWay(int key, std::pair<std::string, int> way);
+    void setWayActive(bool isActive);
     Animation * getAnimation();
 private:
     void walkInX(double & incX);
     void walkInY(double & incY);
+    void walkInXSpecial(double & incX);
+    void walkInYSpecial(double & incY);
     void specialAction();
     int idleAnimationNumber;
     int wayActual;
