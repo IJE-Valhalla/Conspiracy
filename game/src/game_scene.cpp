@@ -50,17 +50,18 @@ void GameScene::verifyWinOrLose(){
             player = (Player *)(gameObject);
         }
     }
-    if(player->isDead()){
-        getSceneManager()->loadScene(1);
-    }else if(allPapersEdited){
-        getSceneManager()->loadScene(2);
-    }
 
     for(Guard * guard : guards){
         guard->verifyDistance(player->getVarginha());
         guard->verifyDistance(player->getBilu());
-        guard->verifyDistance(player->getEtemer());
     }
+
+    if(player->isDead()){
+        getSceneManager()->loadScene(2);
+    }else if(allPapersEdited){
+        getSceneManager()->loadScene(3);
+    }
+
 }
 
 

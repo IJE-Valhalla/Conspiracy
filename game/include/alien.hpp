@@ -13,7 +13,7 @@ class Alien: public GameObject{
 public:
     Alien(std::string objectName, double positionX, double positionY, int width, int height);
     ~Alien();
-    void update(double timeElapsed);
+    virtual void update(double timeElapsed) = 0;
     void draw();
     void init();
     Animation * getAnimation();
