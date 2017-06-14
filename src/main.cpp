@@ -4,6 +4,7 @@
 #include "game_scene.hpp"
 #include "lose_scene.hpp"
 #include "win_scene.hpp"
+#include "menu_scene.hpp"
 #include "alien.hpp"
 
 using namespace engine;
@@ -11,10 +12,12 @@ using namespace engine;
 
 int main(int, char**){
     loadEngine();
-    GameScene* gameScene = new GameScene(0);
-    LoseScene* loseScene = new LoseScene(1);
-    WinScene* winScene = new WinScene(2);
+    MenuScene* menuScene = new MenuScene(0);
+    GameScene* gameScene = new GameScene(1);
+    LoseScene* loseScene = new LoseScene(2);
+    WinScene* winScene = new WinScene(3);
 
+    getSceneManager()->addScene(menuScene);
     getSceneManager()->addScene(gameScene);
     getSceneManager()->addScene(loseScene);
     getSceneManager()->addScene(winScene);
