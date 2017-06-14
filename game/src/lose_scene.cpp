@@ -46,7 +46,7 @@ void LoseScene::load(){
 }
 
 void LoseScene::selectAction(){
-        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_LEFT)) {
+        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_UP)) {
                 soundEffect->pause();
                 soundEffect->play(0);
                 selectButton--;
@@ -54,7 +54,7 @@ void LoseScene::selectAction(){
                         selectButton = 2;
                 }
         }
-        else if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
+        else if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_DOWN)) {
                 soundEffect->pause();
                 soundEffect->play(0);
                 selectButton++;
