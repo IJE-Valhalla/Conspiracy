@@ -17,7 +17,10 @@ InputManager InputManager::instance;
                     keyAction = event.key.keysym.sym;
                     if(!event.key.repeat){
                         keyActive[keyAction] = true;
+                        keyPrevious[keyAction] = false;
                         INFO("PUSH");
+                    }else if(event.key.repeat){
+                        keyPrevious[keyAction] = true;
                     }
                 break;
                 case SDL_KEYUP:
@@ -44,5 +47,13 @@ InputManager InputManager::instance;
     }
 
     bool InputManager::isKeyTriggered(int iKeyCode){
-        return (keyActive[iKeyCode] && !keyPrevious[iKeyCode]);
+        if(keyActive[iKeyCode] && !keyPrevious[iKeyCode]){
+            keyPrevious[iKeyCode] = true;
+            return true;
+        }
+        return false;
+    }
+
+    void InputManager::setQuitRequest(bool isRequest){
+        quitRequest = isRequest;
     }
