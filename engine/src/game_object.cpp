@@ -13,6 +13,14 @@ GameObject::GameObject(std::string objectName, double positionX, double position
         setEnabled(true);
 }
 
+GameObject::GameObject(double positionX, double positionY,int width, int height){
+    setPositionX(positionX);
+    setPositionY(positionY);
+    setWidth(width);
+    setHeight(height);
+    setEnabled(true);
+}
+
 GameObject::GameObject(){}
 
 GameObject::~GameObject(){}
