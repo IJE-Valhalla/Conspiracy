@@ -6,6 +6,7 @@
 #include "animation.hpp"
 #include "game_object.hpp"
 #include "collision_manager.hpp"
+#include "audio.hpp"
 
 using namespace engine;
 
@@ -13,7 +14,7 @@ class Alien: public GameObject{
 public:
     Alien(std::string objectName, double positionX, double positionY, int width, int height);
     ~Alien();
-    void update(double timeElapsed);
+    virtual void update(double timeElapsed) = 0;
     void draw();
     void init();
     Animation * getAnimation();
@@ -29,6 +30,7 @@ protected:
     std::string alienName;
     bool blockMovement;
     bool isSelected;
+    Audio *movement_sound_effect;
 };
 
 #endif

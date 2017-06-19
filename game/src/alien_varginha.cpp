@@ -13,6 +13,33 @@ Varginha::Varginha(std::string objectName, double positionX, double positionY,
    isSelected = false;
 }
 
+void Varginha::update(double timeElapsed){
+    // To Do: Use Time Elapsed in inc.
+    animator->setTotalTime(0.3);
+    auto incY = 0.15*timeElapsed;
+    auto incX = 0.15*timeElapsed;
+
+    if(!blockMovement && isSelected){
+        walkInX(incX);
+        walkInY(incY, incX);
+    }
+
+    if(incX == 0 && incY == 0){
+        if(idleAnimationNumber){
+          animator->setInterval("idle_right");
+        }else{
+          animator->setInterval("idle_left");
+        }
+    }
+    specialAction();
+
+    if(CollisionManager::instance.verifyCollisionWithEnemies(this)){
+        setEnabled(false);
+    }
+
+    animator->update();
+}
+
 void Varginha::specialAction(){
     std::pair<int, int> interval;
 

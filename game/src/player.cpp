@@ -13,8 +13,9 @@ Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosit
     varginha->update(0);
     etemer->update(0);
 
-    varginha_sound_effect = new Audio("assets/sounds/TROCAVARGINHA.wav", "EFFECT");
-    etemer_sound_effect = new Audio("assets/sounds/TROCATEMER.wav", "EFFECT");
+    bilu_sound_effect = new Audio("assets/sounds/TROCABILU.wav", "EFFECT", 100);
+    varginha_sound_effect = new Audio("assets/sounds/TROCAVARGINHA.wav", "EFFECT", 100);
+    etemer_sound_effect = new Audio("assets/sounds/TROCATEMER.wav", "EFFECT", 100);
 }
 
 Player::~Player(){}
@@ -37,7 +38,7 @@ void Player::update(double timeElapsed){
 
         waitAnimation(beforeAlien);
         switch(selectedAlien){
-            case 1: bilu->setAlienSelected(); break;
+            case 1: bilu->setAlienSelected(); bilu_sound_effect->play(0); break;
             case 2: varginha->setAlienSelected(); varginha_sound_effect->play(0); break;
             case 3: etemer->setAlienSelected(); etemer_sound_effect->play(0); break;
         }
@@ -90,4 +91,16 @@ bool Player::isDead(){
         return true;
     }
     return false;
+}
+
+Alien * Player::getBilu(){
+    return bilu;
+}
+
+Alien * Player::getVarginha(){
+    return varginha;
+}
+
+Alien * Player::getEtemer(){
+    return etemer;
 }

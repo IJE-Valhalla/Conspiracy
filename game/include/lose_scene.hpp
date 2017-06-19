@@ -3,7 +3,10 @@
 
 #include "engine.hpp"
 #include "scene.hpp"
+#include "sprite.hpp"
 #include "game_object.hpp"
+#include "color.hpp"
+#include "audio.hpp"
 
 #include <vector>
 
@@ -18,7 +21,13 @@ public:
     void update(double timeElapsed);
     void unload();
 private:
-    std::vector<GameObject*> gameObjectsList;
+    void selectAction();
+    int selectButton;
+    std::vector<std::pair<int, GameObject*>> gameObjectsList;
+    Sprite * background;
+    Color * select;
+    Color * notSelect;
+    Audio * soundEffect;
 };
 
 #endif

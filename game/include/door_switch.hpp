@@ -4,6 +4,8 @@
 #include "engine.hpp"
 #include "animation.hpp"
 #include "game_object.hpp"
+#include "audio.hpp"
+#include "progress_bar.hpp"
 
 using namespace engine;
 
@@ -16,10 +18,18 @@ public:
     void init();
     Animation * getAnimation();
     void animate();
+    void stopAnimation();
     bool isPressed();
+    void playEffect();
+    void stopEffect();
+    double getHackingBarPercent();
+    void resetHackingProgress();
 protected:
     bool pressed;
     Animation* animator;
+private:
+    Audio *hacking_effect;
+    ProgressBar *hacking_bar;
 };
 
 #endif

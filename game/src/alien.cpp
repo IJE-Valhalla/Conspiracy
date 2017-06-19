@@ -25,36 +25,10 @@ Alien::Alien(std::string objectName, double positionX, double positionY,
 
     idleAnimationNumber = 5;
     blockMovement = false;
+    movement_sound_effect = new Audio("assets/sounds/FOOTSTEP.wav", "EFFECT", 128);
 }
 
 Alien::~Alien(){}
-
-void Alien::update(double timeElapsed){
-    // To Do: Use Time Elapsed in inc.
-    animator->setTotalTime(0.3);
-    auto incY = 0.15*timeElapsed;
-    auto incX = 0.15*timeElapsed;
-
-    if(!blockMovement && isSelected){
-        walkInX(incX);
-        walkInY(incY, incX);
-    }
-
-    if(incX == 0 && incY == 0){
-        if(idleAnimationNumber){
-          animator->setInterval("idle_right");
-        }else{
-          animator->setInterval("idle_left");
-        }
-    }
-    specialAction();
-
-    if(CollisionManager::instance.verifyCollisionWithEnemies(this)){
-        setEnabled(false);
-    }
-
-    animator->update();
-}
 
 void Alien::walkInX(double & incX){
 
@@ -64,6 +38,7 @@ void Alien::walkInX(double & incX){
         animator->setInterval("right");
     }
     else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_LEFT)){
+        //movement_sound_effect->play(-1);
         incX = incX * (0-1);
         idleAnimationNumber = 0;
         animator->setInterval("left");

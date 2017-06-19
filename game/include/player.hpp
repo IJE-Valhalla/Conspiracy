@@ -19,10 +19,12 @@ public:
     void update(double timeElapsed);
     void draw();
     bool isDead();
-
+    Alien * getBilu();
+    Alien * getVarginha();
+    Alien * getEtemer();
 private:
     Alien *bilu, *varginha, *etemer;
-    Audio *varginha_sound_effect, *etemer_sound_effect;
+    Audio *varginha_sound_effect, *etemer_sound_effect, *bilu_sound_effect;
     int selectedAlien;
     void idleAnimation(Alien * alien);
     void waitAnimation(int beforeAlien);
