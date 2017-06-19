@@ -11,7 +11,7 @@ WinScene::WinScene(int id) : Scene(id){
     select = new Color(255, 255, 255, 0);
     notSelect = new Color(0, 0, 0, 0);
     background = new Sprite("assets/sprites/background.png");
-    soundEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT");
+    soundEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT",100);
 }
 
 WinScene::~WinScene(){

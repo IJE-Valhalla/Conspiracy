@@ -33,6 +33,7 @@ ProgressBar::ProgressBar(double positionX, double positionY, int width, int heig
 ProgressBar::~ProgressBar(){}
 
 void ProgressBar::update(double timeElapsed){
+    timeElapsed = timeElapsed;
     if(percent > 1.0){
         percent = 1.0;
     }else if(percent < 0.0){
