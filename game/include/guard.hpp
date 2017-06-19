@@ -15,14 +15,23 @@ public:
     ~Guard();
     void update(double timeElapsed);
     void draw();
+    void addWay(int key, std::pair<std::string, int> way);
+    void setWayActive(bool isActive);
+    void verifyDistance(GameObject* alien);
     Animation * getAnimation();
 private:
     void walkInX(double & incX);
     void walkInY(double & incY);
+    void walkInXSpecial(double & incX);
+    void walkInYSpecial(double & incY);
     void specialAction();
     int idleAnimationNumber;
+    int wayActual;
+    bool wayActive;
     Animation* animator;
     std::string direction;
+    std::unordered_map< int, std::pair<std::string, int>> ways;
+    std::unordered_map< int, std::pair<std::string, int>>::iterator search;
 };
 
 #endif

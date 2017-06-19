@@ -26,21 +26,24 @@ void GameScene::draw(){
     for(auto gameObject : gameObjectsList) {
         (*gameObject).draw();
     }
+    player->draw();
 }
 
 void GameScene::update(double timeElapsed){
     for(auto gameObject : gameObjectsList) {
         (*gameObject).update(timeElapsed);
     }
+    player->update(timeElapsed);
     verifyWinOrLose();
 }
 
 void GameScene::verifyWinOrLose(){
     bool allPapersEdited = true;
-    bool isDead = true;
     for(auto gameObject : gameObjectsList){
-        if(typeid(*gameObject) == typeid(Player)){
-            isDead = ((Player *) gameObject)->isDead();
+        if(typeid(*gameObject) == typeid(Guard)){
+            ((Guard *)(gameObject))->verifyDistance(player->getBilu());
+            ((Guard *)(gameObject))->verifyDistance(player->getVarginha());
+            ((Guard *)(gameObject))->verifyDistance(player->getEtemer());
         }
         if(typeid(*gameObject) == typeid(Paper)){
             if(!((Paper*)(gameObject))->isEdited()){
@@ -48,7 +51,7 @@ void GameScene::verifyWinOrLose(){
             }
         }
     }
-    if(isDead){
+    if(player->isDead()){
         getSceneManager()->loadScene(1);
     }else if(allPapersEdited){
         getSceneManager()->loadScene(2);
@@ -79,10 +82,21 @@ void GameScene::load(){
     std::pair <int, int> etemerPos (30, 510);
     std::pair <int, int> varginhaPos (50, 500);
 
-    gameObjectsList.push_back(new Player(biluPos, etemerPos, varginhaPos));
+    player = new Player(biluPos, etemerPos, varginhaPos);
 
-    gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 900, 10, 40, 40, "down"));
-    gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 220, 100, 40, 40, "right"));
+    std::pair <std::string, int> wayOne ("right", 480);
+    std::pair <std::string, int> wayTwo ("up", 20);
+    std::pair <std::string, int> wayThree ("left", 220);
+    std::pair <std::string, int> wayFour ("down", 120);
+
+    Guard * guard = new Guard("assets/sprites/seguranca_sheet.png", 220, 120, 40, 40, "right");
+    guard->addWay(1, wayOne);
+    guard->addWay(2, wayTwo);
+    guard->addWay(3, wayThree);
+    guard->addWay(4, wayFour);
+
+    gameObjectsList.push_back(guard);
+    // gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 900, 10, 40, 40));
 
     gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 100,300, 19, 21));
     gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 800,300, 19, 21));
@@ -176,6 +190,7 @@ void GameScene::load(){
     }
 
 }
+
 void GameScene::unload(){
     CollisionManager::instance.resetLists();
     gameObjectsList.clear();
