@@ -1,5 +1,5 @@
-#ifndef LOSE_SCENE_HPP
-#define LOSE_SCENE_HPP
+#ifndef MENU_SCENE_HPP
+#define MENU_SCENE_HPP
 
 #include "engine.hpp"
 #include "scene.hpp"
@@ -12,16 +12,17 @@
 
 using namespace engine;
 
-class LoseScene: public Scene{
+class MenuScene: public Scene{
 public:
-    LoseScene(int id);
-    ~LoseScene();
+    MenuScene(int id);
+    ~MenuScene();
     void load();
     void draw();
     void update(double timeElapsed);
     void unload();
-private:
     void selectAction();
+
+private:
     int selectButton;
     std::vector<std::pair<int, GameObject*>> gameObjectsList;
     Sprite * background;

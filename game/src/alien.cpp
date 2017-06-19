@@ -29,33 +29,6 @@ Alien::Alien(std::string objectName, double positionX, double positionY,
 
 Alien::~Alien(){}
 
-void Alien::update(double timeElapsed){
-    // To Do: Use Time Elapsed in inc.
-    animator->setTotalTime(0.3);
-    auto incY = 0.15*timeElapsed;
-    auto incX = 0.15*timeElapsed;
-
-    if(!blockMovement && isSelected){
-        walkInX(incX);
-        walkInY(incY, incX);
-    }
-
-    if(incX == 0 && incY == 0){
-        if(idleAnimationNumber){
-          animator->setInterval("idle_right");
-        }else{
-          animator->setInterval("idle_left");
-        }
-    }
-    specialAction();
-
-    if(CollisionManager::instance.verifyCollisionWithEnemies(this)){
-        setEnabled(false);
-    }
-
-    animator->update();
-}
-
 void Alien::walkInX(double & incX){
 
     if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_RIGHT)){

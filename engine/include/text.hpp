@@ -19,7 +19,8 @@ namespace engine{
         void draw(int x, int y);
         void shutdown();
         void loadFont();
-
+        void setBackground(Color * newBackground);
+        void setTextColor(Color * newTextColor);
     protected:
         SDL_Texture * texture;
         TTF_Font * font;

@@ -23,7 +23,6 @@ public:
     void verifyWinOrLose();
 private:
     std::vector<GameObject*> gameObjectsList;
-    Player * player;
 };
 
 #endif

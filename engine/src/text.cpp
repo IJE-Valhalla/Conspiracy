@@ -23,11 +23,13 @@ void Text::init(){
         exit(-1);
     }
 
-    loadFont();
-
-    if(font == NULL){
-        exit(-1);
+    if (font == NULL){
+        loadFont();
+        if(font == NULL){
+            exit(-1);
+        }
     }
+
 
     SDL_Color color = {textColor->r, textColor->g, textColor->b, textColor->a};
     SDL_Color bg_color = {background->r, background->g, background->b, background->a};
@@ -53,6 +55,10 @@ void Text::init(){
     if(surface == NULL){
         exit(-1);
     }
+
+    if(texture != NULL){
+		SDL_DestroyTexture(texture);
+	}
 
     texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), surface);
 
@@ -92,4 +98,14 @@ void Text::loadFont(){
                     exit(-1);
             }
 
+}
+
+void Text::setBackground(Color * newBackground){
+    background = newBackground;
+    init();
+}
+
+void Text::setTextColor(Color * newTextColor){
+    textColor = newTextColor;
+    init();
 }

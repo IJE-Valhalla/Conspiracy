@@ -8,6 +8,7 @@ class Etemer: public Alien{
 public:
     Etemer(std::string objectName, double positionX, double positionY,
                                                      int width, int height);
+    void update(double timeElapsed);
 protected:
     void specialAction();
 };

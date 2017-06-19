@@ -6,6 +6,7 @@ using namespace engine;
 
     Sprite::Sprite(std::string newDirectory){
         directory = newDirectory;
+        init();
     }
 
     void Sprite::init(){
