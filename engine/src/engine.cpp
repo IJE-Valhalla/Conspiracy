@@ -1,12 +1,4 @@
 #include "engine.hpp"
-#include "sprite.hpp"
-#include "scene_manager.hpp"
-#include "input_manager.hpp"
-#include "game_object.hpp"
-#include "animation.hpp"
-#include <vector>
-#include <iostream>
-
 
 namespace engine{
 
@@ -73,6 +65,7 @@ namespace engine{
               sceneManager->getCurrentScene()->update(timeElapsed);
               sceneManager->getCurrentScene()->draw();
             }
+            AnimationManager::instance.draw_quads();
             SDL_RenderPresent(WindowManager::getGameCanvas());
         }
     }

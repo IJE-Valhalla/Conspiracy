@@ -1,7 +1,6 @@
 #ifndef GROUND_HPP
 #define GROUND_HPP
 
-#include "engine.hpp"
 #include "animation.hpp"
 #include "game_object.hpp"
 

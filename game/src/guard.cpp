@@ -101,4 +101,5 @@ void Guard::specialAction(){
 
 void Guard::draw(){
     animator->draw(getPositionX(), getPositionY());
+    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
 }
