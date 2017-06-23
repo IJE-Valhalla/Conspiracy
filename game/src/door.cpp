@@ -6,6 +6,7 @@ Door::Door(std::string objectName, double positionX, double positionY,
                                                                          positionY,
                                                                          width, height){
     animator = new Animation(objectName, 1, 4, 0.5);
+    door_effect = new Audio("assets/sounds/DOOR.wav", "EFFECT", 128);
     animator->addAction("closed", 0,0);
     animator->addAction("open",1,3);
     animator->setDrawSize(width,height);
@@ -41,4 +42,8 @@ bool Door::isOpen(){
 
 void Door::setOpen(bool status){
         open = status;
+}
+
+void Door::playEffect(){
+    door_effect->play(0);
 }

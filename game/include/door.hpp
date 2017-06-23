@@ -4,6 +4,7 @@
 #include "engine.hpp"
 #include "animation.hpp"
 #include "game_object.hpp"
+#include "audio.hpp"
 
 using namespace engine;
 
@@ -17,9 +18,11 @@ public:
     Animation * getAnimation();
     bool isOpen();
     void setOpen(bool status);
+    void playEffect();
 protected:
     Animation* animator;
 private:
+    Audio *door_effect;
     bool open;
 };
 
