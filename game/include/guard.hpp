@@ -27,6 +27,7 @@ private:
     void walkInXSpecial(double & incX);
     void walkInYSpecial(double & incY);
     void selectLine();
+    void drawLinesOfVision();
     void specialAction();
     int idleAnimationNumber;
     int wayActual;

@@ -30,7 +30,7 @@ Guard::~Guard(){
 void Guard::update(double timeElapsed){
         auto incY = 0.1*timeElapsed;
         auto incX = 0.1*timeElapsed;
-        // To Do: Use Time Elapsed in inc.
+        // To Do: Use Time Elapsed in angleOfVision.
         if(wayActive){
             incY = 0.2*timeElapsed;
             incX = 0.2*timeElapsed;
@@ -188,19 +188,22 @@ void Guard::specialAction(){
 }
 
 void Guard::draw(){
-        animator->draw(getPositionX()-10, getPositionY()-10);
-        animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
-        if(wayActive){
-            exclamation->draw(getPositionX(), getPositionY()-30);
-        }
-        for(auto line:lines){
-            std::pair<std::pair<int,int>,std::pair<int,int>> aux;
-            aux.first = line->getPoint1();
-            aux.second = line->getPoint2();
-            AnimationManager::instance.addLine(aux);
-        }
+    animator->draw(getPositionX()-10, getPositionY()-10);
+    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+    if(wayActive){
+        exclamation->draw(getPositionX(), getPositionY()-30);
+    }
+    drawLinesOfVision();
 }
 
+void Guard::drawLinesOfVision(){
+    for(auto line:lines){
+        std::pair<std::pair<int,int>,std::pair<int,int>> aux;
+        aux.first = line->getPoint1();
+        aux.second = line->getPoint2();
+        AnimationManager::instance.addLine(aux);
+    }
+}
 void Guard::addWay(int key, std::pair<std::string, int> way){
         ways[key] = way;
 }
@@ -216,44 +219,38 @@ void Guard::verifyDistance(GameObject* alien){
 void Guard::selectLine(){
     lines.clear();
     int range = 200;
-    int inc = 25;
-    Line* middleLine;
-    Line* middleUpperLine;
-    Line* middleBottomLine;
-    Line* upperLine;
-    Line* bottomLine;
+    int angleOfVision = 25;
+    //lines of vision
+    Line* middleLine, *middleUpperLine, *middleBottomLine, *upperLine, *bottomLine;
+
     std::pair<int,int> center;
     center.first = getPositionX() + (getWidth()/2);
     center.second = getPositionY() + (getHeight()/2);
-    if(animator->getCurrentAction()=="up"){
+
+    if(animator->getCurrentAction()=="up")
         middleLine = new Line(center.first,center.second,center.first,center.second-range);
-        middleUpperLine = new Line(center.first, center.second, middleLine->getPoint2().first- inc, middleLine->getPoint2().second);
-        upperLine = new Line(center.first, center.second, middleLine->getPoint2().first  - inc - inc, middleLine->getPoint2().second);
-        middleBottomLine = new Line(center.first, center.second, middleLine->getPoint2().first  + inc, middleLine->getPoint2().second);
-        bottomLine = new Line(center.first, center.second, middleLine->getPoint2().first  + inc  + inc, middleLine->getPoint2().second);
-    }else if(animator->getCurrentAction() == "down"){
+    else if(animator->getCurrentAction() == "down")
         middleLine = new Line(center.first,center.second,center.first,center.second+range);
-        middleUpperLine = new Line(center.first, center.second, middleLine->getPoint2().first- inc, middleLine->getPoint2().second);
-        upperLine = new Line(center.first, center.second, middleLine->getPoint2().first  - inc - inc, middleLine->getPoint2().second);
-        middleBottomLine = new Line(center.first, center.second, middleLine->getPoint2().first  + inc, middleLine->getPoint2().second);
-        bottomLine = new Line(center.first, center.second, middleLine->getPoint2().first  + inc  + inc, middleLine->getPoint2().second);
-    }else if(animator->getCurrentAction() == "right"){
+    else if(animator->getCurrentAction() == "right")
         middleLine = new Line(center.first,center.second,center.first+range,center.second);
-        middleUpperLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second - inc);
-        upperLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second - inc - inc);
-        middleBottomLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second + inc);
-        bottomLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second + inc + inc);
-    }else{
+    else
         middleLine = new Line(center.first,center.second,center.first-range,center.second);
-        middleUpperLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second - inc);
-        upperLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second - inc - inc);
-        middleBottomLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second + inc);
-        bottomLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second + inc + inc);
+
+    if(animator->getCurrentAction() == "up" or animator->getCurrentAction() == "down"){
+        middleUpperLine = new Line(center.first, center.second, middleLine->getPoint2().first- angleOfVision, middleLine->getPoint2().second);
+        upperLine = new Line(center.first, center.second, middleLine->getPoint2().first  - angleOfVision - angleOfVision, middleLine->getPoint2().second);
+        middleBottomLine = new Line(center.first, center.second, middleLine->getPoint2().first  + angleOfVision, middleLine->getPoint2().second);
+        bottomLine = new Line(center.first, center.second, middleLine->getPoint2().first  + angleOfVision  + angleOfVision, middleLine->getPoint2().second);
+    }else{
+        middleUpperLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second - angleOfVision);
+        upperLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second - angleOfVision - angleOfVision);
+        middleBottomLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second + angleOfVision);
+        bottomLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second + angleOfVision + angleOfVision);
     }
+
     lines.push_back(middleLine);
     lines.push_back(middleUpperLine);
     lines.push_back(upperLine);
     lines.push_back(middleBottomLine);
     lines.push_back(bottomLine);
-
 }
