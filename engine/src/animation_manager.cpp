@@ -21,9 +21,6 @@ void AnimationManager::clearAnimationQuads(){
     for(auto animationQuad: animationQuads){
         free(animationQuad);
     }
-    for(auto progressBar: progressBars){
-        free(progressBar);
-    }
     for(auto collider: colliderRects){
         free(collider);
     }
