@@ -91,6 +91,14 @@ CollisionManager CollisionManager::instance;
         topB = g2->getPositionY();
         bottomB = topB + g2->getHeight();
 
+        if(g2->getWidth() == 0 || g2->getHeight() == 0){
+            return false;
+        }
+        if(g1->getWidth() == 0 || g1->getHeight() == 0){
+            return false;
+        }
+
+
         //If any of the sides from A are outside of B
         if( bottomA <= topB ){ return false;}
         if( topA >= bottomB ){ return false;}
