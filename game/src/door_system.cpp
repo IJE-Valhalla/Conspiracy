@@ -15,6 +15,7 @@ void DoorSystem::update(double timeElapsed){
     if(!doorSwitch->isEnabled() && !door->isOpen()){
         door->setOpen(true);
         door->setEnabled(false);
+        door->playEffect();
     }
 }
 
