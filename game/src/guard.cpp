@@ -7,6 +7,7 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
                                                                           width, height){
 
         animator = new Animation(objectName, 1, 10, 0.5);
+        exclamation = new Animation("assets/sprites/exclamation.png",1, 1, 0.5);
 
         animator->addAction("right",6,9);
         animator->addAction("left",1,4);
@@ -21,7 +22,6 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
         wayActive = false;
         wayActual = 1;
         direction = initialDirection;
-
 }
 
 Guard::~Guard(){
@@ -45,6 +45,7 @@ void Guard::update(double timeElapsed){
 
         specialAction();
         animator->update();
+        exclamation->update();
 }
 
 void Guard::walkInX(double & incX){
@@ -182,6 +183,9 @@ void Guard::specialAction(){
 void Guard::draw(){
         animator->draw(getPositionX()-10, getPositionY()-10);
         animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+        if(wayActive){
+            exclamation->draw(getPositionX(), getPositionY()-30);
+        }
 }
 
 void Guard::addWay(int key, std::pair<std::string, int> way){
