@@ -9,7 +9,7 @@
 #include "paper.hpp"
 #include "door_system.hpp"
 #include "audio.hpp"
-
+#include "table.hpp"
 
 #include <typeinfo>
 #include <iostream>
@@ -178,7 +178,7 @@ void GameScene::load(){
 
 
     std::pair<int,int> doorTwoPosition (660, 401);
-    std::pair<int,int> switchTwoPosition (400, 530);
+    std::pair<int,int> switchTwoPosition (300, 505);
 
     gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", 692, 400, 20, 65));
     gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", 710, 400, 20, 65));
@@ -188,6 +188,11 @@ void GameScene::load(){
 
     gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 100,300, 19, 21));
     gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 800,300, 19, 21));
+
+// // Is table
+//     gameObjectsList.push_back(new Wall("assets/sprites/mesa.png", 800, 500, 60, 40));
+//
+//     gameObjectsList.push_back(new Table("assets/sprites/mesa.png", 300, 500, 60, 40));
 
 
     for(auto gameObject: gameObjectsList){

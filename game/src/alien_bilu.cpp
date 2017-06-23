@@ -64,7 +64,7 @@ void Bilu::specialAction(){
             if(!hacking){
                 hacking = true;
                 blockMovement = true;
-                ((DoorSwitch*)(doorSwitch))->playEffect();
+                ((DoorSwitch*)(doorSwitch))-> playEffect();
             }
         }
 
