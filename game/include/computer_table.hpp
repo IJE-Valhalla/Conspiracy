@@ -19,6 +19,7 @@ public:
     void init();
     Animation * getAnimation();
     DoorSwitch* getDoorSwitch();
+    Table* getTable();
 protected:
     Animation* animator;
     DoorSwitch* doorSwitch;

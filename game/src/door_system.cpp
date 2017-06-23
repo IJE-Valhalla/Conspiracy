@@ -30,3 +30,7 @@ GameObject* DoorSystem::getDoor(){
 GameObject* DoorSystem::getSwitch(){
     return computerTable->getDoorSwitch();
 }
+
+GameObject* DoorSystem::getTable(){
+    return computerTable->getTable();
+}

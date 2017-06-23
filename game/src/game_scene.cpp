@@ -205,6 +205,7 @@ void GameScene::load(){
         }else if(typeid(*gameObject) == typeid(DoorSystem)){
             CollisionManager::instance.addDoor(((DoorSystem*)(gameObject))->getDoor());
             CollisionManager::instance.addSwitch(((DoorSystem*)(gameObject))->getSwitch());
+            CollisionManager::instance.addWall(((DoorSystem*)(gameObject))->getTable());
         }
     }
 

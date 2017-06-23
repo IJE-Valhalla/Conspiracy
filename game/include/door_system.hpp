@@ -16,6 +16,7 @@ public:
     void draw();
     GameObject* getDoor();
     GameObject* getSwitch();
+    GameObject* getTable();
 private:
     Door* door;
     ComputerTable * computerTable;
