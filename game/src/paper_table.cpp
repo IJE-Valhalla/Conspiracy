@@ -1,33 +1,33 @@
-#include "computer_table.hpp"
+#include "paper_table.hpp"
 #include "log.h"
 
-ComputerTable::ComputerTable(std::string objectName, double positionX, double positionY,
+PaperTable::PaperTable(std::string objectName, double positionX, double positionY,
                                      int width, int height) : GameObject(objectName,
                                                                          positionX,
                                                                          positionY,
                                                                          width, height){
 table = new Table("assets/sprites/mesa.png", positionX, positionY, width, height);
-doorSwitch = new DoorSwitch("assets/sprites/PC_sprites(34X20).png", positionX + 15, positionY + 2, 34, 60);
+paper = new Paper("assets/sprites/papeis(19X21).png", positionX + 15, positionY + 2, 10, 40);
 }
 
-ComputerTable::~ComputerTable(){
+PaperTable::~PaperTable(){
 
 }
 
-void ComputerTable::update(double timeElapsed){
+void PaperTable::update(double timeElapsed){
    table->update(timeElapsed);
-    doorSwitch->update(timeElapsed);
+   paper->update(timeElapsed);
 }
 
-void ComputerTable::draw(){
+void PaperTable::draw(){
    table->draw();
-   doorSwitch->draw();
+   paper->draw();
 }
 
-DoorSwitch* ComputerTable::getDoorSwitch(){
-    return doorSwitch;
+Paper* PaperTable::getPaper(){
+    return paper;
 }
 
-Table* ComputerTable::getTable(){
+Table* PaperTable::getTable(){
     return table;
 }

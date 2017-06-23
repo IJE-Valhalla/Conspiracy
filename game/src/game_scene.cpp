@@ -10,6 +10,8 @@
 #include "door_system.hpp"
 #include "audio.hpp"
 #include "table.hpp"
+#include "paper_table.hpp"
+
 
 #include <typeinfo>
 #include <iostream>
@@ -42,8 +44,8 @@ void GameScene::verifyWinOrLose(){
     for(auto gameObject : gameObjectsList){
         if(typeid(*gameObject) == typeid(Guard)){
             guards.push_back((Guard *)(gameObject));
-        }else if(typeid(*gameObject) == typeid(Paper)){
-            if(!((Paper*)(gameObject))->isEdited()){
+        }else if(typeid(*gameObject) == typeid(PaperTable)){
+            if(!(((PaperTable*)(gameObject))->getPaper())->isEdited()){
                 allPapersEdited = false;
             }
         }else if(typeid(*gameObject) == typeid(Player)){
@@ -91,8 +93,9 @@ void GameScene::initializeColliders(){
             CollisionManager::instance.addWall(gameObject);
         }else if(typeid(*gameObject) == typeid(Guard)){
             CollisionManager::instance.addEnemy(gameObject);
-        }else if(typeid(*gameObject) == typeid(Paper)){
-            CollisionManager::instance.addPaper(gameObject);
+        }else if(typeid(*gameObject) == typeid(PaperTable)){
+            CollisionManager::instance.addPaper(((PaperTable*)(gameObject))->getPaper());
+            CollisionManager::instance.addWall(((PaperTable*)(gameObject))->getTable());
         }else if(typeid(*gameObject) == typeid(DoorSystem)){
             CollisionManager::instance.addDoor(((DoorSystem*)(gameObject))->getDoor());
             CollisionManager::instance.addSwitch(((DoorSystem*)(gameObject))->getSwitch());
@@ -126,19 +129,19 @@ void GameScene::createGuards(){
 
 void GameScene::createDoorSystems(){
     std::pair<int,int> doorOnePosition (360, 240);
-    std::pair<int,int> switchOnePosition (150, 150);
+    std::pair<int,int> switchOnePosition (60, 50);
 
 
     std::pair<int,int> doorTwoPosition (660, 381);
-    std::pair<int,int> switchTwoPosition (400, 530);
+    std::pair<int,int> switchTwoPosition (650, 50);
 
     gameObjectsList.push_back(new DoorSystem(doorOnePosition,switchOnePosition));
     gameObjectsList.push_back(new DoorSystem(doorTwoPosition,switchTwoPosition));
 }
 
 void GameScene::createPapers(){
-    gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 100,300, 19, 21));
-    gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 800,300, 19, 21));
+    gameObjectsList.push_back(new PaperTable("Paper", 100, 200, 60, 34));
+    gameObjectsList.push_back(new PaperTable("Paper", 600, 220, 60, 34));
 }
 
 void GameScene::createGameBorders(){

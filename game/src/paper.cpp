@@ -46,6 +46,7 @@ bool Paper::isEdited(){
 void Paper::draw(){
     INFO("Paper DRAW");
     animator->draw(getPositionX(), getPositionY());
+    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
     if(isBeingEdited){
         AnimationManager::instance.addProgressBar(editing_bar);
     }
