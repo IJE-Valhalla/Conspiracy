@@ -3,6 +3,8 @@
 
 #include "engine.hpp"
 #include "animation.hpp"
+#include "animation_manager.hpp"
+#include "progress_bar.hpp"
 
 using namespace engine;
 
@@ -15,9 +17,13 @@ public:
     void init();
     Animation * getAnimation();
     void animate();
+    void stopAnimation();
     bool isEdited();
+    double getEditingBarPercent();
+    void resetEditingProgress();
 protected:
     Animation* animator;
+    ProgressBar *editing_bar;
     bool edited;
     bool isBeingEdited;
 };
