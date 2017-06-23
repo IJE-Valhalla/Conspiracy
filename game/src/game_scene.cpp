@@ -9,7 +9,7 @@
 #include "paper.hpp"
 #include "door_system.hpp"
 #include "audio.hpp"
-
+#include "table.hpp"
 
 #include <typeinfo>
 #include <iostream>
@@ -96,6 +96,7 @@ void GameScene::initializeColliders(){
         }else if(typeid(*gameObject) == typeid(DoorSystem)){
             CollisionManager::instance.addDoor(((DoorSystem*)(gameObject))->getDoor());
             CollisionManager::instance.addSwitch(((DoorSystem*)(gameObject))->getSwitch());
+            CollisionManager::instance.addWall(((DoorSystem*)(gameObject))->getTable()); 
         }
     }
 }
