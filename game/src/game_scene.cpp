@@ -108,9 +108,6 @@ void GameScene::load(){
     gameObjectsList.push_back(guard);
     // gameObjectsList.push_back(new Guard("assets/sprites/seguranca_sheet.png", 900, 10, 40, 40));
 
-    gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 100,300, 19, 21));
-    gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 800,300, 19, 21));
-
     for(int i=0; i<=400; i+=20){
         gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", i, 400, 20, 65));
     }
@@ -184,6 +181,9 @@ void GameScene::load(){
 
     gameObjectsList.push_back(new DoorSystem(doorOnePosition,switchOnePosition));
     gameObjectsList.push_back(new DoorSystem(doorTwoPosition,switchTwoPosition));
+
+    gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 100,300, 19, 21));
+    gameObjectsList.push_back(new Paper("assets/sprites/papeis(19X21).png", 800,300, 19, 21));
 
 
     for(auto gameObject: gameObjectsList){

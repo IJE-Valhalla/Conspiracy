@@ -11,6 +11,10 @@ void AnimationManager::add_collider(SDL_Rect* newQuad){
     colliderRects.push_back(newQuad);
 }
 
+void AnimationManager::addProgressBar(ProgressBar* newProgressBar){
+    progressBars.push_back(newProgressBar);
+}
+
 void AnimationManager::clearAnimationQuads(){
     animationQuads.clear();
 }
@@ -22,6 +26,7 @@ void AnimationManager::draw_quads(){
         SDL_RenderCopy(WindowManager::getGameCanvas(), quad->getTexture(), quad->getClipRect(), quad->getRenderQuad());
     }
     draw_colliders();
+    drawProgressBars();
     clearAnimationQuads();
 }
 
@@ -30,4 +35,11 @@ void AnimationManager::draw_colliders(){
         SDL_RenderDrawRect(WindowManager::getGameCanvas(), quad);
     }
     colliderRects.clear();
+}
+
+void AnimationManager::drawProgressBars(){
+    for(ProgressBar * progressBar : progressBars) {
+        progressBar->draw();
+    }
+    progressBars.clear();
 }

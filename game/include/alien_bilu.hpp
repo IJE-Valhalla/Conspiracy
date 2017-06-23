@@ -14,6 +14,7 @@ protected:
 
 private:
     bool hacking;
+    bool editing;
     bool lastAction;
     void setSpecialActionAnimator();
 };
