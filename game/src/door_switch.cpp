@@ -46,12 +46,10 @@ Animation * DoorSwitch::getAnimation(){
 
 void DoorSwitch::animate(){
     pressed = true;
-    //setEnabled(false);
 }
 
 void DoorSwitch::stopAnimation(){
     pressed = false;
-    //setEnabled(true);
 }
 
 bool DoorSwitch::isPressed(){

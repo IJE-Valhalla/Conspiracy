@@ -179,8 +179,12 @@ void GameScene::load(){
     std::pair<int,int> doorOnePosition (360, 270);
     std::pair<int,int> switchOnePosition (150, 150);
 
-    std::pair<int,int> doorTwoPosition (660, 460);
-    std::pair<int,int> switchTwoPosition (600, 150);
+
+    std::pair<int,int> doorTwoPosition (660, 401);
+    std::pair<int,int> switchTwoPosition (400, 530);
+
+    gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", 692, 400, 20, 65));
+    gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", 710, 400, 20, 65));
 
     gameObjectsList.push_back(new DoorSystem(doorOnePosition,switchOnePosition));
     gameObjectsList.push_back(new DoorSystem(doorTwoPosition,switchTwoPosition));
