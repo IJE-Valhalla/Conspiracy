@@ -129,19 +129,19 @@ void GameScene::createGuards(){
 
 void GameScene::createDoorSystems(){
     std::pair<int,int> doorOnePosition (360, 240);
-    std::pair<int,int> switchOnePosition (150, 150);
+    std::pair<int,int> switchOnePosition (60, 50);
 
 
     std::pair<int,int> doorTwoPosition (660, 381);
-    std::pair<int,int> switchTwoPosition (400, 530);
+    std::pair<int,int> switchTwoPosition (650, 50);
 
     gameObjectsList.push_back(new DoorSystem(doorOnePosition,switchOnePosition));
     gameObjectsList.push_back(new DoorSystem(doorTwoPosition,switchTwoPosition));
 }
 
 void GameScene::createPapers(){
-    gameObjectsList.push_back(new PaperTable("Paper", 100,300, 60, 34));
-    gameObjectsList.push_back(new PaperTable("Paper", 400,300, 60, 34));
+    gameObjectsList.push_back(new PaperTable("Paper", 100, 200, 60, 34));
+    gameObjectsList.push_back(new PaperTable("Paper", 600, 220, 60, 34));
 }
 
 void GameScene::createGameBorders(){
@@ -178,10 +178,10 @@ void GameScene::createCenary(){
                 switch(compare){
                     case 1: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", j, i+25, 20, 40));break;
 
-                    case 2: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, i, 5, 5));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, i+5, 5, 5));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, i+10, 5, 5));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, i+15, 5, 5));
+                    case 2: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, i, 5, 15));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, i+5, 5, 15));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, i+10, 5, 15));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, i+15, 5, 15));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, i-5, 0, 0));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, i-10, 0, 0));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, i-15, 0, 0)); break;
@@ -191,10 +191,10 @@ void GameScene::createCenary(){
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+10, i+15, 5, 5));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, i+15, 5, 5)); break;
 
-                    case 4: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, i, 5, 5));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, i+5, 5, 5));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, i+10, 5, 5));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, i+15, 5, 5));
+                    case 4: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, i, 5, 15));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, i+5, 5, 15));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, i+10, 5, 15));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, i+15, 5, 15));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, i-5, 0, 0));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, i-10, 0, 0));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, i-15, 0, 0));break;

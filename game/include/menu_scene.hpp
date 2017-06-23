@@ -29,6 +29,7 @@ private:
     Color * select;
     Color * notSelect;
     Audio * buttonEffect;
+    Audio * selectEffect;
     Audio * backgroundMusic;
 };
 
