@@ -10,7 +10,9 @@ void AnimationManager::add_animation_quad(AnimationQuad* newQuad){
 void AnimationManager::add_collider(SDL_Rect* newQuad){
     colliderRects.push_back(newQuad);
 }
-
+void AnimationManager::addLine(std::pair<std::pair<int,int>,std::pair<int,int>> line){
+    lines.push_back(line);
+}
 void AnimationManager::addProgressBar(ProgressBar* newProgressBar){
     progressBars.push_back(newProgressBar);
 }
@@ -20,13 +22,25 @@ void AnimationManager::clearAnimationQuads(){
 }
 
 void AnimationManager::draw_quads(){
-        //ORDER QUADS BY Y;
+    if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_L)){
+        if(isActive){
+            isActive = false;
+        }else{
+            isActive = true;
+        }
+    }
     std::sort(animationQuads.begin(), animationQuads.end(),[](const AnimationQuad* lhs, const AnimationQuad* rhs){ return lhs->y < rhs->y; });
     for(AnimationQuad * quad : animationQuads) {
         SDL_RenderCopy(WindowManager::getGameCanvas(), quad->getTexture(), quad->getClipRect(), quad->getRenderQuad());
     }
-    draw_colliders();
+    if(isActive){
+        draw_colliders();
+    }
     drawProgressBars();
+    for(auto line: lines){
+        SDL_RenderDrawLine(WindowManager::getGameCanvas(), line.first.first, line.first.second, line.second.first, line.second.second);
+    }
+    lines.clear();
     clearAnimationQuads();
 }
 

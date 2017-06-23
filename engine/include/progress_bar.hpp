@@ -8,7 +8,7 @@
 namespace engine{
     class ProgressBar: public GameObject{
     public:
-        ProgressBar(double positionX, double positionY, int width, int height);
+        ProgressBar(double positionX, double positionY, int width, int height, double increment);
         ~ProgressBar();
         void update(double timeElapsed);
         void draw();
@@ -17,6 +17,7 @@ namespace engine{
 
     private:
         double percent;
+        double progressIncrement;
         int pw;
         int px;
         SDL_Rect *backRect;
