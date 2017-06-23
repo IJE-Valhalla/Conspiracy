@@ -2,13 +2,16 @@
 
 using namespace engine;
 
-ProgressBar::ProgressBar(double positionX, double positionY, int width, int height):
+ProgressBar::ProgressBar(double positionX, double positionY, int width,
+                                                             int height,
+                                                             double increment):
                                                                       GameObject(
                                                                           positionX,
                                                                           positionY,
                                                                           width,
                                                                           height){
     percent = 1.0;
+    progressIncrement = increment;
 
     backRect = new SDL_Rect();
     backRect->x = positionX;
@@ -46,7 +49,7 @@ void ProgressBar::update(double timeElapsed){
     frontRect->y = getPositionY();
     frontRect->w = pw;
     frontRect->h = getHeight();
-    percent -= 0.002;
+    percent -= progressIncrement;
 }
 
 void ProgressBar::draw(){
