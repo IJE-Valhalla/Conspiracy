@@ -29,6 +29,7 @@ private:
     int wayActual;
     bool wayActive;
     Animation* animator;
+    Animation* exclamation;
     std::string direction;
     std::unordered_map< int, std::pair<std::string, int>> ways;
     std::unordered_map< int, std::pair<std::string, int>>::iterator search;
