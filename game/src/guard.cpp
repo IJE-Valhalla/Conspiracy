@@ -28,9 +28,13 @@ Guard::~Guard(){
 }
 
 void Guard::update(double timeElapsed){
-        // To Do: Use Time Elapsed in inc.
         auto incY = 0.1*timeElapsed;
         auto incX = 0.1*timeElapsed;
+        // To Do: Use Time Elapsed in inc.
+        if(wayActive){
+            incY = 0.2*timeElapsed;
+            incX = 0.2*timeElapsed;
+        }
 
         walkInX(incX);
         walkInY(incY);
