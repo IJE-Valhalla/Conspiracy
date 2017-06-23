@@ -46,6 +46,7 @@ void Guard::update(double timeElapsed){
         specialAction();
         animator->update();
         exclamation->update();
+        selectLine();
 }
 
 void Guard::walkInX(double & incX){
@@ -144,6 +145,7 @@ void Guard::walkInYSpecial(double & incY){
         if(ways[wayActual].first == "down") {
                 incY = incY * (1);
                 idleAnimationNumber = 5;
+                direction = "down";
                 animator->setInterval("down");
                 if(getPositionY()+incY > ways[wayActual].second) {
                         search = ways.find(wayActual + 1);
@@ -157,6 +159,7 @@ void Guard::walkInYSpecial(double & incY){
         }else if(ways[wayActual].first == "up") {
                 incY = incY * (-1);
                 idleAnimationNumber = 0;
+                direction = "up";
                 animator->setInterval("up");
                 if(getPositionY()+incY < ways[wayActual].second) {
                         search = ways.find(wayActual + 1);
@@ -186,6 +189,7 @@ void Guard::draw(){
         if(wayActive){
             exclamation->draw(getPositionX(), getPositionY()-30);
         }
+        AnimationManager::instance.addLine(line);
 }
 
 void Guard::addWay(int key, std::pair<std::string, int> way){
@@ -197,5 +201,24 @@ void Guard::verifyDistance(GameObject* alien){
 // TODO Definir quando irá iniciar o percurso especial do guarda
     if(distance < 60){
         wayActive = true;
+    }
+}
+
+void Guard::selectLine(){
+    int range = 80;
+    line.first.first = getPositionX() + (getWidth()/2);
+    line.first.second = getPositionY() + (getHeight()/2);
+    if(direction=="up"){
+        line.second.first = line.first.first;
+        line.second.second = line.first.second-range;
+    }else if(direction == "down"){
+        line.second.first = line.first.first;
+        line.second.second = line.first.second+range;
+    }else if(direction == "right"){
+        line.second.first = line.first.first+range;
+        line.second.second = line.first.second;
+    }else{
+        line.second.first = line.first.first-range;
+        line.second.second = line.first.second;
     }
 }

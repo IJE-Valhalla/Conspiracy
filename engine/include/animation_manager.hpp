@@ -17,10 +17,12 @@ public:
     void draw_quads();
     void add_collider(SDL_Rect* renderQuad);
     void addProgressBar(ProgressBar* newProgressBar);
+    void addLine(std::pair<std::pair<int,int>,std::pair<int,int>> line);
 private:
     std::vector<AnimationQuad*> animationQuads;
     std::vector<SDL_Rect*> colliderRects;
     std::vector<ProgressBar*> progressBars;
+    std::vector<std::pair<std::pair<int,int>,std::pair<int,int>>> lines;
     void clearAnimationQuads();
     void draw_colliders();
     void drawProgressBars();

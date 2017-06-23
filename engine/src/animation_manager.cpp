@@ -10,7 +10,9 @@ void AnimationManager::add_animation_quad(AnimationQuad* newQuad){
 void AnimationManager::add_collider(SDL_Rect* newQuad){
     colliderRects.push_back(newQuad);
 }
-
+void AnimationManager::addLine(std::pair<std::pair<int,int>,std::pair<int,int>> line){
+    lines.push_back(line);
+}
 void AnimationManager::addProgressBar(ProgressBar* newProgressBar){
     progressBars.push_back(newProgressBar);
 }
@@ -27,6 +29,10 @@ void AnimationManager::draw_quads(){
     }
     draw_colliders();
     drawProgressBars();
+    for(auto line: lines){
+        SDL_RenderDrawLine(WindowManager::getGameCanvas(), line.first.first, line.first.second, line.second.first, line.second.second);
+    }
+    lines.clear();
     clearAnimationQuads();
 }
 

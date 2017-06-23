@@ -19,15 +19,18 @@ public:
     void setWayActive(bool isActive);
     void verifyDistance(GameObject* alien);
     Animation * getAnimation();
+    std::pair<std::pair<int,int>,std::pair<int,int>> getLine();
 private:
     void walkInX(double & incX);
     void walkInY(double & incY);
     void walkInXSpecial(double & incX);
     void walkInYSpecial(double & incY);
+    void selectLine();
     void specialAction();
     int idleAnimationNumber;
     int wayActual;
     bool wayActive;
+    std::pair<std::pair<int,int>,std::pair<int,int>> line;
     Animation* animator;
     Animation* exclamation;
     std::string direction;
