@@ -30,6 +30,7 @@ void Door::update(double timeElapsed){
 void Door::draw(){
     INFO("Door DRAW");
     animator->draw(getPositionX(), getPositionY());
+    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
 }
 
 Animation * Door::getAnimation(){
