@@ -21,7 +21,7 @@ void ComputerTable::update(double timeElapsed){
 
 void ComputerTable::draw(){
    table->draw();
-    doorSwitch->draw();
+   doorSwitch->draw();
 }
 
 DoorSwitch* ComputerTable::getDoorSwitch(){
