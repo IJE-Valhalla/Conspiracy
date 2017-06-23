@@ -143,12 +143,11 @@ void GameScene::createPapers(){
 void GameScene::createGameBorders(){
     for(int i=0; i<=960; i+=5){
         gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", i, 0, 5, 5));
-    }
-    for(int i=0; i<=960; i+=5){
         gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", i, 595, 5, 5));
     }
     for(int j=0; j<=600; j+=5){
         gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", 955, j, 5, 5));
+        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", 0, j, 5, 5));
     }
 }
 
