@@ -4,6 +4,7 @@
 #include "animation_quad.hpp"
 #include "window_manager.hpp"
 #include "progress_bar.hpp"
+#include "input_manager.hpp"
 #include <algorithm>
 #include <vector>
 #include "log.h"
@@ -19,6 +20,7 @@ public:
     void addProgressBar(ProgressBar* newProgressBar);
     void addLine(std::pair<std::pair<int,int>,std::pair<int,int>> line);
 private:
+    bool isActive;
     std::vector<AnimationQuad*> animationQuads;
     std::vector<SDL_Rect*> colliderRects;
     std::vector<ProgressBar*> progressBars;
