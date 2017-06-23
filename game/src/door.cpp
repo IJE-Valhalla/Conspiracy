@@ -17,9 +17,7 @@ void Door::update(double timeElapsed){
 
 void Door::draw(){
     INFO("Door DRAW");
-    if(isEnabled()){
-        animator->draw(getPositionX(), getPositionY());
-    }
+    animator->draw(getPositionX(), getPositionY());
 }
 
 Animation * Door::getAnimation(){
