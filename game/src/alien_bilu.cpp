@@ -113,7 +113,7 @@ void Bilu::specialAction(){
 void Bilu::draw(){
     INFO("Bilu DRAW");
     animator->draw(getPositionX()-11, getPositionY()-20);
-    //animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
 }
 
 void Bilu::setSpecialActionAnimator(){
