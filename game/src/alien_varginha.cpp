@@ -63,3 +63,10 @@ void Varginha::specialAction(){
         blockMovement = false;
     }
 }
+
+
+void Varginha::draw(){
+    INFO("Varginha DRAW");
+    animator->draw(getPositionX()-15, getPositionY()-25);
+    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+}

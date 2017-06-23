@@ -7,6 +7,7 @@ Paper::Paper(std::string objectName, double positionX, double positionY,
                                                                          width, height){
 
     animator = new Animation(objectName, 1, 4, 0.5);
+    editing_bar = new ProgressBar(positionX-7, positionY-5, 22.5, 5, 0.005);
     animator->addAction("idle",0,0);
     animator->addAction("beingEdited",1,3);
     edited = false;
@@ -18,8 +19,12 @@ Paper::~Paper(){}
 void Paper::update(double timeElapsed){
     timeElapsed = timeElapsed;
     if(isBeingEdited){
+        editing_bar->update(timeElapsed);
         animator->setInterval("beingEdited");
-        isBeingEdited = false;
+        if(editing_bar->getPercent() <= 0.0){
+            isBeingEdited = false;
+            edited = true;
+        }
     }else{
         animator->setInterval("idle");
     }
@@ -27,8 +32,11 @@ void Paper::update(double timeElapsed){
 }
 
 void Paper::animate(){
-    edited = true;
     isBeingEdited = true;
+}
+
+void Paper::stopAnimation(){
+    isBeingEdited = false;
 }
 
 bool Paper::isEdited(){
@@ -38,8 +46,20 @@ bool Paper::isEdited(){
 void Paper::draw(){
     INFO("Paper DRAW");
     animator->draw(getPositionX(), getPositionY());
+    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+    if(isBeingEdited){
+        AnimationManager::instance.addProgressBar(editing_bar);
+    }
 }
 
 Animation * Paper::getAnimation(){
   return animator;
+}
+
+double Paper::getEditingBarPercent(){
+    return editing_bar->getPercent();
+}
+
+void Paper::resetEditingProgress(){
+    editing_bar->resetPercent();
 }

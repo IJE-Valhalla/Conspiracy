@@ -13,6 +13,7 @@ Bilu::Bilu(std::string objectName, double positionX, double positionY,
 
    isSelected = true;
    hacking = false;
+   editing = false;
    lastAction = false;
 }
 
@@ -52,7 +53,10 @@ void Bilu::specialAction(){
     if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE)){
         // Paper interaction
         if(paper != NULL){
-            ((Paper*)paper)->animate();
+            if(!editing){
+                editing = true;
+                blockMovement = true;
+            }
         }
 
         // PC interaction
@@ -60,7 +64,7 @@ void Bilu::specialAction(){
             if(!hacking){
                 hacking = true;
                 blockMovement = true;
-                ((DoorSwitch*)(doorSwitch))->playEffect();
+                ((DoorSwitch*)(doorSwitch))-> playEffect();
             }
         }
 
@@ -71,6 +75,12 @@ void Bilu::specialAction(){
             ((DoorSwitch*)(doorSwitch))->stopEffect();
             ((DoorSwitch*)(doorSwitch))->stopAnimation();
             ((DoorSwitch*)(doorSwitch))->resetHackingProgress();
+        }else if(editing){
+            editing = false;
+            blockMovement = false;
+            //((Paper*)(paper))->stopEffect();
+            ((Paper*)(paper))->stopAnimation();
+            ((Paper*)(paper))->resetEditingProgress();
         }
     }
 
@@ -82,6 +92,17 @@ void Bilu::specialAction(){
             ((DoorSwitch*)(doorSwitch))->stopAnimation();
             ((DoorSwitch*)(doorSwitch))->stopEffect();
             ((DoorSwitch*)(doorSwitch))->resetHackingProgress();
+            Alien::animator->setInterval("idle");
+            blockMovement = false;
+        }
+    }else if(editing){
+        ((Paper*)(paper))->animate();
+        setSpecialActionAnimator();
+        if(((Paper*)(paper))->getEditingBarPercent() <= 0.0){
+            editing = false;
+            ((Paper*)(paper))->stopAnimation();
+            //((Paper*)(paper))->stopEffect();
+            ((Paper*)(paper))->resetEditingProgress();
             Alien::animator->setInterval("idle");
             blockMovement = false;
         }

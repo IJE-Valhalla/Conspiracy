@@ -4,6 +4,8 @@
 #include "engine.hpp"
 #include "door.hpp"
 #include "door_switch.hpp"
+#include "computer_table.hpp"
+
 using namespace engine;
 
 class DoorSystem: public GameObject{
@@ -14,8 +16,9 @@ public:
     void draw();
     GameObject* getDoor();
     GameObject* getSwitch();
+    GameObject* getTable();
 private:
     Door* door;
-    DoorSwitch* doorSwitch;
+    ComputerTable * computerTable;
 };
 #endif

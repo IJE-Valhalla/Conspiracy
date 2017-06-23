@@ -48,3 +48,9 @@ void Etemer::specialAction(){
         blockMovement = false;
     }
 }
+
+void Etemer::draw(){
+    INFO("Etemer DRAW");
+    animator->draw(getPositionX()-15, getPositionY()-20);
+    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+}
