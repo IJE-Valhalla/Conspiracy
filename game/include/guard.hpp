@@ -6,6 +6,7 @@
 #include "animation.hpp"
 #include "enemy.hpp"
 #include "collision_manager.hpp"
+#include "line.hpp"
 
 using namespace engine;
 
@@ -30,7 +31,7 @@ private:
     int idleAnimationNumber;
     int wayActual;
     bool wayActive;
-    std::pair<std::pair<int,int>,std::pair<int,int>> line;
+    std::vector<Line*> lines;
     Animation* animator;
     Animation* exclamation;
     std::string direction;
