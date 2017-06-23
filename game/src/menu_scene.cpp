@@ -12,6 +12,7 @@ MenuScene::MenuScene(int id) : Scene(id){
         notSelect = new Color(0, 0, 0, 0);
         background = new Sprite("assets/sprites/background.png");
         buttonEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);
+        selectEffect = new Audio("assets/sounds/SELECT5.wav", "EFFECT", 128);
         backgroundMusic = new Audio("assets/sounds/MENU.wav", "MUSIC", 100);
 }
 
@@ -62,6 +63,7 @@ void MenuScene::selectAction(){
         }
 
         if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
+                selectEffect->play(0);
                 switch(selectButton) {
                 case 1:
                         getSceneManager()->loadScene(1);
