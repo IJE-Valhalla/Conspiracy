@@ -27,6 +27,7 @@ private:
     std::vector<std::pair<std::pair<int,int>,std::pair<int,int>>> lines;
     void clearAnimationQuads();
     void draw_colliders();
+    void drawLinesOfVision();
     void drawProgressBars();
 };
 
