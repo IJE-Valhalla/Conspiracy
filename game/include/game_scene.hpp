@@ -9,6 +9,7 @@
 #include "guard.hpp"
 #include "progress_bar.hpp"
 
+#include <fstream>
 #include <vector>
 
 using namespace engine;
@@ -24,6 +25,14 @@ public:
     void verifyWinOrLose();
 private:
     std::vector<GameObject*> gameObjectsList;
+    void initializeColliders();
+    void createGuards();
+    void createAliens();
+    void createCenary();
+    void createDoorSystems();
+    void createPapers();
+    void createGameBorders();
+    void createGround();
 };
 
 #endif

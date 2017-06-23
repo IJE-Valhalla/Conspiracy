@@ -16,6 +16,10 @@ void Wall::update(double timeElapsed){
 }
 
 void Wall::draw(){
-    animator->draw(getPositionX(), getPositionY());
+    if(getName().compare("assets/sprites/cenary/parede2.png") == 0){
+        animator->draw(getPositionX(), getPositionY()-25);
+    }else{
+        animator->draw(getPositionX(), getPositionY());
+    }
     animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
 }

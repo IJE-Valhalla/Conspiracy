@@ -7,7 +7,7 @@ Paper::Paper(std::string objectName, double positionX, double positionY,
                                                                          width, height){
 
     animator = new Animation(objectName, 1, 4, 0.5);
-    editing_bar = new ProgressBar(positionX-7, positionY-5, 45, 5);
+    editing_bar = new ProgressBar(positionX-7, positionY-5, 22.5, 5, 0.005);
     animator->addAction("idle",0,0);
     animator->addAction("beingEdited",1,3);
     edited = false;
@@ -21,7 +21,10 @@ void Paper::update(double timeElapsed){
     if(isBeingEdited){
         editing_bar->update(timeElapsed);
         animator->setInterval("beingEdited");
-        isBeingEdited = false;
+        if(editing_bar->getPercent() <= 0.0){
+            isBeingEdited = false;
+            edited = true;
+        }
     }else{
         animator->setInterval("idle");
     }
@@ -29,10 +32,7 @@ void Paper::update(double timeElapsed){
 }
 
 void Paper::animate(){
-    edited = true;
     isBeingEdited = true;
-    editing_bar->draw();
-    std::cout << "HERE" <<std::endl;
 }
 
 void Paper::stopAnimation(){

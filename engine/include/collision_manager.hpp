@@ -25,6 +25,9 @@ public:
     void resetLists();
     static CollisionManager instance;
 private:
+    double CCW(std::pair<int, int> a, std::pair<int, int> b, std::pair<int, int> c);
+    bool verifyLineCollisionWithLine(std::pair<int, int> a, std::pair<int, int> b, std::pair<int, int> c, std::pair<int, int> d);
+    bool verifyRectangleCollisionWithLine(GameObject* g, std::pair<int, int> a, std::pair<int, int> b);
     std::vector<GameObject*> wallList;
     std::vector<GameObject*> enemyList;
     std::vector<GameObject*> paperList;

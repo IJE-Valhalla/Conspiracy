@@ -28,7 +28,8 @@ private:
     Sprite * background;
     Color * select;
     Color * notSelect;
-    Audio * soundEffect;
+    Audio * buttonEffect;
+    Audio * backgroundMusic;
 };
 
 #endif

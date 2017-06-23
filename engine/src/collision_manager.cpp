@@ -106,6 +106,14 @@ CollisionManager CollisionManager::instance;
         topB = g2->getPositionY();
         bottomB = topB + g2->getHeight();
 
+        if(g2->getWidth() == 0 || g2->getHeight() == 0){
+            return false;
+        }
+        if(g1->getWidth() == 0 || g1->getHeight() == 0){
+            return false;
+        }
+
+
         //If any of the sides from A are outside of B
         if( bottomA <= topB ){ return false;}
         if( topA >= bottomB ){ return false;}
@@ -113,6 +121,47 @@ CollisionManager CollisionManager::instance;
         if( leftA >= rightB ){ return false;}
         //If none of the sides from A are outside B
         return true;
+    }
+    bool CollisionManager::verifyRectangleCollisionWithLine(GameObject* g, std::pair<int, int> a, std::pair<int, int> b){
+        std::pair<std::pair<int, int>, std::pair<int, int>> topo;
+        std::pair<std::pair<int, int>, std::pair<int, int>> direita;
+        std::pair<std::pair<int, int>, std::pair<int, int>> esquerda;
+        std::pair<std::pair<int, int>, std::pair<int, int>> embaixo;
+
+        topo.first.first = g->getPositionX();
+        topo.first.second = g->getPositionY();
+        topo.second.first = g->getPositionX()+g->getWidth();
+        topo.second.second= g->getPositionY();
+
+        direita.first.first = g->getPositionX()+g->getWidth();
+        direita.first.second = g->getPositionY();
+        direita.second.first = g->getPositionX()+g->getWidth();
+        direita.second.second= g->getPositionY()+g->getHeight();
+
+        esquerda.first.first = g->getPositionX();
+        esquerda.first.second = g->getPositionY();
+        esquerda.second.first = g->getPositionX();
+        esquerda.second.second= g->getPositionY()+g->getHeight();
+
+        embaixo.first.first = g->getPositionX();
+        embaixo.first.second = g->getPositionY()+g->getHeight();
+        embaixo.second.first = g->getPositionX()+g->getWidth();
+        embaixo.second.second= g->getPositionY()+g->getHeight();
+
+        if(verifyLineCollisionWithLine(topo.first,topo.second,a,b)){return true;}
+        if(verifyLineCollisionWithLine(direita.first,direita.second,a,b)){return true;}
+        if(verifyLineCollisionWithLine(esquerda.first,esquerda.second,a,b)){return true;}
+        if(verifyLineCollisionWithLine(embaixo.first,embaixo.second,a,b)){return true;}
+        
+        return false;
+    }
+
+    bool CollisionManager::verifyLineCollisionWithLine(std::pair<int, int> a, std::pair<int, int> b, std::pair<int, int> c, std::pair<int, int> d){
+        return (CCW(a,b,c)*CCW(a,b,d)<0 && CCW(c,d,b)*CCW(c,d,a)<0);
+    }
+
+    double CollisionManager::CCW(std::pair<int, int> a, std::pair<int, int> b, std::pair<int, int> c){
+        return (b.first-a.first)*(c.second-a.second) - (b.second-a.second)*(c.first-a.first);
     }
 
 

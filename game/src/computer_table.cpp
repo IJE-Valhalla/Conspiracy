@@ -7,7 +7,7 @@ ComputerTable::ComputerTable(std::string objectName, double positionX, double po
                                                                          positionY,
                                                                          width, height){
 table = new Table("assets/sprites/mesa.png", positionX, positionY, width, height);
-doorSwitch = new DoorSwitch("assets/sprites/PC_sprites(34X20).png", positionX + 15, positionY + 5, 34, 40);
+doorSwitch = new DoorSwitch("assets/sprites/PC_sprites(34X20).png", positionX + 15, positionY + 2, 34, 60);
 }
 
 ComputerTable::~ComputerTable(){

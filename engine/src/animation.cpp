@@ -107,6 +107,7 @@ int Animation::getCurrentPositionFrame(){
 }
 
 void Animation::setInterval(std::string action){
+    currentAction = action;
     if(action != interval.first){
         startTime = SDL_GetTicks();
         stepTime = startTime;
@@ -132,4 +133,8 @@ std::pair<std::string, std::pair<int, int>> Animation::getInterval(){
 
 void Animation::addAction(std::string name_action, int initial, int last){
   list_actions[name_action] = std::pair<int, int>(initial, last);
+}
+
+std::string Animation::getCurrentAction(){
+    return currentAction;
 }
