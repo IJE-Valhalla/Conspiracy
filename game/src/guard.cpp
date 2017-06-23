@@ -180,7 +180,7 @@ void Guard::specialAction(){
 }
 
 void Guard::draw(){
-        animator->draw(getPositionX(), getPositionY());
+        animator->draw(getPositionX()-10, getPositionY()-10);
         animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
 }
 

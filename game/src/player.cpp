@@ -5,8 +5,8 @@ using namespace engine;
 Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosition,
       std::pair<int,int> varginhaPosition){
     bilu = new Bilu("assets/sprites/bilu_sheet.png", biluPosition.first, biluPosition.second, 19, 22);
-    varginha = new Varginha("assets/sprites/varginha_sheet.png", varginhaPosition.first, varginhaPosition.second, 40, 41);
-    etemer = new Etemer("assets/sprites/etemer_sheet.png", etemerPosition.first, etemerPosition.second, 40, 40);
+    varginha = new Varginha("assets/sprites/varginha_sheet.png", varginhaPosition.first, varginhaPosition.second, 10, 15);
+    etemer = new Etemer("assets/sprites/etemer_sheet.png", etemerPosition.first, etemerPosition.second, 10, 22);
     selectedAlien = 1;
 
     bilu->update(0);

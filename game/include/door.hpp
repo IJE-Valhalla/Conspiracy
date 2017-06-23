@@ -15,8 +15,12 @@ public:
     void draw();
     void init();
     Animation * getAnimation();
+    bool isOpen();
+    void setOpen(bool status);
 protected:
     Animation* animator;
+private:
+    bool open;
 };
 
 #endif

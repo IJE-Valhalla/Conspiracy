@@ -99,7 +99,7 @@ void GameScene::load(){
     std::pair <std::string, int> wayThree ("left", 220);
     std::pair <std::string, int> wayFour ("down", 120);
 
-    Guard * guard = new Guard("assets/sprites/seguranca_sheet.png", 220, 120, 40, 40, "right");
+    Guard * guard = new Guard("assets/sprites/seguranca_sheet.png", 220, 120, 18, 35, "right");
     guard->addWay(1, wayOne);
     guard->addWay(2, wayTwo);
     guard->addWay(3, wayThree);
@@ -176,8 +176,12 @@ void GameScene::load(){
     std::pair<int,int> doorOnePosition (360, 270);
     std::pair<int,int> switchOnePosition (150, 150);
 
-    std::pair<int,int> doorTwoPosition (660, 460);
-    std::pair<int,int> switchTwoPosition (600, 150);
+
+    std::pair<int,int> doorTwoPosition (660, 401);
+    std::pair<int,int> switchTwoPosition (400, 530);
+
+    gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", 692, 400, 20, 65));
+    gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", 710, 400, 20, 65));
 
     gameObjectsList.push_back(new DoorSystem(doorOnePosition,switchOnePosition));
     gameObjectsList.push_back(new DoorSystem(doorTwoPosition,switchTwoPosition));
