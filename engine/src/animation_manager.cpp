@@ -18,7 +18,20 @@ void AnimationManager::addProgressBar(ProgressBar* newProgressBar){
 }
 
 void AnimationManager::clearAnimationQuads(){
+    for(auto animationQuad: animationQuads){
+        free(animationQuad);
+    }
+    for(auto progressBar: progressBars){
+        free(progressBar);
+    }
+    for(auto collider: colliderRects){
+        free(collider);
+    }
     animationQuads.clear();
+    lines.clear();
+    progressBars.clear();
+    colliderRects.clear();
+
 }
 
 void AnimationManager::draw_quads(){
@@ -37,23 +50,22 @@ void AnimationManager::draw_quads(){
         draw_colliders();
     }
     drawProgressBars();
+    drawLinesOfVision();
+    clearAnimationQuads();
+}
+void AnimationManager::drawLinesOfVision(){
     for(auto line: lines){
         SDL_RenderDrawLine(WindowManager::getGameCanvas(), line.first.first, line.first.second, line.second.first, line.second.second);
     }
-    lines.clear();
-    clearAnimationQuads();
 }
-
 void AnimationManager::draw_colliders(){
     for(SDL_Rect * quad : colliderRects) {
         SDL_RenderDrawRect(WindowManager::getGameCanvas(), quad);
     }
-    colliderRects.clear();
 }
 
 void AnimationManager::drawProgressBars(){
     for(ProgressBar * progressBar : progressBars) {
         progressBar->draw();
     }
-    progressBars.clear();
 }
