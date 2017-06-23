@@ -11,7 +11,8 @@ MenuScene::MenuScene(int id) : Scene(id){
         select = new Color(255, 255, 255, 0);
         notSelect = new Color(0, 0, 0, 0);
         background = new Sprite("assets/sprites/background.png");
-        soundEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);
+        buttonEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);
+        backgroundMusic = new Audio("assets/sounds/MENU.wav", "MUSIC", 100);
 }
 
 MenuScene::~MenuScene(){
@@ -44,16 +45,16 @@ void MenuScene::update(double timeElapsed){
 
 void MenuScene::selectAction(){
         if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_UP)) {
-                soundEffect->pause();
-                soundEffect->play(0);
+                buttonEffect->pause();
+                buttonEffect->play(0);
                 selectButton--;
                 if(selectButton <= 0) {
                         selectButton = 3;
                 }
         }
         else if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_DOWN)) {
-                soundEffect->pause();
-                soundEffect->play(0);
+                buttonEffect->pause();
+                buttonEffect->play(0);
                 selectButton++;
                 if(selectButton > 3) {
                         selectButton = 1;
@@ -81,6 +82,7 @@ void MenuScene::load(){
         gameObjectsList.push_back(std::pair<int, GameObject*>(1, new Button("assets/fonts/font.ttf", 390, 300, 500, 500, "Start", 50)));
         gameObjectsList.push_back(std::pair<int, GameObject*>(2,new Button("assets/fonts/font.ttf", 350, 400, 500, 500, "Continue", 50)));
         gameObjectsList.push_back(std::pair<int, GameObject*>(3,new Button("assets/fonts/font.ttf", 400, 500, 500, 500, "Exit", 50)));
+        backgroundMusic->play(-1);
 }
 
 void MenuScene::unload(){
