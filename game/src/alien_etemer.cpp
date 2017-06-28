@@ -1,4 +1,5 @@
 #include "alien_etemer.hpp"
+#include "chair.hpp"
 
 Etemer::Etemer(std::string objectName, double positionX, double positionY,
                                    int width, int height) : Alien(objectName,
@@ -30,6 +31,7 @@ void Etemer::update(double timeElapsed){
         }
     }
     specialAction();
+    moveChair();
 
     animator->update();
 }
@@ -53,4 +55,12 @@ void Etemer::draw(){
     INFO("Etemer DRAW");
     animator->draw(getPositionX()-15, getPositionY()-20);
     animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+}
+
+void Etemer::moveChair(){
+        std::pair<std::string, GameObject *> chair = CollisionManager::instance.verifyCollisionWithChairs(this);
+        if(chair.second != NULL) {
+                ((Chair *) (chair.second))->setMoving(true);
+                ((Chair *) (chair.second))->setDirection(chair.first);
+        }
 }

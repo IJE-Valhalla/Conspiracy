@@ -33,6 +33,7 @@ private:
     void createPapers();
     void createGameBorders();
     void createGround();
+    void createChairs();
 };
 
 #endif

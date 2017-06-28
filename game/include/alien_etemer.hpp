@@ -12,6 +12,7 @@ public:
     void draw();
 protected:
     void specialAction();
+    void moveChair();
 };
 
 #endif

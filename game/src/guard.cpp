@@ -71,7 +71,7 @@ void Guard::walkInX(double & incX){
         }
 
         setPositionX(getPositionX()+incX);
-        if(CollisionManager::instance.verifyCollisionWithWalls(this)) {
+        if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
                 if (!wayActive) {
                         if(direction == "left") {
                                 direction = "right";
@@ -101,7 +101,7 @@ void Guard::walkInY(double & incY){
         }
 
         setPositionY(getPositionY()+incY);
-        if(CollisionManager::instance.verifyCollisionWithWalls(this)) {
+        if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
             if (!wayActive) {
                     if(direction == "down") {
                             direction = "up";
