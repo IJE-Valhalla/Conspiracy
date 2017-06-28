@@ -5,91 +5,111 @@ using namespace engine;
 
 CollisionManager CollisionManager::instance;
 
-    void CollisionManager::addWall(GameObject* g){
+void CollisionManager::addWall(GameObject* g){
         wallList.push_back(g);
-    }
+}
 
-    void CollisionManager::addEnemy(GameObject* g){
+void CollisionManager::addEnemy(GameObject* g){
         enemyList.push_back(g);
-    }
+}
 
-    void CollisionManager::addPaper(GameObject* g){
+void CollisionManager::addPaper(GameObject* g){
         paperList.push_back(g);
-    }
+}
 
-    void CollisionManager::addDoor(GameObject* g){
+void CollisionManager::addDoor(GameObject* g){
         doorList.push_back(g);
-    }
+}
 
-    void CollisionManager::addSwitch(GameObject* g){
+void CollisionManager::addSwitch(GameObject* g){
         switchList.push_back(g);
-    }
+}
 
-    void CollisionManager::addTable(GameObject* g){
-        tableList.push_back(g);
-    }
+void CollisionManager::addChair(GameObject* g){
+        chairList.push_back(g);
+}
 
-    bool CollisionManager::verifyCollisionWithWalls(GameObject* g1){
+bool CollisionManager::verifyCollisionWithWalls(GameObject* g1){
         for(GameObject * wall : wallList) {
-            if(verifyCollision(wall, g1)){
-                return true;
-            }
+                if(verifyCollision(wall, g1)) {
+                        return true;
+                }
         }
-        for(GameObject* door: doorList){
-            if(door->isEnabled() && verifyCollision(door,g1)){
-                return true;
-            }
+        for(GameObject* door : doorList) {
+                if(door->isEnabled() && verifyCollision(door,g1)) {
+                        return true;
+                }
         }
         return false;
-    }
+}
 
-    std::string CollisionManager::verifyCollisionWithTables(GameObject* g1){
+bool CollisionManager::verifyCollisionWithWallsAndChairs(GameObject* g1){
+        for(GameObject * wall : wallList) {
+                if(verifyCollision(wall, g1)) {
+                        return true;
+                }
+        }
+        for(GameObject * chair : chairList) {
+                if(verifyCollision(chair, g1)) {
+                        return true;
+                }
+        }
+        for(GameObject* door : doorList) {
+                if(door->isEnabled() && verifyCollision(door,g1)) {
+                        return true;
+                }
+        }
+        return false;
+}
+
+std::pair<std::string, GameObject *> CollisionManager::verifyCollisionWithChairs(GameObject* g1){
         std::string collision = "";
-        for(GameObject * table : tableList) {
-            if((collision = verifyCollisionTable(table, g1))!="none"){
-                WARN(collision);
-            }
+        for(GameObject * chair : chairList) {
+                if((collision = verifyCollisionChair(chair, g1))!="none") {
+                        WARN(collision);
+                        return std::pair<std::string, GameObject*>(collision, chair);
+                }
         }
-        return "None";
-    }
+        return std::pair<std::string, GameObject*>(collision, NULL);
+}
 
-    bool CollisionManager::verifyCollisionWithEnemies(GameObject* g1){
+bool CollisionManager::verifyCollisionWithEnemies(GameObject* g1){
         for(GameObject * enemy : enemyList) {
-            if(verifyCollision(enemy, g1)){
-                return true;
-            }
+                if(verifyCollision(enemy, g1)) {
+                        return true;
+                }
         }
         return false;
-    }
+}
 
-    GameObject* CollisionManager::verifyCollisionWithSwitches(GameObject* g1){
+GameObject* CollisionManager::verifyCollisionWithSwitches(GameObject* g1){
         for(GameObject * doorSwitch : switchList) {
-            if(verifyCollision(doorSwitch, g1)){
-                return doorSwitch;
-            }
+                if(verifyCollision(doorSwitch, g1)) {
+                        return doorSwitch;
+                }
         }
         return NULL;
-    }
+}
 
-    GameObject* CollisionManager::verifyCollisionWithPapers(GameObject* g1){
+GameObject* CollisionManager::verifyCollisionWithPapers(GameObject* g1){
         for(GameObject * paper : paperList) {
-            if(verifyCollision(paper, g1)){
-                return paper;
-            }
+                if(verifyCollision(paper, g1)) {
+                        return paper;
+                }
         }
         return NULL;
-    }
+}
 
-    void CollisionManager::resetLists(){
+void CollisionManager::resetLists(){
         wallList.clear();
         enemyList.clear();
         paperList.clear();
         doorList.clear();
         switchList.clear();
-        tableList.clear();
-    }
+        chairList.clear();
+}
 
-    bool CollisionManager::verifyCollision( GameObject* g1, GameObject* g2){
+bool CollisionManager::verifyCollision( GameObject* g1, GameObject* g2){
         //The sides of the rectangles
         int leftA, rightA, topA, bottomA;
         int leftB, rightB, topB, bottomB;
@@ -106,27 +126,27 @@ CollisionManager CollisionManager::instance;
         topB = g2->getPositionY();
         bottomB = topB + g2->getHeight();
 
-        if(g2->getWidth() == 0 || g2->getHeight() == 0){
-            return false;
+        if(g2->getWidth() == 0 || g2->getHeight() == 0) {
+                return false;
         }
-        if(g1->getWidth() == 0 || g1->getHeight() == 0){
-            return false;
+        if(g1->getWidth() == 0 || g1->getHeight() == 0) {
+                return false;
         }
 
 
         //If any of the sides from A are outside of B
-        if( bottomA <= topB ){ return false;}
-        if( topA >= bottomB ){ return false;}
-        if( rightA <= leftB ){ return false;}
-        if( leftA >= rightB ){ return false;}
+        if( bottomA <= topB ) { return false; }
+        if( topA >= bottomB ) { return false; }
+        if( rightA <= leftB ) { return false; }
+        if( leftA >= rightB ) { return false; }
         //If none of the sides from A are outside B
         return true;
-    }
-    bool CollisionManager::verifyRectangleCollisionWithLine(GameObject* g, std::pair<int, int> a, std::pair<int, int> b){
-        std::pair<std::pair<int, int>, std::pair<int, int>> topo;
-        std::pair<std::pair<int, int>, std::pair<int, int>> direita;
-        std::pair<std::pair<int, int>, std::pair<int, int>> esquerda;
-        std::pair<std::pair<int, int>, std::pair<int, int>> embaixo;
+}
+bool CollisionManager::verifyRectangleCollisionWithLine(GameObject* g, std::pair<int, int> a, std::pair<int, int> b){
+        std::pair<std::pair<int, int>, std::pair<int, int> > topo;
+        std::pair<std::pair<int, int>, std::pair<int, int> > direita;
+        std::pair<std::pair<int, int>, std::pair<int, int> > esquerda;
+        std::pair<std::pair<int, int>, std::pair<int, int> > embaixo;
 
         topo.first.first = g->getPositionX();
         topo.first.second = g->getPositionY();
@@ -148,24 +168,24 @@ CollisionManager CollisionManager::instance;
         embaixo.second.first = g->getPositionX()+g->getWidth();
         embaixo.second.second= g->getPositionY()+g->getHeight();
 
-        if(verifyLineCollisionWithLine(topo.first,topo.second,a,b)){return true;}
-        if(verifyLineCollisionWithLine(direita.first,direita.second,a,b)){return true;}
-        if(verifyLineCollisionWithLine(esquerda.first,esquerda.second,a,b)){return true;}
-        if(verifyLineCollisionWithLine(embaixo.first,embaixo.second,a,b)){return true;}
-        
+        if(verifyLineCollisionWithLine(topo.first,topo.second,a,b)) {return true; }
+        if(verifyLineCollisionWithLine(direita.first,direita.second,a,b)) {return true; }
+        if(verifyLineCollisionWithLine(esquerda.first,esquerda.second,a,b)) {return true; }
+        if(verifyLineCollisionWithLine(embaixo.first,embaixo.second,a,b)) {return true; }
+
         return false;
-    }
+}
 
-    bool CollisionManager::verifyLineCollisionWithLine(std::pair<int, int> a, std::pair<int, int> b, std::pair<int, int> c, std::pair<int, int> d){
+bool CollisionManager::verifyLineCollisionWithLine(std::pair<int, int> a, std::pair<int, int> b, std::pair<int, int> c, std::pair<int, int> d){
         return (CCW(a,b,c)*CCW(a,b,d)<0 && CCW(c,d,b)*CCW(c,d,a)<0);
-    }
+}
 
-    double CollisionManager::CCW(std::pair<int, int> a, std::pair<int, int> b, std::pair<int, int> c){
+double CollisionManager::CCW(std::pair<int, int> a, std::pair<int, int> b, std::pair<int, int> c){
         return (b.first-a.first)*(c.second-a.second) - (b.second-a.second)*(c.first-a.first);
-    }
+}
 
 
-    std::string CollisionManager::verifyCollisionTable(GameObject* g1, GameObject* g2){
+std::string CollisionManager::verifyCollisionChair(GameObject* g1, GameObject* g2){
         //The sides of the rectangles
         int leftA, rightA, topA, bottomA;
         int leftB, rightB, topB, bottomB;
@@ -182,11 +202,49 @@ CollisionManager CollisionManager::instance;
         topB = g2->getPositionY();
         bottomB = topB + g2->getHeight();
 
-        //If any of the sides from A are outside of B
-        if( bottomA > topB ){ return "top";}
-        if( topA < bottomB ){ return "bottom";}
-        if( rightA > leftB ){ return "right";}
-        if( leftA < rightB ){ return "left";}
-        //If none of the sides from A are outside B
+        if(g2->getWidth() == 0 || g2->getHeight() == 0) {
+                return "none";
+        }
+        if(g1->getWidth() == 0 || g1->getHeight() == 0) {
+                return "none";
+        }
+
+
+        if( (rightB + 3) >= leftA && rightA > (rightB + 3)) {
+                if( bottomB <= bottomA && bottomB >= topA ) {
+                        return "right";
+                }
+                if( topB <= bottomA && topB >= topA ) {
+                        return "right";
+                }
+        }
+
+        if( (leftB - 3) <= rightA && leftA < (leftB - 3)) {
+                if( bottomB <= bottomA && bottomB >= topA ) {
+                        return "left";
+                }
+                if( topB <= bottomA && topB >= topA ) {
+                        return "left";
+                }
+        }
+
+        if( (topB - 3) <= bottomA && (topB - 3) > topA) {
+                if( leftB >= leftA && leftB <= rightA ) {
+                        return "up";
+                }
+                if( rightB <= rightA && rightB >= leftA ) {
+                        return "up";
+                }
+        }
+
+        if( (bottomB + 3) >= topA && bottomA > (bottomB + 3)) {
+                if( leftB >= leftA && leftB <= rightA ) {
+                        return "down";
+                }
+                if( rightB <= rightA && rightB >= leftA ) {
+                        return "down";
+                }
+        }
+
         return "none";
-    }
+}
