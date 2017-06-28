@@ -4,6 +4,7 @@
 #include <vector>
 #include "engine.hpp"
 #include "game_object.hpp"
+#include "line.hpp"
 
 using namespace engine;
 

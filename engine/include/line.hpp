@@ -1,7 +1,8 @@
 #ifndef LINE_HPP
 #define LINE_HPP
 
-#include "engine.hpp"
+#include <utility>
+namespace engine{
 
 class Line{
 public:
@@ -14,4 +15,5 @@ private:
     std::pair<int,int> point2;
 };
 
+}
 #endif
