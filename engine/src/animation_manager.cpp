@@ -10,7 +10,7 @@ void AnimationManager::add_animation_quad(AnimationQuad* newQuad){
 void AnimationManager::add_collider(SDL_Rect* newQuad){
     colliderRects.push_back(newQuad);
 }
-void AnimationManager::addLine(std::pair<std::pair<int,int>,std::pair<int,int>> line){
+void AnimationManager::addLine(Line* line){
     lines.push_back(line);
 }
 void AnimationManager::addProgressBar(ProgressBar* newProgressBar){
@@ -52,7 +52,7 @@ void AnimationManager::draw_quads(){
 }
 void AnimationManager::drawLinesOfVision(){
     for(auto line: lines){
-        SDL_RenderDrawLine(WindowManager::getGameCanvas(), line.first.first, line.first.second, line.second.first, line.second.second);
+        SDL_RenderDrawLine(WindowManager::getGameCanvas(), line->getPoint1().first, line->getPoint1().second, line->getPoint2().first, line->getPoint2().second);
     }
 }
 void AnimationManager::draw_colliders(){

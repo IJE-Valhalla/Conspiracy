@@ -18,10 +18,16 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
         animator->addAction("idle_up",5,5);
         animator->addAction("idle_down",0,0);
 
+        int rangeOfVision = 200;
+        int angleOfVision = 80;
+
+        fieldOfVision = new FieldOfVision(positionX,positionY, rangeOfVision, angleOfVision);
+
         idleAnimationNumber = 0;
         wayActive = false;
         wayActual = 1;
         direction = initialDirection;
+        lastDirection = initialDirection;
 }
 
 Guard::~Guard(){
@@ -50,6 +56,7 @@ void Guard::update(double timeElapsed){
         specialAction();
         animator->update();
         exclamation->update();
+        fieldOfVision->updateCenter(incX,incY);
         selectLine();
 }
 
@@ -193,17 +200,9 @@ void Guard::draw(){
     if(wayActive){
         exclamation->draw(getPositionX(), getPositionY()-30);
     }
-    drawLinesOfVision();
+    fieldOfVision->draw();
 }
 
-void Guard::drawLinesOfVision(){
-    for(auto line:lines){
-        std::pair<std::pair<int,int>,std::pair<int,int>> aux;
-        aux.first = line->getPoint1();
-        aux.second = line->getPoint2();
-        AnimationManager::instance.addLine(aux);
-    }
-}
 void Guard::addWay(int key, std::pair<std::string, int> way){
         ways[key] = way;
 }
@@ -217,40 +216,16 @@ void Guard::verifyDistance(GameObject* alien){
 }
 
 void Guard::selectLine(){
-    lines.clear();
-    int range = 200;
-    int angleOfVision = 25;
-    //lines of vision
-    Line* middleLine, *middleUpperLine, *middleBottomLine, *upperLine, *bottomLine;
-
-    std::pair<int,int> center;
-    center.first = getPositionX() + (getWidth()/2);
-    center.second = getPositionY() + (getHeight()/2);
-
-    if(animator->getCurrentAction()=="up")
-        middleLine = new Line(center.first,center.second,center.first,center.second-range);
-    else if(animator->getCurrentAction() == "down")
-        middleLine = new Line(center.first,center.second,center.first,center.second+range);
-    else if(animator->getCurrentAction() == "right")
-        middleLine = new Line(center.first,center.second,center.first+range,center.second);
-    else
-        middleLine = new Line(center.first,center.second,center.first-range,center.second);
-
-    if(animator->getCurrentAction() == "up" or animator->getCurrentAction() == "down"){
-        middleUpperLine = new Line(center.first, center.second, middleLine->getPoint2().first- angleOfVision, middleLine->getPoint2().second);
-        upperLine = new Line(center.first, center.second, middleLine->getPoint2().first  - angleOfVision - angleOfVision, middleLine->getPoint2().second);
-        middleBottomLine = new Line(center.first, center.second, middleLine->getPoint2().first  + angleOfVision, middleLine->getPoint2().second);
-        bottomLine = new Line(center.first, center.second, middleLine->getPoint2().first  + angleOfVision  + angleOfVision, middleLine->getPoint2().second);
-    }else{
-        middleUpperLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second - angleOfVision);
-        upperLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second - angleOfVision - angleOfVision);
-        middleBottomLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second + angleOfVision);
-        bottomLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second + angleOfVision + angleOfVision);
+    if(lastDirection != direction){
+        lastDirection = direction;
+        if(direction == "right"){
+            fieldOfVision->setAngle(0);
+        }else if(direction == "up"){
+            fieldOfVision->setAngle(90);
+        }else if(direction == "left"){
+            fieldOfVision->setAngle(180);
+        }else if(direction == "down"){
+            fieldOfVision->setAngle(270);
+        }
     }
-
-    lines.push_back(middleLine);
-    lines.push_back(middleUpperLine);
-    lines.push_back(upperLine);
-    lines.push_back(middleBottomLine);
-    lines.push_back(bottomLine);
 }
