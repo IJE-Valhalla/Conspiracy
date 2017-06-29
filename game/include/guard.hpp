@@ -20,6 +20,7 @@ public:
     void setWayActive(bool isActive);
     void verifyDistance(GameObject* alien);
     Animation * getAnimation();
+    int getRange();
     FieldOfVision* getFieldOfVision();
     std::pair<std::pair<int,int>,std::pair<int,int>> getLine();
 private:
@@ -32,6 +33,7 @@ private:
     int idleAnimationNumber;
     int wayActual;
     bool wayActive;
+    int range;
     FieldOfVision* fieldOfVision;
     Animation* animator;
     Animation* exclamation;

@@ -15,6 +15,7 @@ namespace engine{
         void draw();
         void incrementAngle(double angleIncrement);
         void setAngle(double angle);
+        int getRange();
         std::vector<Line*> getLines();
     private:
         Line* centerLine;

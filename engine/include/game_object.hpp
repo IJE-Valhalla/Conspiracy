@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <utility>
 #include "sprite.hpp"
 
 namespace engine{
@@ -21,6 +22,7 @@ namespace engine{
         double getPositionY();
         int getWidth();
         int getHeight();
+        std::pair<double,double> getCenter();
         bool isEnabled();
 
         void setName(std::string newName);

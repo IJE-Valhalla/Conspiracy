@@ -65,7 +65,13 @@ CollisionManager CollisionManager::instance;
             for(Line* line: field->getLines()){
                 AnimationManager::instance.addLine(line);
                 if(verifyRectangleCollisionWithLine(g1,line->getPoint1(),line->getPoint2())){
-                    return true;
+                    std::pair<double,double> center = g1->getCenter();
+                    int distanceBetweenCenterOfVision = sqrt(((center.first-line->getPoint1().first)*(center.first-line->getPoint1().first))+((center.second-line->getPoint1().second)*(center.second-line->getPoint1().second)));
+                    WARN(distanceBetweenCenterOfVision);
+                    WARN(field->getRange()*0.9);
+                    if(distanceBetweenCenterOfVision < field->getRange()*0.9){
+                        return true;
+                    }
                 }
             }
         }

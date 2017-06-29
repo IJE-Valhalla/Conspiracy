@@ -83,3 +83,7 @@ std::vector<Line*> FieldOfVision::getLines(){
     }
     return linesReturn;
 }
+
+int FieldOfVision::getRange(){
+    return range;
+}

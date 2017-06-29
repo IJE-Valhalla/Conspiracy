@@ -18,10 +18,10 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
         animator->addAction("idle_up",5,5);
         animator->addAction("idle_down",0,0);
 
-        int rangeOfVision = 150;
+        range = 150;
         int angleOfVision = 60;
 
-        fieldOfVision = new FieldOfVision(positionX+width/2,positionY, rangeOfVision, angleOfVision);
+        fieldOfVision = new FieldOfVision(positionX+width/2,positionY, range, angleOfVision);
 
         idleAnimationNumber = 0;
         wayActive = false;
@@ -230,7 +230,9 @@ void Guard::selectLine(){
         }
     }
 }
-
+int Guard::getRange(){
+    return range;
+}
 FieldOfVision* Guard::getFieldOfVision(){
     return fieldOfVision;
 }
