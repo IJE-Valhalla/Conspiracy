@@ -4,7 +4,9 @@
 using namespace engine;
 
 CollisionManager CollisionManager::instance;
-
+    void CollisionManager::addFieldOfVision(FieldOfVision* f){
+        fieldsOfVision.push_back(f);
+    }
     void CollisionManager::addWall(GameObject* g){
         wallList.push_back(g);
     }
@@ -59,6 +61,14 @@ CollisionManager CollisionManager::instance;
                 return true;
             }
         }
+        for(FieldOfVision* field: fieldsOfVision){
+            for(Line* line: field->getLines()){
+                AnimationManager::instance.addLine(line);
+                if(verifyRectangleCollisionWithLine(g1,line->getPoint1(),line->getPoint2())){
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -87,6 +97,7 @@ CollisionManager CollisionManager::instance;
         doorList.clear();
         switchList.clear();
         tableList.clear();
+        fieldsOfVision.clear();
     }
 
     bool CollisionManager::verifyCollision( GameObject* g1, GameObject* g2){
@@ -152,7 +163,7 @@ CollisionManager CollisionManager::instance;
         if(verifyLineCollisionWithLine(direita.first,direita.second,a,b)){return true;}
         if(verifyLineCollisionWithLine(esquerda.first,esquerda.second,a,b)){return true;}
         if(verifyLineCollisionWithLine(embaixo.first,embaixo.second,a,b)){return true;}
-        
+
         return false;
     }
 

@@ -5,6 +5,7 @@
 #include "engine.hpp"
 #include "game_object.hpp"
 #include "line.hpp"
+#include "field_of_vision.hpp"
 
 using namespace engine;
 
@@ -21,6 +22,7 @@ public:
     void addEnemy(GameObject* g);
     void addPaper(GameObject* g);
     void addDoor(GameObject* g);
+    void addFieldOfVision(FieldOfVision* f);
     void addSwitch(GameObject* g);
     void addTable(GameObject* g);
     void resetLists();
@@ -32,6 +34,7 @@ private:
     std::vector<GameObject*> wallList;
     std::vector<GameObject*> enemyList;
     std::vector<GameObject*> paperList;
+    std::vector<FieldOfVision*> fieldsOfVision;
     std::vector<GameObject*> doorList;
     std::vector<GameObject*> switchList;
     std::vector<GameObject*> tableList;

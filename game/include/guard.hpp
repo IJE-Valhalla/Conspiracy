@@ -20,6 +20,7 @@ public:
     void setWayActive(bool isActive);
     void verifyDistance(GameObject* alien);
     Animation * getAnimation();
+    FieldOfVision* getFieldOfVision();
     std::pair<std::pair<int,int>,std::pair<int,int>> getLine();
 private:
     void walkInX(double & incX);

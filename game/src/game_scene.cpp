@@ -94,6 +94,7 @@ void GameScene::initializeColliders(){
             CollisionManager::instance.addWall(gameObject);
         }else if(typeid(*gameObject) == typeid(Guard)){
             CollisionManager::instance.addEnemy(gameObject);
+            CollisionManager::instance.addFieldOfVision(((Guard*)gameObject)->getFieldOfVision());
         }else if(typeid(*gameObject) == typeid(PaperTable)){
             CollisionManager::instance.addPaper(((PaperTable*)(gameObject))->getPaper());
             CollisionManager::instance.addWall(((PaperTable*)(gameObject))->getTable());

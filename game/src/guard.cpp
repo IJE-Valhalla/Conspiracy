@@ -230,3 +230,7 @@ void Guard::selectLine(){
         }
     }
 }
+
+FieldOfVision* Guard::getFieldOfVision(){
+    return fieldOfVision;
+}
