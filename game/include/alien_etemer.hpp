@@ -13,6 +13,8 @@ public:
 protected:
     void specialAction();
     void moveChair();
+    void walkInX(double & incX);
+    void walkInY(double & incY, double );
 };
 
 #endif

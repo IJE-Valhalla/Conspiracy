@@ -66,7 +66,6 @@ std::pair<std::string, GameObject *> CollisionManager::verifyCollisionWithChairs
         std::string collision = "";
         for(GameObject * chair : chairList) {
                 if((collision = verifyCollisionChair(chair, g1))!="none") {
-                        WARN(collision);
                         return std::pair<std::string, GameObject*>(collision, chair);
                 }
         }
@@ -132,7 +131,6 @@ bool CollisionManager::verifyCollision( GameObject* g1, GameObject* g2){
         if(g1->getWidth() == 0 || g1->getHeight() == 0) {
                 return false;
         }
-
 
         //If any of the sides from A are outside of B
         if( bottomA <= topB ) { return false; }
@@ -209,39 +207,38 @@ std::string CollisionManager::verifyCollisionChair(GameObject* g1, GameObject* g
                 return "none";
         }
 
-
-        if( (rightB + 3) >= leftA && rightA > (rightB + 3)) {
-                if( bottomB <= bottomA && bottomB >= topA ) {
+        if(rightB > (leftA - 3) && rightA > (rightB)) {
+                if((bottomB < (bottomA) && bottomB > (topA)) || (topB < bottomA && topB > topA)) {
                         return "right";
                 }
-                if( topB <= bottomA && topB >= topA ) {
+                if((bottomA < bottomB && bottomA > topB) || (topA < bottomB && topA > topB)) {
                         return "right";
                 }
         }
 
-        if( (leftB - 3) <= rightA && leftA < (leftB - 3)) {
-                if( bottomB <= bottomA && bottomB >= topA ) {
+        if(leftB < (rightA + 3) && leftA < (leftB)) {
+                if((bottomB < bottomA && bottomB > topA) ||(topB < bottomA && topB > topA)) {
                         return "left";
                 }
-                if( topB <= bottomA && topB >= topA ) {
+                if((bottomA < bottomB && bottomA > topB) || (topA < bottomB && topA > topB)) {
                         return "left";
                 }
         }
 
-        if( (topB - 3) <= bottomA && (topB - 3) > topA) {
-                if( leftB >= leftA && leftB <= rightA ) {
+        if(topB <= (bottomA + 3) && (topB) > topA) {
+                if((leftB >= leftA && leftB <= rightA) || (rightB <= rightA && rightB >= leftA)) {
                         return "up";
                 }
-                if( rightB <= rightA && rightB >= leftA ) {
+                if((leftA >= leftB && leftA <= rightB) || (rightA <= rightB && rightA >= leftB)) {
                         return "up";
                 }
         }
 
-        if( (bottomB + 3) >= topA && bottomA > (bottomB + 3)) {
-                if( leftB >= leftA && leftB <= rightA ) {
+        if(bottomB >= (topA - 3) && bottomA > (bottomB)) {
+                if((leftB >= leftA && leftB <= rightA) || (rightB <= rightA && rightB >= leftA)) {
                         return "down";
                 }
-                if( rightB <= rightA && rightB >= leftA ) {
+                if((leftA >= leftB && leftA <= rightB) || (rightA <= rightB && rightA >= leftB)) {
                         return "down";
                 }
         }

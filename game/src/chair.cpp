@@ -25,6 +25,8 @@ void Chair::update(double timeElapsed){
         if(isMoving) {
                 moveInX(incX);
                 moveInY(incY);
+        }else{
+          animator->setInterval("idle");
         }
 
         animator->update();
@@ -32,7 +34,7 @@ void Chair::update(double timeElapsed){
 }
 
 void Chair::draw(){
-        animator->draw(getPositionX(), getPositionY()-7);
+        animator->draw(getPositionX(), getPositionY()-15);
         animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
 }
 
@@ -50,7 +52,7 @@ void Chair::moveInX(double incX){
                 incX = 0;
         }
         setPositionX(getPositionX()+incX);
-        if(CollisionManager::instance.verifyCollisionWithWalls(this)) {
+        if(CollisionManager::instance.verifyCollisionWithWalls(this) || CollisionManager::instance.verifyCollisionWithEnemies(this)) {
                 setPositionX(getPositionX()+(incX*(0-1)));
         }
 
@@ -70,7 +72,7 @@ void Chair::moveInY(double incY){
                 incY = 0;
         }
         setPositionY(getPositionY()+incY);
-        if(CollisionManager::instance.verifyCollisionWithWalls(this)) {
+        if(CollisionManager::instance.verifyCollisionWithWalls(this) || CollisionManager::instance.verifyCollisionWithEnemies(this)) {
                 setPositionY(getPositionY()+(incY*(0-1)));
         }
 
