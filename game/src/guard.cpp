@@ -18,10 +18,10 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
         animator->addAction("idle_up",5,5);
         animator->addAction("idle_down",0,0);
 
-        int rangeOfVision = 200;
-        int angleOfVision = 80;
+        int rangeOfVision = 150;
+        int angleOfVision = 60;
 
-        fieldOfVision = new FieldOfVision(positionX,positionY, rangeOfVision, angleOfVision);
+        fieldOfVision = new FieldOfVision(positionX+width/2,positionY, rangeOfVision, angleOfVision);
 
         idleAnimationNumber = 0;
         wayActive = false;
@@ -34,8 +34,8 @@ Guard::~Guard(){
 }
 
 void Guard::update(double timeElapsed){
-        auto incY = 0.1*timeElapsed;
-        auto incX = 0.1*timeElapsed;
+        auto incY = 0.05*timeElapsed;
+        auto incX = 0.05*timeElapsed;
         // To Do: Use Time Elapsed in angleOfVision.
         if(wayActive){
             incY = 0.2*timeElapsed;
@@ -216,15 +216,16 @@ void Guard::verifyDistance(GameObject* alien){
 }
 
 void Guard::selectLine(){
-    if(lastDirection != direction){
-        lastDirection = direction;
-        if(direction == "right"){
+    std::string action = animator->getCurrentAction();
+    if(lastDirection != action){
+        lastDirection = action;
+        if(action == "right"){
             fieldOfVision->setAngle(0);
-        }else if(direction == "up"){
+        }else if(action == "up"){
             fieldOfVision->setAngle(90);
-        }else if(direction == "left"){
+        }else if(action == "left"){
             fieldOfVision->setAngle(180);
-        }else if(direction == "down"){
+        }else if(action == "down"){
             fieldOfVision->setAngle(270);
         }
     }

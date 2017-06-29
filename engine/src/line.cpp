@@ -50,26 +50,37 @@ void Line::setPoint2(double x, double y){
 }
 
 void Line::rotateLine(double p_angle){
+    if(angle > 360){
+        angle -= 360;
+    }
     double newAngle = p_angle;
 
     //Centralizar na origem
     point2.first -= point1.first;
-    point2.second -= point1.first;
+    point2.second -= point1.second;
 
     //transformar em radianos
-    p_angle = p_angle*PI/180;
+    p_angle = ((-p_angle)*PI)/180.0;
+
+    double c = cos(p_angle);
+    double s = sin(p_angle);
 
     //rotacionar o ponto
     std::pair<double,double> aux;
-    aux.first = point2.first*cos(p_angle) - point2.second*sin(p_angle);
-    aux.second = point2.first*sin(p_angle) - point2.second*cos(p_angle);
+    aux.first = point2.first*c - point2.second*s;
+    aux.second = point2.first*s + point2.second*c;
 
     //Salvar o ponto rotacionado
     point2 = aux;
 
     //Retornar ao local anterior
     point2.first += point1.first;
-    point2.second += point1.first;
+    point2.second += point1.second;
 
     angle += newAngle;
+}
+
+void Line::changeAngleTo(double p_angle){
+    rotateLine(-angle);
+    rotateLine(p_angle);
 }

@@ -20,6 +20,7 @@ public:
     void setPoint2(double x, double y);
     double getAngle();
     void rotateLine(double angle);
+    void changeAngleTo(double angle);
 private:
     std::pair<double,double> point1;
     std::pair<double,double> point2;

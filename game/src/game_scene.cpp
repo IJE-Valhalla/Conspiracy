@@ -16,10 +16,11 @@
 #include <typeinfo>
 #include <iostream>
 
+#include "line.hpp"
+
 using namespace engine;
 
 GameScene::GameScene(int id) : Scene(id){
-
 }
 
 GameScene::~GameScene(){}

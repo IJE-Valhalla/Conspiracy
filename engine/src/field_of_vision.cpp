@@ -7,7 +7,7 @@ FieldOfVision::FieldOfVision(double x, double y, int size, double angle){
     totalAngle = angle;
 
     //not including centerLine
-    numberOfLines = 4;
+    numberOfLines = 28;
     createLines(x,y,range);
 }
 
@@ -24,7 +24,7 @@ void FieldOfVision::createLines(double x, double y, int size){
     centerLine = new Line(x,y,size, 0);
 
     int angleInc = (totalAngle/2)/(numberOfLines/2);
-    for(int i = 0, lineAngle = totalAngle/2; i<numberOfLines/2; i++, lineAngle -= angleInc){
+    for(int i = 0, lineAngle = angleInc; i<numberOfLines/2; i++, lineAngle += angleInc){
         Line* newUpperLine = new Line(centerLine);
         newUpperLine->rotateLine(lineAngle);
         lines.push_back(newUpperLine);
@@ -57,12 +57,22 @@ void FieldOfVision::incrementAngle(double angle){
 }
 
 void FieldOfVision::setAngle(double angle){
-    int x = centerLine->getPoint1().first;
-    int y = centerLine->getPoint1().second;
-    int oldRange = range;
-    resetLines();
-    createLines(x,y,oldRange);
-    incrementAngle(angle);
+    centerLine->changeAngleTo(angle);
+    int angleInc = (totalAngle/2)/(numberOfLines/2);
+
+    int lineAngle = angle;
+    int i = 0;
+    bool inverteu = false;
+    for(auto line:lines){
+        if(i >= numberOfLines/2 && !inverteu){
+            lineAngle = angle;
+            angleInc *= (-1);
+            inverteu = true;
+        }
+        lineAngle -= angleInc;
+        line->changeAngleTo(lineAngle);
+        i++;
+    }
 }
 
 std::vector<Line*> FieldOfVision::getLines(){
