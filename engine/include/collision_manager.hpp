@@ -37,6 +37,7 @@ private:
     std::vector<FieldOfVision*> fieldsOfVision;
     std::vector<GameObject*> doorList;
     std::vector<GameObject*> switchList;
+    double calculateDistance(std::pair<double,double> center,std::pair<double,double> lineCenter);
     std::vector<GameObject*> tableList;
 };
 

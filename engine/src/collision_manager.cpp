@@ -66,18 +66,17 @@ CollisionManager CollisionManager::instance;
             for(Line* line: field->getLines()){
                 AnimationManager::instance.addLine(line);
                 if(verifyRectangleCollisionWithLine(g1,line->getPoint1(),line->getPoint2())){
-                    //Margin between player and line
                     std::pair<double,double> playerCenter = g1->getCenter();
-                    int distanceBetweenPlayer = sqrt(((playerCenter.first-line->getPoint1().first)*
-                                                      (playerCenter.first-line->getPoint1().first))+
-                                                     ((playerCenter.second-line->getPoint1().second)*
-                                                      (playerCenter.second-line->getPoint1().second)));
+                    int distanceBetweenPlayer = calculateDistance(playerCenter,line->getPoint1());
+                    // Margin between player and line
+                    // Or else just touching a line would make you lose
                     if(distanceBetweenPlayer < field->getRange()*0.85){
                         for(auto wall:wallList){
                             if(verifyRectangleCollisionWithLine(wall,line->getPoint1(),line->getPoint2())){
                                 std::pair<double,double> wallCenter = wall->getCenter();
-                                int distanceBetweenWall = sqrt(((wallCenter.first-line->getPoint1().first)*(wallCenter.first-line->getPoint1().first))+((wallCenter.second-line->getPoint1().second)*(wallCenter.second-line->getPoint1().second)));
-                                if(distanceBetweenWall<distanceBetweenPlayer){
+                                int distanceBetweenWall = calculateDistance(wallCenter,line->getPoint1());
+                                //Wall in front of player
+                                if(distanceBetweenWall < distanceBetweenPlayer){
                                     isVisible = false;
                                 }
                             }
@@ -109,7 +108,12 @@ CollisionManager CollisionManager::instance;
         }
         return NULL;
     }
-
+    double CollisionManager::calculateDistance(std::pair<double,double> center, std::pair<double,double> lineCenter){
+        return sqrt(((center.first-lineCenter.first)*
+                     (center.first-lineCenter.first))+
+                    ((center.second-lineCenter.second)*
+                     (center.second-lineCenter.second)));
+    }
     void CollisionManager::resetLists(){
         wallList.clear();
         enemyList.clear();
