@@ -61,16 +61,30 @@ CollisionManager CollisionManager::instance;
                 return true;
             }
         }
+        bool isVisible = true;
         for(FieldOfVision* field: fieldsOfVision){
             for(Line* line: field->getLines()){
                 AnimationManager::instance.addLine(line);
                 if(verifyRectangleCollisionWithLine(g1,line->getPoint1(),line->getPoint2())){
-                    std::pair<double,double> center = g1->getCenter();
-                    int distanceBetweenCenterOfVision = sqrt(((center.first-line->getPoint1().first)*(center.first-line->getPoint1().first))+((center.second-line->getPoint1().second)*(center.second-line->getPoint1().second)));
-                    WARN(distanceBetweenCenterOfVision);
-                    WARN(field->getRange()*0.9);
-                    if(distanceBetweenCenterOfVision < field->getRange()*0.9){
-                        return true;
+                    //Margin between player and line
+                    std::pair<double,double> playerCenter = g1->getCenter();
+                    int distanceBetweenPlayer = sqrt(((playerCenter.first-line->getPoint1().first)*
+                                                      (playerCenter.first-line->getPoint1().first))+
+                                                     ((playerCenter.second-line->getPoint1().second)*
+                                                      (playerCenter.second-line->getPoint1().second)));
+                    if(distanceBetweenPlayer < field->getRange()*0.85){
+                        for(auto wall:wallList){
+                            if(verifyRectangleCollisionWithLine(wall,line->getPoint1(),line->getPoint2())){
+                                std::pair<double,double> wallCenter = wall->getCenter();
+                                int distanceBetweenWall = sqrt(((wallCenter.first-line->getPoint1().first)*(wallCenter.first-line->getPoint1().first))+((wallCenter.second-line->getPoint1().second)*(wallCenter.second-line->getPoint1().second)));
+                                if(distanceBetweenWall<distanceBetweenPlayer){
+                                    isVisible = false;
+                                }
+                            }
+                        }
+                        if(isVisible){
+                            return true;
+                        }
                     }
                 }
             }
