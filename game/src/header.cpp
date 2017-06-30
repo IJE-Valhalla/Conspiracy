@@ -1,7 +1,7 @@
 #include "header.hpp"
 #include "log.h"
 
-SelectAlien::SelectAlien(std::string objectName, double positionX, double positionY,
+Header::Header(std::string objectName, double positionX, double positionY,
                          int width, int height) : GameObject(objectName,
                                                              positionX,
                                                              positionY,
@@ -16,19 +16,19 @@ SelectAlien::SelectAlien(std::string objectName, double positionX, double positi
         alienSelect = 1;
 }
 
-SelectAlien::~SelectAlien(){
+Header::~Header(){
 }
-void SelectAlien::update(double timeElapsed){
+void Header::update(double timeElapsed){
         timeElapsed = timeElapsed;
         verifySelect();
         animator->update();
 }
 
-void SelectAlien::draw(){
+void Header::draw(){
         animator->draw(getPositionX(), getPositionY());
 }
 
-void SelectAlien::verifySelect(){
+void Header::verifySelect(){
         switch(alienSelect) {
         case 0:
                 animator->setInterval("none");
@@ -48,6 +48,6 @@ void SelectAlien::verifySelect(){
         }
 }
 
-void SelectAlien::setAlienSelect(int select){
+void Header::setAlienSelect(int select){
         alienSelect = select;
 }
