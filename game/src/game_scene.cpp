@@ -122,7 +122,7 @@ void GameScene::createAliens(){
 
 void GameScene::createGuards(){
         std::pair <std::string, int> wayOne ("right", 480);
-        std::pair <std::string, int> wayTwo ("up", 20);
+        std::pair <std::string, int> wayTwo ("up", 40);
         std::pair <std::string, int> wayThree ("left", 220);
         std::pair <std::string, int> wayFour ("down", 120);
 

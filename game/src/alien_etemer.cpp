@@ -60,8 +60,12 @@ void Etemer::draw(){
 void Etemer::moveChair(){
         std::pair<std::string, GameObject *> chair = CollisionManager::instance.verifyCollisionWithChairs(this);
         if(chair.second != NULL) {
+              if(animator->getInterval().first == chair.first){
                 ((Chair *) (chair.second))->setMoving(true);
                 ((Chair *) (chair.second))->setDirection(chair.first);
+              }else{
+                ((Chair *) (chair.second))->setMoving(false);
+              }
         }
 }
 

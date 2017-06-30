@@ -37,9 +37,9 @@ void Guard::update(double timeElapsed){
         auto incY = 0.05*timeElapsed;
         auto incX = 0.05*timeElapsed;
         // To Do: Use Time Elapsed in angleOfVision.
-        if(wayActive){
-            incY = 0.2*timeElapsed;
-            incX = 0.2*timeElapsed;
+        if(wayActive) {
+                incY = 0.2*timeElapsed;
+                incX = 0.2*timeElapsed;
         }
 
         walkInX(incX);
@@ -86,6 +86,11 @@ void Guard::walkInX(double & incX){
                                 direction = "left";
                         }
                 }
+                search = ways.find(wayActual + 1);
+
+                if(search != ways.end() && wayActive) {
+                        wayActual++;
+                }
                 setPositionX(getPositionX()+(incX*(0-1)));
         }
 }
@@ -109,13 +114,18 @@ void Guard::walkInY(double & incY){
 
         setPositionY(getPositionY()+incY);
         if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
-            if (!wayActive) {
-                    if(direction == "down") {
-                            direction = "up";
-                    }else{
-                            direction = "down";
-                    }
-            }
+                if (!wayActive) {
+                        if(direction == "down") {
+                                direction = "up";
+                        }else{
+                                direction = "down";
+                        }
+                }
+                search = ways.find(wayActual + 1);
+
+                if(search != ways.end() && wayActive) {
+                        wayActual++;
+                }
                 setPositionY(getPositionY()+(incY*(0-1)));
         }
 }
@@ -195,12 +205,12 @@ void Guard::specialAction(){
 }
 
 void Guard::draw(){
-    animator->draw(getPositionX()-10, getPositionY()-10);
-    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
-    if(wayActive){
-        exclamation->draw(getPositionX(), getPositionY()-30);
-    }
-    fieldOfVision->draw();
+        animator->draw(getPositionX()-10, getPositionY()-10);
+        animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+        if(wayActive) {
+                exclamation->draw(getPositionX(), getPositionY()-30);
+        }
+        fieldOfVision->draw();
 }
 
 void Guard::addWay(int key, std::pair<std::string, int> way){
@@ -208,31 +218,31 @@ void Guard::addWay(int key, std::pair<std::string, int> way){
 }
 
 void Guard::verifyDistance(GameObject* alien){
-    double distance = sqrt((pow(getPositionX() - alien->getPositionX(), 2.0)) +  (pow(getPositionY() - alien->getPositionY(), 2.0)));
+        double distance = sqrt((pow(getPositionX() - alien->getPositionX(), 2.0)) +  (pow(getPositionY() - alien->getPositionY(), 2.0)));
 // TODO Definir quando irá iniciar o percurso especial do guarda
-    if(distance < 60){
-        wayActive = true;
-    }
+        if(distance < 60) {
+                wayActive = true;
+        }
 }
 
 void Guard::selectLine(){
-    std::string action = animator->getCurrentAction();
-    if(lastDirection != action){
-        lastDirection = action;
-        if(action == "right"){
-            fieldOfVision->setAngle(0);
-        }else if(action == "up"){
-            fieldOfVision->setAngle(90);
-        }else if(action == "left"){
-            fieldOfVision->setAngle(180);
-        }else if(action == "down"){
-            fieldOfVision->setAngle(270);
+        std::string action = animator->getCurrentAction();
+        if(lastDirection != action) {
+                lastDirection = action;
+                if(action == "right") {
+                        fieldOfVision->setAngle(0);
+                }else if(action == "up") {
+                        fieldOfVision->setAngle(90);
+                }else if(action == "left") {
+                        fieldOfVision->setAngle(180);
+                }else if(action == "down") {
+                        fieldOfVision->setAngle(270);
+                }
         }
-    }
 }
 int Guard::getRange(){
-    return range;
+        return range;
 }
 FieldOfVision* Guard::getFieldOfVision(){
-    return fieldOfVision;
+        return fieldOfVision;
 }
