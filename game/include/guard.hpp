@@ -6,7 +6,7 @@
 #include "animation.hpp"
 #include "enemy.hpp"
 #include "collision_manager.hpp"
-#include "line.hpp"
+#include "field_of_vision.hpp"
 
 using namespace engine;
 
@@ -20,6 +20,8 @@ public:
     void setWayActive(bool isActive);
     void verifyDistance(GameObject* alien);
     Animation * getAnimation();
+    int getRange();
+    FieldOfVision* getFieldOfVision();
     std::pair<std::pair<int,int>,std::pair<int,int>> getLine();
 private:
     void walkInX(double & incX);
@@ -27,15 +29,16 @@ private:
     void walkInXSpecial(double & incX);
     void walkInYSpecial(double & incY);
     void selectLine();
-    void drawLinesOfVision();
     void specialAction();
     int idleAnimationNumber;
     int wayActual;
     bool wayActive;
-    std::vector<Line*> lines;
+    int range;
+    FieldOfVision* fieldOfVision;
     Animation* animator;
     Animation* exclamation;
     std::string direction;
+    std::string lastDirection;
     std::unordered_map< int, std::pair<std::string, int>> ways;
     std::unordered_map< int, std::pair<std::string, int>>::iterator search;
 };

@@ -55,6 +55,13 @@ void GameObject::setPositionX(double newX){
     position.first = newX;
 }
 
+std::pair<double,double> GameObject::getCenter(){
+    std::pair<double,double> center;
+    center.first = (position.first + size.first/2);
+    center.second = (position.second + size.second/2);
+    return center;
+}
+
 void GameObject::setPositionY(double newY){
     position.second = newY;
 }

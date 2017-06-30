@@ -17,10 +17,11 @@
 #include <typeinfo>
 #include <iostream>
 
+#include "line.hpp"
+
 using namespace engine;
 
 GameScene::GameScene(int id) : Scene(id){
-
 }
 
 GameScene::~GameScene(){
@@ -91,11 +92,13 @@ void GameScene::unload(){
 }
 
 void GameScene::initializeColliders(){
+
         for(auto gameObject : gameObjectsList) {
                 if(typeid(*gameObject) == typeid(Wall)) {
                         CollisionManager::instance.addWall(gameObject);
                 }else if(typeid(*gameObject) == typeid(Guard)) {
                         CollisionManager::instance.addEnemy(gameObject);
+                        CollisionManager::instance.addFieldOfVision(((Guard*)gameObject)->getFieldOfVision());
                 }else if(typeid(*gameObject) == typeid(PaperTable)) {
                         CollisionManager::instance.addPaper(((PaperTable*)(gameObject))->getPaper());
                         CollisionManager::instance.addWall(((PaperTable*)(gameObject))->getTable());

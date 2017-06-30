@@ -5,6 +5,9 @@ using namespace engine;
 
 CollisionManager CollisionManager::instance;
 
+void CollisionManager::addFieldOfVision(FieldOfVision* f){
+        fieldsOfVision.push_back(f);
+}
 void CollisionManager::addWall(GameObject* g){
         wallList.push_back(g);
 }
@@ -78,6 +81,33 @@ bool CollisionManager::verifyCollisionWithEnemies(GameObject* g1){
                         return true;
                 }
         }
+        bool isVisible = true;
+        for(FieldOfVision* field : fieldsOfVision) {
+                for(Line* line : field->getLines()) {
+                        AnimationManager::instance.addLine(line);
+                        if(verifyRectangleCollisionWithLine(g1,line->getPoint1(),line->getPoint2())) {
+                                std::pair<double,double> playerCenter = g1->getCenter();
+                                int distanceBetweenPlayer = calculateDistance(playerCenter,line->getPoint1());
+                                // Margin between player and line
+                                // Or else just touching a line would make you lose
+                                if(distanceBetweenPlayer < field->getRange()*0.85) {
+                                        for(auto wall : wallList) {
+                                                if(verifyRectangleCollisionWithLine(wall,line->getPoint1(),line->getPoint2())) {
+                                                        std::pair<double,double> wallCenter = wall->getCenter();
+                                                        int distanceBetweenWall = calculateDistance(wallCenter,line->getPoint1());
+                                                        //Wall in front of player
+                                                        if(distanceBetweenWall < distanceBetweenPlayer) {
+                                                                isVisible = false;
+                                                        }
+                                                }
+                                        }
+                                        if(isVisible) {
+                                                return true;
+                                        }
+                                }
+                        }
+                }
+        }
         return false;
 }
 
@@ -99,6 +129,13 @@ GameObject* CollisionManager::verifyCollisionWithPapers(GameObject* g1){
         return NULL;
 }
 
+
+double CollisionManager::calculateDistance(std::pair<double,double> center, std::pair<double,double> lineCenter){
+        return sqrt(((center.first-lineCenter.first)*
+                     (center.first-lineCenter.first))+
+                    ((center.second-lineCenter.second)*
+                     (center.second-lineCenter.second)));
+}
 void CollisionManager::resetLists(){
         wallList.clear();
         enemyList.clear();
@@ -106,6 +143,7 @@ void CollisionManager::resetLists(){
         doorList.clear();
         switchList.clear();
         chairList.clear();
+        fieldsOfVision.clear();
 }
 
 bool CollisionManager::verifyCollision( GameObject* g1, GameObject* g2){
@@ -170,7 +208,6 @@ bool CollisionManager::verifyRectangleCollisionWithLine(GameObject* g, std::pair
         if(verifyLineCollisionWithLine(direita.first,direita.second,a,b)) {return true; }
         if(verifyLineCollisionWithLine(esquerda.first,esquerda.second,a,b)) {return true; }
         if(verifyLineCollisionWithLine(embaixo.first,embaixo.second,a,b)) {return true; }
-
         return false;
 }
 
