@@ -60,8 +60,8 @@ void Guard::update(double timeElapsed){
                 }
         }
 
-        if(talking){
-            talkingBar->update(timeElapsed);
+        if(talking) {
+                talkingBar->update(timeElapsed);
         }
 
         specialAction();
@@ -221,11 +221,11 @@ void Guard::draw(){
         if(wayActive) {
                 exclamation->draw(getPositionX(), getPositionY()-30);
         }
-        if(talking){
-            AnimationManager::instance.addProgressBar(talkingBar);
-            if(talkingBar->getPercent() <= 0.0){
-                notTalkingToETemer();
-            }
+        if(talking) {
+                AnimationManager::instance.addProgressBar(talkingBar);
+                if(talkingBar->getPercent() <= 0.0) {
+                        notTalkingToETemer();
+                }
         }
         fieldOfVision->draw();
 }
@@ -246,11 +246,11 @@ void Guard::selectLine(){
         std::string action = animator->getCurrentAction();
         if(lastDirection != action) {
                 lastDirection = action;
-                if(action == "right") {
+                if(action == "right" || action == "idle_right") {
                         fieldOfVision->setAngle(0);
                 }else if(action == "up") {
                         fieldOfVision->setAngle(90);
-                }else if(action == "left") {
+                }else if(action == "left" || action == "idle_left") {
                         fieldOfVision->setAngle(180);
                 }else if(action == "down") {
                         fieldOfVision->setAngle(270);
@@ -264,8 +264,13 @@ FieldOfVision* Guard::getFieldOfVision(){
         return fieldOfVision;
 }
 
-void Guard::talkingToETemer(){
+void Guard::talkingToETemer(std::string status){
         talking = true;
+        if(status == "right") {
+                idleAnimationNumber = 5;
+        }else{
+                idleAnimationNumber = 0;
+        }
         talkingBar->resetPercent();
         talkingBar->setPositionX(getPositionX() - 10);
         talkingBar->setPositionY(getPositionY() - 20);
@@ -275,5 +280,5 @@ void Guard::notTalkingToETemer(){
         talking = false;
 }
 double Guard::getTalkingBarPercent(){
-  return talkingBar->getPercent();
+        return talkingBar->getPercent();
 }

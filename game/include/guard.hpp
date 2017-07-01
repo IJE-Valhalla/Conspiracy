@@ -20,7 +20,7 @@ public:
     void addWay(int key, std::pair<std::string, int> way);
     void setWayActive(bool isActive);
     void verifyDistance(GameObject* alien);
-    void talkingToETemer();
+    void talkingToETemer(std::string status);
     void notTalkingToETemer();
     double getTalkingBarPercent();
     Animation * getAnimation();

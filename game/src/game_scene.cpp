@@ -61,6 +61,7 @@ void GameScene::verifyWinOrLose(){
         for(Guard * guard : guards) {
                 guard->verifyDistance(player->getVarginha());
                 guard->verifyDistance(player->getBilu());
+                ((Etemer *)(player->getEtemer()))->verifyDistance(guard);
         }
 
         if(player->isDead()) {
