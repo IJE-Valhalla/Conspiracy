@@ -10,8 +10,9 @@ public:
                                                      int width, int height);
     void update(double timeElapsed);
     void draw();
+    void verifyDistance(GameObject* guard);
 protected:
-    void specialAction();
+    void specialAction(GameObject* guard, double distance);
     void walkInX(double & incX);
     void walkInY(double & incY, double );
 

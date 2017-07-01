@@ -37,34 +37,37 @@ void Etemer::update(double timeElapsed){
                         animator->setInterval("idle_left");
                 }
         }
-        specialAction();
         moveChair();
 
         animator->update();
 }
-void Etemer::specialAction(){
-        GameObject * guard = CollisionManager::instance.verifyCollisionWithGuards(this);
-
+void Etemer::specialAction(GameObject * guard, double distance){
         if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE) && guard != NULL && isSelected) {
                 animator->setTotalTime(1.0);
-                if(!talking) {
+                //TODO Change distance.
+                if(!talking && distance < 60) {
                         talking = true;
                         blockMovement = true;
-                        ((Guard *)(guard))->talkingToETemer();
+                        if(((Guard *) (guard))->getPositionX() > getPositionX()) {
+                                ((Guard *)(guard))->talkingToETemer("left");
+                        }else{
+                                ((Guard *)(guard))->talkingToETemer("right");
+                        }
                 }
 
         }
 
         if(talking) {
-                if(idleAnimationNumber == 5) {
+                if(((Guard *) (guard))->getPositionX() > getPositionX()) {
                         animator->setInterval("special_right");
+                        idleAnimationNumber = 5;
                 }else{
                         animator->setInterval("special_left");
+                        idleAnimationNumber = 0;
                 }
                 if(((Guard *) (guard))->getTalkingBarPercent() <= 0.0) {
                         talking = false;
                         blockMovement = false;
-                        Alien::animator->setInterval("idle");
                 }
         }
 }
@@ -135,4 +138,9 @@ void Etemer::walkInY(double & incY, double incX){
         if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
                 setPositionY(getPositionY()+(incY*(0-1)));
         }
+}
+
+void Etemer::verifyDistance(GameObject* guard){
+        double distance = sqrt((pow(getPositionX() - guard->getPositionX(), 2.0)) +  (pow(getPositionY() - guard->getPositionY(), 2.0)));
+        specialAction(guard, distance);
 }
