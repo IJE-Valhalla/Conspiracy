@@ -1,14 +1,28 @@
 #include "door.hpp"
 
 Door::Door(std::string objectName, double positionX, double positionY,
-                                     int width, int height) : GameObject(objectName,
-                                                                         positionX,
-                                                                         positionY,
-                                                                         width, height){
-    animator = new Animation(objectName, 1, 4, 0.5);
+           int width, int height, std::string doorSide) : GameObject(objectName,
+                                                                     positionX,
+                                                                     positionY,
+                                                                     width,
+                                                                     height){
+
+    if(doorSide.compare("DOWN") == 0){
+        animator = new Animation(objectName, 1, 4, 0.5);
+        animator->addAction("closed", 0,0);
+        animator->addAction("open",1,3);
+    }else if(doorSide.compare("RIGHT") == 0){
+        animator = new Animation(objectName, 1, 8, 0.5);
+        animator->addAction("closed", 0,0);
+        animator->addAction("open",1,3);
+    }else if(doorSide.compare("LEFT") == 0){
+        animator = new Animation(objectName, 1, 8, 0.5);
+        animator->addAction("closed", 4,4);
+        animator->addAction("open",5,7);
+    }
+
     door_effect = new Audio("assets/sounds/DOOR.wav", "EFFECT", 128);
-    animator->addAction("closed", 0,0);
-    animator->addAction("open",1,3);
+
     animator->setDrawSize(width,height);
     open = false;
 }

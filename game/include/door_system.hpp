@@ -10,7 +10,7 @@ using namespace engine;
 
 class DoorSystem: public GameObject{
 public:
-    DoorSystem(std::pair<int,int> doorPosition, std::pair<int,int> switchPosition);
+    DoorSystem(std::pair<int,int> doorPosition, std::pair<int,int> switchPosition, std::string doorSide);
     ~DoorSystem();
     void update(double timeElapsed);
     void draw();
