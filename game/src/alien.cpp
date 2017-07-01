@@ -78,7 +78,7 @@ void Alien::walkInY(double & incY, double incX){
 }
 
 void Alien::specialAction(){
-    if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE)){
+    if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE && isSelected)){
         if(idleAnimationNumber == 5){
             animator->setInterval("special_right");
         }else{

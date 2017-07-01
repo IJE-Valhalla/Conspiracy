@@ -12,9 +12,12 @@ public:
     void draw();
 protected:
     void specialAction();
-    void moveChair();
     void walkInX(double & incX);
     void walkInY(double & incY, double );
+
+private:
+    bool talking;
+    void moveChair();
 };
 
 #endif

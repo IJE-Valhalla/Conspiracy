@@ -50,11 +50,9 @@ void Player::update(double timeElapsed){
                 }
         }
 
-        switch(selectedAlien) {
-        case 1: etemer->update(timeElapsed); break;
-        case 2: bilu->update(timeElapsed); break;
-        case 3: varginha->update(timeElapsed); break;
-        }
+        etemer->update(timeElapsed);
+        bilu->update(timeElapsed);
+        varginha->update(timeElapsed);
 
         header->update(timeElapsed);
 }

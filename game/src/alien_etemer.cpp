@@ -1,5 +1,6 @@
 #include "alien_etemer.hpp"
 #include "chair.hpp"
+#include "guard.hpp"
 
 Etemer::Etemer(std::string objectName, double positionX, double positionY,
                int width, int height) : Alien(objectName,
@@ -10,11 +11,17 @@ Etemer::Etemer(std::string objectName, double positionX, double positionY,
         animator->addAction("special_left",10,13);
 
         isSelected = false;
+        talking = false;
 }
 
 void Etemer::update(double timeElapsed){
         // To Do: Use Time Elapsed in inc.
-        animator->setTotalTime(0.3);
+        if (blockMovement) {
+                animator->setTotalTime(1.0);
+        }else{
+                animator->setTotalTime(0.3);
+        }
+
         auto incY = 0.15*timeElapsed;
         auto incX = 0.15*timeElapsed;
 
@@ -36,18 +43,29 @@ void Etemer::update(double timeElapsed){
         animator->update();
 }
 void Etemer::specialAction(){
-        std::pair<int, int> interval;
+        GameObject * guard = CollisionManager::instance.verifyCollisionWithGuards(this);
 
-        if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE)) {
-                blockMovement = true;
+        if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE) && guard != NULL && isSelected) {
+                animator->setTotalTime(1.0);
+                if(!talking) {
+                        talking = true;
+                        blockMovement = true;
+                        ((Guard *)(guard))->talkingToETemer();
+                }
+
+        }
+
+        if(talking) {
                 if(idleAnimationNumber == 5) {
                         animator->setInterval("special_right");
                 }else{
                         animator->setInterval("special_left");
                 }
-                animator->setTotalTime(1.5);
-        }else{
-                blockMovement = false;
+                if(((Guard *) (guard))->getTalkingBarPercent() <= 0.0) {
+                        talking = false;
+                        blockMovement = false;
+                        Alien::animator->setInterval("idle");
+                }
         }
 }
 
@@ -60,12 +78,12 @@ void Etemer::draw(){
 void Etemer::moveChair(){
         std::pair<std::string, GameObject *> chair = CollisionManager::instance.verifyCollisionWithChairs(this);
         if(chair.second != NULL) {
-              if(animator->getInterval().first == chair.first){
-                ((Chair *) (chair.second))->setMoving(true);
-                ((Chair *) (chair.second))->setDirection(chair.first);
-              }else{
-                ((Chair *) (chair.second))->setMoving(false);
-              }
+                if(animator->getInterval().first == chair.first) {
+                        ((Chair *) (chair.second))->setMoving(true);
+                        ((Chair *) (chair.second))->setDirection(chair.first);
+                }else{
+                        ((Chair *) (chair.second))->setMoving(false);
+                }
         }
 }
 

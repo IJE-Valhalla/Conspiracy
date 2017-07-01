@@ -11,7 +11,6 @@ Bilu::Bilu(std::string objectName, double positionX, double positionY,
         animator->addAction("special_right",14,17);
         animator->addAction("special_left",10,13);
 
-        isSelected = true;
         hacking = false;
         editing = false;
         lastAction = false;
@@ -50,7 +49,7 @@ void Bilu::specialAction(){
         GameObject* paper = CollisionManager::instance.verifyCollisionWithPapers(this);
         GameObject* doorSwitch = CollisionManager::instance.verifyCollisionWithSwitches(this);
 
-        if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE)) {
+        if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE) && isSelected) {
                 // Paper interaction
                 if(paper != NULL) {
                         if(!editing) {
@@ -68,7 +67,7 @@ void Bilu::specialAction(){
                         }
                 }
 
-        }else if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_ESC)) {
+        }else if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_ESC) && isSelected) {
                 if(hacking) {
                         hacking = false;
                         blockMovement = false;

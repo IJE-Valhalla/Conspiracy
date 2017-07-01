@@ -12,8 +12,8 @@ void CollisionManager::addWall(GameObject* g){
         wallList.push_back(g);
 }
 
-void CollisionManager::addEnemy(GameObject* g){
-        enemyList.push_back(g);
+void CollisionManager::addGuard(GameObject* g){
+        guardList.push_back(g);
 }
 
 void CollisionManager::addPaper(GameObject* g){
@@ -75,8 +75,18 @@ std::pair<std::string, GameObject *> CollisionManager::verifyCollisionWithChairs
         return std::pair<std::string, GameObject*>(collision, NULL);
 }
 
+GameObject* CollisionManager::verifyCollisionWithGuards(GameObject* g){
+        for(GameObject * enemy : guardList) {
+                if(verifyCollision(enemy, g)) {
+                        return enemy;
+                }
+        }
+        return NULL;
+}
+
+
 bool CollisionManager::verifyCollisionWithEnemies(GameObject* g1){
-        for(GameObject * enemy : enemyList) {
+        for(GameObject * enemy : guardList) {
                 if(verifyCollision(enemy, g1)) {
                         return true;
                 }
@@ -138,7 +148,7 @@ double CollisionManager::calculateDistance(std::pair<double,double> center, std:
 }
 void CollisionManager::resetLists(){
         wallList.clear();
-        enemyList.clear();
+        guardList.clear();
         paperList.clear();
         doorList.clear();
         switchList.clear();

@@ -22,9 +22,11 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
         int angleOfVision = 60;
 
         fieldOfVision = new FieldOfVision(positionX+width/2,positionY, range, angleOfVision);
+        talkingBar = new ProgressBar(positionX, positionY, 45, 5, 0.005);
 
         idleAnimationNumber = 0;
         wayActive = false;
+        talking = false;
         wayActual = 1;
         direction = initialDirection;
         lastDirection = initialDirection;
@@ -37,20 +39,29 @@ void Guard::update(double timeElapsed){
         auto incY = 0.05*timeElapsed;
         auto incX = 0.05*timeElapsed;
         // To Do: Use Time Elapsed in angleOfVision.
-        if(wayActive) {
-                incY = 0.2*timeElapsed;
-                incX = 0.2*timeElapsed;
+        if(talking) {
+                wayActive = false;
+                incX = 0.0;
+                incY = 0.0;
+        }else{
+                if(wayActive) {
+                        incY = 0.2*timeElapsed;
+                        incX = 0.2*timeElapsed;
+                }
+
+                walkInX(incX);
+                walkInY(incY);
         }
-
-        walkInX(incX);
-        walkInY(incY);
-
         if(incX == 0 && incY == 0) {
                 if(idleAnimationNumber) {
                         animator->setInterval("idle_right");
                 }else{
                         animator->setInterval("idle_left");
                 }
+        }
+
+        if(talking){
+            talkingBar->update(timeElapsed);
         }
 
         specialAction();
@@ -210,6 +221,12 @@ void Guard::draw(){
         if(wayActive) {
                 exclamation->draw(getPositionX(), getPositionY()-30);
         }
+        if(talking){
+            AnimationManager::instance.addProgressBar(talkingBar);
+            if(talkingBar->getPercent() <= 0.0){
+                notTalkingToETemer();
+            }
+        }
         fieldOfVision->draw();
 }
 
@@ -245,4 +262,18 @@ int Guard::getRange(){
 }
 FieldOfVision* Guard::getFieldOfVision(){
         return fieldOfVision;
+}
+
+void Guard::talkingToETemer(){
+        talking = true;
+        talkingBar->resetPercent();
+        talkingBar->setPositionX(getPositionX() - 10);
+        talkingBar->setPositionY(getPositionY() - 20);
+}
+
+void Guard::notTalkingToETemer(){
+        talking = false;
+}
+double Guard::getTalkingBarPercent(){
+  return talkingBar->getPercent();
 }
