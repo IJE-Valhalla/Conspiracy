@@ -9,6 +9,7 @@
 #include "stage_one.hpp"
 #include "stage_two.hpp"
 #include "stage_three.hpp"
+#include "stage_four.hpp"
 
 using namespace engine;
 
@@ -20,6 +21,7 @@ int main(int, char**){
     StageOne * stageOne = new StageOne(1, "assets/tiledMaps/Stage1.txt");
     StageTwo * stageTwo = new StageTwo(4, "assets/tiledMaps/Stage2.txt");
     StageThree * stageThree = new StageThree(5, "assets/tiledMaps/Stage3.txt");
+    StageFour * stageFour = new StageFour(6, "assets/tiledMaps/Stage4.txt");
     LoseScene* loseScene = new LoseScene(2);
     WinScene* winScene = new WinScene(3);
 
@@ -27,6 +29,7 @@ int main(int, char**){
     getSceneManager()->addScene(stageOne);
     getSceneManager()->addScene(stageTwo);
     getSceneManager()->addScene(stageThree);
+    getSceneManager()->addScene(stageFour);
     getSceneManager()->addScene(loseScene);
     getSceneManager()->addScene(winScene);
 

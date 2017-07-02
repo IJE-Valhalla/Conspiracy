@@ -77,6 +77,7 @@ void GameScene::load(){
     createGuards();
     createDoorSystems();
     createPapers();
+    createTables();
 
     initializeColliders();
 
@@ -86,6 +87,8 @@ void GameScene::unload(){
     CollisionManager::instance.resetLists();
     gameObjectsList.clear();
 }
+
+void GameScene::createTables(){}
 
 void GameScene::createGameBorders(){
     for(int i=0; i<=960; i+=5){

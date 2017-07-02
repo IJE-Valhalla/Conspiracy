@@ -32,6 +32,7 @@ protected:
     void createCenary();
     virtual void createDoorSystems() = 0;
     virtual void createPapers() = 0;
+    virtual void createTables();
     void createGameBorders();
     void createGround();
 };
