@@ -8,6 +8,7 @@
 #include "alien.hpp"
 #include "stage_one.hpp"
 #include "stage_two.hpp"
+#include "stage_three.hpp"
 
 using namespace engine;
 
@@ -18,12 +19,14 @@ int main(int, char**){
     //GameScene* gameScene = new GameScene(1);
     StageOne * stageOne = new StageOne(1, "assets/tiledMaps/Stage1.txt");
     StageTwo * stageTwo = new StageTwo(4, "assets/tiledMaps/Stage2.txt");
+    StageThree * stageThree = new StageThree(5, "assets/tiledMaps/Stage3.txt");
     LoseScene* loseScene = new LoseScene(2);
     WinScene* winScene = new WinScene(3);
 
     getSceneManager()->addScene(menuScene);
     getSceneManager()->addScene(stageOne);
     getSceneManager()->addScene(stageTwo);
+    getSceneManager()->addScene(stageThree);
     getSceneManager()->addScene(loseScene);
     getSceneManager()->addScene(winScene);
 
