@@ -61,9 +61,29 @@ void GameScene::verifyWinOrLose(){
     if(player->isDead()){
         getSceneManager()->loadScene(2);
     }else if(allPapersEdited){
-        getSceneManager()->loadScene(3);
+        getSceneManager()->loadNextScene();
+        //getSceneManager()->loadScene(3);
     }
 
+}
+
+void GameScene::initializeColliders(){
+    for(auto gameObject: gameObjectsList){
+        if(typeid(*gameObject) == typeid(Wall)){
+            CollisionManager::instance.addWall(gameObject);
+        }else if(typeid(*gameObject) == typeid(Guard)){
+            CollisionManager::instance.addEnemy(gameObject);
+        }else if(typeid(*gameObject) == typeid(PaperTable)){
+            CollisionManager::instance.addPaper(((PaperTable*)(gameObject))->getPaper());
+            CollisionManager::instance.addWall(((PaperTable*)(gameObject))->getTable());
+        }else if(typeid(*gameObject) == typeid(DoorSystem)){
+            CollisionManager::instance.addDoor(((DoorSystem*)(gameObject))->getDoor());
+            CollisionManager::instance.addSwitch(((DoorSystem*)(gameObject))->getSwitch());
+            CollisionManager::instance.addWall(((DoorSystem*)(gameObject))->getTable());
+        }else if(typeid(*gameObject) == typeid(Table)){
+            CollisionManager::instance.addWall(((Table*)(gameObject)));
+        }
+    }
 }
 
 void GameScene::load(){

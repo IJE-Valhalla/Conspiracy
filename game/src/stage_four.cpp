@@ -6,25 +6,6 @@ StageFour::StageFour(int id, std::string newTiledFile) : GameScene (id, newTiled
 
 }
 
-void StageFour::initializeColliders(){
-    for(auto gameObject: gameObjectsList){
-        if(typeid(*gameObject) == typeid(Wall)){
-            CollisionManager::instance.addWall(gameObject);
-        }else if(typeid(*gameObject) == typeid(Guard)){
-            CollisionManager::instance.addEnemy(gameObject);
-        }else if(typeid(*gameObject) == typeid(PaperTable)){
-            CollisionManager::instance.addPaper(((PaperTable*)(gameObject))->getPaper());
-            CollisionManager::instance.addWall(((PaperTable*)(gameObject))->getTable());
-        }else if(typeid(*gameObject) == typeid(DoorSystem)){
-            CollisionManager::instance.addDoor(((DoorSystem*)(gameObject))->getDoor());
-            CollisionManager::instance.addSwitch(((DoorSystem*)(gameObject))->getSwitch());
-            CollisionManager::instance.addWall(((DoorSystem*)(gameObject))->getTable());
-        }else if(typeid(*gameObject) == typeid(Table)){
-            CollisionManager::instance.addWall(((Table*)(gameObject)));
-        }
-    }
-}
-
 void StageFour::createGuards(){
     std::pair <std::string, int> wayOne ("right", 480);
     std::pair <std::string, int> wayTwo ("up", 20);

@@ -17,7 +17,6 @@ class StageFour: public GameScene{
 public:
     StageFour(int id, std::string newTiledFile);
 private:
-    void initializeColliders();
     void createGuards();
     void createAliens();
     void createDoorSystems();

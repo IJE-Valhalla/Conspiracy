@@ -26,7 +26,7 @@ public:
 protected:
     std::vector<GameObject*> gameObjectsList;
     std::string tiledFile;
-    virtual void initializeColliders() = 0;
+    void initializeColliders();
     virtual void createGuards() = 0;
     virtual void createAliens() = 0;
     void createCenary();

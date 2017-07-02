@@ -16,7 +16,6 @@ class StageTwo: public GameScene{
 public:
     StageTwo(int id, std::string newTiledFile);
 private:
-    void initializeColliders();
     void createGuards();
     void createAliens();
     void createDoorSystems();
