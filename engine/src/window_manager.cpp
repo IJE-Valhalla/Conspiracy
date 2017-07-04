@@ -25,7 +25,7 @@ bool WindowManager::createWindow(std::string windowTitle, std::pair<int, int> wi
         SDL_SetRenderDrawColor(gameCanvas, 100, 100, 100, 255);
         SDL_RenderClear(gameCanvas);
         SDL_RenderPresent(gameCanvas);
-
+        setImageIcon();
         return true;
     }
 
@@ -49,4 +49,18 @@ bool WindowManager::createWindow(std::string windowTitle, std::pair<int, int> wi
 
     SDL_Renderer* WindowManager::getGameCanvas(){
         return gameCanvas;
+    }
+
+    void WindowManager::setImageIcon(){
+      // TODO Change image icon.
+      SDL_Surface * image = NULL;
+      image = IMG_Load(std::string("assets/sprites/alien.png").c_str());
+
+      if(image == NULL){
+            exit(-1);
+      }
+
+      SDL_SetWindowIcon(gameWindow, image);
+      SDL_FreeSurface(image);
+
     }

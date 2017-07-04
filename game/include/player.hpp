@@ -8,6 +8,7 @@
 #include "input_manager.hpp"
 #include "audio.hpp"
 #include "engine.hpp"
+#include "header.hpp"
 
 using namespace engine;
 
@@ -25,6 +26,7 @@ public:
 private:
     Alien *bilu, *varginha, *etemer;
     Audio *varginha_sound_effect, *etemer_sound_effect, *bilu_sound_effect;
+    Header * header;
     int selectedAlien;
     void idleAnimation(Alien * alien);
     void waitAnimation(int beforeAlien);

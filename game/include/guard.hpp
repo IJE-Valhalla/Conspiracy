@@ -7,6 +7,7 @@
 #include "enemy.hpp"
 #include "collision_manager.hpp"
 #include "field_of_vision.hpp"
+#include "progress_bar.hpp"
 
 using namespace engine;
 
@@ -19,6 +20,9 @@ public:
     void addWay(int key, std::pair<std::string, int> way);
     void setWayActive(bool isActive);
     void verifyDistance(GameObject* alien);
+    void talkingToETemer(std::string status);
+    void notTalkingToETemer();
+    double getTalkingBarPercent();
     Animation * getAnimation();
     int getRange();
     FieldOfVision* getFieldOfVision();
@@ -33,10 +37,12 @@ private:
     int idleAnimationNumber;
     int wayActual;
     bool wayActive;
+    bool talking;
     int range;
     FieldOfVision* fieldOfVision;
     Animation* animator;
     Animation* exclamation;
+    ProgressBar * talkingBar;
     std::string direction;
     std::string lastDirection;
     std::unordered_map< int, std::pair<std::string, int>> ways;

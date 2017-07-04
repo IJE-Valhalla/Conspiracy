@@ -43,10 +43,6 @@ void FieldOfVision::updateCenter(double incX, double incY){
 
 void FieldOfVision::draw(){
     AnimationManager::instance.addLine(centerLine);
-
-    for(Line* line : lines){
-    //    AnimationManager::instance.addLine(line);
-    }
 }
 
 void FieldOfVision::incrementAngle(double angle){

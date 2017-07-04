@@ -47,7 +47,7 @@ void Alien::walkInX(double & incX){
         incX = 0;
     }
     setPositionX(getPositionX()+incX);
-    if(CollisionManager::instance.verifyCollisionWithWalls(this)){
+    if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)){
         setPositionX(getPositionX()+(incX*(0-1)));
     }
 }
@@ -72,18 +72,8 @@ void Alien::walkInY(double & incY, double incX){
         incY = 0;
     }
     setPositionY(getPositionY()+incY);
-    if(CollisionManager::instance.verifyCollisionWithWalls(this)){
+    if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)){
         setPositionY(getPositionY()+(incY*(0-1)));
-    }
-}
-
-void Alien::specialAction(){
-    if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE)){
-        if(idleAnimationNumber == 5){
-            animator->setInterval("special_right");
-        }else{
-            animator->setInterval("special_left");
-        }
     }
 }
 
