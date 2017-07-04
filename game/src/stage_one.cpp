@@ -8,11 +8,11 @@ StageOne::StageOne(int id, std::string newTiledFile) : GameScene (id, newTiledFi
 
 void StageOne::createGuards(){
     std::pair <std::string, int> wayOne ("right", 480);
-    std::pair <std::string, int> wayTwo ("up", HEADER_SIZE + 20);
+    std::pair <std::string, int> wayTwo ("up", HEADER_SIZE + 30);
     std::pair <std::string, int> wayThree ("left", 220);
     std::pair <std::string, int> wayFour ("down", HEADER_SIZE + 120);
 
-    Guard * guard = new Guard("assets/sprites/seguranca_sheet.png", 220, HEADER_SIZE + 120, 18, 35, "right");
+    Guard * guard = new Guard("assets/sprites/seguranca_sheet.png", 220, HEADER_SIZE + 120, 18, 35, "right", 10);
     guard->addWay(1, wayOne);
     guard->addWay(2, wayTwo);
     guard->addWay(3, wayThree);
