@@ -14,7 +14,7 @@ public:
     bool verifyCollisionWithWalls(GameObject* g);
     bool verifyCollisionWithWallsAndChairs(GameObject* g);
     bool verifyCollisionWithEnemies(GameObject* g);
-    GameObject* verifyCollisionWithGuards(GameObject* g);
+    bool verifyCollisionWithGuards(GameObject* g);
     GameObject* verifyCollisionWithPapers(GameObject* g);
     GameObject* verifyCollisionWithSwitches(GameObject* g);
     bool verifyCollision(GameObject* g1, GameObject* g2);

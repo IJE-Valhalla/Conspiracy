@@ -75,13 +75,13 @@ std::pair<std::string, GameObject *> CollisionManager::verifyCollisionWithChairs
         return std::pair<std::string, GameObject*>(collision, NULL);
 }
 
-GameObject* CollisionManager::verifyCollisionWithGuards(GameObject* g){
+bool CollisionManager::verifyCollisionWithGuards(GameObject* g){
         for(GameObject * enemy : guardList) {
                 if(verifyCollision(enemy, g)) {
-                        return enemy;
+                        return true;
                 }
         }
-        return NULL;
+        return false;
 }
 
 

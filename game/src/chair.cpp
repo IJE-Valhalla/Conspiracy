@@ -52,7 +52,7 @@ void Chair::moveInX(double incX){
                 incX = 0;
         }
         setPositionX(getPositionX()+incX);
-        if(CollisionManager::instance.verifyCollisionWithWalls(this) || CollisionManager::instance.verifyCollisionWithEnemies(this)) {
+        if(CollisionManager::instance.verifyCollisionWithWalls(this) || CollisionManager::instance.verifyCollisionWithGuards(this)) {
                 setPositionX(getPositionX()+(incX*(0-1)));
         }
 
@@ -72,7 +72,7 @@ void Chair::moveInY(double incY){
                 incY = 0;
         }
         setPositionY(getPositionY()+incY);
-        if(CollisionManager::instance.verifyCollisionWithWalls(this) || CollisionManager::instance.verifyCollisionWithEnemies(this)) {
+        if(CollisionManager::instance.verifyCollisionWithWalls(this) || CollisionManager::instance.verifyCollisionWithGuards(this)) {
                 setPositionY(getPositionY()+(incY*(0-1)));
         }
 
