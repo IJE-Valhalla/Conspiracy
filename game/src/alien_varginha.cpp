@@ -49,7 +49,7 @@ void Varginha::specialAction(){
         }else{
             animator->setInterval("invisible_left");
         }
-    }else if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE)){
+    }else if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE) && isSelected){
         blockMovement = true;
         isInvisible = true;
         if(idleAnimationNumber == 5){

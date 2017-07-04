@@ -10,7 +10,8 @@ using namespace engine;
 
 class Door: public GameObject{
 public:
-    Door(std::string objectName, double positionX, double positionY, int width, int height);
+    Door(std::string objectName, double positionX, double positionY,
+         int width, int height, std::string doorSide);
     ~Door();
     void update(double timeElapsed);
     void draw();

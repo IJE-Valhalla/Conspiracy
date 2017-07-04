@@ -42,6 +42,10 @@ void ProgressBar::update(double timeElapsed){
     }else if(percent < 0.0){
         percent = 0.0;
     }
+
+    backRect->x = getPositionX();
+    backRect->y = getPositionY();
+
     pw = (int)((double)getWidth() * percent);
     px = getPositionX() + (getWidth() - pw);
 

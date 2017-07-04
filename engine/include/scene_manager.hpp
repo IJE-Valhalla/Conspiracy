@@ -9,6 +9,7 @@ namespace engine{
     public:
         void addScene(Scene* scene);
         void loadScene(int id);
+        void loadNextScene();
         Scene* getCurrentScene();
     private:
     std::unordered_map< int, Scene *> scenes;
