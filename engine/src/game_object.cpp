@@ -11,6 +11,7 @@ GameObject::GameObject(std::string objectName, double positionX, double position
         setWidth(width);
         setHeight(height);
         setEnabled(true);
+        setVisible(true);
 }
 
 GameObject::GameObject(double positionX, double positionY,int width, int height){
@@ -78,6 +79,14 @@ void GameObject::setEnabled(bool paramEnabled){
     enabled = paramEnabled;
 }
 
+void GameObject::setVisible(bool paramVisible){
+    visible = paramVisible;
+}
+
 bool GameObject::isEnabled(){
     return enabled;
+}
+
+bool GameObject::isVisible(){
+    return visible;
 }

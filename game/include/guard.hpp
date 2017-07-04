@@ -38,11 +38,13 @@ private:
     int wayActual;
     bool wayActive;
     bool talking;
+    bool detecting;
     int range;
     FieldOfVision* fieldOfVision;
     Animation* animator;
     Animation* exclamation;
     ProgressBar * talkingBar;
+    ProgressBar * detectionBar;
     std::string direction;
     std::string lastDirection;
     std::unordered_map< int, std::pair<std::string, int>> ways;

@@ -111,7 +111,7 @@ bool CollisionManager::verifyCollisionWithEnemies(GameObject* g1){
                                                         }
                                                 }
                                         }
-                                        if(isVisible) {
+                                        if(isVisible && g1->isVisible()) {
                                                 return true;
                                         }
                                 }

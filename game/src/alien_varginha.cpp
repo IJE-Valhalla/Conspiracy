@@ -52,6 +52,7 @@ void Varginha::specialAction(){
     }else if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE) && isSelected){
         blockMovement = true;
         isInvisible = true;
+        setVisible(false);
         if(idleAnimationNumber == 5){
             animator->setInterval("special_right");
         }else{
@@ -60,6 +61,7 @@ void Varginha::specialAction(){
     }
     if(InputManager::instance.isKeyReleased(InputManager::KEY_PRESS_SPACE)){
         isInvisible = false;
+        setVisible(true);
         blockMovement = false;
     }
 }
