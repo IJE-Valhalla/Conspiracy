@@ -24,6 +24,7 @@ public:
     void talkingToETemer(std::string status);
     void notTalkingToETemer();
     double getTalkingBarPercent();
+    void setWaitingTime(double newWaitingTime);
     Animation * getAnimation();
     int getRange();
     FieldOfVision* getFieldOfVision();

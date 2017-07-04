@@ -323,3 +323,7 @@ void Guard::stop(double &incX, double &incY){
         incY = 0.0;
       }
 }
+
+void Guard::setWaitingTime(double newWaitingTime){
+      waitingTime = newWaitingTime;
+}
