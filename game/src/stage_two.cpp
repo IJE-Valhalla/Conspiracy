@@ -18,6 +18,7 @@ void StageTwo::createGuards(){
     guard->addWay(3, wayThree);
     guard->addWay(4, wayFour);
 
+    
     gameObjectsList.push_back(guard);
 }
 
