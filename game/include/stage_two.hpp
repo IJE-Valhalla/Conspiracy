@@ -8,6 +8,7 @@
 #include "game_object.hpp"
 #include "guard.hpp"
 #include "paper_table.hpp"
+#include "camera.hpp"
 #include "door_system.hpp"
 
 #include <typeinfo>
