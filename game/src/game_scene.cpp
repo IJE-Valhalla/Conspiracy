@@ -23,10 +23,8 @@
 
 using namespace engine;
 
-GameScene::GameScene(int id) : Scene(id){
-}
-
-GameScene::~GameScene(){
+GameScene::GameScene(int id, std::string newTiledFile) : Scene(id){
+    tiledFile = newTiledFile;
 }
 
 void GameScene::draw(){
@@ -64,96 +62,60 @@ void GameScene::verifyWinOrLose(){
                 ((Etemer *)(player->getEtemer()))->verifyDistance(guard);
         }
 
-        if(player->isDead()) {
-                getSceneManager()->loadScene(2);
-        }else if(allPapersEdited) {
-                getSceneManager()->loadScene(3);
-        }
+    if(player->isDead()){
+        getSceneManager()->loadScene(6);
+    }else if(allPapersEdited){
+        getSceneManager()->loadNextScene();
+        //getSceneManager()->loadScene(3);
+    }
+}
 
+void GameScene::initializeColliders(){
+    for(auto gameObject: gameObjectsList){
+        if(typeid(*gameObject) == typeid(Wall)){
+            CollisionManager::instance.addWall(gameObject);
+        }else if(typeid(*gameObject) == typeid(Guard)){
+            CollisionManager::instance.addGuard(gameObject);
+            CollisionManager::instance.addFieldOfVision(((Guard*)gameObject)->getFieldOfVision());
+        }else if(typeid(*gameObject) == typeid(PaperTable)){
+            CollisionManager::instance.addPaper(((PaperTable*)(gameObject))->getPaper());
+            CollisionManager::instance.addWall(((PaperTable*)(gameObject))->getTable());
+        }else if(typeid(*gameObject) == typeid(DoorSystem)){
+            CollisionManager::instance.addDoor(((DoorSystem*)(gameObject))->getDoor());
+            CollisionManager::instance.addSwitch(((DoorSystem*)(gameObject))->getSwitch());
+            CollisionManager::instance.addWall(((DoorSystem*)(gameObject))->getTable());
+        }else if(typeid(*gameObject) == typeid(Table)){
+            CollisionManager::instance.addWall(((Table*)(gameObject)));
+        }else if(typeid(*gameObject) == typeid(Chair)) {
+            CollisionManager::instance.addChair(gameObject);
+        }
+    }
 }
 
 void GameScene::load(){
-        Audio background_music = Audio("assets/sounds/tema1demo.wav", "MUSIC", 50);
-        background_music.play(-1);
+    Audio background_music = Audio("assets/sounds/tema1demo.wav", "MUSIC", 50);
+    background_music.play(-1);
 
-        createGround();
-        createGameBorders();
-        createCenary();
-        createAliens();
-        createGuards();
-        createDoorSystems();
-        createPapers();
-        createChairs();
+    createGround();
+    createGameBorders();
+    createCenary();
+    createAliens();
+    createGuards();
+    createDoorSystems();
+    createPapers();
+    createTables();
+    createChairs();
 
-        initializeColliders();
+    initializeColliders();
 
 }
 
 void GameScene::unload(){
-        CollisionManager::instance.resetLists();
-        gameObjectsList.clear();
+    CollisionManager::instance.resetLists();
+    gameObjectsList.clear();
 }
 
-void GameScene::initializeColliders(){
-
-        for(auto gameObject : gameObjectsList) {
-                if(typeid(*gameObject) == typeid(Wall)) {
-                        CollisionManager::instance.addWall(gameObject);
-                }else if(typeid(*gameObject) == typeid(Guard)) {
-                        CollisionManager::instance.addGuard(gameObject);
-                        CollisionManager::instance.addFieldOfVision(((Guard*)gameObject)->getFieldOfVision());
-                }else if(typeid(*gameObject) == typeid(PaperTable)) {
-                        CollisionManager::instance.addPaper(((PaperTable*)(gameObject))->getPaper());
-                        CollisionManager::instance.addWall(((PaperTable*)(gameObject))->getTable());
-                }else if(typeid(*gameObject) == typeid(DoorSystem)) {
-                        CollisionManager::instance.addDoor(((DoorSystem*)(gameObject))->getDoor());
-                        CollisionManager::instance.addSwitch(((DoorSystem*)(gameObject))->getSwitch());
-                        CollisionManager::instance.addWall(((DoorSystem*)(gameObject))->getTable());
-                }else if(typeid(*gameObject) == typeid(Chair)) {
-                        CollisionManager::instance.addChair(gameObject);
-                }
-        }
-}
-
-void GameScene::createAliens(){
-        std::pair <int, int> biluPos (10, HEADER + 500);
-        std::pair <int, int> etemerPos (30, HEADER + 510);
-        std::pair <int, int> varginhaPos (50, HEADER + 500);
-
-        gameObjectsList.push_back(new Player(biluPos, etemerPos, varginhaPos));
-}
-
-void GameScene::createGuards(){
-        std::pair <std::string, int> wayOne ("right", 480);
-        std::pair <std::string, int> wayTwo ("up", HEADER + 40);
-        std::pair <std::string, int> wayThree ("left", 220);
-        std::pair <std::string, int> wayFour ("down", HEADER + 120);
-
-        Guard * guard = new Guard("assets/sprites/seguranca_sheet.png", 220, HEADER + 120, 18, 35, "right");
-        guard->addWay(1, wayOne);
-        guard->addWay(2, wayTwo);
-        guard->addWay(3, wayThree);
-        guard->addWay(4, wayFour);
-
-        gameObjectsList.push_back(guard);
-}
-
-void GameScene::createDoorSystems(){
-        std::pair<int,int> doorOnePosition (360, HEADER + 240);
-        std::pair<int,int> switchOnePosition (60, HEADER + 50);
-
-
-        std::pair<int,int> doorTwoPosition (660, HEADER + 381);
-        std::pair<int,int> switchTwoPosition (650, HEADER + 50);
-
-        gameObjectsList.push_back(new DoorSystem(doorOnePosition,switchOnePosition));
-        gameObjectsList.push_back(new DoorSystem(doorTwoPosition,switchTwoPosition));
-}
-
-void GameScene::createPapers(){
-        gameObjectsList.push_back(new PaperTable("Paper", 100, HEADER + 200, 60, 34));
-        gameObjectsList.push_back(new PaperTable("Paper", 600, HEADER + 220, 60, 34));
-}
+void GameScene::createTables(){}
 
 void GameScene::createChairs(){
         gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 200, HEADER + 500, 20, 16));
@@ -179,49 +141,44 @@ void GameScene::createGround(){
 }
 
 void GameScene::createCenary(){
-        std::ifstream tile_file;
-        tile_file.open("assets/tiledMaps/Stage1.txt");
+    std::ifstream tile_file;
+    tile_file.open(tiledFile);
+    if(tile_file.is_open()) {
+        char c;
+        int compare;
+        for(int i=0; i<=600; i+=20) {
+            for(int j=0; j<=960; j+=20) {
+                tile_file.get(c);
+                compare = c-48;
+                switch(compare) {
+                    case 1: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", j, HEADER + i+25, 20, 40)); break;
 
+                    case 2: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER + i, 5, 15));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER + i+5, 5, 15));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER + i+10, 5, 15));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER + i+15, 5, 15));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER + i-5, 0, 0));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER + i-10, 0, 0));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER + i-15, 0, 0)); break;
 
-        if(tile_file.is_open()) {
-                char c;
-                int compare;
-                for(int i=0; i<=600; i+=20) {
-                        for(int j=0; j<=960; j+=20) {
-                                tile_file.get(c);
-                                compare = c-48;
-                                switch(compare) {
-                                case 1: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", j, HEADER + i+25, 20, 40)); break;
+                    case 3: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER + i+15, 5, 5));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+5, HEADER + i+15, 5, 5));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+10, HEADER + i+15, 5, 5));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER +i+15, 5, 5)); break;
 
-                                case 2: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER + i, 5, 15));
-                                        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER + i+5, 5, 15));
-                                        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER + i+10, 5, 15));
-                                        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER + i+15, 5, 15));
-                                        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER + i-5, 0, 0));
-                                        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER + i-10, 0, 0));
-                                        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER + i-15, 0, 0)); break;
+                    case 4: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER + i, 5, 15));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER + i+5, 5, 15));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER + i+10, 5, 15));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER + i+15, 5, 15));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER + i-5, 0, 0));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER + i-10, 0, 0));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER + i-15, 0, 0)); break;
 
-                                case 3: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER + i+15, 5, 5));
-                                        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+5, HEADER + i+15, 5, 5));
-                                        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+10, HEADER + i+15, 5, 5));
-                                        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER +i+15, 5, 5)); break;
+                    case 5: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_door.png", j+15, HEADER + i-20, 5, 65)); break;
 
-                                case 4: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER + i, 5, 15));
-                                        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER + i+5, 5, 15));
-                                        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER + i+10, 5, 15));
-                                        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER + i+15, 5, 15));
-                                        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER + i-5, 0, 0));
-                                        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER + i-10, 0, 0));
-                                        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER + i-15, 0, 0)); break;
-
-                                case 5: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_door.png", j+15, HEADER + i-20, 5, 65)); break;
-
-                                case 6: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER + i, 5, 5));
-                                        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+5, HEADER + i, 5, 5));
-                                        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+10, HEADER + i, 5, 5));
-                                        gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER + i, 5, 5)); break;
-                                }
-                        }
+                    case 6: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_door.png", j, i-20, 5, 65));break;
                 }
+            }
         }
+    }
 }

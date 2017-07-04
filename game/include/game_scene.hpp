@@ -16,21 +16,23 @@ using namespace engine;
 
 class GameScene: public Scene{
 public:
-    GameScene(int id);
+    GameScene(int id, std::string newTiledFile);
     ~GameScene();
     void load();
     void draw();
     void update(double timeElapsed);
     void unload();
     void verifyWinOrLose();
-private:
+protected:
     std::vector<GameObject*> gameObjectsList;
+    std::string tiledFile;
     void initializeColliders();
-    void createGuards();
-    void createAliens();
+    virtual void createGuards() = 0;
+    virtual void createAliens() = 0;
     void createCenary();
-    void createDoorSystems();
-    void createPapers();
+    virtual void createDoorSystems() = 0;
+    virtual void createPapers() = 0;
+    virtual void createTables();
     void createGameBorders();
     void createGround();
     void createChairs();
