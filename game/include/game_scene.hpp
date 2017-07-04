@@ -12,6 +12,10 @@
 #include <fstream>
 #include <vector>
 
+#ifndef HEADER_SIZE
+   #define HEADER_SIZE 40
+#endif
+
 using namespace engine;
 
 class GameScene: public Scene{

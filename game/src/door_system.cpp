@@ -8,7 +8,6 @@ DoorSystem::DoorSystem(std::pair<int,int> doorPosition,
 
     if(doorSide.compare("RIGHT") == 0 || doorSide.compare("LEFT") == 0){
         door = new Door("assets/sprites/cenary/porta_anima_lateral(20X61).png", doorPosition.first, doorPosition.second, 20, 175, doorSide);
-        //door = new Door("assets/sprites/cenary/test.png", doorPosition.first, doorPosition.second, 20, 126, doorSide);
     }else{
         door = new Door("assets/sprites/cenary/porta_anima.png", doorPosition.first, doorPosition.second, 79, 58, doorSide);
     }
