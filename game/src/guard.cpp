@@ -1,7 +1,7 @@
 #include "guard.hpp"
 
 Guard::Guard(std::string objectName, double positionX, double positionY,
-             int width, int height, std::string initialDirection) : Enemy(objectName,
+             int width, int height, std::string initialDirection, double newWaitingTime) : Enemy(objectName,
                                                                           positionX,
                                                                           positionY,
                                                                           width, height){
@@ -21,15 +21,22 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
         range = 150;
         int angleOfVision = 60;
 
-        fieldOfVision = new FieldOfVision(positionX+width/2,positionY, range, angleOfVision);
+        fieldOfVision = new FieldOfVision(positionX+width/2,positionY-7, range, angleOfVision);
         talkingBar = new ProgressBar(positionX, positionY, 45, 5, 0.005);
 
         idleAnimationNumber = 0;
+        waitingTime = newWaitingTime;
         wayActive = false;
         talking = false;
         wayActual = 1;
         direction = initialDirection;
         lastDirection = initialDirection;
+
+        timerHorizontal = new Timer();
+        timerVertical = new Timer();
+
+        timerHorizontal->start();
+        timerVertical->start();
 }
 
 Guard::~Guard(){
@@ -48,7 +55,7 @@ void Guard::update(double timeElapsed){
                         incY = 0.2*timeElapsed;
                         incX = 0.2*timeElapsed;
                 }
-
+                stop(incX, incY);
                 walkInX(incX);
                 walkInY(incY);
         }
@@ -91,9 +98,11 @@ void Guard::walkInX(double & incX){
         setPositionX(getPositionX()+incX);
         if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
                 if (!wayActive) {
+                        verifyDeadLockHorizontal();
+
                         if(direction == "left") {
                                 direction = "right";
-                        }else{
+                        }else if(direction == "right"){
                                 direction = "left";
                         }
                 }
@@ -126,9 +135,11 @@ void Guard::walkInY(double & incY){
         setPositionY(getPositionY()+incY);
         if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
                 if (!wayActive) {
+                        verifyDeadLockVertical();
+
                         if(direction == "down") {
                                 direction = "up";
-                        }else{
+                        }else if(direction == "up"){
                                 direction = "down";
                         }
                 }
@@ -281,4 +292,38 @@ void Guard::notTalkingToETemer(){
 }
 double Guard::getTalkingBarPercent(){
         return talkingBar->getPercent();
+}
+
+
+void Guard::verifyDeadLockHorizontal(){
+  if(timerHorizontal->elapsed_time()/100.0 < (waitingTime + 3)){
+          if(direction == "right") {
+                  direction = "up";
+          }else if(direction == "left"){
+                  direction = "down";
+          }
+  }
+  timerHorizontal->step();
+}
+
+void Guard::verifyDeadLockVertical(){
+  if(timerVertical->elapsed_time()/100.0 < (waitingTime + 3)){
+          if(direction == "down"){
+                  direction = "left";
+          }else if(direction == "up"){
+                direction = "right";
+          }
+  }
+  timerVertical->step();
+}
+
+void Guard::stop(double &incX, double &incY){
+      if((timerVertical->elapsed_time()/100.0) < waitingTime || (timerHorizontal->elapsed_time()/100.0) < waitingTime){
+        incX = 0.0;
+        incY = 0.0;
+      }
+}
+
+void Guard::setWaitingTime(double newWaitingTime){
+      waitingTime = newWaitingTime;
 }

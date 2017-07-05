@@ -25,7 +25,7 @@ void Header::update(double timeElapsed){
 }
 
 void Header::draw(){
-        animator->draw(getPositionX(), getPositionY());
+        animator->draw(getPositionX()+5, getPositionY()+5);
 }
 
 void Header::verifySelect(){

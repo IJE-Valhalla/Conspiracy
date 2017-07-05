@@ -15,7 +15,7 @@ public:
     void update(double timeElapsed);
     void setTextColor(Color * newTextColor);
     void draw();
-    void init();
+    Text * getText();
 protected:
     Text * text;
 };

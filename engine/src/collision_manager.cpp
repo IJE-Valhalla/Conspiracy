@@ -94,7 +94,6 @@ bool CollisionManager::verifyCollisionWithEnemies(GameObject* g1){
         bool isVisible = true;
         for(FieldOfVision* field : fieldsOfVision) {
                 for(Line* line : field->getLines()) {
-                        AnimationManager::instance.addLine(line);
                         if(verifyRectangleCollisionWithLine(g1,line->getPoint1(),line->getPoint2())) {
                                 std::pair<double,double> playerCenter = g1->getCenter();
                                 int distanceBetweenPlayer = calculateDistance(playerCenter,line->getPoint1());

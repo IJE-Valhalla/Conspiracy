@@ -69,6 +69,7 @@ void MenuScene::selectAction(){
                         getSceneManager()->loadScene(1);
                         break;
                 case 2:
+                        getSceneManager()->loadScene(8);
                         break;
                 case 3:
                         InputManager::instance.setQuitRequest(true);

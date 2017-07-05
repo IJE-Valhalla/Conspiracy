@@ -7,6 +7,7 @@
 #include "wall.hpp"
 #include "game_object.hpp"
 #include "guard.hpp"
+#include "camera.hpp"
 #include "progress_bar.hpp"
 
 #include <fstream>
