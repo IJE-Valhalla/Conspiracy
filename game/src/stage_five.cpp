@@ -12,7 +12,7 @@ void StageFive::createGuards(){
     std::pair <std::string, int> wayThree ("left", 220);
     std::pair <std::string, int> wayFour ("down", 120);
 
-    Guard * guard = new Guard("assets/sprites/seguranca_sheet.png", 220, 120, 18, 35, "right",10);
+    Guard * guard = new Guard("assets/sprites/seguranca_sheet.png", 220, 120, 18, 35, "right", 2, 10);
     guard->addWay(1, wayOne);
     guard->addWay(2, wayTwo);
     guard->addWay(3, wayThree);

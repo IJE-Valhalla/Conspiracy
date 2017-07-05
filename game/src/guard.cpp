@@ -1,7 +1,7 @@
 #include "guard.hpp"
 
 Guard::Guard(std::string objectName, double positionX, double positionY,
-             int width, int height, std::string initialDirection, double newWaitingTime) : Enemy(objectName,
+             int width, int height, std::string initialDirection,int newQuantityRepeatWay, double newWaitingTime) : Enemy(objectName,
                                                                           positionX,
                                                                           positionY,
                                                                           width, height){
@@ -20,6 +20,8 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
 
         range = 150;
         int angleOfVision = 60;
+        quantityRepeatWay = newQuantityRepeatWay;
+        currentRepeat = 0;
 
         fieldOfVision = new FieldOfVision(positionX+width/2,positionY-7, range, angleOfVision);
         talkingBar = new ProgressBar(positionX, positionY, 45, 5, 0.005);
@@ -118,11 +120,8 @@ void Guard::walkInX(double & incX){
                                 direction = "left";
                         }
                 }
-                search = ways.find(wayActual + 1);
 
-                if(search != ways.end() && wayActive) {
-                        wayActual++;
-                }
+                nextWay();
                 setPositionX(getPositionX()+(incX*(0-1)));
                 incX = 0;
         }
@@ -158,9 +157,8 @@ void Guard::walkInY(double & incY){
                 }
                 search = ways.find(wayActual + 1);
 
-                if(search != ways.end() && wayActive) {
-                        wayActual++;
-                }
+                nextWay();
+
                 setPositionY(getPositionY()+(incY*(0-1)));
                 incY = 0;
         }
@@ -173,13 +171,7 @@ void Guard::walkInXSpecial(double & incX){
                 animator->setInterval("right");
                 direction = "right";
                 if(getPositionX()+incX > ways[wayActual].second) {
-                        search = ways.find(wayActual + 1);
-                        if(search != ways.end()) {
-                                wayActual++;
-                        }else{
-                                wayActual = 1;
-                                wayActive = false;
-                        }
+                        nextWay();
                 }
         }else if(ways[wayActual].first == "left") {
                 incX = incX * (-1);
@@ -187,13 +179,7 @@ void Guard::walkInXSpecial(double & incX){
                 animator->setInterval("left");
                 direction = "left";
                 if(getPositionX()+incX < ways[wayActual].second) {
-                        search = ways.find(wayActual + 1);
-                        if(search != ways.end()) {
-                                wayActual++;
-                        }else{
-                                wayActual = 1;
-                                wayActive = false;
-                        }
+                        nextWay();
                 }
         }else {
                 incX = 0;
@@ -207,13 +193,7 @@ void Guard::walkInYSpecial(double & incY){
                 animator->setInterval("down");
                 direction = "down";
                 if(getPositionY()+incY > ways[wayActual].second) {
-                        search = ways.find(wayActual + 1);
-                        if(search != ways.end()) {
-                                wayActual++;
-                        }else{
-                                wayActual = 1;
-                                wayActive = false;
-                        }
+                        nextWay();
                 }
         }else if(ways[wayActual].first == "up") {
                 incY = incY * (-1);
@@ -221,13 +201,7 @@ void Guard::walkInYSpecial(double & incY){
                 animator->setInterval("up");
                 direction = "up";
                 if(getPositionY()+incY < ways[wayActual].second) {
-                        search = ways.find(wayActual + 1);
-                        if(search != ways.end()) {
-                                wayActual++;
-                        }else{
-                                wayActual = 1;
-                                wayActive = false;
-                        }
+                        nextWay();
                 }
         }else {
                 incY = 0;
@@ -357,4 +331,21 @@ void Guard::stop(double &incX, double &incY){
 
 void Guard::setWaitingTime(double newWaitingTime){
       waitingTime = newWaitingTime;
+}
+
+void Guard::nextWay(){
+    search = ways.find(wayActual + 1);
+
+    if(wayActive){
+        if(search != ways.end()) {
+                wayActual++;
+        }else{
+                currentRepeat ++;
+                wayActual = 1;
+                if (currentRepeat >= quantityRepeatWay){
+                    wayActive = false;
+                    currentRepeat = 0;
+                }
+        }
+    }
 }
