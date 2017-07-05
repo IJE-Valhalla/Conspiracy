@@ -23,10 +23,10 @@ Camera::Camera(std::string objectName, double positionX, double positionY,
         fieldOfVision = new FieldOfVision(positionX-centralizeVisionX+width/2,positionY+7, range, angleOfVision);
         fieldOfVision->setAngle(220);
     }else if(direction == "upleft"){
-        fieldOfVision = new FieldOfVision(positionX-centralizeVisionX+width/2,positionY+7, range, angleOfVision);
+        fieldOfVision = new FieldOfVision(positionX-centralizeVisionX-2+width/2,positionY, range, angleOfVision);
         fieldOfVision->setAngle(140);
     }else{
-        fieldOfVision = new FieldOfVision(positionX-centralizeVisionX+width/2,positionY+7, range, angleOfVision);
+        fieldOfVision = new FieldOfVision(positionX-centralizeVisionX+9+width/2,positionY, range, angleOfVision);
         fieldOfVision->setAngle(45);
     }
 
