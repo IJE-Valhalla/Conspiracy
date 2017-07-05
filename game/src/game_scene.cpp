@@ -25,6 +25,7 @@ using namespace engine;
 
 GameScene::GameScene(int id, std::string newTiledFile) : Scene(id){
     tiledFile = newTiledFile;
+    stageTimer = new Timer();
 }
 
 void GameScene::draw(){
@@ -34,16 +35,20 @@ void GameScene::draw(){
 }
 
 void GameScene::update(double timeElapsed){
+    if(!player->isDead()){
         for(auto gameObject : gameObjectsList) {
-                (*gameObject).update(timeElapsed);
+                if(typeid(gameObject) != typeid(Player)){
+                    (*gameObject).update(timeElapsed);
+                }
         }
-        verifyWinOrLose();
+    }
+    verifyWinOrLose();
 }
 
 void GameScene::verifyWinOrLose(){
         bool allPapersEdited = true;
         std::vector<Guard *> guards;
-        Player * player = NULL;
+        //Player * player = NULL;
         for(auto gameObject : gameObjectsList) {
                 if(typeid(*gameObject) == typeid(Guard)) {
                         guards.push_back((Guard *)(gameObject));
@@ -51,9 +56,9 @@ void GameScene::verifyWinOrLose(){
                         if(!(((PaperTable*)(gameObject))->getPaper())->isEdited()) {
                                 allPapersEdited = false;
                         }
-                }else if(typeid(*gameObject) == typeid(Player)) {
+                }/*else if(typeid(*gameObject) == typeid(Player)) {
                         player = (Player *)(gameObject);
-                }
+                }*/
         }
 
         for(Guard * guard : guards) {
@@ -62,8 +67,15 @@ void GameScene::verifyWinOrLose(){
                 ((Etemer *)(player->getEtemer()))->verifyDistance(guard);
         }
 
+    if(!player->isDead()){
+        stageTimer->step();
+    }
     if(player->isDead()){
-        getSceneManager()->loadScene(6);
+        //stageTimer->step();
+        std::cout << stageTimer->elapsed_time() << std::endl;
+        if(stageTimer->elapsed_time() >= 2500){
+            getSceneManager()->loadScene(6);
+        }
     }else if(allPapersEdited){
         getSceneManager()->loadNextScene();
         //getSceneManager()->loadScene(3);
@@ -95,6 +107,7 @@ void GameScene::initializeColliders(){
 }
 
 void GameScene::load(){
+    stageTimer->start();
     Audio background_music = Audio("assets/sounds/tema1demo.wav", "MUSIC", 50);
     background_music.play(-1);
 

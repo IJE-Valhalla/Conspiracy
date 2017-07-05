@@ -4,6 +4,9 @@ using namespace engine;
 
 Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosition,
                std::pair<int,int> varginhaPosition){
+
+        exclamationAnimation = new Animation("assets/sprites/exclamation2.png",1, 1, 0.5);
+
         bilu = new Bilu("assets/sprites/bilu_sheet.png", biluPosition.first, biluPosition.second, 19, 22);
         varginha = new Varginha("assets/sprites/varginha_sheet.png", varginhaPosition.first, varginhaPosition.second, 10, 15);
         etemer = new Etemer("assets/sprites/etemer_sheet.png", etemerPosition.first, etemerPosition.second, 10, 22);
@@ -50,10 +53,11 @@ void Player::update(double timeElapsed){
                 }
         }
 
+        exclamationAnimation->update();
+
         etemer->update(timeElapsed);
         bilu->update(timeElapsed);
         varginha->update(timeElapsed);
-
         header->update(timeElapsed);
 }
 
@@ -91,10 +95,13 @@ void Player::idleAnimation(Alien * alien){
 }
 bool Player::isDead(){
         if(!varginha->isEnabled()) {
+                exclamationAnimation->draw(varginha->getPositionX()-5, varginha->getPositionY()-40);
                 return true;
         }else if(!bilu->isEnabled()) {
+            exclamationAnimation->draw(bilu->getPositionX(), bilu->getPositionY()-40);
                 return true;
         }else if(!etemer->isEnabled()) {
+            exclamationAnimation->draw(etemer->getPositionX(), etemer->getPositionY()-40);
                 return true;
         }
         return false;
