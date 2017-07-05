@@ -26,7 +26,11 @@ void SceneManager::loadScene(int id){
 }
 
 void SceneManager::loadNextScene(){
-    loadScene(currentScene->getId()+1);
+    if(currentScene->getId() < 5){
+        loadScene(currentScene->getId()+1);
+    }else{
+        loadScene(7);
+    }
 }
 
 Scene* SceneManager::getCurrentScene(){
