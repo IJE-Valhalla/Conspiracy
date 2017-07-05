@@ -26,7 +26,8 @@ void StageFive::createAliens(){
     std::pair <int, int> etemerPos (780, 130);
     std::pair <int, int> varginhaPos (130, 130);
 
-    gameObjectsList.push_back(new Player(biluPos, etemerPos, varginhaPos));
+    player = new Player(biluPos, etemerPos, varginhaPos);
+    gameObjectsList.push_back(player);
 }
 
 void StageFive::createDoorSystems(){
