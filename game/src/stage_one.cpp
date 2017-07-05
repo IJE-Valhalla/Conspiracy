@@ -18,7 +18,7 @@ void StageOne::createGuards(){
     guard->addWay(3, wayThree);
     guard->addWay(4, wayFour);
 
-    Camera* camera = new Camera("assets/sprites/camera(11X8).png",100,500,11,8);
+    Camera* camera = new Camera("assets/sprites/camera(11X8).png",130,530,11,8);
     gameObjectsList.push_back(camera);
 
     gameObjectsList.push_back(guard);
@@ -33,14 +33,14 @@ void StageOne::createAliens(){
 }
 
 void StageOne::createDoorSystems(){
-    std::pair<int,int> doorOnePosition (360, HEADER_SIZE + 240);
+    std::pair<int,int> doorOnePosition (343, HEADER_SIZE + 200);
     std::pair<int,int> switchOnePosition (60, HEADER_SIZE + 50);
 
 
     std::pair<int,int> doorTwoPosition (660, HEADER_SIZE + 381);
     std::pair<int,int> switchTwoPosition (650, HEADER_SIZE + 50);
 
-    gameObjectsList.push_back(new DoorSystem(doorOnePosition,switchOnePosition, "DOWN"));
+    gameObjectsList.push_back(new DoorSystem(doorOnePosition,switchOnePosition, "RIGHT"));
     gameObjectsList.push_back(new DoorSystem(doorTwoPosition,switchTwoPosition, "DOWN"));
 }
 
