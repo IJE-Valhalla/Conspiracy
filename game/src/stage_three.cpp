@@ -31,16 +31,16 @@ void StageThree::createAliens(){
 }
 
 void StageThree::createDoorSystems(){
-    std::pair<int,int> doorOnePosition (183, HEADER_SIZE + 240);
+    std::pair<int,int> doorOnePosition (357, HEADER_SIZE + 298);
     std::pair<int,int> switchOnePosition (880, HEADER_SIZE + 50);
 
-    std::pair<int,int> doorTwoPosition (460, HEADER_SIZE + 240);
+    std::pair<int,int> doorTwoPosition (583, HEADER_SIZE + 178);
     std::pair<int,int> switchTwoPosition (10, HEADER_SIZE + 430);
 
-    std::pair<int,int> doorThreePosition (250, HEADER_SIZE + 50);
+    std::pair<int,int> doorThreePosition (700, HEADER_SIZE + 339);
     std::pair<int,int> switchThreePosition (150, HEADER_SIZE + 50);
 
-    gameObjectsList.push_back(new DoorSystem(doorOnePosition,switchOnePosition, "RIGHT"));
+    gameObjectsList.push_back(new DoorSystem(doorOnePosition,switchOnePosition, "LEFT"));
     gameObjectsList.push_back(new DoorSystem(doorTwoPosition,switchTwoPosition, "RIGHT"));
     gameObjectsList.push_back(new DoorSystem(doorThreePosition,switchThreePosition, "DOWN"));
 }
