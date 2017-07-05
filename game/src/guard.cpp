@@ -349,7 +349,7 @@ void Guard::verifyDeadLockVertical(){
 }
 
 void Guard::stop(double &incX, double &incY){
-      if((timerVertical->elapsed_time()/100.0) < waitingTime || (timerHorizontal->elapsed_time()/100.0) < waitingTime){
+      if(((timerVertical->elapsed_time()/100.0) < waitingTime || (timerHorizontal->elapsed_time()/100.0) < waitingTime) && !wayActive){
         incX = 0.0;
         incY = 0.0;
       }
