@@ -7,21 +7,39 @@ StageOne::StageOne(int id, std::string newTiledFile) : GameScene (id, newTiledFi
 }
 
 void StageOne::createGuards(){
-    std::pair <std::string, int> wayOne ("right", 480);
-    std::pair <std::string, int> wayTwo ("up", HEADER_SIZE + 30);
-    std::pair <std::string, int> wayThree ("left", 220);
-    std::pair <std::string, int> wayFour ("down", HEADER_SIZE + 120);
+    std::pair <std::string, int> wayOne1 ("right", 470);
+    std::pair <std::string, int> wayTwo1 ("up", HEADER_SIZE + 30);
+    std::pair <std::string, int> wayThree1 ("left", 220);
+    std::pair <std::string, int> wayFour1 ("down", HEADER_SIZE + 120);
+    std::pair <std::string, int> wayFive1 ("right", 470);
 
-    Guard * guard = new Guard("assets/sprites/seguranca_sheet.png", 220, HEADER_SIZE + 120, 18, 35, "right", 10);
-    guard->addWay(1, wayOne);
-    guard->addWay(2, wayTwo);
-    guard->addWay(3, wayThree);
-    guard->addWay(4, wayFour);
+    Guard * guard1 = new Guard("assets/sprites/seguranca_sheet.png", 220, HEADER_SIZE + 120, 18, 35, "right", 10);
+    guard1->addWay(1, wayOne1);
+    guard1->addWay(2, wayTwo1);
+    guard1->addWay(3, wayThree1);
+    guard1->addWay(4, wayFour1);
+    guard1->addWay(5, wayFive1);
+
+    gameObjectsList.push_back(guard1);
+
+    std::pair <std::string, int> wayOne2 ("right", 470);
+    std::pair <std::string, int> wayTwo2 ("up", HEADER_SIZE + 30);
+    std::pair <std::string, int> wayThree2 ("left", 220);
+    std::pair <std::string, int> wayFour2 ("down", HEADER_SIZE + 120);
+    std::pair <std::string, int> wayFive2 ("right", 470);
+
+    Guard * guard2 = new Guard("assets/sprites/seguranca_sheet.png", 880, HEADER_SIZE + 120, 18, 35, "down", 10);
+    guard1->addWay(1, wayOne2);
+    guard1->addWay(2, wayTwo2);
+    guard1->addWay(3, wayThree2);
+    guard1->addWay(4, wayFour2);
+    guard1->addWay(5, wayFive2);
+
+    gameObjectsList.push_back(guard2);
 
     Camera* camera = new Camera("assets/sprites/camera(11X8).png",130,530,11,8,"right");
     gameObjectsList.push_back(camera);
 
-    gameObjectsList.push_back(guard);
 }
 
 void StageOne::createAliens(){

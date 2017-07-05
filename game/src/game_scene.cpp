@@ -47,7 +47,6 @@ void GameScene::update(double timeElapsed){
 void GameScene::verifyWinOrLose(){
         bool allPapersEdited = true;
         std::vector<Guard *> guards;
-        //Player * player = NULL;
         for(auto gameObject : gameObjectsList) {
                 if(typeid(*gameObject) == typeid(Guard)) {
                         guards.push_back((Guard *)(gameObject));
@@ -55,9 +54,7 @@ void GameScene::verifyWinOrLose(){
                         if(!(((PaperTable*)(gameObject))->getPaper())->isEdited()) {
                                 allPapersEdited = false;
                         }
-                }/*else if(typeid(*gameObject) == typeid(Player)) {
-                        player = (Player *)(gameObject);
-                }*/
+                }
         }
 
         for(Guard * guard : guards) {
@@ -70,14 +67,12 @@ void GameScene::verifyWinOrLose(){
         stageTimer->step();
     }
     if(player->isDead()){
-        //stageTimer->step();
         std::cout << stageTimer->elapsed_time() << std::endl;
         if(stageTimer->elapsed_time() >= 2500){
             getSceneManager()->loadScene(6);
         }
     }else if(allPapersEdited || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skipTimer->total_elapsed_time() >= 500)){
         getSceneManager()->loadNextScene();
-        //getSceneManager()->loadScene(3);
     }
 }
 

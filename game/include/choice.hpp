@@ -22,8 +22,11 @@ public:
     void draw();
     void init();
     Text * getText();
+    bool getUnlock();
+    void setUnlock(bool isUnlock);
 private:
     Sprite * sprite;
+    Sprite * padlock;
     Button * button;
     Rectangle * rectangle;
     bool unlock;

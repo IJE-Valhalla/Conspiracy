@@ -14,6 +14,7 @@ Bilu::Bilu(std::string objectName, double positionX, double positionY,
         hacking = false;
         editing = false;
         lastAction = false;
+        isSelected = false;
 }
 
 void Bilu::update(double timeElapsed){
