@@ -35,7 +35,7 @@ void StageOne::createAliens(){
 }
 
 void StageOne::createDoorSystems(){
-    std::pair<int,int> doorOnePosition (343, HEADER_SIZE + 200);
+    std::pair<int,int> doorOnePosition (323, HEADER_SIZE + 220);
     std::pair<int,int> switchOnePosition (60, HEADER_SIZE + 50);
 
 

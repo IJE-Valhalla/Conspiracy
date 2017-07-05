@@ -23,6 +23,7 @@ using namespace engine;
 
 GameScene::GameScene(int id, std::string newTiledFile) : Scene(id){
     tiledFile = newTiledFile;
+    skipTimer = new Timer();
     stageTimer = new Timer();
 }
 
@@ -74,7 +75,7 @@ void GameScene::verifyWinOrLose(){
         if(stageTimer->elapsed_time() >= 2500){
             getSceneManager()->loadScene(6);
         }
-    }else if(allPapersEdited){
+    }else if(allPapersEdited || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skipTimer->total_elapsed_time() >= 500)){
         getSceneManager()->loadNextScene();
         //getSceneManager()->loadScene(3);
     }
@@ -106,6 +107,8 @@ void GameScene::initializeColliders(){
 
 void GameScene::load(){
     stageTimer->start();
+    skipTimer->start();
+    skipTimer->step();
     Audio background_music = Audio("assets/sounds/tema1demo.wav", "MUSIC", 50);
     background_music.play(-1);
 

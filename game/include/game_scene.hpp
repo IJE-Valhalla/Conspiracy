@@ -35,6 +35,7 @@ protected:
     std::vector<GameObject*> gameObjectsList;
     std::string tiledFile;
     Timer* stageTimer;
+    Timer* skipTimer;
     void initializeColliders();
     virtual void createGuards() = 0;
     virtual void createAliens() = 0;
