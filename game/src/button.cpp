@@ -25,3 +25,7 @@ void Button::draw(){
 void Button::setTextColor(Color * newTextColor){
     text->setTextColor(newTextColor);
 }
+
+Text * Button::getText(){
+    return text;
+}
