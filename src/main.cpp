@@ -18,7 +18,6 @@ using namespace engine;
 int main(int, char**){
     loadEngine();
     MenuScene* menuScene = new MenuScene(0);
-    //GameScene* gameScene = new GameScene(1);
     StageOne * stageOne = new StageOne(1, "assets/tiledMaps/Stage1.txt");
     StageTwo * stageTwo = new StageTwo(2, "assets/tiledMaps/Stage2.txt");
     StageThree * stageThree = new StageThree(3, "assets/tiledMaps/Stage3.txt");
@@ -36,7 +35,7 @@ int main(int, char**){
     getSceneManager()->addScene(winScene);
     getSceneManager()->addScene(chooseStageScene);
 
-    getSceneManager()->loadScene(8);
+    getSceneManager()->loadScene(0);
 
     run();
     return 0;
