@@ -5,6 +5,7 @@
 #include "animation_manager.hpp"
 #include <vector>
 #include <math.h>
+#include "audio.hpp"
 
 namespace engine{
     class FieldOfVision{
@@ -17,8 +18,10 @@ namespace engine{
         void setAngle(double angle);
         int getRange();
         std::vector<Line*> getLines();
+        void playEffect();
     private:
         Line* centerLine;
+        Audio* catchEffect;
         std::vector<Line*> lines;
         std::pair<double,double> center;
         void resetLines();

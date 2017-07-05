@@ -86,9 +86,11 @@ GameObject* CollisionManager::verifyCollisionWithGuards(GameObject* g){
 
 
 bool CollisionManager::verifyCollisionWithEnemies(GameObject* g1){
+    bool status = false;
+
         for(GameObject * enemy : guardList) {
                 if(verifyCollision(enemy, g1)) {
-                        return true;
+                        status = true;
                 }
         }
         bool isVisible = true;
@@ -111,14 +113,15 @@ bool CollisionManager::verifyCollisionWithEnemies(GameObject* g1){
                                                         }
                                                 }
                                         }
-                                        if(isVisible && g1->isVisible()) {
+                                        if((isVisible && g1->isVisible()) || status) {
+                                                field->playEffect();
                                                 return true;
                                         }
                                 }
                         }
                 }
         }
-        return false;
+        return status;
 }
 
 GameObject* CollisionManager::verifyCollisionWithSwitches(GameObject* g1){

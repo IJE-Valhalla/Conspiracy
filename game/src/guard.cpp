@@ -267,17 +267,6 @@ void Guard::verifyDistance(GameObject* alien){
     }else if(distance < 60){
         wayActive = true;
     }
-        // if(distance < 60 && alien->getName().compare("Varginha") != 0) {
-        //     wayActive = true;
-        // }else if(distance < 100 && alien->getName().compare("Varginha") == 0){
-        //     if(alien->isVisible()){
-        //         detecting = true;
-        //     }else{
-        //         detecting = false;
-        //     }
-        // }else if(distance > 500 && alien->getName().compare("Varginha") == 0){
-        //     detecting = false;
-        // }
 }
 
 void Guard::selectLine(){
