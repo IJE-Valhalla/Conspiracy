@@ -6,6 +6,8 @@ FieldOfVision::FieldOfVision(double x, double y, int size, double angle){
     range = size;
     totalAngle = angle;
 
+    catchEffect = new Audio("assets/sounds/GUARDAVIU.wav", "EFFECT", 128);
+
     //not including centerLine
     numberOfLines = 28;
     createLines(x,y,range);
@@ -85,4 +87,8 @@ std::vector<Line*> FieldOfVision::getLines(){
 
 int FieldOfVision::getRange(){
     return range;
+}
+
+void FieldOfVision::playEffect(){
+    catchEffect->play(0);
 }

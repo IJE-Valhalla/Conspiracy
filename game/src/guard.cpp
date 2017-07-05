@@ -24,6 +24,10 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
         fieldOfVision = new FieldOfVision(positionX+width/2,positionY-7, range, angleOfVision);
         talkingBar = new ProgressBar(positionX, positionY, 45, 5, 0.005);
 
+        std::vector<int> backColor = {255, 0, 0, 255};
+        std::vector<int> frontColor = {0, 0, 0, 255};
+        detectionBar = new ProgressBar(positionX, positionY, 30, 5, 0.03, backColor, frontColor);
+
         idleAnimationNumber = 0;
         waitingTime = newWaitingTime;
         wayActive = false;
@@ -45,6 +49,7 @@ Guard::~Guard(){
 void Guard::update(double timeElapsed){
         auto incY = 0.05*timeElapsed;
         auto incX = 0.05*timeElapsed;
+
         // To Do: Use Time Elapsed in angleOfVision.
         if(talking) {
                 wayActive = false;
@@ -69,6 +74,13 @@ void Guard::update(double timeElapsed){
 
         if(talking) {
                 talkingBar->update(timeElapsed);
+        }
+        if(detecting){
+            detectionBar->update(timeElapsed);
+            if(detectionBar->getPercent() <= 0.0){
+                detecting = false;
+                wayActive = true;
+            }
         }
 
         specialAction();
@@ -229,8 +241,14 @@ void Guard::specialAction(){
 void Guard::draw(){
         animator->draw(getPositionX()-10, getPositionY()-10);
         animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
-        if(wayActive) {
-                exclamation->draw(getPositionX(), getPositionY()-30);
+
+        if(detecting) {
+            detectionBar->setPositionX(getPositionX() - 10);
+            detectionBar->setPositionY(getPositionY() - 20);
+            AnimationManager::instance.addProgressBar(detectionBar);
+        }
+        if(wayActive){
+            exclamation->draw(getPositionX(), getPositionY()-30);
         }
         if(talking) {
                 AnimationManager::instance.addProgressBar(talkingBar);
@@ -248,9 +266,18 @@ void Guard::addWay(int key, std::pair<std::string, int> way){
 void Guard::verifyDistance(GameObject* alien){
         double distance = sqrt((pow(getPositionX() - alien->getPositionX(), 2.0)) +  (pow(getPositionY() - alien->getPositionY(), 2.0)));
 // TODO Definir quando irá iniciar o percurso especial do guarda
-        if(distance < 60) {
-                wayActive = true;
+    //std::cout << alien->getName() << std::endl;
+    if(alien->getName().compare("assets/sprites/varginha_sheet.png") == 0){
+        //std::cout << "AQUI" << std::endl;
+        if(distance < 100 && alien->isVisible() && !wayActive){
+            detecting = true;
+        }else{
+            detectionBar->resetPercent();
+            detecting = false;
         }
+    }else if(distance < 60){
+        wayActive = true;
+    }
 }
 
 void Guard::selectLine(){

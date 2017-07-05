@@ -43,12 +43,14 @@ private:
     int wayActual;
     bool wayActive;
     bool talking;
+    bool detecting;
     int range;
     double waitingTime;
     FieldOfVision* fieldOfVision;
     Animation* animator;
     Animation* exclamation;
     ProgressBar * talkingBar;
+    ProgressBar * detectionBar;
     std::string direction;
     std::string lastDirection;
     Timer * timerHorizontal;

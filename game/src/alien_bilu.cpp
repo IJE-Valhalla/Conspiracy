@@ -55,6 +55,7 @@ void Bilu::specialAction(){
                         if(!editing) {
                                 editing = true;
                                 blockMovement = true;
+                                ((Paper*)(paper))->playEffect();
                         }
                 }
 
@@ -77,7 +78,7 @@ void Bilu::specialAction(){
                 }else if(editing) {
                         editing = false;
                         blockMovement = false;
-                        //((Paper*)(paper))->stopEffect();
+                        ((Paper*)(paper))->stopEffect();
                         ((Paper*)(paper))->stopAnimation();
                         ((Paper*)(paper))->resetEditingProgress();
                 }

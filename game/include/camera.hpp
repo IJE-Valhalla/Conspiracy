@@ -11,7 +11,7 @@ using namespace engine;
 
 class Camera: public Enemy{
 public:
-    Camera(std::string objectName, double positionX, double positionY, int width, int height);
+    Camera(std::string objectName, double positionX, double positionY, int width, int height, std::string direction);
     ~Camera();
     void update(double timeElapsed);
     void draw();
