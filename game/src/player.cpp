@@ -18,6 +18,8 @@ Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosit
         varginha->update(0);
         header->update(0);
 
+        bilu->setAlienDeselect();
+        varginha->setAlienDeselect();
         etemer->setAlienSelected();
 
         bilu_sound_effect = new Audio("assets/sounds/TROCABILU.wav", "EFFECT", 100);
