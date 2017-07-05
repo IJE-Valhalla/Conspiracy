@@ -6,9 +6,11 @@ Camera::Camera(std::string objectName, double positionX, double positionY,
                                               positionY,
                                               width, height){
 
-    animator = new Animation(objectName, 1, 4, 0.1);
+    animator = new Animation(objectName, 2, 4, 0.1);
     animator->addAction("right",0,0);
     animator->addAction("left",2,2);
+    animator->addAction("upright",4,4);
+    animator->addAction("upleft",6,6);
 
     animator->setInterval(direction);
     range = 180;
@@ -17,9 +19,15 @@ Camera::Camera(std::string objectName, double positionX, double positionY,
     if(direction == "right"){
         fieldOfVision = new FieldOfVision(positionX+centralizeVisionX+width/2,positionY+7, range, angleOfVision);
         fieldOfVision->setAngle(305);
-    }else{
+    }else if(direction  == "left"){
         fieldOfVision = new FieldOfVision(positionX-centralizeVisionX+width/2,positionY+7, range, angleOfVision);
         fieldOfVision->setAngle(220);
+    }else if(direction == "upleft"){
+        fieldOfVision = new FieldOfVision(positionX-centralizeVisionX+width/2,positionY+7, range, angleOfVision);
+        fieldOfVision->setAngle(140);
+    }else{
+        fieldOfVision = new FieldOfVision(positionX-centralizeVisionX+width/2,positionY+7, range, angleOfVision);
+        fieldOfVision->setAngle(45);
     }
 
 }
