@@ -34,8 +34,10 @@ void ChooseStageScene::update(double timeElapsed){
                 if(typeid(*gameObject.second) == typeid(Choice)) {
                         if(gameObject.first == selectButton) {
                                 ((Choice *)(gameObject.second))->setTextColor(select);
+                                ((Choice *)(gameObject.second))->setChosen(true);
                         }else{
                                 ((Choice *)(gameObject.second))->setTextColor(notSelect);
+                                ((Choice *)(gameObject.second))->setChosen(false);
                         }
                 }
 

@@ -16,6 +16,7 @@ public:
     void update(double timeElapsed);
     void setTextColor(Color * newTextColor);
     void setBackgroundColor(Color * newBackgroundColor);
+    void setChosen(bool isChosen);
     void draw();
     void init();
     Text * getText();
@@ -23,6 +24,7 @@ private:
     Sprite * sprite;
     Button * button;
     bool unlock;
+    bool chosen;
 };
 
 #endif
