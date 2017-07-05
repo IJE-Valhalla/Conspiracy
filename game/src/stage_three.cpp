@@ -18,10 +18,10 @@ void StageThree::createGuards(){
     guard->addWay(3, wayThree);
     guard->addWay(4, wayFour);
 
-    Camera* camera1 = new Camera("assets/sprites/camera(11X8).png",450,600,11,8, "upleft");
+    Camera* camera1 = new Camera(450,600,"upleft");
     gameObjectsList.push_back(camera1);
 
-    Camera* camera2 = new Camera("assets/sprites/camera(11X8).png",450,40,11,8, "left");
+    Camera* camera2 = new Camera(450,40,"left");
     gameObjectsList.push_back(camera2);
 
     gameObjectsList.push_back(guard);
