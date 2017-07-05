@@ -6,6 +6,8 @@
 #include "game_object.hpp"
 #include "button.hpp"
 #include "sprite.hpp"
+#include "color.hpp"
+#include "rectangle.hpp"
 
 using namespace engine;
 
@@ -23,6 +25,7 @@ public:
 private:
     Sprite * sprite;
     Button * button;
+    Rectangle * rectangle;
     bool unlock;
     bool chosen;
 };
