@@ -1,6 +1,7 @@
 #include "text.hpp"
 #include "log.h"
 #include "engine.hpp"
+#include "text_manager.hpp"
 
 using namespace engine;
 
@@ -23,13 +24,7 @@ void Text::init(){
         exit(-1);
     }
 
-    if (font == NULL){
-        loadFont();
-        if(font == NULL){
-            exit(-1);
-        }
-    }
-
+    font = TextManager::instance.loadFont(fontPath, size);
 
     SDL_Color color = {textColor->r, textColor->g, textColor->b, textColor->a};
     SDL_Color bg_color = {background->r, background->g, background->b, background->a};
@@ -90,15 +85,6 @@ void Text::draw(int x, int y){
     SDL_RenderCopy(WindowManager::getGameCanvas(), texture, NULL, &renderQuad);
 }
 
-void Text::loadFont(){
-    font = TTF_OpenFont(fontPath.c_str(), size);
-
-            if(font == NULL){
-                    ERROR("Font invalid!");
-                    exit(-1);
-            }
-
-}
 
 void Text::setBackground(Color * newBackground){
     background = newBackground;

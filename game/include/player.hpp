@@ -24,6 +24,7 @@ public:
     Alien * getVarginha();
     Alien * getEtemer();
 private:
+    Animation* exclamationAnimation;
     Alien *bilu, *varginha, *etemer;
     Audio *varginha_sound_effect, *etemer_sound_effect, *bilu_sound_effect;
     Header * header;

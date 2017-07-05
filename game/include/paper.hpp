@@ -5,6 +5,7 @@
 #include "animation.hpp"
 #include "animation_manager.hpp"
 #include "progress_bar.hpp"
+#include "audio.hpp"
 
 using namespace engine;
 
@@ -21,11 +22,14 @@ public:
     bool isEdited();
     double getEditingBarPercent();
     void resetEditingProgress();
+    void playEffect();
+    void stopEffect();
 protected:
     Animation* animator;
     ProgressBar *editing_bar;
     bool edited;
     bool isBeingEdited;
+    Audio* paperEditingSound;
 };
 
 #endif

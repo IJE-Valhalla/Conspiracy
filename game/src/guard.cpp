@@ -1,7 +1,7 @@
 #include "guard.hpp"
 
 Guard::Guard(std::string objectName, double positionX, double positionY,
-             int width, int height, std::string initialDirection) : Enemy(objectName,
+             int width, int height, std::string initialDirection, double newWaitingTime) : Enemy(objectName,
                                                                           positionX,
                                                                           positionY,
                                                                           width, height){
@@ -21,15 +21,26 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
         range = 150;
         int angleOfVision = 60;
 
-        fieldOfVision = new FieldOfVision(positionX+width/2,positionY, range, angleOfVision);
+        fieldOfVision = new FieldOfVision(positionX+width/2,positionY-7, range, angleOfVision);
         talkingBar = new ProgressBar(positionX, positionY, 45, 5, 0.005);
 
+        std::vector<unsigned int> backColor = {255, 0, 0, 255};
+        std::vector<unsigned int> frontColor = {0, 0, 0, 255};
+        detectionBar = new ProgressBar(positionX, positionY, 30, 5, 0.01, backColor, frontColor);
+
         idleAnimationNumber = 0;
+        waitingTime = newWaitingTime;
         wayActive = false;
         talking = false;
         wayActual = 1;
         direction = initialDirection;
         lastDirection = initialDirection;
+
+        timerHorizontal = new Timer();
+        timerVertical = new Timer();
+
+        timerHorizontal->start();
+        timerVertical->start();
 }
 
 Guard::~Guard(){
@@ -38,6 +49,7 @@ Guard::~Guard(){
 void Guard::update(double timeElapsed){
         auto incY = 0.05*timeElapsed;
         auto incX = 0.05*timeElapsed;
+
         // To Do: Use Time Elapsed in angleOfVision.
         if(talking) {
                 wayActive = false;
@@ -48,7 +60,7 @@ void Guard::update(double timeElapsed){
                         incY = 0.2*timeElapsed;
                         incX = 0.2*timeElapsed;
                 }
-
+                stop(incX, incY);
                 walkInX(incX);
                 walkInY(incY);
         }
@@ -62,6 +74,13 @@ void Guard::update(double timeElapsed){
 
         if(talking) {
                 talkingBar->update(timeElapsed);
+        }
+        if(detecting){
+            detectionBar->update(timeElapsed);
+            if(detectionBar->getPercent() <= 0.0){
+                detecting = false;
+                wayActive = true;
+            }
         }
 
         specialAction();
@@ -91,9 +110,11 @@ void Guard::walkInX(double & incX){
         setPositionX(getPositionX()+incX);
         if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
                 if (!wayActive) {
+                        verifyDeadLockHorizontal();
+
                         if(direction == "left") {
                                 direction = "right";
-                        }else{
+                        }else if(direction == "right"){
                                 direction = "left";
                         }
                 }
@@ -126,9 +147,11 @@ void Guard::walkInY(double & incY){
         setPositionY(getPositionY()+incY);
         if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
                 if (!wayActive) {
+                        verifyDeadLockVertical();
+
                         if(direction == "down") {
                                 direction = "up";
-                        }else{
+                        }else if(direction == "up"){
                                 direction = "down";
                         }
                 }
@@ -218,8 +241,14 @@ void Guard::specialAction(){
 void Guard::draw(){
         animator->draw(getPositionX()-10, getPositionY()-10);
         animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
-        if(wayActive) {
-                exclamation->draw(getPositionX(), getPositionY()-30);
+
+        if(detecting) {
+            detectionBar->setPositionX(getPositionX() - 10);
+            detectionBar->setPositionY(getPositionY() - 20);
+            AnimationManager::instance.addProgressBar(detectionBar);
+        }
+        if(wayActive){
+            exclamation->draw(getPositionX(), getPositionY()-30);
         }
         if(talking) {
                 AnimationManager::instance.addProgressBar(talkingBar);
@@ -237,9 +266,18 @@ void Guard::addWay(int key, std::pair<std::string, int> way){
 void Guard::verifyDistance(GameObject* alien){
         double distance = sqrt((pow(getPositionX() - alien->getPositionX(), 2.0)) +  (pow(getPositionY() - alien->getPositionY(), 2.0)));
 // TODO Definir quando irá iniciar o percurso especial do guarda
-        if(distance < 60) {
-                wayActive = true;
+    //std::cout << alien->getName() << std::endl;
+    if(alien->getName().compare("assets/sprites/varginha_sheet.png") == 0){
+        //std::cout << "AQUI" << std::endl;
+        if(distance < 150 && alien->isVisible() && !wayActive){
+            detecting = true;
+        }else{
+            detectionBar->resetPercent();
+            detecting = false;
         }
+    }else if(distance < 150){
+        wayActive = true;
+    }
 }
 
 void Guard::selectLine(){
@@ -281,4 +319,38 @@ void Guard::notTalkingToETemer(){
 }
 double Guard::getTalkingBarPercent(){
         return talkingBar->getPercent();
+}
+
+
+void Guard::verifyDeadLockHorizontal(){
+  if(timerHorizontal->elapsed_time()/100.0 < (waitingTime + 3)){
+          if(direction == "right") {
+                  direction = "up";
+          }else if(direction == "left"){
+                  direction = "down";
+          }
+  }
+  timerHorizontal->step();
+}
+
+void Guard::verifyDeadLockVertical(){
+  if(timerVertical->elapsed_time()/100.0 < (waitingTime + 3)){
+          if(direction == "down"){
+                  direction = "left";
+          }else if(direction == "up"){
+                direction = "right";
+          }
+  }
+  timerVertical->step();
+}
+
+void Guard::stop(double &incX, double &incY){
+      if((timerVertical->elapsed_time()/100.0) < waitingTime || (timerHorizontal->elapsed_time()/100.0) < waitingTime){
+        incX = 0.0;
+        incY = 0.0;
+      }
+}
+
+void Guard::setWaitingTime(double newWaitingTime){
+      waitingTime = newWaitingTime;
 }
