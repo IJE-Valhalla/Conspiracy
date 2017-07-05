@@ -24,9 +24,9 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
         fieldOfVision = new FieldOfVision(positionX+width/2,positionY-7, range, angleOfVision);
         talkingBar = new ProgressBar(positionX, positionY, 45, 5, 0.005);
 
-        std::vector<int> backColor = {255, 0, 0, 255};
-        std::vector<int> frontColor = {0, 0, 0, 255};
-        detectionBar = new ProgressBar(positionX, positionY, 30, 5, 0.03, backColor, frontColor);
+        std::vector<unsigned int> backColor = {255, 0, 0, 255};
+        std::vector<unsigned int> frontColor = {0, 0, 0, 255};
+        detectionBar = new ProgressBar(positionX, positionY, 30, 5, 0.01, backColor, frontColor);
 
         idleAnimationNumber = 0;
         waitingTime = newWaitingTime;
@@ -269,13 +269,13 @@ void Guard::verifyDistance(GameObject* alien){
     //std::cout << alien->getName() << std::endl;
     if(alien->getName().compare("assets/sprites/varginha_sheet.png") == 0){
         //std::cout << "AQUI" << std::endl;
-        if(distance < 100 && alien->isVisible() && !wayActive){
+        if(distance < 150 && alien->isVisible() && !wayActive){
             detecting = true;
         }else{
             detectionBar->resetPercent();
             detecting = false;
         }
-    }else if(distance < 60){
+    }else if(distance < 150){
         wayActive = true;
     }
 }

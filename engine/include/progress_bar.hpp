@@ -12,7 +12,7 @@ namespace engine{
     public:
         ProgressBar(double positionX, double positionY, int width, int height, double increment);
         ProgressBar(double positionX, double positionY, int width, int height,
-                    double increment, std::vector<int> newBackColor, std::vector<int> newFrontColor);
+                    double increment, std::vector<unsigned int> newBackColor, std::vector<unsigned int> newFrontColor);
         ~ProgressBar();
         void update(double timeElapsed);
         void draw();
