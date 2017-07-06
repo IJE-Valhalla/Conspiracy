@@ -14,7 +14,7 @@ ChooseStageScene::ChooseStageScene(int id) : Scene(id){
     selectButton = 1;
     select = new Color(255, 255, 255, 0);
     notSelect = new Color(0, 0, 0, 0);
-    background = new Sprite("assets/sprites/background.png");
+    background = new Sprite("assets/sprites/selecao_fases.png");
     soundEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);
 }
 
@@ -22,6 +22,8 @@ ChooseStageScene::~ChooseStageScene(){
 }
 
 void ChooseStageScene::draw(){
+        background->draw(80, 20);
+
         for(auto gameObject : gameObjectsList) {
                 (*gameObject.second).draw();
         }
@@ -64,8 +66,7 @@ void ChooseStageScene::load(){
         gameObjectsList.push_back(std::pair<int, GameObject*>(3,new Choice("assets/sprites/choices/stage_3.png", 50, 400, 200, 150, "Stage 3", 40)));
         gameObjectsList.push_back(std::pair<int, GameObject*>(4,new Choice("assets/sprites/choices/stage_4.png", 720, 400, 200, 150, "Stage 4", 40)));
         gameObjectsList.push_back(std::pair<int, GameObject*>(5,new Choice("assets/sprites/choices/stage_5.png", 400, 250, 200, 150, "Stage 5", 40)));
-        gameObjectsList.push_back(std::pair<int, GameObject*>(7,new Button("assets/fonts/font.ttf", 400, 20, 100, 100, "Stages", 50)));
-
+        AnimationManager::instance.setBackgroundColor(new Color(255,225,142, 125));
 }
 
 void ChooseStageScene::selectAction(){
