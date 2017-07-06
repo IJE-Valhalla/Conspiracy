@@ -18,7 +18,6 @@ namespace engine{
         void setId(int id);
     protected:
         int sceneId;
-        //vector<GameObject *> gameObjects;
     };
 }
 #endif

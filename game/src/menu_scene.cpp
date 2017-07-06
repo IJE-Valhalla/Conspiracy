@@ -14,6 +14,7 @@ MenuScene::MenuScene(int id) : Scene(id){
         buttonEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);
         selectEffect = new Audio("assets/sounds/SELECT5.wav", "EFFECT", 128);
         backgroundMusic = new Audio("assets/sounds/MENU.wav", "MUSIC", 100);
+        SaveManager::instance.verifySave();
 }
 
 MenuScene::~MenuScene(){
@@ -66,9 +67,10 @@ void MenuScene::selectAction(){
                 selectEffect->play(0);
                 switch(selectButton) {
                 case 1:
-                        getSceneManager()->loadScene(1);
+                        getSceneManager()->loadScene(20);
                         break;
                 case 2:
+                        getSceneManager()->loadScene(8);
                         break;
                 case 3:
                         InputManager::instance.setQuitRequest(true);
@@ -81,10 +83,11 @@ void MenuScene::selectAction(){
 }
 
 void MenuScene::load(){
-        gameObjectsList.push_back(std::pair<int, GameObject*>(1, new Button("assets/fonts/font.ttf", 390, 300, 500, 500, "Start", 50)));
-        gameObjectsList.push_back(std::pair<int, GameObject*>(2,new Button("assets/fonts/font.ttf", 350, 400, 500, 500, "Continue", 50)));
-        gameObjectsList.push_back(std::pair<int, GameObject*>(3,new Button("assets/fonts/font.ttf", 400, 500, 500, 500, "Exit", 50)));
+        gameObjectsList.push_back(std::pair<int, GameObject*>(1, new Button("assets/fonts/font.ttf", 410, 300, 500, 500, "Jogar", 50)));
+        gameObjectsList.push_back(std::pair<int, GameObject*>(2,new Button("assets/fonts/font.ttf", 290, 400, 500, 500, "Selecionar Fase", 50)));
+        gameObjectsList.push_back(std::pair<int, GameObject*>(3,new Button("assets/fonts/font.ttf", 430, 500, 500, 500, "Sair", 50)));
         backgroundMusic->play(-1);
+        AnimationManager::instance.setBackgroundColor(new Color(100,100,100, 125));
 }
 
 void MenuScene::unload(){

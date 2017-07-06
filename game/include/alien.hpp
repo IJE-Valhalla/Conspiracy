@@ -7,6 +7,7 @@
 #include "game_object.hpp"
 #include "collision_manager.hpp"
 #include "audio.hpp"
+#include "finish_point.hpp"
 
 using namespace engine;
 
@@ -20,16 +21,17 @@ public:
     Animation * getAnimation();
     void setAlienSelected();
     void setAlienDeselect();
+    bool isInPosition();
 
 protected:
     void walkInX(double & incX);
     void walkInY(double & incY, double incX);
-    virtual void specialAction() = 0;
     Animation* animator;
     int idleAnimationNumber;
     std::string alienName;
     bool blockMovement;
     bool isSelected;
+    bool inPosition;
     Audio *movement_sound_effect;
 };
 

@@ -1,7 +1,7 @@
 #include "guard.hpp"
 
 Guard::Guard(std::string objectName, double positionX, double positionY,
-             int width, int height, std::string initialDirection) : Enemy(objectName,
+             int width, int height, std::string initialDirection,int newQuantityRepeatWay, double newWaitingTime) : Enemy(objectName,
                                                                           positionX,
                                                                           positionY,
                                                                           width, height){
@@ -18,10 +18,31 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
         animator->addAction("idle_up",5,5);
         animator->addAction("idle_down",0,0);
 
+        range = 150;
+        int angleOfVision = 60;
+        quantityRepeatWay = newQuantityRepeatWay;
+        currentRepeat = 0;
+
+        fieldOfVision = new FieldOfVision(positionX+width/2,positionY-7, range, angleOfVision);
+        talkingBar = new ProgressBar(positionX, positionY, 45, 5, 0.005);
+
+        std::vector<unsigned int> backColor = {255, 0, 0, 255};
+        std::vector<unsigned int> frontColor = {0, 0, 0, 255};
+        detectionBar = new ProgressBar(positionX, positionY, 30, 5, 0.01, backColor, frontColor);
+
         idleAnimationNumber = 0;
+        waitingTime = newWaitingTime;
         wayActive = false;
+        talking = false;
         wayActual = 1;
         direction = initialDirection;
+        lastDirection = initialDirection;
+
+        timerHorizontal = new Timer();
+        timerVertical = new Timer();
+
+        timerHorizontal->start();
+        timerVertical->start();
 }
 
 Guard::~Guard(){
@@ -30,16 +51,25 @@ Guard::~Guard(){
 void Guard::update(double timeElapsed){
         auto incY = 0.1*timeElapsed;
         auto incX = 0.1*timeElapsed;
+
         // To Do: Use Time Elapsed in angleOfVision.
-        if(wayActive){
-            incY = 0.2*timeElapsed;
-            incX = 0.2*timeElapsed;
+        if(talking) {
+                wayActive = false;
+                incX = 0.0;
+                incY = 0.0;
+        }else{
+                if(wayActive) {
+                        incY = 0.2*timeElapsed;
+                        incX = 0.2*timeElapsed;
+                }else{
+                        stop(incX, incY);
+                }
+
+                walkInX(incX);
+                walkInY(incY);
+                fieldOfVision->updateCenter(incX,incY);
         }
-
-        walkInX(incX);
-        walkInY(incY);
-
-        if(incX == 0 && incY == 0) {
+        if(incX == 0.0 && incY == 0.0) {
                 if(idleAnimationNumber) {
                         animator->setInterval("idle_right");
                 }else{
@@ -47,13 +77,25 @@ void Guard::update(double timeElapsed){
                 }
         }
 
-        specialAction();
+        if(talking){
+                talkingBar->update(timeElapsed);
+        }
+        if(detecting){
+            detectionBar->update(timeElapsed);
+            if(detectionBar->getPercent() <= 0.0){
+                detecting = false;
+                wayActive = true;
+            }
+        }
+
         animator->update();
         exclamation->update();
         selectLine();
 }
 
 void Guard::walkInX(double & incX){
+        int beforeWay = wayActual;
+
         if(wayActive) {
                 walkInXSpecial(incX);
         }else{
@@ -71,19 +113,28 @@ void Guard::walkInX(double & incX){
         }
 
         setPositionX(getPositionX()+incX);
-        if(CollisionManager::instance.verifyCollisionWithWalls(this)) {
+        if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
                 if (!wayActive) {
+                        verifyDeadLockHorizontal();
+
                         if(direction == "left") {
                                 direction = "right";
-                        }else{
+                        }else if(direction == "right"){
                                 direction = "left";
                         }
                 }
+
                 setPositionX(getPositionX()+(incX*(0-1)));
+                incX = 0;
+                if (beforeWay == wayActual){
+                    nextWay();
+                }
         }
 }
 
 void Guard::walkInY(double & incY){
+        int beforeWay = wayActual;
+
         if(wayActive) {
                 walkInYSpecial(incY);
         }else{
@@ -101,15 +152,22 @@ void Guard::walkInY(double & incY){
         }
 
         setPositionY(getPositionY()+incY);
-        if(CollisionManager::instance.verifyCollisionWithWalls(this)) {
-            if (!wayActive) {
-                    if(direction == "down") {
-                            direction = "up";
-                    }else{
-                            direction = "down";
-                    }
-            }
+        if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
+                if (!wayActive) {
+                        verifyDeadLockVertical();
+
+                        if(direction == "down") {
+                                direction = "up";
+                        }else if(direction == "up"){
+                                direction = "down";
+                        }
+                }
+
                 setPositionY(getPositionY()+(incY*(0-1)));
+                incY = 0;
+                if (beforeWay == wayActual){
+                    nextWay();
+                }
         }
 }
 
@@ -118,27 +176,19 @@ void Guard::walkInXSpecial(double & incX){
                 incX = incX * (1);
                 idleAnimationNumber = 5;
                 animator->setInterval("right");
+                direction = "right";
                 if(getPositionX()+incX > ways[wayActual].second) {
-                        search = ways.find(wayActual + 1);
-                        if(search != ways.end()) {
-                                wayActual++;
-                        }else{
-                                wayActual = 1;
-                                wayActive = false;
-                        }
+                        incX = 0.0;
+                        nextWay();
                 }
         }else if(ways[wayActual].first == "left") {
                 incX = incX * (-1);
                 idleAnimationNumber = 0;
                 animator->setInterval("left");
+                direction = "left";
                 if(getPositionX()+incX < ways[wayActual].second) {
-                        search = ways.find(wayActual + 1);
-                        if(search != ways.end()) {
-                                wayActual++;
-                        }else{
-                                wayActual = 1;
-                                wayActive = false;
-                        }
+                        incX = 0.0;
+                        nextWay();
                 }
         }else {
                 incX = 0;
@@ -149,108 +199,157 @@ void Guard::walkInYSpecial(double & incY){
         if(ways[wayActual].first == "down") {
                 incY = incY * (1);
                 idleAnimationNumber = 5;
-                direction = "down";
                 animator->setInterval("down");
+                direction = "down";
                 if(getPositionY()+incY > ways[wayActual].second) {
-                        search = ways.find(wayActual + 1);
-                        if(search != ways.end()) {
-                                wayActual++;
-                        }else{
-                                wayActual = 1;
-                                wayActive = false;
-                        }
+                        incY = 0.0;
+                        nextWay();
                 }
         }else if(ways[wayActual].first == "up") {
                 incY = incY * (-1);
                 idleAnimationNumber = 0;
-                direction = "up";
                 animator->setInterval("up");
+                direction = "up";
                 if(getPositionY()+incY < ways[wayActual].second) {
-                        search = ways.find(wayActual + 1);
-                        if(search != ways.end()) {
-                                wayActual++;
-                        }else{
-                                wayActual = 1;
-                                wayActive = false;
-                        }
+                        incY = 0.0;
+                        nextWay();
                 }
         }else {
                 incY = 0;
         }
 }
 
-void Guard::specialAction(){
-        if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE)) {
-                if(idleAnimationNumber == 5) {
-                }else{
+void Guard::draw(){
+        animator->draw(getPositionX()-10, getPositionY()-10);
+        animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+
+        if(detecting) {
+            detectionBar->setPositionX(getPositionX() - 10);
+            detectionBar->setPositionY(getPositionY() - 20);
+            AnimationManager::instance.addProgressBar(detectionBar);
+        }
+        if(wayActive){
+            exclamation->draw(getPositionX(), getPositionY()-30);
+        }
+        if(talking) {
+                AnimationManager::instance.addProgressBar(talkingBar);
+                if(talkingBar->getPercent() <= 0.0) {
+                        notTalkingToETemer();
                 }
         }
+        AnimationManager::instance.addGuardVision(fieldOfVision);
+        //fieldOfVision->draw();
 }
 
-void Guard::draw(){
-    animator->draw(getPositionX()-10, getPositionY()-10);
-    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
-    if(wayActive){
-        exclamation->draw(getPositionX(), getPositionY()-30);
-    }
-    drawLinesOfVision();
-}
-
-void Guard::drawLinesOfVision(){
-    for(auto line:lines){
-        std::pair<std::pair<int,int>,std::pair<int,int>> aux;
-        aux.first = line->getPoint1();
-        aux.second = line->getPoint2();
-        AnimationManager::instance.addLine(aux);
-    }
-}
 void Guard::addWay(int key, std::pair<std::string, int> way){
         ways[key] = way;
 }
 
 void Guard::verifyDistance(GameObject* alien){
-    double distance = sqrt((pow(getPositionX() - alien->getPositionX(), 2.0)) +  (pow(getPositionY() - alien->getPositionY(), 2.0)));
+        double distance = sqrt((pow(getPositionX() - alien->getPositionX(), 2.0)) +  (pow(getPositionY() - alien->getPositionY(), 2.0)));
 // TODO Definir quando irá iniciar o percurso especial do guarda
-    if(distance < 60){
+    //std::cout << alien->getName() << std::endl;
+    if(alien->getName().compare("assets/sprites/varginha_sheet.png") == 0){
+        //std::cout << "AQUI" << std::endl;
+        if(distance < 150 && alien->isVisible() && !wayActive){
+            detecting = true;
+        }else{
+            detectionBar->resetPercent();
+            detecting = false;
+        }
+    }else if(distance < 150){
         wayActive = true;
     }
 }
 
 void Guard::selectLine(){
-    lines.clear();
-    int range = 200;
-    int angleOfVision = 25;
-    //lines of vision
-    Line* middleLine, *middleUpperLine, *middleBottomLine, *upperLine, *bottomLine;
+        std::string action = animator->getCurrentAction();
+        if(lastDirection != action) {
+                lastDirection = action;
+                if(action == "right" || action == "idle_right") {
+                        fieldOfVision->setAngle(0);
+                }else if(action == "left" || action == "idle_left") {
+                  fieldOfVision->setAngle(180);
+                }else if(action == "up") {
+                        fieldOfVision->setAngle(90);
+                }else if(action == "down") {
+                        fieldOfVision->setAngle(270);
+                }
+        }
+}
+int Guard::getRange(){
+        return range;
+}
+FieldOfVision* Guard::getFieldOfVision(){
+        return fieldOfVision;
+}
 
-    std::pair<int,int> center;
-    center.first = getPositionX() + (getWidth()/2);
-    center.second = getPositionY() + (getHeight()/2);
+void Guard::talkingToETemer(std::string status){
+        talking = true;
+        if(status == "right") {
+                idleAnimationNumber = 5;
+        }else{
+                idleAnimationNumber = 0;
+        }
+        talkingBar->resetPercent();
+        talkingBar->setPositionX(getPositionX() - 10);
+        talkingBar->setPositionY(getPositionY() - 20);
+}
 
-    if(animator->getCurrentAction()=="up")
-        middleLine = new Line(center.first,center.second,center.first,center.second-range);
-    else if(animator->getCurrentAction() == "down")
-        middleLine = new Line(center.first,center.second,center.first,center.second+range);
-    else if(animator->getCurrentAction() == "right")
-        middleLine = new Line(center.first,center.second,center.first+range,center.second);
-    else
-        middleLine = new Line(center.first,center.second,center.first-range,center.second);
+void Guard::notTalkingToETemer(){
+        talking = false;
+}
+double Guard::getTalkingBarPercent(){
+        return talkingBar->getPercent();
+}
 
-    if(animator->getCurrentAction() == "up" or animator->getCurrentAction() == "down"){
-        middleUpperLine = new Line(center.first, center.second, middleLine->getPoint2().first- angleOfVision, middleLine->getPoint2().second);
-        upperLine = new Line(center.first, center.second, middleLine->getPoint2().first  - angleOfVision - angleOfVision, middleLine->getPoint2().second);
-        middleBottomLine = new Line(center.first, center.second, middleLine->getPoint2().first  + angleOfVision, middleLine->getPoint2().second);
-        bottomLine = new Line(center.first, center.second, middleLine->getPoint2().first  + angleOfVision  + angleOfVision, middleLine->getPoint2().second);
-    }else{
-        middleUpperLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second - angleOfVision);
-        upperLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second - angleOfVision - angleOfVision);
-        middleBottomLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second + angleOfVision);
-        bottomLine = new Line(center.first, center.second, middleLine->getPoint2().first, middleLine->getPoint2().second + angleOfVision + angleOfVision);
+
+void Guard::verifyDeadLockHorizontal(){
+  if(timerHorizontal->elapsed_time()/100.0 < (waitingTime + 3)){
+          if(direction == "right") {
+                  direction = "up";
+          }else if(direction == "left"){
+                  direction = "down";
+          }
+  }
+  timerHorizontal->step();
+}
+
+void Guard::verifyDeadLockVertical(){
+  if(timerVertical->elapsed_time()/100.0 < (waitingTime + 3)){
+          if(direction == "down"){
+                  direction = "left";
+          }else if(direction == "up"){
+                direction = "right";
+          }
+  }
+  timerVertical->step();
+}
+
+void Guard::stop(double &incX, double &incY){
+      if(((timerVertical->elapsed_time()/100.0) < waitingTime || (timerHorizontal->elapsed_time()/100.0) < waitingTime) && !wayActive){
+        incX = 0.0;
+        incY = 0.0;
+      }
+}
+
+void Guard::setWaitingTime(double newWaitingTime){
+      waitingTime = newWaitingTime;
+}
+
+void Guard::nextWay(){
+    search = ways.find(wayActual + 1);
+
+    if(wayActive){
+        if(search != ways.end()){
+                wayActual++;
+        }else{
+                currentRepeat ++;
+                wayActual = 1;
+                if (currentRepeat >= quantityRepeatWay){
+                    wayActive = false;
+                    currentRepeat = 0;
+                }
+        }
     }
-
-    lines.push_back(middleLine);
-    lines.push_back(middleUpperLine);
-    lines.push_back(upperLine);
-    lines.push_back(middleBottomLine);
-    lines.push_back(bottomLine);
 }

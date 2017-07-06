@@ -5,11 +5,15 @@
 #include "window_manager.hpp"
 #include "progress_bar.hpp"
 #include "input_manager.hpp"
+#include "field_of_vision.hpp"
+#include "line.hpp"
+#include "color.hpp"
 #include <algorithm>
 #include <vector>
 #include "log.h"
 
 namespace engine{
+class FieldOfVision;
 
 class AnimationManager{
 public:
@@ -18,17 +22,25 @@ public:
     void draw_quads();
     void add_collider(SDL_Rect* renderQuad);
     void addProgressBar(ProgressBar* newProgressBar);
-    void addLine(std::pair<std::pair<int,int>,std::pair<int,int>> line);
+    void addFieldOfVision(FieldOfVision* field);
+    void addGuardVision(FieldOfVision* field);
+    void addLine(Line* line);
+    void setBackgroundColor(Color* backgroundColor);
 private:
+    AnimationManager(): color(new Color(100,100,100,0)){};
     bool isActive;
+    Color * color;
     std::vector<AnimationQuad*> animationQuads;
     std::vector<SDL_Rect*> colliderRects;
     std::vector<ProgressBar*> progressBars;
-    std::vector<std::pair<std::pair<int,int>,std::pair<int,int>>> lines;
+    std::vector<FieldOfVision*> fields;
+    std::vector<FieldOfVision*> guardsVision;
     void clearAnimationQuads();
     void draw_colliders();
     void drawLinesOfVision();
     void drawProgressBars();
+    void drawLine(Line* line);
+    void drawTriangleVision(std::vector<Line*> lines);
 };
 
 }

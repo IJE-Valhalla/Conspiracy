@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <utility>
 #include "sprite.hpp"
 
 namespace engine{
@@ -21,7 +22,9 @@ namespace engine{
         double getPositionY();
         int getWidth();
         int getHeight();
+        std::pair<double,double> getCenter();
         bool isEnabled();
+        bool isVisible();
 
         void setName(std::string newName);
         void setPositionX(double newPosition);
@@ -29,12 +32,14 @@ namespace engine{
         void setWidth(int newWidth);
         void setHeight(int newHeight);
         void setEnabled(bool paramEnabled);
+        void setVisible(bool paramVisible);
 
     private:
         std::string name;
 
         bool enabled;
 
+        bool visible;
         // X position and Y position in pixels
         std::pair <double, double> position;
 

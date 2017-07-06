@@ -1,20 +1,22 @@
 #include "alien_varginha.hpp"
 
-Varginha::Varginha(std::string objectName, double positionX, double positionY,
-                                   int width, int height) : Alien(objectName,
-                                                                       positionX,
-                                                                       positionY,
-                                                                       width, height){
+#define FILENAME "assets/sprites/varginha_sheet.png"
+#define WIDTH 10
+#define HEIGHT 15
+
+Varginha::Varginha(double positionX, double positionY) : Alien(FILENAME, positionX, positionY, WIDTH, HEIGHT){
+
    animator->addAction("special_right",12,13);
    animator->addAction("special_left",10,11);
    animator->addAction("invisible_right", 13, 13);
    animator->addAction("invisible_left", 11, 11);
    isInvisible = false;
    isSelected = false;
+   inPosition = false;
 }
 
 void Varginha::update(double timeElapsed){
-    // To Do: Use Time Elapsed in inc.
+    inPosition = false;
     animator->setTotalTime(0.3);
     auto incY = 0.15*timeElapsed;
     auto incX = 0.15*timeElapsed;
@@ -33,8 +35,15 @@ void Varginha::update(double timeElapsed){
     }
     specialAction();
 
-    if(CollisionManager::instance.verifyCollisionWithEnemies(this)){
+    if(CollisionManager::instance.verifyCollisionWithGuards(this)){
         setEnabled(false);
+    }
+
+    FinishPoint* finishPoint = (FinishPoint*)CollisionManager::instance.verifyCollisionWithFinishPoints(this);
+    if(finishPoint != NULL){
+        if(finishPoint->getAlienNames().find("V") != std::string::npos){
+            inPosition = true;
+        }
     }
 
     animator->update();
@@ -49,19 +58,36 @@ void Varginha::specialAction(){
         }else{
             animator->setInterval("invisible_left");
         }
-    }else if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE)){
-        blockMovement = true;
-        isInvisible = true;
-        if(idleAnimationNumber == 5){
-            animator->setInterval("special_right");
-        }else{
-            animator->setInterval("special_left");
-        }
-    }
-    if(InputManager::instance.isKeyReleased(InputManager::KEY_PRESS_SPACE)){
-        isInvisible = false;
-        blockMovement = false;
-    }
+    }else if(isSelected){
+            CameraSwitch* cameraSwitch = NULL;
+            CameraLever* cameraLever = NULL;
+            cameraSwitch = (CameraSwitch*)CollisionManager::instance.verifyCollisionWithCameraSwitches(this);
+            cameraLever = (CameraLever*)CollisionManager::instance.verifyCollisionWithCameraLevers(this);
+
+            if((cameraSwitch != NULL) || (cameraLever != NULL)){
+                   if(InputManager::instance.isKeyTriggered(InputManager::KEY_PRESS_SPACE)){
+                       if(cameraSwitch!= NULL){
+                           cameraSwitch->turnOff();
+                       }else if(cameraLever != NULL){
+                           cameraLever->nextState();
+                       }
+                   }
+           }else if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE)){
+               blockMovement = true;
+               isInvisible = true;
+               setVisible(false);
+               if(idleAnimationNumber == 5){
+                   animator->setInterval("special_right");
+               }else{
+                   animator->setInterval("special_left");
+               }
+           }
+   }
+   if(InputManager::instance.isKeyReleased(InputManager::KEY_PRESS_SPACE)){
+       isInvisible = false;
+       setVisible(true);
+       blockMovement = false;
+   }
 }
 
 

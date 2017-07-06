@@ -2,8 +2,8 @@
 
 namespace engine{
 
-    const std::string GAME_NAME = "Default";
-    const std::pair <int, int> WINDOW_SIZE (960, 600);
+    const std::string GAME_NAME = "Conspiracy";
+    const std::pair <int, int> WINDOW_SIZE (960, 640);
 
     SceneManager* sceneManager;
     WindowManager* windowManager;

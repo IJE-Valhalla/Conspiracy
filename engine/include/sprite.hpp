@@ -17,7 +17,7 @@ namespace engine{
         virtual void init();
         virtual void draw(int x, int y);
         virtual void shutdown();
-
+        void setDrawSize(int w, int h);
     protected:
         SDL_Texture * texture;
         std::string directory;
@@ -25,6 +25,8 @@ namespace engine{
         std::pair<int, int> axis;
         SDL_Rect renderQuad;
         SDL_Rect clipRect;
+        int drawWidth;
+        int drawHeight;
     };
 }
 

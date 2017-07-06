@@ -3,9 +3,16 @@
 
 using namespace engine;
 
-DoorSystem::DoorSystem(std::pair<int,int> doorPosition, std::pair<int,int> switchPosition){
-    door = new Door("assets/sprites//cenary/porta_anima.png", doorPosition.first, doorPosition.second, 79, 58);
-    computerTable = new ComputerTable("assets/sprites/PC_sprites(34X20).png", switchPosition.first,switchPosition.second, 60, 40);
+DoorSystem::DoorSystem(std::pair<int,int> doorPosition,
+                       std::pair<int,int> switchPosition, std::string doorSide){
+
+    if(doorSide.compare("RIGHT") == 0 || doorSide.compare("LEFT") == 0){
+        door = new Door("assets/sprites/cenary/porta_anima_lateral(40X59).png", doorPosition.first, doorPosition.second, 40, 60, doorSide);
+    }else{
+        door = new Door("assets/sprites/cenary/porta_anima.png", doorPosition.first, doorPosition.second, 79, 58, doorSide);
+    }
+
+    computerTable = new ComputerTable("assets/sprites/PC_sprites(34X20).png", switchPosition.first,switchPosition.second, 60, 24);
 }
 DoorSystem::~DoorSystem(){}
 

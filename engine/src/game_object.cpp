@@ -11,6 +11,7 @@ GameObject::GameObject(std::string objectName, double positionX, double position
         setWidth(width);
         setHeight(height);
         setEnabled(true);
+        setVisible(true);
 }
 
 GameObject::GameObject(double positionX, double positionY,int width, int height){
@@ -55,6 +56,13 @@ void GameObject::setPositionX(double newX){
     position.first = newX;
 }
 
+std::pair<double,double> GameObject::getCenter(){
+    std::pair<double,double> center;
+    center.first = (position.first + size.first/2);
+    center.second = (position.second + size.second/2);
+    return center;
+}
+
 void GameObject::setPositionY(double newY){
     position.second = newY;
 }
@@ -71,6 +79,14 @@ void GameObject::setEnabled(bool paramEnabled){
     enabled = paramEnabled;
 }
 
+void GameObject::setVisible(bool paramVisible){
+    visible = paramVisible;
+}
+
 bool GameObject::isEnabled(){
     return enabled;
+}
+
+bool GameObject::isVisible(){
+    return visible;
 }

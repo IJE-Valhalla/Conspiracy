@@ -6,12 +6,18 @@
 
 class Etemer: public Alien{
 public:
-    Etemer(std::string objectName, double positionX, double positionY,
-                                                     int width, int height);
+    Etemer(double positionX, double positionY);
     void update(double timeElapsed);
     void draw();
+    void verifyDistance(GameObject* guard);
 protected:
-    void specialAction();
+    void specialAction(GameObject* guard, double distance);
+    void walkInX(double & incX);
+    void walkInY(double & incY, double );
+
+private:
+    bool talking;
+    void moveChair();
 };
 
 #endif

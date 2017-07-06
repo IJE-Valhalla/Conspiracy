@@ -96,3 +96,5 @@ tags
 # End of https://www.gitignore.io/api/vim,macos,c++,cmake
 
 conspiracy
+
+*save.txt

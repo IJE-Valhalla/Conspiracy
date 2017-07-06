@@ -7,7 +7,7 @@ PaperTable::PaperTable(std::string objectName, double positionX, double position
                                                                          positionY,
                                                                          width, height){
 table = new Table("assets/sprites/mesa.png", positionX, positionY, width, height);
-paper = new Paper("assets/sprites/papeis(19X21).png", positionX + 15, positionY + 2, 10, 40);
+paper = new Paper("assets/sprites/papeis(19X21).png", positionX + 20, positionY - 2, 10, 40);
 }
 
 PaperTable::~PaperTable(){
