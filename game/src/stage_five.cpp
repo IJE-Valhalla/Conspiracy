@@ -7,17 +7,32 @@ StageFive::StageFive(int id, std::string newTiledFile) : GameScene (id, newTiled
 }
 
 void StageFive::createGuards(){
-    std::pair <std::string, int> wayOne ("right", 480);
-    std::pair <std::string, int> wayTwo ("up", 20);
-    std::pair <std::string, int> wayThree ("left", 220);
-    std::pair <std::string, int> wayFour ("down", 120);
+    std::pair <std::string, int> wayOne1 ("down", 900);
+    std::pair <std::string, int> wayTwo1 ("up", 450);
 
-    Guard * guard = new Guard("assets/sprites/seguranca_sheet.png", 220, 120, 18, 35, "right", 2, 10);
-    guard->addWay(1, wayOne);
-    guard->addWay(2, wayTwo);
-    guard->addWay(3, wayThree);
-    guard->addWay(4, wayFour);
+    Guard * guard1 = new Guard("assets/sprites/seguranca_sheet.png", 800, HEADER_SIZE + 430, 18, 35, "down", 2, 10);
+    guard1->addWay(1, wayOne1);
+    guard1->addWay(2, wayTwo1);
 
+    gameObjectsList.push_back(guard1);
+
+    std::pair <std::string, int> wayOne2 ("right", 900);
+    std::pair <std::string, int> wayTwo2 ("left", 450);
+
+    Guard * guard2 = new Guard("assets/sprites/seguranca_sheet.png", 800, HEADER_SIZE + 490, 18, 35, "right", 2, 10);
+    guard2->addWay(1, wayOne2);
+    guard2->addWay(2, wayTwo2);
+
+    gameObjectsList.push_back(guard2);
+
+    std::pair <std::string, int> wayOne3 ("right", 900);
+    std::pair <std::string, int> wayTwo3 ("left", 450);
+
+    Guard * guard3 = new Guard("assets/sprites/seguranca_sheet.png", 800, HEADER_SIZE + 100, 18, 35, "right", 2, 10);
+    guard3->addWay(1, wayOne3);
+    guard3->addWay(2, wayTwo3);
+
+    gameObjectsList.push_back(guard3);
 
     Camera* camera1 = new Camera(2,450,"upright");
     gameObjectsList.push_back(camera1);
@@ -37,7 +52,6 @@ void StageFive::createGuards(){
     Camera* camera6 = new Camera(730,625,"upleft");
     gameObjectsList.push_back(camera6);
 
-    gameObjectsList.push_back(guard);
 }
 
 void StageFive::createAliens(){
@@ -65,7 +79,7 @@ void StageFive::createDoorSystems(){
 }
 
 void StageFive::createPapers(){
-    gameObjectsList.push_back(new PaperTable("Paper", 880, 580, 60, 34));
+    gameObjectsList.push_back(new PaperTable("Paper", 880, 570, 60, 34));
     gameObjectsList.push_back(new PaperTable("Paper", 10, 580, 60, 34));
     gameObjectsList.push_back(new PaperTable("Paper", 530, 530, 60, 34));
     gameObjectsList.push_back(new PaperTable("Paper", 550, 100, 60, 34));
@@ -73,8 +87,8 @@ void StageFive::createPapers(){
 }
 
 void StageFive::createTables(){
-    gameObjectsList.push_back(new Table("assets/sprites/mesa.png", 890, 520, 60, 34));
-    gameObjectsList.push_back(new Table("assets/sprites/mesa.png", 828, 520, 60, 34));
+    gameObjectsList.push_back(new Table("assets/sprites/mesa.png", 890, 490, 60, 34));
+    gameObjectsList.push_back(new Table("assets/sprites/mesa.png", 828, 490, 60, 34));
 }
 
 void StageFive::createFinishPoints(){
