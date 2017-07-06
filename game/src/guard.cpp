@@ -24,7 +24,7 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
         currentRepeat = 0;
 
         fieldOfVision = new FieldOfVision(positionX+width/2,positionY-7, range, angleOfVision);
-        talkingBar = new ProgressBar(positionX, positionY, 45, 5, 0.005);
+        talkingBar = new ProgressBar(positionX, positionY, 45, 5, 0.0025);
 
         std::vector<unsigned int> backColor = {255, 0, 0, 255};
         std::vector<unsigned int> frontColor = {0, 0, 0, 255};
@@ -59,8 +59,8 @@ void Guard::update(double timeElapsed){
                 incY = 0.0;
         }else{
                 if(wayActive) {
-                        incY = 0.2*timeElapsed;
-                        incX = 0.2*timeElapsed;
+                        incY = 0.15*timeElapsed;
+                        incX = 0.15*timeElapsed;
                 }else{
                         stop(incX, incY);
                 }
