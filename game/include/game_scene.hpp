@@ -25,6 +25,7 @@ using namespace engine;
 class GameScene: public Scene{
 public:
     GameScene(int id, std::string newTiledFile);
+    GameScene(int id, std::string newTiledFile, std::string music);
     ~GameScene();
     void load();
     void draw();
@@ -33,6 +34,7 @@ public:
     void verifyWinOrLose();
 protected:
     Player* player;
+    Audio* background_music;
     std::vector<GameObject*> gameObjectsList;
     std::string tiledFile;
     Timer* stageTimer;

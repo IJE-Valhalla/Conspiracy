@@ -28,6 +28,13 @@ GameScene::GameScene(int id, std::string newTiledFile) : Scene(id){
     actualPapers = 0;
 }
 
+GameScene::GameScene(int id, std::string newTiledFile, std::string audioFile) : Scene(id){
+    background_music = new Audio(audioFile, "MUSIC", 50);
+    tiledFile = newTiledFile;
+    skipTimer = new Timer();
+    stageTimer = new Timer();
+    actualPapers = 0;
+}
 void GameScene::draw(){
         for(auto gameObject : gameObjectsList) {
                 (*gameObject).draw();
@@ -117,12 +124,11 @@ void GameScene::initializeColliders(){
 }
 
 void GameScene::load(){
+    background_music->play(-1);
     aliensInPosition = false;
     stageTimer->start();
     skipTimer->start();
     skipTimer->step();
-    Audio background_music = Audio("assets/sounds/tema1demo.wav", "MUSIC", 50);
-    background_music.play(-1);
 
     createGround();
     createGameBorders();

@@ -3,7 +3,7 @@
 using namespace engine;
 #define PAPERQUANTITY 3
 #define STAGENUMBER 3
-StageThree::StageThree(int id, std::string newTiledFile) : GameScene (id, newTiledFile){
+StageThree::StageThree(int id, std::string newTiledFile) : GameScene (id, newTiledFile, "assets/sounds/TEMA3.wav"){
 
 }
 
