@@ -39,6 +39,10 @@ void ChooseStageScene::update(double timeElapsed){
                                 ((Choice *)(gameObject.second))->setTextColor(notSelect);
                                 ((Choice *)(gameObject.second))->setChosen(false);
                         }
+
+                        if(gameObject.first <= SaveManager::instance.getStageNumberUnlock()){
+                                ((Choice *)(gameObject.second))->setUnlock(true);
+                        }
                 }
 
                 if(!gameObject.first){
@@ -88,19 +92,29 @@ void ChooseStageScene::selectAction(){
                           getSceneManager()->loadScene(0);
                           break;
                   case 1:
-                          getSceneManager()->loadScene(1);
+                          if(selectButton <= SaveManager::instance.getStageNumberUnlock()){
+                              getSceneManager()->loadScene(1);
+                          }
                           break;
                   case 2:
-                          getSceneManager()->loadScene(2);
+                          if(selectButton <= SaveManager::instance.getStageNumberUnlock()){
+                              getSceneManager()->loadScene(2);
+                          }
                           break;
                   case 3:
-                          getSceneManager()->loadScene(3);
+                          if(selectButton <= SaveManager::instance.getStageNumberUnlock()){
+                              getSceneManager()->loadScene(3);
+                          }
                           break;
                   case 4:
-                          getSceneManager()->loadScene(4);
+                          if(selectButton <= SaveManager::instance.getStageNumberUnlock()){
+                              getSceneManager()->loadScene(4);
+                          }
                           break;
                   case 5:
-                          getSceneManager()->loadScene(5);
+                          if(selectButton <= SaveManager::instance.getStageNumberUnlock()){
+                              getSceneManager()->loadScene(5);
+                          }
                           break;
                 default:
                         break;

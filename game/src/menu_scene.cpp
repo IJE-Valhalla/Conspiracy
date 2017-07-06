@@ -14,6 +14,7 @@ MenuScene::MenuScene(int id) : Scene(id){
         buttonEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);
         selectEffect = new Audio("assets/sounds/SELECT5.wav", "EFFECT", 128);
         backgroundMusic = new Audio("assets/sounds/MENU.wav", "MUSIC", 100);
+        SaveManager::instance.verifySave();
 }
 
 MenuScene::~MenuScene(){

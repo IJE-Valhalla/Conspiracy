@@ -7,6 +7,7 @@
 #include "game_object.hpp"
 #include "color.hpp"
 #include "audio.hpp"
+#include "save_manager.hpp"
 
 #include <vector>
 

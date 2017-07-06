@@ -1,7 +1,13 @@
 #include "scene_manager.hpp"
 #include "scene.hpp"
+#include "save_manager.hpp"
 
 using namespace engine;
+
+SceneManager::SceneManager(){
+    beforeSceneId = 0;
+    currentSceneId = 0;  
+}
 
 void SceneManager::addScene(Scene* scene){
     if(scenes.find(scene->getId()) != scenes.end()){
@@ -21,18 +27,26 @@ void SceneManager::loadScene(int id){
         }
         currentScene = scenes[id];
         currentScene->load();
-    }
-
-}
-
-void SceneManager::loadNextScene(){
-    if(currentScene->getId() < 5){
-        loadScene(currentScene->getId()+1);
-    }else{
-        loadScene(7);
+        beforeSceneId = currentSceneId;
+        currentSceneId = currentScene->getId();
+        if (beforeSceneId >= SaveManager::instance.getStageNumberUnlock() && beforeSceneId < 6 && currentSceneId != 6){
+              SaveManager::instance.saveActualSituation(beforeSceneId + 1);
+        }
     }
 }
 
 Scene* SceneManager::getCurrentScene(){
     return currentScene;
+}
+
+int SceneManager::getCurrentSceneId(){
+    return currentSceneId;
+}
+
+int SceneManager::getBeforeSceneId(){
+    return beforeSceneId;
+}
+
+void SceneManager::setCurrentSceneId(int id){
+    currentSceneId = id;
 }

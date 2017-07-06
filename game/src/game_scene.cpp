@@ -73,7 +73,7 @@ void GameScene::verifyWinOrLose(){
             getSceneManager()->loadScene(6);
         }
     }else if(allPapersEdited || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skipTimer->total_elapsed_time() >= 500)){
-        getSceneManager()->loadNextScene();
+        getSceneManager()->loadScene(7);
     }
 }
 
