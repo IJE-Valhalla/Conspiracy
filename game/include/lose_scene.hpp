@@ -28,6 +28,7 @@ private:
     Color * select;
     Color * notSelect;
     Audio * soundEffect;
+    Audio * backgroundMusic;
 };
 
 #endif

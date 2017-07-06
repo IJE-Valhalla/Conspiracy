@@ -4,7 +4,7 @@ using namespace engine;
 
 #define PAPERQUANTITY 2
 #define STAGENUMBER 1
-StageOne::StageOne(int id, std::string newTiledFile) : GameScene (id, newTiledFile){
+StageOne::StageOne(int id, std::string newTiledFile) : GameScene (id, newTiledFile, "assets/sounds/TEMA1.wav"){
 
 }
 
