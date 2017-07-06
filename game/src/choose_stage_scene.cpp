@@ -94,7 +94,7 @@ void ChooseStageScene::selectAction(){
                           break;
                   case 1:
                           if(selectButton <= SaveManager::instance.getStageNumberUnlock()){
-                              getSceneManager()->loadScene(1);
+                              getSceneManager()->loadScene(20);
                           }
                           break;
                   case 2:

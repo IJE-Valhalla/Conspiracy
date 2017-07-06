@@ -28,7 +28,8 @@ int main(int, char**){
     StageFive * stageFive = new StageFive(5, "assets/tiledMaps/Stage5.txt");
     LoseScene* loseScene = new LoseScene(6);
     WinScene* winScene = new WinScene(7);
-    TutorialScene* biluTutorialScene = new TutorialScene(20, "assets/sprites/tutorial_bilu.png");
+    TutorialScene* biluTutorialScene = new TutorialScene(20, "assets/sprites/tutorial_bilu.png", 1);
+    TutorialScene* exitTutorialScene = new TutorialScene(21, "assets/sprites/tutorial_saida.png", 20);
     ChooseStageScene* chooseStageScene = new ChooseStageScene(8);
     FinishScene* finishScene = new FinishScene(9);
 
@@ -41,6 +42,7 @@ int main(int, char**){
     getSceneManager()->addScene(loseScene);
     getSceneManager()->addScene(winScene);
     getSceneManager()->addScene(biluTutorialScene);
+    getSceneManager()->addScene(exitTutorialScene);
     getSceneManager()->addScene(chooseStageScene);
     getSceneManager()->addScene(finishScene);
 
