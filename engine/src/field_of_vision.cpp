@@ -44,10 +44,28 @@ void FieldOfVision::updateCenter(double incX, double incY){
 }
 
 void FieldOfVision::draw(){
-    AnimationManager::instance.addLine(centerLine);
+    //AnimationManager::instance.addLine(centerLine);
+    Line* bottomLine = NULL;
+    Line* upperLine = NULL;
+    Line* frontLine = NULL;
+    int i = 0;
     for(auto line:lines){
-        AnimationManager::instance.addLine(line);
+        if(i++ == 0){
+            bottomLine = line;
+            upperLine = line;
+        }
+        if(line->getAngle() > upperLine->getAngle()){
+            upperLine = line;
+        }
+        if(line->getAngle() < bottomLine->getAngle()){
+            bottomLine = line;
+        }
     }
+    frontLine = new Line(bottomLine->getPoint2().first,bottomLine->getPoint2().second,upperLine->getPoint2().first,upperLine->getPoint2().second);
+    AnimationManager::instance.addLine(bottomLine);
+    AnimationManager::instance.addLine(upperLine);
+    AnimationManager::instance.addLine(frontLine);
+
 }
 
 void FieldOfVision::incrementAngle(double angle){

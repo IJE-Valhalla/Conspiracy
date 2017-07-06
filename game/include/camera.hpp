@@ -11,14 +11,18 @@ using namespace engine;
 
 class Camera: public Enemy{
 public:
-    Camera(std::string objectName, double positionX, double positionY, int width, int height, std::string direction);
+    Camera(double positionX, double positionY, std::string direction);
+    Camera(double positionX, double positionY, std::string direction, int angleOfVision, int range, int initialAngle);
     ~Camera();
     void update(double timeElapsed);
     void draw();
     int getRange();
     FieldOfVision* getFieldOfVision();
 private:
+    void initializeVision(int p_range, int p_angleOfVision, std::string direction);
+    void initializeAnimator(std::string filename);
     int range;
+    int angleOfVision;
     FieldOfVision* fieldOfVision;
     Animation* animator;
 };

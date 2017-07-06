@@ -20,6 +20,17 @@ Line::Line(Line* referenceLine){
     angle = referenceLine->getAngle();
 }
 
+Line::Line(double x1, double y1, double x2, double y2){
+    point1.first = x1;
+    point1.second = y1;
+    point2.first = x2;
+    point2.second = y2;
+
+    double deltaY = y2 - y1;
+    double deltaX = x2 - x1;
+
+    this->angle = atan2(deltaY,deltaX) * 180 / PI;
+}
 std::pair<double,double> Line::getPoint1(){
     return point1;
 }
