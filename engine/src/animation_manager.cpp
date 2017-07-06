@@ -49,6 +49,7 @@ void AnimationManager::draw_quads(){
     drawProgressBars();
     drawLinesOfVision();
     clearAnimationQuads();
+    SDL_SetRenderDrawColor(WindowManager::getGameCanvas(), color->r, color->g, color->b, color->a);
 }
 void AnimationManager::drawLinesOfVision(){
 
@@ -56,8 +57,8 @@ void AnimationManager::drawLinesOfVision(){
     for(auto line: lines){
         SDL_RenderDrawLine(WindowManager::getGameCanvas(), line->getPoint1().first, line->getPoint1().second, line->getPoint2().first, line->getPoint2().second);
     }
-    int color = 100;
-    SDL_SetRenderDrawColor(WindowManager::getGameCanvas(), color, color, color, 1);
+    int colorLine = 100;
+    SDL_SetRenderDrawColor(WindowManager::getGameCanvas(), colorLine, colorLine, colorLine, 1);
 }
 void AnimationManager::draw_colliders(){
     for(SDL_Rect * quad : colliderRects) {
@@ -69,4 +70,8 @@ void AnimationManager::drawProgressBars(){
     for(ProgressBar * progressBar : progressBars) {
         progressBar->draw();
     }
+}
+
+void AnimationManager::setBackgroundColor(Color* backgroundColor){
+    color = backgroundColor;
 }
