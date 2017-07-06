@@ -6,6 +6,8 @@
 #include "progress_bar.hpp"
 #include "input_manager.hpp"
 #include "field_of_vision.hpp"
+#include "line.hpp"
+#include "color.hpp"
 #include <algorithm>
 #include <vector>
 #include "log.h"
@@ -22,8 +24,12 @@ public:
     void addProgressBar(ProgressBar* newProgressBar);
     void addFieldOfVision(FieldOfVision* field);
     void addGuardVision(FieldOfVision* field);
+    void addLine(Line* line);
+    void setBackgroundColor(Color* backgroundColor);
 private:
+    AnimationManager(): color(new Color(100,100,100,0)){};
     bool isActive;
+    Color * color;
     std::vector<AnimationQuad*> animationQuads;
     std::vector<SDL_Rect*> colliderRects;
     std::vector<ProgressBar*> progressBars;

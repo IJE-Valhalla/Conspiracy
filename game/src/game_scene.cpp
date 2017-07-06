@@ -82,6 +82,7 @@ void GameScene::verifyWinOrLose(){
         if(stageTimer->elapsed_time() >= 2500){
             getSceneManager()->loadScene(6);
         }
+
     }else if((allPapersEdited && aliensInPosition) || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skipTimer->total_elapsed_time() >= 500)){
         getSceneManager()->loadScene(7);
     }
@@ -135,6 +136,7 @@ void GameScene::load(){
     createFinishPoints();
 
     initializeColliders();
+    AnimationManager::instance.setBackgroundColor(new Color(100,100,100, 125));
 
 }
 

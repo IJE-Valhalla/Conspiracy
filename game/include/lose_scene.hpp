@@ -3,7 +3,7 @@
 
 #include "engine.hpp"
 #include "scene.hpp"
-#include "sprite.hpp"
+#include "animation.hpp"
 #include "game_object.hpp"
 #include "color.hpp"
 #include "audio.hpp"
@@ -24,7 +24,7 @@ private:
     void selectAction();
     int selectButton;
     std::vector<std::pair<int, GameObject*>> gameObjectsList;
-    Sprite * background;
+    Animation * background;
     Color * select;
     Color * notSelect;
     Audio * soundEffect;
