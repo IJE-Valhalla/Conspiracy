@@ -3,6 +3,7 @@
 
 #include <utility>
 #include <math.h>
+#include "log.h"
 
 #define PI 3.14159265
 
@@ -12,6 +13,7 @@ class Line{
 public:
     Line(double x1, double y1, int size, double angle);
     Line(Line* referenceLine);
+    Line(double x1, double y1, double x2, double y2);
     ~Line();
     std::pair<double,double> getPoint1();
     std::pair<double,double> getPoint2();

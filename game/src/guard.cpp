@@ -83,7 +83,6 @@ void Guard::update(double timeElapsed){
             }
         }
 
-        specialAction();
         animator->update();
         exclamation->update();
         fieldOfVision->updateCenter(incX,incY);
@@ -227,14 +226,6 @@ void Guard::walkInYSpecial(double & incY){
                 }
         }else {
                 incY = 0;
-        }
-}
-
-void Guard::specialAction(){
-        if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE)) {
-                if(idleAnimationNumber == 5) {
-                }else{
-                }
         }
 }
 
