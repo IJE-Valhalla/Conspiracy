@@ -10,8 +10,8 @@ void AnimationManager::add_animation_quad(AnimationQuad* newQuad){
 void AnimationManager::add_collider(SDL_Rect* newQuad){
     colliderRects.push_back(newQuad);
 }
-void AnimationManager::addLine(Line* line){
-    lines.push_back(line);
+void AnimationManager::addFieldOfVision(FieldOfVision* field){
+    fields.push_back(field);
 }
 void AnimationManager::addProgressBar(ProgressBar* newProgressBar){
     progressBars.push_back(newProgressBar);
@@ -24,8 +24,9 @@ void AnimationManager::clearAnimationQuads(){
     for(auto collider: colliderRects){
         free(collider);
     }
+
     animationQuads.clear();
-    lines.clear();
+    fields.clear();
     progressBars.clear();
     colliderRects.clear();
 
@@ -53,12 +54,48 @@ void AnimationManager::draw_quads(){
 void AnimationManager::drawLinesOfVision(){
 
     SDL_SetRenderDrawColor(WindowManager::getGameCanvas(), 230, 0, 0, 1);
-    for(auto line: lines){
-        SDL_RenderDrawLine(WindowManager::getGameCanvas(), line->getPoint1().first, line->getPoint1().second, line->getPoint2().first, line->getPoint2().second);
+    if(!isActive){
+        for(auto field: fields){
+            drawTriangleVision(field->getLines());
+        }
+    }else{
+        for(auto field: fields){
+            for(auto line: field->getLines()){
+                drawLine(line);
+            }
+        }
     }
+
     int color = 100;
     SDL_SetRenderDrawColor(WindowManager::getGameCanvas(), color, color, color, 1);
 }
+
+void AnimationManager::drawTriangleVision(std::vector<Line*> lines){
+    Line* bottomLine = NULL;
+    Line* upperLine = NULL;
+    Line* frontLine = NULL;
+    int i = 0;
+    for(auto line:lines){
+        if(i++ == 0){
+            bottomLine = line;
+            upperLine = line;
+        }
+        if(line->getAngle() > upperLine->getAngle()){
+            upperLine = line;
+        }
+        if(line->getAngle() < bottomLine->getAngle()){
+            bottomLine = line;
+        }
+    }
+    frontLine = new Line(bottomLine->getPoint2().first,bottomLine->getPoint2().second,upperLine->getPoint2().first,upperLine->getPoint2().second);
+    drawLine(bottomLine);
+    drawLine(upperLine);
+    drawLine(frontLine);
+}
+void AnimationManager::drawLine(Line* line){
+    SDL_RenderDrawLine(WindowManager::getGameCanvas(), line->getPoint1().first, line->getPoint1().second, line->getPoint2().first, line->getPoint2().second);
+}
+
 void AnimationManager::draw_colliders(){
     for(SDL_Rect * quad : colliderRects) {
         SDL_RenderDrawRect(WindowManager::getGameCanvas(), quad);

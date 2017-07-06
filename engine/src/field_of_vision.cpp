@@ -9,7 +9,7 @@ FieldOfVision::FieldOfVision(double x, double y, int size, double angle){
     catchEffect = new Audio("assets/sounds/GUARDAVIU.wav", "EFFECT", 128);
     active = true;
     //not including centerLine
-    numberOfLines = 28;
+    numberOfLines = 10;
     createLines(x,y,range);
 }
 
@@ -32,8 +32,9 @@ void FieldOfVision::createLines(double x, double y, int size){
     resetLines();
     centerLine = new Line(x,y,size, 0);
 
-    int angleInc = (totalAngle/2)/(numberOfLines/2);
-    for(int i = 0, lineAngle = angleInc; i<numberOfLines/2; i++, lineAngle += angleInc){
+    double angleInc = ((double)totalAngle/2.0)/((double)numberOfLines/2.0);
+    WARN(angleInc);
+    for(double i = 0, lineAngle = angleInc; i<numberOfLines/2; i+=1, lineAngle += angleInc){
         Line* newUpperLine = new Line(centerLine);
         newUpperLine->rotateLine(lineAngle);
         lines.push_back(newUpperLine);
@@ -52,28 +53,8 @@ void FieldOfVision::updateCenter(double incX, double incY){
 
 void FieldOfVision::draw(){
     if(active){
-        Line* bottomLine = NULL;
-        Line* upperLine = NULL;
-        Line* frontLine = NULL;
-        int i = 0;
-        for(auto line:lines){
-            if(i++ == 0){
-                bottomLine = line;
-                upperLine = line;
-            }
-            if(line->getAngle() > upperLine->getAngle()){
-                upperLine = line;
-            }
-            if(line->getAngle() < bottomLine->getAngle()){
-                bottomLine = line;
-            }
-        }
-        frontLine = new Line(bottomLine->getPoint2().first,bottomLine->getPoint2().second,upperLine->getPoint2().first,upperLine->getPoint2().second);
-        AnimationManager::instance.addLine(bottomLine);
-        AnimationManager::instance.addLine(upperLine);
-        AnimationManager::instance.addLine(frontLine);
+        AnimationManager::instance.addFieldOfVision(this);
     }
-
 }
 
 void FieldOfVision::incrementAngle(double angle){
