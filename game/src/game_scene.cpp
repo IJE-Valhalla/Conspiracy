@@ -47,13 +47,12 @@ void GameScene::update(double timeElapsed){
 void GameScene::verifyWinOrLose(){
         bool allPapersEdited = true;
         std::vector<Guard *> guards;
-        //Player * player = NULL;
         for(auto gameObject : gameObjectsList) {
                 if(typeid(*gameObject) == typeid(Guard)) {
                         guards.push_back((Guard *)(gameObject));
                 }else if(typeid(*gameObject) == typeid(PaperTable)) {
                         if(!(((PaperTable*)(gameObject))->getPaper())->isEdited()) {
-                                //allPapersEdited = false;
+                                allPapersEdited = false;
                         }
                 }
         }
@@ -65,7 +64,7 @@ void GameScene::verifyWinOrLose(){
         }
     if((Etemer *)(player->getEtemer())->isInPosition() &&
       (Bilu*)(player->getBilu())->isInPosition() &&
-      (Varginha*)(player->getBilu())->isInPosition()){
+      (Varginha*)(player->getVarginha())->isInPosition()){
           aliensInPosition = true;
       }
 
@@ -73,14 +72,12 @@ void GameScene::verifyWinOrLose(){
         stageTimer->step();
     }
     if(player->isDead()){
-        //stageTimer->step();
-        std::cout << stageTimer->elapsed_time() << std::endl;
         if(stageTimer->elapsed_time() >= 2500){
             getSceneManager()->loadScene(6);
         }
     }else if((allPapersEdited && aliensInPosition) || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skipTimer->total_elapsed_time() >= 500)){
         getSceneManager()->loadNextScene();
-        //getSceneManager()->loadScene(3);
+        getSceneManager()->loadScene(7);
     }
 }
 

@@ -18,6 +18,7 @@ Bilu::Bilu(double positionX, double positionY) : Alien(FILENAME, positionX, posi
 }
 
 void Bilu::update(double timeElapsed){
+        inPosition = false;
         animator->setTotalTime(0.3);
         auto incY = 0.15*timeElapsed;
         auto incX = 0.15*timeElapsed;

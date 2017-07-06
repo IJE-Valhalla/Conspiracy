@@ -180,7 +180,6 @@ GameObject* CollisionManager::verifyCollisionWithPapers(GameObject* g1){
 GameObject* CollisionManager::verifyCollisionWithFinishPoints(GameObject* g1){
     for(GameObject * finishPoint : finishPointList) {
             if(verifyCollision(finishPoint, g1)) {
-                    std::cout << "AAAA" << std::endl;
                     return finishPoint;
             }
     }

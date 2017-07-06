@@ -35,49 +35,49 @@ std::string FinishPoint::getAlienNames(){
 }
 
 void FinishPoint::draw(){
-    animator->draw(getPositionX(), getPositionY());
+    animator->draw_instant(getPositionX(), getPositionY());
 
     if(orientation.compare("UPDOWN") == 0){
         if(aliens.compare("EBV") == 0){
-            etemerAnim->draw(getPositionX()+1, getPositionY()+3.5);
-            biluAnim->draw(getPositionX()+12, getPositionY()+3.5);
-            varginhaAnim->draw(getPositionX()+23, getPositionY()+3.5);
+            etemerAnim->draw_instant(getPositionX()+1, getPositionY()+3.5);
+            biluAnim->draw_instant(getPositionX()+12, getPositionY()+3.5);
+            varginhaAnim->draw_instant(getPositionX()+23, getPositionY()+3.5);
         }else if(aliens.compare("EB") == 0){
-            etemerAnim->draw(getPositionX()+1, getPositionY()+3.5);
-            biluAnim->draw(getPositionX()+23, getPositionY()+3.5);
+            etemerAnim->draw_instant(getPositionX()+1, getPositionY()+3.5);
+            biluAnim->draw_instant(getPositionX()+23, getPositionY()+3.5);
         }else if(aliens.compare("BV") == 0){
-            biluAnim->draw(getPositionX()+1, getPositionY()+3.5);
-            varginhaAnim->draw(getPositionX()+23, getPositionY()+3.5);
+            biluAnim->draw_instant(getPositionX()+1, getPositionY()+3.5);
+            varginhaAnim->draw_instant(getPositionX()+23, getPositionY()+3.5);
         }else if(aliens.compare("EV") == 0){
-            etemerAnim->draw(getPositionX()+1, getPositionY()+3.5);
-            varginhaAnim->draw(getPositionX()+23, getPositionY()+3.5);
+            etemerAnim->draw_instant(getPositionX()+1, getPositionY()+3.5);
+            varginhaAnim->draw_instant(getPositionX()+23, getPositionY()+3.5);
         }else if(aliens.compare("E") == 0){
-            etemerAnim->draw(getPositionX()+12, getPositionY()+3.5);
+            etemerAnim->draw_instant(getPositionX()+12, getPositionY()+3.5);
         }else if(aliens.compare("B") == 0){
-            biluAnim->draw(getPositionX()+12, getPositionY()+3.5);
+            biluAnim->draw_instant(getPositionX()+12, getPositionY()+3.5);
         }else if(aliens.compare("V") == 0){
-            varginhaAnim->draw(getPositionX()+12, getPositionY()+3.5);
+            varginhaAnim->draw_instant(getPositionX()+12, getPositionY()+3.5);
         }
     }else{
         if(aliens.compare("EBV") == 0){
-            etemerAnim->draw(getPositionX()+3.5, getPositionY()+1);
-            biluAnim->draw(getPositionX()+3.5, getPositionY()+12);
-            varginhaAnim->draw(getPositionX()+3.5, getPositionY()+23);
+            etemerAnim->draw_instant(getPositionX()+3.5, getPositionY()+1);
+            biluAnim->draw_instant(getPositionX()+3.5, getPositionY()+12);
+            varginhaAnim->draw_instant(getPositionX()+3.5, getPositionY()+23);
         }else if(aliens.compare("EB") == 0){
-            etemerAnim->draw(getPositionX()+3.5, getPositionY()+1);
-            biluAnim->draw(getPositionX()+3.5, getPositionY()+23);
+            etemerAnim->draw_instant(getPositionX()+3.5, getPositionY()+1);
+            biluAnim->draw_instant(getPositionX()+3.5, getPositionY()+23);
         }else if(aliens.compare("BV") == 0){
-            biluAnim->draw(getPositionX()+3.5, getPositionY()+1);
-            varginhaAnim->draw(getPositionX()+2, getPositionY()+23);
+            biluAnim->draw_instant(getPositionX()+3.5, getPositionY()+1);
+            varginhaAnim->draw_instant(getPositionX()+2, getPositionY()+23);
         }else if(aliens.compare("EV") == 0){
-            etemerAnim->draw(getPositionX()+3.5, getPositionY()+1);
-            varginhaAnim->draw(getPositionX()+3.5, getPositionY()+23);
+            etemerAnim->draw_instant(getPositionX()+3.5, getPositionY()+1);
+            varginhaAnim->draw_instant(getPositionX()+3.5, getPositionY()+23);
         }else if(aliens.compare("E") == 0){
-            etemerAnim->draw(getPositionX()+3.5, getPositionY()+12);
+            etemerAnim->draw_instant(getPositionX()+3.5, getPositionY()+12);
         }else if(aliens.compare("B") == 0){
-            biluAnim->draw(getPositionX()+3.5, getPositionY()+12);
+            biluAnim->draw_instant(getPositionX()+3.5, getPositionY()+12);
         }else if(aliens.compare("V") == 0){
-            varginhaAnim->draw(getPositionX()+3.5, getPositionY()+12);
+            varginhaAnim->draw_instant(getPositionX()+3.5, getPositionY()+12);
         }
     }
 }

@@ -16,6 +16,7 @@ Varginha::Varginha(double positionX, double positionY) : Alien(FILENAME, positio
 }
 
 void Varginha::update(double timeElapsed){
+    inPosition = false;
     animator->setTotalTime(0.3);
     auto incY = 0.15*timeElapsed;
     auto incX = 0.15*timeElapsed;

@@ -16,6 +16,7 @@ Etemer::Etemer(double positionX, double positionY) : Alien(FILENAME, positionX, 
 }
 
 void Etemer::update(double timeElapsed){
+        inPosition = false;
         if (blockMovement) {
                 animator->setTotalTime(1.0);
         }else{
