@@ -32,7 +32,7 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
 
         idleAnimationNumber = 0;
         waitingTime = newWaitingTime;
-        wayActive = false;
+        wayActive = true;
         talking = false;
         wayActual = 1;
         direction = initialDirection;
@@ -61,11 +61,13 @@ void Guard::update(double timeElapsed){
                 if(wayActive) {
                         incY = 0.2*timeElapsed;
                         incX = 0.2*timeElapsed;
+                }else{
+                        stop(incX, incY);
                 }
 
-                stop(incX, incY);
                 walkInX(incX);
                 walkInY(incY);
+                fieldOfVision->updateCenter(incX,incY);
         }
         if(incX == 0.0 && incY == 0.0) {
                 if(idleAnimationNumber) {
@@ -89,7 +91,6 @@ void Guard::update(double timeElapsed){
         specialAction();
         animator->update();
         exclamation->update();
-        fieldOfVision->updateCenter(incX,incY);
         selectLine();
 }
 
@@ -178,6 +179,7 @@ void Guard::walkInXSpecial(double & incX){
                 animator->setInterval("right");
                 direction = "right";
                 if(getPositionX()+incX > ways[wayActual].second) {
+                        incX = 0.0;
                         nextWay();
                 }
         }else if(ways[wayActual].first == "left") {
@@ -186,6 +188,7 @@ void Guard::walkInXSpecial(double & incX){
                 animator->setInterval("left");
                 direction = "left";
                 if(getPositionX()+incX < ways[wayActual].second) {
+                        incX = 0.0;
                         nextWay();
                 }
         }else {
@@ -200,6 +203,7 @@ void Guard::walkInYSpecial(double & incY){
                 animator->setInterval("down");
                 direction = "down";
                 if(getPositionY()+incY > ways[wayActual].second) {
+                        incY = 0.0;
                         nextWay();
                 }
         }else if(ways[wayActual].first == "up") {
@@ -208,6 +212,7 @@ void Guard::walkInYSpecial(double & incY){
                 animator->setInterval("up");
                 direction = "up";
                 if(getPositionY()+incY < ways[wayActual].second) {
+                        incY = 0.0;
                         nextWay();
                 }
         }else {

@@ -115,7 +115,7 @@ void GameScene::load(){
     createDoorSystems();
     createPapers();
     createTables();
-    createChairs();
+    // createChairs();
 
     initializeColliders();
 

@@ -12,7 +12,7 @@ DoorSystem::DoorSystem(std::pair<int,int> doorPosition,
         door = new Door("assets/sprites/cenary/porta_anima.png", doorPosition.first, doorPosition.second, 79, 58, doorSide);
     }
 
-    computerTable = new ComputerTable("assets/sprites/PC_sprites(34X20).png", switchPosition.first,switchPosition.second, 60, 40);
+    computerTable = new ComputerTable("assets/sprites/PC_sprites(34X20).png", switchPosition.first,switchPosition.second, 60, 24);
 }
 DoorSystem::~DoorSystem(){}
 

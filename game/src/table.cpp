@@ -19,7 +19,7 @@ void Table::update(double timeElapsed){
 }
 
 void Table::draw(){
-    animator->draw(getPositionX(), getPositionY());
+    animator->draw(getPositionX(), (getPositionY() - 10));
     animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
 
 }
