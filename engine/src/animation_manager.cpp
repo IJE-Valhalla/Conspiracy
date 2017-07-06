@@ -55,6 +55,7 @@ void AnimationManager::draw_quads(){
     drawProgressBars();
     drawLinesOfVision();
     clearAnimationQuads();
+    SDL_SetRenderDrawColor(WindowManager::getGameCanvas(), color->r, color->g, color->b, color->a);
 }
 void AnimationManager::drawLinesOfVision(){
 
@@ -76,8 +77,9 @@ void AnimationManager::drawLinesOfVision(){
         }
     }
 
-    int color = 100;
-    SDL_SetRenderDrawColor(WindowManager::getGameCanvas(), color, color, color, 1);
+    int colorLine = 100;
+    SDL_SetRenderDrawColor(WindowManager::getGameCanvas(), colorLine, colorLine, colorLine, 1);
+
 }
 
 void AnimationManager::drawTriangleVision(std::vector<Line*> lines){
@@ -116,4 +118,8 @@ void AnimationManager::drawProgressBars(){
     for(ProgressBar * progressBar : progressBars) {
         progressBar->draw();
     }
+}
+
+void AnimationManager::setBackgroundColor(Color* backgroundColor){
+    color = backgroundColor;
 }

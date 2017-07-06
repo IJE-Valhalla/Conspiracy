@@ -50,7 +50,7 @@ bool WindowManager::createWindow(std::string windowTitle, std::pair<int, int> wi
     SDL_Renderer* WindowManager::getGameCanvas(){
         return gameCanvas;
     }
-
+    
     void WindowManager::setImageIcon(){
       // TODO Change image icon.
       SDL_Surface * image = NULL;

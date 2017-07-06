@@ -14,6 +14,7 @@ MenuScene::MenuScene(int id) : Scene(id){
         buttonEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);
         selectEffect = new Audio("assets/sounds/SELECT5.wav", "EFFECT", 128);
         backgroundMusic = new Audio("assets/sounds/MENU.wav", "MUSIC", 100);
+        SaveManager::instance.verifySave();
 }
 
 MenuScene::~MenuScene(){
@@ -86,6 +87,7 @@ void MenuScene::load(){
         gameObjectsList.push_back(std::pair<int, GameObject*>(2,new Button("assets/fonts/font.ttf", 350, 400, 500, 500, "Continue", 50)));
         gameObjectsList.push_back(std::pair<int, GameObject*>(3,new Button("assets/fonts/font.ttf", 400, 500, 500, 500, "Exit", 50)));
         backgroundMusic->play(-1);
+        AnimationManager::instance.setBackgroundColor(new Color(100,100,100, 125));
 }
 
 void MenuScene::unload(){
