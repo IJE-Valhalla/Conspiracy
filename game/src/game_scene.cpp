@@ -87,9 +87,9 @@ void GameScene::initializeColliders(){
             CollisionManager::instance.addWall(gameObject);
         }else if(typeid(*gameObject) == typeid(Guard)){
             CollisionManager::instance.addGuard(gameObject);
-            CollisionManager::instance.addFieldOfVision(((Guard*)gameObject)->getFieldOfVision());
+            CollisionManager::instance.addGuardFieldOfVision(((Guard*)gameObject)->getFieldOfVision());
         }else if(typeid(*gameObject) == typeid(CameraSystem)){
-            CollisionManager::instance.addFieldOfVision(((CameraSystem*)gameObject)->getCamera()->getFieldOfVision());
+            CollisionManager::instance.addCameraFieldOfVision(((CameraSystem*)gameObject)->getCamera()->getFieldOfVision());
             CollisionManager::instance.addCameraSwitch(((CameraSystem*)gameObject)->getCameraSwitch());
             CollisionManager::instance.addCameraLever(((CameraSystem*)gameObject)->getCameraLever());
         }else if(typeid(*gameObject) == typeid(PaperTable)){

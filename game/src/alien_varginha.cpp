@@ -33,7 +33,7 @@ void Varginha::update(double timeElapsed){
     }
     specialAction();
 
-    if(CollisionManager::instance.verifyCollisionWithEnemies(this)){
+    if(CollisionManager::instance.verifyCollisionWithGuards(this)){
         setEnabled(false);
     }
 
@@ -50,33 +50,35 @@ void Varginha::specialAction(){
             animator->setInterval("invisible_left");
         }
     }else if(isSelected){
-        CameraSwitch* cameraSwitch;
-        CameraLever* cameraLever;
-        if(((cameraSwitch = (CameraSwitch*)CollisionManager::instance.verifyCollisionWithCameraSwitches(this))!= NULL) ||
-           ((cameraLever = (CameraLever*)CollisionManager::instance.verifyCollisionWithCameraLevers(this) )!= NULL)){
+        CameraSwitch* cameraSwitch = NULL;
+        CameraLever* cameraLever = NULL;
+        cameraSwitch = (CameraSwitch*)CollisionManager::instance.verifyCollisionWithCameraSwitches(this);
+        cameraLever = (CameraLever*)CollisionManager::instance.verifyCollisionWithCameraLevers(this);
+
+        if((cameraSwitch != NULL) || (cameraLever != NULL)){
                if(InputManager::instance.isKeyTriggered(InputManager::KEY_PRESS_SPACE)){
                    if(cameraSwitch!= NULL){
                        cameraSwitch->turnOff();
                    }else if(cameraLever != NULL){
                        cameraLever->nextState();
+                   }
                }
-           }else if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE)){
-               blockMovement = true;
-               isInvisible = true;
-               setVisible(false);
-               if(idleAnimationNumber == 5){
-                   animator->setInterval("special_right");
-               }else{
-                   animator->setInterval("special_left");
-               }
+       }else if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE)){
+           blockMovement = true;
+           isInvisible = true;
+           setVisible(false);
+           if(idleAnimationNumber == 5){
+               animator->setInterval("special_right");
+           }else{
+               animator->setInterval("special_left");
            }
        }
-    }
-    if(InputManager::instance.isKeyReleased(InputManager::KEY_PRESS_SPACE)){
-        isInvisible = false;
-        setVisible(true);
-        blockMovement = false;
-    }
+   }
+   if(InputManager::instance.isKeyReleased(InputManager::KEY_PRESS_SPACE)){
+       isInvisible = false;
+       setVisible(true);
+       blockMovement = false;
+   }
 }
 
 

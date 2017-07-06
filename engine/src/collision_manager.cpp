@@ -5,8 +5,11 @@ using namespace engine;
 
 CollisionManager CollisionManager::instance;
 
-void CollisionManager::addFieldOfVision(FieldOfVision* f){
-        fieldsOfVision.push_back(f);
+void CollisionManager::addGuardFieldOfVision(FieldOfVision* f){
+        guardsVision.push_back(f);
+}
+void CollisionManager::addCameraFieldOfVision(FieldOfVision* f){
+        camerasVision.push_back(f);
 }
 void CollisionManager::addWall(GameObject* g){
         wallList.push_back(g);
@@ -84,7 +87,7 @@ std::pair<std::string, GameObject *> CollisionManager::verifyCollisionWithChairs
         return std::pair<std::string, GameObject*>(collision, NULL);
 }
 
-bool CollisionManager::verifyCollisionWithGuards(GameObject* g){
+bool CollisionManager::verifyCollisionWithGuardsBody(GameObject* g){
         for(GameObject * enemy : guardList) {
                 if(verifyCollision(enemy, g)) {
                         return true;
@@ -94,47 +97,56 @@ bool CollisionManager::verifyCollisionWithGuards(GameObject* g){
 }
 
 
-bool CollisionManager::verifyCollisionWithEnemies(GameObject* g1){
+bool CollisionManager::verifyCollisionWithGuards(GameObject* g1){
     bool status = false;
 
-        for(GameObject * enemy : guardList) {
-                if(verifyCollision(enemy, g1)) {
-                        status = true;
-                }
+        status = verifyCollisionWithGuardsBody(g1);
+        if(status){
+            return status;
+        }else{
+            status = verifyCollisionWithFieldsOfVision(g1, guardsVision);
+            return status;
         }
-        bool isVisible = true;
-        for(FieldOfVision* field : fieldsOfVision) {
-            if(field->isActive()){
-
-                for(Line* line : field->getLines()) {
-                        if(verifyRectangleCollisionWithLine(g1,line->getPoint1(),line->getPoint2())) {
-                                std::pair<double,double> playerCenter = g1->getCenter();
-                                int distanceBetweenPlayer = calculateDistance(playerCenter,line->getPoint1());
-                                // Margin between player and line
-                                // Or else just touching a line would make you lose
-                                if(distanceBetweenPlayer < field->getRange()*0.85) {
-                                        for(auto wall : wallList) {
-                                                if(verifyRectangleCollisionWithLine(wall,line->getPoint1(),line->getPoint2())) {
-                                                        std::pair<double,double> wallCenter = wall->getCenter();
-                                                        int distanceBetweenWall = calculateDistance(wallCenter,line->getPoint1());
-                                                        //Wall in front of player
-                                                        if(distanceBetweenWall < distanceBetweenPlayer) {
-                                                                isVisible = false;
-                                                        }
-                                                }
-                                        }
-                                        if((isVisible && g1->isVisible()) || status) {
-                                                field->playEffect();
-                                                return true;
-                                        }
-                                }
-                        }
-                }
-            }
-        }
-        return status;
 }
 
+bool CollisionManager::verifyCollisionWithCameras(GameObject* g1){
+    bool status = false;
+    status = verifyCollisionWithFieldsOfVision(g1, camerasVision);
+    return status;
+}
+
+bool CollisionManager::verifyCollisionWithFieldsOfVision(GameObject* g1, std::vector<FieldOfVision*> fields){
+    bool isVisible = true;
+    for(FieldOfVision* field : fields) {
+        if(field->isActive()){
+            for(Line* line : field->getLines()) {
+                    if(verifyRectangleCollisionWithLine(g1,line->getPoint1(),line->getPoint2())) {
+                            std::pair<double,double> playerCenter = g1->getCenter();
+                            int distanceBetweenPlayer = calculateDistance(playerCenter,line->getPoint1());
+                            // Margin between player and line
+                            // Or else just touching a line would make you lose
+                            if(distanceBetweenPlayer < field->getRange()*0.85) {
+                                    for(auto wall : wallList) {
+                                            if(verifyRectangleCollisionWithLine(wall,line->getPoint1(),line->getPoint2())) {
+                                                    std::pair<double,double> wallCenter = wall->getCenter();
+                                                    int distanceBetweenWall = calculateDistance(wallCenter,line->getPoint1());
+                                                    //Wall in front of player
+                                                    if(distanceBetweenWall < distanceBetweenPlayer) {
+                                                            isVisible = false;
+                                                    }
+                                            }
+                                    }
+                                    if((isVisible && g1->isVisible())) {
+                                            field->playEffect();
+                                            return true;
+                                    }
+                            }
+                    }
+            }
+        }
+    }
+    return false;
+}
 GameObject* CollisionManager::verifyCollisionWithSwitches(GameObject* g1){
         for(GameObject * doorSwitch : switchList) {
                 if(verifyCollision(doorSwitch, g1)) {
@@ -186,7 +198,8 @@ void CollisionManager::resetLists(){
         doorList.clear();
         switchList.clear();
         chairList.clear();
-        fieldsOfVision.clear();
+        guardsVision.clear();
+        camerasVision.clear();
 }
 
 bool CollisionManager::verifyCollision( GameObject* g1, GameObject* g2){
