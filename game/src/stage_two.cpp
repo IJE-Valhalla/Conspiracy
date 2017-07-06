@@ -73,10 +73,10 @@ void StageTwo::createAliens(){
 }
 
 void StageTwo::createDoorSystems(){
-    std::pair<int,int> doorOnePosition (183, HEADER_SIZE + 240);
+    std::pair<int,int> doorOnePosition (163, HEADER_SIZE + 257);
     std::pair<int,int> switchOnePosition (610, HEADER_SIZE + 50);
 
-    std::pair<int,int> doorTwoPosition (460, HEADER_SIZE + 240);
+    std::pair<int,int> doorTwoPosition (163, HEADER_SIZE + 497);
     std::pair<int,int> switchTwoPosition (800, HEADER_SIZE + 50);
 
     gameObjectsList.push_back(new DoorSystem(doorOnePosition,switchOnePosition, "RIGHT"));

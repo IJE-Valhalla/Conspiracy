@@ -36,8 +36,8 @@ ProgressBar::ProgressBar(double positionX, double positionY, int width,
 ProgressBar::ProgressBar(double positionX, double positionY, int width,
                                                              int height,
                                                              double increment,
-                                                             std::vector<int> newBackColor,
-                                                             std::vector<int> newFrontColor):
+                                                             std::vector<unsigned int> newBackColor,
+                                                             std::vector<unsigned int> newFrontColor):
                                                                       GameObject(
                                                                           positionX,
                                                                           positionY,
@@ -59,8 +59,8 @@ ProgressBar::ProgressBar(double positionX, double positionY, int width,
     frontRect->h =  height;
 
     //backColor = {0, 255, 0, 255};
-    backColor = {newBackColor[0], newBackColor[1], newBackColor[2], newBackColor[3]};
-    frontColor = {newFrontColor[0], newFrontColor[1], newFrontColor[2], newFrontColor[3]};
+    backColor = {(uint8_t)newBackColor[0], (uint8_t)newBackColor[1], (uint8_t)newBackColor[2], (uint8_t)newBackColor[3]};
+    frontColor = {(uint8_t)newFrontColor[0], (uint8_t)newFrontColor[1], (uint8_t)newFrontColor[2], (uint8_t)newFrontColor[3]};
     SDL_GetRenderDrawColor(WindowManager::getGameCanvas(),
                                  &oldColor.r, &oldColor.g,
                                  &oldColor.g, &oldColor.a);
