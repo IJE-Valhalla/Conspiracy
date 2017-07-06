@@ -12,9 +12,11 @@ Etemer::Etemer(double positionX, double positionY) : Alien(FILENAME, positionX, 
 
         isSelected = true;
         talking = false;
+        inPosition = false;
 }
 
 void Etemer::update(double timeElapsed){
+        inPosition = false;
         if (blockMovement) {
                 animator->setTotalTime(1.0);
         }else{
@@ -36,6 +38,14 @@ void Etemer::update(double timeElapsed){
                         animator->setInterval("idle_left");
                 }
         }
+
+        FinishPoint* finishPoint = (FinishPoint*)CollisionManager::instance.verifyCollisionWithFinishPoints(this);
+        if(finishPoint != NULL){
+            if(finishPoint->getAlienNames().find("E") != std::string::npos){
+                inPosition = true;
+            }
+        }
+
         moveChair();
 
         if(CollisionManager::instance.verifyCollisionWithCameras(this)) {
