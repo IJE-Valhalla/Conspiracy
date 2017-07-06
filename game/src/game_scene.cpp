@@ -25,6 +25,7 @@ GameScene::GameScene(int id, std::string newTiledFile) : Scene(id){
     tiledFile = newTiledFile;
     skipTimer = new Timer();
     stageTimer = new Timer();
+    actualPapers = 0;
 }
 
 void GameScene::draw(){
@@ -47,20 +48,26 @@ void GameScene::update(double timeElapsed){
 void GameScene::verifyWinOrLose(){
         bool allPapersEdited = true;
         std::vector<Guard *> guards;
+        int countPapers = 0;
         for(auto gameObject : gameObjectsList) {
                 if(typeid(*gameObject) == typeid(Guard)) {
                         guards.push_back((Guard *)(gameObject));
                 }else if(typeid(*gameObject) == typeid(PaperTable)) {
                         if(!(((PaperTable*)(gameObject))->getPaper())->isEdited()) {
-                                allPapersEdited = false;
+                            allPapersEdited = false;
+                        }else{
+                            countPapers++;
                         }
                 }
         }
-
+        if(countPapers >= actualPapers){
+            player->updatePaperQuantity(countPapers);
+            actualPapers = countPapers;
+        }
         for(Guard * guard : guards) {
-                guard->verifyDistance(player->getVarginha());
-                guard->verifyDistance(player->getBilu());
-                ((Etemer *)(player->getEtemer()))->verifyDistance(guard);
+            guard->verifyDistance(player->getVarginha());
+            guard->verifyDistance(player->getBilu());
+            ((Etemer *)(player->getEtemer()))->verifyDistance(guard);
         }
     if((Etemer *)(player->getEtemer())->isInPosition() &&
       (Bilu*)(player->getBilu())->isInPosition() &&
@@ -135,6 +142,7 @@ void GameScene::load(){
 
 void GameScene::unload(){
     CollisionManager::instance.resetLists();
+    actualPapers = 0;
     gameObjectsList.clear();
 }
 
@@ -179,7 +187,7 @@ void GameScene::createCenary(){
                     case 2: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i, 0, 0));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i+5, 5, 15));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i+10, 5, 15));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i+15, 5, 25));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i+15, 5, 30));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i-5, 0, 0));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i-10, 0, 0));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i-15, 0, 0)); break;
@@ -192,7 +200,7 @@ void GameScene::createCenary(){
                     case 4: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i, 0, 0));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i+5, 5, 15));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i+10, 5, 15));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i+15, 5, 25));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i+15, 5, 30));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i-5, 0, 0));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i-10, 0, 0));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i-15, 0, 0)); break;

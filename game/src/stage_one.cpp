@@ -2,6 +2,8 @@
 
 using namespace engine;
 
+#define PAPERQUANTITY 2
+#define STAGENUMBER 1
 StageOne::StageOne(int id, std::string newTiledFile) : GameScene (id, newTiledFile){
 
 }
@@ -44,18 +46,6 @@ void StageOne::createGuards(){
 
     gameObjectsList.push_back(guard2);
 
-    CameraLever* cameraLever = new CameraLever(120, 530, "right");
-    CameraSwitch* cameraSwitch = new CameraSwitch(100, 530, "right");
-    Camera* camera = new Camera(130,530,"right");
-    camera->setStates(0,270);
-    CameraSystem* cameraSystem = new CameraSystem(camera,cameraSwitch,cameraLever);
-
-    gameObjectsList.push_back(cameraSystem);
-
-    // gameObjectsList.push_back(camera);
-    // gameObjectsList.push_back(cameraSwitch);
-    // gameObjectsList.push_back(cameraLever);
-
 }
 
 void StageOne::createAliens(){
@@ -63,7 +53,7 @@ void StageOne::createAliens(){
     std::pair <int, int> etemerPos (30, HEADER_SIZE + 510);
     std::pair <int, int> varginhaPos (50, HEADER_SIZE + 500);
 
-    player = new Player(biluPos, etemerPos, varginhaPos);
+    player = new Player(biluPos, etemerPos, varginhaPos, PAPERQUANTITY, STAGENUMBER);
 
     gameObjectsList.push_back(player);
 }

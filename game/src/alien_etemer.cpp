@@ -73,11 +73,9 @@ void Etemer::specialAction(GameObject * guard, double distance){
                 if(((Guard *) (guard))->getPositionX() >= getPositionX()) {
                         animator->setInterval("special_right");
                         idleAnimationNumber = 5;
-                        WARN("!" << guard->getPositionX() << " " << getPositionX());
                 }else{
                         animator->setInterval("special_left");
                         idleAnimationNumber = 0;
-                        WARN("!!!" << guard->getPositionX() << " " << getPositionX());
                 }
                 if(((Guard *) (guard))->getTalkingBarPercent() <= 0.0) {
                         talking = false;
