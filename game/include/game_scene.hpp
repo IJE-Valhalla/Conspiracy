@@ -37,12 +37,14 @@ protected:
     std::string tiledFile;
     Timer* stageTimer;
     Timer* skipTimer;
+    bool aliensInPosition;
     void initializeColliders();
     virtual void createGuards() = 0;
     virtual void createAliens() = 0;
     void createCenary();
     virtual void createDoorSystems() = 0;
     virtual void createPapers() = 0;
+    virtual void createFinishPoints() = 0;
     virtual void createTables();
     void createGameBorders();
     void createGround();

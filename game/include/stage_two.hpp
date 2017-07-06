@@ -10,6 +10,7 @@
 #include "paper_table.hpp"
 #include "camera.hpp"
 #include "door_system.hpp"
+#include "finish_point.hpp"
 
 #include <typeinfo>
 
@@ -21,6 +22,7 @@ private:
     void createAliens();
     void createDoorSystems();
     void createPapers();
+    void createFinishPoints();
 };
 
 #endif

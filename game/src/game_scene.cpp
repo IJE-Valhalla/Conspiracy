@@ -25,6 +25,7 @@ GameScene::GameScene(int id, std::string newTiledFile) : Scene(id){
     tiledFile = newTiledFile;
     skipTimer = new Timer();
     stageTimer = new Timer();
+    aliensInPosition = false;
 }
 
 void GameScene::draw(){
@@ -123,6 +124,7 @@ void GameScene::load(){
     createPapers();
     createTables();
     createChairs();
+    createFinishPoints();
 
     initializeColliders();
 

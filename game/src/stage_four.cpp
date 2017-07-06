@@ -71,3 +71,9 @@ void StageFour::createTables(){
     gameObjectsList.push_back(new Table("assets/sprites/mesa.png", 890, HEADER_SIZE + 460, 60, 34));
     gameObjectsList.push_back(new Table("assets/sprites/mesa.png", 828, HEADER_SIZE + 460, 60, 34));
 }
+
+void StageFour::createFinishPoints(){
+    gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 100, 595, 34, 34, "V"));
+    gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 540, 595, 34, 34, "B"));
+    gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 740, 595, 34, 34, "E"));
+}

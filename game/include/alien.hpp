@@ -20,6 +20,7 @@ public:
     Animation * getAnimation();
     void setAlienSelected();
     void setAlienDeselect();
+    bool isInPosition();
 
 protected:
     void walkInX(double & incX);
@@ -29,6 +30,7 @@ protected:
     std::string alienName;
     bool blockMovement;
     bool isSelected;
+    bool inPosition;
     Audio *movement_sound_effect;
 };
 

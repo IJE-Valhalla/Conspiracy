@@ -56,3 +56,7 @@ void StageThree::createPapers(){
     gameObjectsList.push_back(new PaperTable("Paper", 475, HEADER_SIZE + 170, 60, 34));
     gameObjectsList.push_back(new PaperTable("Paper", 400, HEADER_SIZE + 290, 60, 34));
 }
+
+void StageThree::createFinishPoints(){
+    gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete_lateral.png", 940, 260, 34, 34, "EBV"));
+}

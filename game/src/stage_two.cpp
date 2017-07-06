@@ -52,3 +52,8 @@ void StageTwo::createPapers(){
     gameObjectsList.push_back(new PaperTable("Paper", 350, HEADER_SIZE + 170, 60, 34));
     gameObjectsList.push_back(new PaperTable("Paper", 30, HEADER_SIZE + 490, 60, 34));
 }
+
+void StageTwo::createFinishPoints(){
+    gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 550, 100, 34, 34, "EB"));
+    gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 250, 45, 34, 34, "V"));
+}

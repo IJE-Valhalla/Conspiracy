@@ -10,6 +10,7 @@
 #include "paper_table.hpp"
 #include "door_system.hpp"
 #include "table.hpp"
+#include "finish_point.hpp"
 
 #include <typeinfo>
 
@@ -22,6 +23,7 @@ private:
     void createDoorSystems();
     void createPapers();
     void createTables();
+    void createFinishPoints();
 };
 
 #endif

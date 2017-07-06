@@ -59,3 +59,7 @@ void StageOne::createPapers(){
     gameObjectsList.push_back(new PaperTable("Paper", 100, HEADER_SIZE + 200, 60, 34));
     gameObjectsList.push_back(new PaperTable("Paper", 600, HEADER_SIZE + 220, 60, 34));
 }
+
+void StageOne::createFinishPoints(){
+    gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 550, 100, 34, 34, "EBV"));
+}
