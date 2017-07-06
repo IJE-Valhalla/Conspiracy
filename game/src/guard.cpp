@@ -49,8 +49,8 @@ Guard::~Guard(){
 }
 
 void Guard::update(double timeElapsed){
-        auto incY = 0.05*timeElapsed;
-        auto incX = 0.05*timeElapsed;
+        auto incY = 0.1*timeElapsed;
+        auto incX = 0.1*timeElapsed;
 
         // To Do: Use Time Elapsed in angleOfVision.
         if(talking) {
@@ -62,11 +62,12 @@ void Guard::update(double timeElapsed){
                         incY = 0.2*timeElapsed;
                         incX = 0.2*timeElapsed;
                 }
+
                 stop(incX, incY);
                 walkInX(incX);
                 walkInY(incY);
         }
-        if(incX == 0 && incY == 0) {
+        if(incX == 0.0 && incY == 0.0) {
                 if(idleAnimationNumber) {
                         animator->setInterval("idle_right");
                 }else{
@@ -93,6 +94,8 @@ void Guard::update(double timeElapsed){
 }
 
 void Guard::walkInX(double & incX){
+        int beforeWay = wayActual;
+
         if(wayActive) {
                 walkInXSpecial(incX);
         }else{
@@ -121,13 +124,17 @@ void Guard::walkInX(double & incX){
                         }
                 }
 
-                nextWay();
                 setPositionX(getPositionX()+(incX*(0-1)));
                 incX = 0;
+                if (beforeWay == wayActual){
+                    nextWay();
+                }
         }
 }
 
 void Guard::walkInY(double & incY){
+        int beforeWay = wayActual;
+
         if(wayActive) {
                 walkInYSpecial(incY);
         }else{
@@ -155,12 +162,12 @@ void Guard::walkInY(double & incY){
                                 direction = "down";
                         }
                 }
-                search = ways.find(wayActual + 1);
-
-                nextWay();
 
                 setPositionY(getPositionY()+(incY*(0-1)));
                 incY = 0;
+                if (beforeWay == wayActual){
+                    nextWay();
+                }
         }
 }
 
@@ -337,7 +344,7 @@ void Guard::nextWay(){
     search = ways.find(wayActual + 1);
 
     if(wayActive){
-        if(search != ways.end()) {
+        if(search != ways.end()){
                 wayActual++;
         }else{
                 currentRepeat ++;
