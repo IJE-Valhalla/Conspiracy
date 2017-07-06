@@ -200,6 +200,8 @@ void CollisionManager::resetLists(){
         chairList.clear();
         guardsVision.clear();
         camerasVision.clear();
+        cameraLeverList.clear();
+        cameraSwitchList.clear();
 }
 
 bool CollisionManager::verifyCollision( GameObject* g1, GameObject* g2){
