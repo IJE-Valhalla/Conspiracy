@@ -44,6 +44,11 @@ void CollisionManager::addSwitch(GameObject* g){
 void CollisionManager::addChair(GameObject* g){
         chairList.push_back(g);
 }
+
+void CollisionManager::addFinishPoint(GameObject* g){
+        finishPointList.push_back(g);
+}
+
 bool CollisionManager::verifyCollisionWithWalls(GameObject* g1){
         for(GameObject * wall : wallList) {
                 if(verifyCollision(wall, g1)) {
@@ -182,6 +187,15 @@ GameObject* CollisionManager::verifyCollisionWithPapers(GameObject* g1){
                 }
         }
         return NULL;
+}
+
+GameObject* CollisionManager::verifyCollisionWithFinishPoints(GameObject* g1){
+    for(GameObject * finishPoint : finishPointList) {
+            if(verifyCollision(finishPoint, g1)) {
+                    return finishPoint;
+            }
+    }
+    return NULL;
 }
 
 

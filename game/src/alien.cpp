@@ -25,6 +25,7 @@ Alien::Alien(std::string objectName, double positionX, double positionY,
 
     idleAnimationNumber = 5;
     blockMovement = false;
+    inPosition = false;
     movement_sound_effect = new Audio("assets/sounds/FOOTSTEP.wav", "EFFECT", 128);
 }
 
@@ -92,4 +93,8 @@ void Alien::setAlienSelected(){
 
 void Alien::setAlienDeselect(){
     isSelected = false;
+}
+
+bool Alien::isInPosition(){
+    return inPosition;
 }

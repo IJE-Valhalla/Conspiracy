@@ -25,7 +25,6 @@ GameScene::GameScene(int id, std::string newTiledFile) : Scene(id){
     tiledFile = newTiledFile;
     skipTimer = new Timer();
     stageTimer = new Timer();
-    aliensInPosition = false;
     actualPapers = 0;
 }
 
@@ -70,17 +69,21 @@ void GameScene::verifyWinOrLose(){
             guard->verifyDistance(player->getBilu());
             ((Etemer *)(player->getEtemer()))->verifyDistance(guard);
         }
+    if((Etemer *)(player->getEtemer())->isInPosition() &&
+      (Bilu*)(player->getBilu())->isInPosition() &&
+      (Varginha*)(player->getVarginha())->isInPosition()){
+          aliensInPosition = true;
+      }
 
     if(!player->isDead()){
         stageTimer->step();
     }
     if(player->isDead()){
-        std::cout << stageTimer->elapsed_time() << std::endl;
         if(stageTimer->elapsed_time() >= 2500){
             getSceneManager()->loadScene(6);
         }
-    }else if(allPapersEdited || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skipTimer->total_elapsed_time() >= 500)){
-        getSceneManager()->loadNextScene();
+    }else if((allPapersEdited && aliensInPosition) || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skipTimer->total_elapsed_time() >= 500)){
+        getSceneManager()->loadScene(7);
     }
 }
 
@@ -106,11 +109,14 @@ void GameScene::initializeColliders(){
             CollisionManager::instance.addWall(((Table*)(gameObject)));
         }else if(typeid(*gameObject) == typeid(Chair)) {
             CollisionManager::instance.addChair(gameObject);
+        }else if(typeid(*gameObject) == typeid(FinishPoint)){
+            CollisionManager::instance.addFinishPoint(gameObject);
         }
     }
 }
 
 void GameScene::load(){
+    aliensInPosition = false;
     stageTimer->start();
     skipTimer->start();
     skipTimer->step();

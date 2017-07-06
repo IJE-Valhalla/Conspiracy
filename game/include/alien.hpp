@@ -7,6 +7,7 @@
 #include "game_object.hpp"
 #include "collision_manager.hpp"
 #include "audio.hpp"
+#include "finish_point.hpp"
 
 using namespace engine;
 
