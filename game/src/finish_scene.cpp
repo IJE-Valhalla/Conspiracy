@@ -11,6 +11,7 @@ FinishScene::FinishScene(int id) : Scene(id){
     select = new Color(255, 255, 255, 0);
     notSelect = new Color(0, 0, 0, 0);
     soundEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);
+    backgroundSound = new Audio("assets/sounds/FINAL.wav", "MUSIC", 50);
     background = new Animation("assets/sprites/finish.png", 1, 1, 0.8);
     background->addAction("finish", 0,0);
     background->setInterval("finish");
@@ -48,6 +49,7 @@ void FinishScene::update(double timeElapsed){
 void FinishScene::load(){
         gameObjectsList.push_back(std::pair<int, GameObject*>(1,new Button("assets/fonts/font.ttf", 420, 500, 500, 500, "Menu", 50)));
         AnimationManager::instance.setBackgroundColor(new Color(158,228,159, 125));
+        backgroundSound->play(-1);
 
 }
 
