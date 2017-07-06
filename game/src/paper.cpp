@@ -7,7 +7,13 @@ Paper::Paper(std::string objectName, double positionX, double positionY,
                                                                          width, height){
 
     animator = new Animation(objectName, 1, 4, 0.5);
-    editing_bar = new ProgressBar(positionX-7, positionY-5, 22.5, 5, 0.005);
+
+    std::vector<unsigned int> backColor = {22, 206, 26, 1};
+    std::vector<unsigned int> frontColor = {116, 225, 117, 1};
+    editing_bar = new ProgressBar(positionX-3, positionY-8, 22.5, 5, 0.005, backColor, frontColor);
+
+    paperEditingSound = new Audio("assets/sounds/PAPEROISE.wav", "EFFECT", 128);
+
     animator->addAction("idle",0,0);
     animator->addAction("beingEdited",1,3);
     edited = false;
@@ -62,4 +68,12 @@ double Paper::getEditingBarPercent(){
 
 void Paper::resetEditingProgress(){
     editing_bar->resetPercent();
+}
+
+void Paper::playEffect(){
+    paperEditingSound->play(0);
+}
+
+void Paper::stopEffect(){
+    paperEditingSound->stop();
 }

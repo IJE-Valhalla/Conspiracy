@@ -12,13 +12,32 @@ void StageFive::createGuards(){
     std::pair <std::string, int> wayThree ("left", 220);
     std::pair <std::string, int> wayFour ("down", 120);
 
-    Guard * guard = new Guard("assets/sprites/seguranca_sheet.png", 220, 120, 18, 35, "right");
+    Guard * guard = new Guard("assets/sprites/seguranca_sheet.png", 220, 120, 18, 35, "right",10);
     guard->addWay(1, wayOne);
     guard->addWay(2, wayTwo);
     guard->addWay(3, wayThree);
     guard->addWay(4, wayFour);
 
-    gameObjectsList.push_back(guard);
+
+    Camera* camera1 = new Camera("assets/sprites/camera(11X8).png",2,450,11,8, "upright");
+    gameObjectsList.push_back(camera1);
+
+    Camera* camera2 = new Camera("assets/sprites/camera(11X8).png",435,340,11,8, "upleft");
+    gameObjectsList.push_back(camera2);
+
+    Camera* camera3 = new Camera("assets/sprites/camera(11X8).png",600,340,11,8, "upright");
+    gameObjectsList.push_back(camera3);
+
+    Camera* camera4 = new Camera("assets/sprites/camera(11X8).png",945,205,11,8, "left");
+    gameObjectsList.push_back(camera4);
+
+    Camera* camera5 = new Camera("assets/sprites/camera(11X8).png",430,625,11,8, "upleft");
+    gameObjectsList.push_back(camera5);
+
+    Camera* camera6 = new Camera("assets/sprites/camera(11X8).png",730,625,11,8, "upleft");
+    gameObjectsList.push_back(camera6);
+
+    //gameObjectsList.push_back(guard);
 }
 
 void StageFive::createAliens(){
@@ -26,21 +45,22 @@ void StageFive::createAliens(){
     std::pair <int, int> etemerPos (780, 130);
     std::pair <int, int> varginhaPos (130, 130);
 
-    gameObjectsList.push_back(new Player(biluPos, etemerPos, varginhaPos));
+    player = new Player(biluPos, etemerPos, varginhaPos);
+    gameObjectsList.push_back(player);
 }
 
 void StageFive::createDoorSystems(){
-    std::pair<int,int> doorOnePosition (183, 270);
-    std::pair<int,int> switchOnePosition (760, 350);
+    std::pair<int,int> doorOnePosition (437, 540);
+    std::pair<int,int> switchOnePosition (210, 510);
 
-    std::pair<int,int> doorTwoPosition (460, 270);
+    std::pair<int,int> doorTwoPosition (737, 540);
     std::pair<int,int> switchTwoPosition (490, 390);
 
-    std::pair<int,int> doorThreePosition (780, 200);
-    std::pair<int,int> switchThreePosition (210, 510);
+    std::pair<int,int> doorThreePosition (780, 201);
+    std::pair<int,int> switchThreePosition (760, 350);
 
-    gameObjectsList.push_back(new DoorSystem(doorOnePosition,switchOnePosition, "RIGHT"));
-    gameObjectsList.push_back(new DoorSystem(doorTwoPosition,switchTwoPosition, "RIGHT"));
+    gameObjectsList.push_back(new DoorSystem(doorOnePosition,switchOnePosition, "LEFT"));
+    gameObjectsList.push_back(new DoorSystem(doorTwoPosition,switchTwoPosition, "LEFT"));
     gameObjectsList.push_back(new DoorSystem(doorThreePosition,switchThreePosition, "DOWN"));
 }
 

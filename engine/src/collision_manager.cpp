@@ -86,15 +86,16 @@ bool CollisionManager::verifyCollisionWithGuards(GameObject* g){
 
 
 bool CollisionManager::verifyCollisionWithEnemies(GameObject* g1){
+    bool status = false;
+
         for(GameObject * enemy : guardList) {
                 if(verifyCollision(enemy, g1)) {
-                        return true;
+                        status = true;
                 }
         }
         bool isVisible = true;
         for(FieldOfVision* field : fieldsOfVision) {
                 for(Line* line : field->getLines()) {
-                        AnimationManager::instance.addLine(line);
                         if(verifyRectangleCollisionWithLine(g1,line->getPoint1(),line->getPoint2())) {
                                 std::pair<double,double> playerCenter = g1->getCenter();
                                 int distanceBetweenPlayer = calculateDistance(playerCenter,line->getPoint1());
@@ -111,14 +112,15 @@ bool CollisionManager::verifyCollisionWithEnemies(GameObject* g1){
                                                         }
                                                 }
                                         }
-                                        if(isVisible) {
+                                        if((isVisible && g1->isVisible()) || status) {
+                                                field->playEffect();
                                                 return true;
                                         }
                                 }
                         }
                 }
         }
-        return false;
+        return status;
 }
 
 GameObject* CollisionManager::verifyCollisionWithSwitches(GameObject* g1){

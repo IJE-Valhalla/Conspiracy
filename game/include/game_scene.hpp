@@ -7,7 +7,10 @@
 #include "wall.hpp"
 #include "game_object.hpp"
 #include "guard.hpp"
+#include "camera.hpp"
 #include "progress_bar.hpp"
+#include "timer.hpp"
+#include "player.hpp"
 
 #include <fstream>
 #include <vector>
@@ -28,8 +31,11 @@ public:
     void unload();
     void verifyWinOrLose();
 protected:
+    Player* player;
     std::vector<GameObject*> gameObjectsList;
     std::string tiledFile;
+    Timer* stageTimer;
+    Timer* skipTimer;
     void initializeColliders();
     virtual void createGuards() = 0;
     virtual void createAliens() = 0;

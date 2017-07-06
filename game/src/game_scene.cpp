@@ -23,6 +23,8 @@ using namespace engine;
 
 GameScene::GameScene(int id, std::string newTiledFile) : Scene(id){
     tiledFile = newTiledFile;
+    skipTimer = new Timer();
+    stageTimer = new Timer();
 }
 
 void GameScene::draw(){
@@ -32,16 +34,20 @@ void GameScene::draw(){
 }
 
 void GameScene::update(double timeElapsed){
+    if(!player->isDead()){
         for(auto gameObject : gameObjectsList) {
-                (*gameObject).update(timeElapsed);
+                if(typeid(gameObject) != typeid(Player)){
+                    (*gameObject).update(timeElapsed);
+                }
         }
-        verifyWinOrLose();
+    }
+    verifyWinOrLose();
 }
 
 void GameScene::verifyWinOrLose(){
         bool allPapersEdited = true;
         std::vector<Guard *> guards;
-        Player * player = NULL;
+        //Player * player = NULL;
         for(auto gameObject : gameObjectsList) {
                 if(typeid(*gameObject) == typeid(Guard)) {
                         guards.push_back((Guard *)(gameObject));
@@ -49,9 +55,9 @@ void GameScene::verifyWinOrLose(){
                         if(!(((PaperTable*)(gameObject))->getPaper())->isEdited()) {
                                 allPapersEdited = false;
                         }
-                }else if(typeid(*gameObject) == typeid(Player)) {
+                }/*else if(typeid(*gameObject) == typeid(Player)) {
                         player = (Player *)(gameObject);
-                }
+                }*/
         }
 
         for(Guard * guard : guards) {
@@ -60,9 +66,16 @@ void GameScene::verifyWinOrLose(){
                 ((Etemer *)(player->getEtemer()))->verifyDistance(guard);
         }
 
+    if(!player->isDead()){
+        stageTimer->step();
+    }
     if(player->isDead()){
-        getSceneManager()->loadScene(6);
-    }else if(allPapersEdited){
+        //stageTimer->step();
+        std::cout << stageTimer->elapsed_time() << std::endl;
+        if(stageTimer->elapsed_time() >= 2500){
+            getSceneManager()->loadScene(6);
+        }
+    }else if(allPapersEdited || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skipTimer->total_elapsed_time() >= 500)){
         getSceneManager()->loadNextScene();
         //getSceneManager()->loadScene(3);
     }
@@ -75,6 +88,8 @@ void GameScene::initializeColliders(){
         }else if(typeid(*gameObject) == typeid(Guard)){
             CollisionManager::instance.addGuard(gameObject);
             CollisionManager::instance.addFieldOfVision(((Guard*)gameObject)->getFieldOfVision());
+        }else if(typeid(*gameObject) == typeid(Camera)){
+            CollisionManager::instance.addFieldOfVision(((Camera*)gameObject)->getFieldOfVision());
         }else if(typeid(*gameObject) == typeid(PaperTable)){
             CollisionManager::instance.addPaper(((PaperTable*)(gameObject))->getPaper());
             CollisionManager::instance.addWall(((PaperTable*)(gameObject))->getTable());
@@ -91,6 +106,9 @@ void GameScene::initializeColliders(){
 }
 
 void GameScene::load(){
+    stageTimer->start();
+    skipTimer->start();
+    skipTimer->step();
     Audio background_music = Audio("assets/sounds/tema1demo.wav", "MUSIC", 50);
     background_music.play(-1);
 
@@ -151,7 +169,7 @@ void GameScene::createCenary(){
                 switch(compare) {
                     case 1: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", j, HEADER_SIZE + i+25, 20, 40)); break;
 
-                    case 2: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i, 5, 15));
+                    case 2: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i, 0, 0));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i+5, 5, 15));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i+10, 5, 15));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i+15, 5, 15));
@@ -164,7 +182,7 @@ void GameScene::createCenary(){
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+10, HEADER_SIZE + i+15, 5, 5));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE +i+15, 5, 5)); break;
 
-                    case 4: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i, 5, 15));
+                    case 4: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i, 0, 0));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i+5, 5, 15));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i+10, 5, 15));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i+15, 5, 15));
@@ -172,9 +190,9 @@ void GameScene::createCenary(){
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i-10, 0, 0));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i-15, 0, 0)); break;
 
-                    case 5: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_door.png", j+15, HEADER_SIZE + i-20, 5, 65)); break;
+                    case 5: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_door.png", j+15, HEADER_SIZE + i-20, 5, 60)); break;
 
-                    case 6: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_door.png", j, HEADER_SIZE + i-20, 5, 65));break;
+                    case 6: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_door.png", j, HEADER_SIZE + i-20, 5, 60));break;
                 }
             }
         }
