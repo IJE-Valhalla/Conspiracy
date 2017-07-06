@@ -2,6 +2,8 @@
 #define ALIEN_VARGINHA_HPP
 
 #include "alien.hpp"
+#include "camera_switch.hpp"
+#include "camera_lever.hpp"
 
 class Varginha: public Alien{
 public:

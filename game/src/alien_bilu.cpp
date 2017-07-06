@@ -17,7 +17,6 @@ Bilu::Bilu(std::string objectName, double positionX, double positionY,
 }
 
 void Bilu::update(double timeElapsed){
-        // To Do: Use Time Elapsed in inc.
         animator->setTotalTime(0.3);
         auto incY = 0.15*timeElapsed;
         auto incX = 0.15*timeElapsed;

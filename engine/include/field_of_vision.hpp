@@ -17,6 +17,8 @@ namespace engine{
         void incrementAngle(double angleIncrement);
         void setAngle(double angle);
         int getRange();
+        void deactivate();
+        bool isActive();
         std::vector<Line*> getLines();
         void playEffect();
     private:
@@ -29,6 +31,7 @@ namespace engine{
         int range;
         double totalAngle;
         int numberOfLines;
+        bool active;
     };
 }
 #endif

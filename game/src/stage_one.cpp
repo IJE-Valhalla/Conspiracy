@@ -18,8 +18,17 @@ void StageOne::createGuards(){
     guard->addWay(3, wayThree);
     guard->addWay(4, wayFour);
 
+    CameraLever* cameraLever = new CameraLever(120, 530, "right");
+    CameraSwitch* cameraSwitch = new CameraSwitch(100, 530, "right");
     Camera* camera = new Camera(130,530,"right");
-    gameObjectsList.push_back(camera);
+    camera->setStates(0,270);
+    CameraSystem* cameraSystem = new CameraSystem(camera,cameraSwitch,cameraLever);
+
+    gameObjectsList.push_back(cameraSystem);
+
+    // gameObjectsList.push_back(camera);
+    // gameObjectsList.push_back(cameraSwitch);
+    // gameObjectsList.push_back(cameraLever);
 
     gameObjectsList.push_back(guard);
 }

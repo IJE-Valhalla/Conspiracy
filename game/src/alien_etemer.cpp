@@ -15,7 +15,6 @@ Etemer::Etemer(std::string objectName, double positionX, double positionY,
 }
 
 void Etemer::update(double timeElapsed){
-        // To Do: Use Time Elapsed in inc.
         if (blockMovement) {
                 animator->setTotalTime(1.0);
         }else{

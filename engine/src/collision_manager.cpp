@@ -12,6 +12,16 @@ void CollisionManager::addWall(GameObject* g){
         wallList.push_back(g);
 }
 
+void CollisionManager::addCameraSwitch(GameObject* g){
+    cameraSwitchList.push_back(g);
+}
+
+void CollisionManager::addCameraLever(GameObject* g){
+    if(g != NULL){
+        cameraLeverList.push_back(g);
+    }
+}
+
 void CollisionManager::addGuard(GameObject* g){
         guardList.push_back(g);
 }
@@ -31,7 +41,6 @@ void CollisionManager::addSwitch(GameObject* g){
 void CollisionManager::addChair(GameObject* g){
         chairList.push_back(g);
 }
-
 bool CollisionManager::verifyCollisionWithWalls(GameObject* g1){
         for(GameObject * wall : wallList) {
                 if(verifyCollision(wall, g1)) {
@@ -95,6 +104,8 @@ bool CollisionManager::verifyCollisionWithEnemies(GameObject* g1){
         }
         bool isVisible = true;
         for(FieldOfVision* field : fieldsOfVision) {
+            if(field->isActive()){
+
                 for(Line* line : field->getLines()) {
                         if(verifyRectangleCollisionWithLine(g1,line->getPoint1(),line->getPoint2())) {
                                 std::pair<double,double> playerCenter = g1->getCenter();
@@ -119,6 +130,7 @@ bool CollisionManager::verifyCollisionWithEnemies(GameObject* g1){
                                 }
                         }
                 }
+            }
         }
         return status;
 }
@@ -130,6 +142,25 @@ GameObject* CollisionManager::verifyCollisionWithSwitches(GameObject* g1){
                 }
         }
         return NULL;
+}
+
+GameObject* CollisionManager::verifyCollisionWithCameraSwitches(GameObject* g){
+    for(GameObject * cameraSwitch : cameraSwitchList) {
+            if(verifyCollision(cameraSwitch, g)) {
+                    return cameraSwitch;
+            }
+    }
+    return NULL;
+
+}
+
+GameObject* CollisionManager::verifyCollisionWithCameraLevers(GameObject* g){
+    for(GameObject * lever : cameraLeverList) {
+            if(verifyCollision(lever, g)) {
+                    return lever;
+            }
+    }
+    return NULL;
 }
 
 GameObject* CollisionManager::verifyCollisionWithPapers(GameObject* g1){

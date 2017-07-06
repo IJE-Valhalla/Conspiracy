@@ -9,7 +9,7 @@ Camera::Camera(double positionX, double positionY, std::string direction) : Enem
                                                                      WIDTH, HEIGHT){
     initializeAnimator(FILENAME);
     animator->setInterval(direction);
-
+    turnedOn = true;
     int default_range = 180;
     int default_angleOfVision = 80;
 
@@ -17,16 +17,28 @@ Camera::Camera(double positionX, double positionY, std::string direction) : Enem
 }
 
 Camera::Camera(double positionX, double positionY, std::string direction,
-               int p_angleOfVision, int p_range, int initialAngle): Enemy(FILENAME,positionX,positionY,
+               int p_angleOfVision, int p_range, int p_initialAngle): Enemy(FILENAME,positionX,positionY,
                                                                      WIDTH, HEIGHT){
     initializeAnimator(FILENAME);
     animator->setInterval(direction);
+    turnedOn = true;
+
+    initialAngle = p_initialAngle;
 
     initializeVision(p_range, p_angleOfVision, direction);
     fieldOfVision->setAngle(initialAngle);
 }
 
 Camera::~Camera(){
+}
+
+void Camera::turnOff(){
+    turnedOn = false;
+    fieldOfVision->deactivate();
+}
+
+bool Camera::isTurnedOn(){
+    return turnedOn;
 }
 
 void Camera::update(double timeElapsed){
@@ -41,6 +53,7 @@ void Camera::draw(){
 }
 
 void Camera::initializeAnimator(std::string filename){
+    state = 1;
     animator = new Animation(filename, 2, 4, 0.1);
     animator->addAction("right",0,0);
     animator->addAction("left",2,2);
@@ -54,17 +67,27 @@ void Camera::initializeVision(int p_range, int p_angleOfVision, std::string dire
 
     if(direction == "right"){
         fieldOfVision = new FieldOfVision(getPositionX()+4+getWidth()/2,getPositionY()+7, range, angleOfVision);
-        fieldOfVision->setAngle(305);
+        initialAngle = 305;
     }else if(direction  == "left"){
         fieldOfVision = new FieldOfVision(getPositionX()-4+getWidth()/2,getPositionY()+7, range, angleOfVision);
-        fieldOfVision->setAngle(220);
+        initialAngle = 220;
     }else if(direction == "upleft"){
         fieldOfVision = new FieldOfVision(getPositionX()-6+getWidth()/2,getPositionY(), range, angleOfVision);
-        fieldOfVision->setAngle(140);
+        initialAngle = 140;
     }else{
         fieldOfVision = new FieldOfVision(getPositionX()+5+getWidth()/2,getPositionY(), range, angleOfVision);
-        fieldOfVision->setAngle(45);
+        initialAngle = 45;
     }
+    fieldOfVision->setAngle(initialAngle);
+}
+void Camera::setStates(int angle2, int angle3){
+    angles.push_back(angle2);
+    angles.push_back(initialAngle);
+    angles.push_back(angle3);
+}
+
+void Camera::changeState(int p_state){
+    fieldOfVision->setAngle(angles[p_state]);
 }
 
 int Camera::getRange(){

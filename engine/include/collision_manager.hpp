@@ -17,6 +17,8 @@ public:
     bool verifyCollisionWithGuards(GameObject* g);
     GameObject* verifyCollisionWithPapers(GameObject* g);
     GameObject* verifyCollisionWithSwitches(GameObject* g);
+    GameObject* verifyCollisionWithCameraSwitches(GameObject* g);
+    GameObject* verifyCollisionWithCameraLevers(GameObject* g);
     bool verifyCollision(GameObject* g1, GameObject* g2);
     std::pair<std::string, GameObject *> verifyCollisionWithChairs(GameObject* g1);
     std::string verifyCollisionChair(GameObject* g1, GameObject* g2);
@@ -27,6 +29,8 @@ public:
     void addFieldOfVision(FieldOfVision* f);
     void addSwitch(GameObject* g);
     void addChair(GameObject* g);
+    void addCameraSwitch(GameObject* g);
+    void addCameraLever(GameObject* g);
     void resetLists();
     static CollisionManager instance;
 private:
@@ -39,6 +43,8 @@ private:
     std::vector<FieldOfVision*> fieldsOfVision;
     std::vector<GameObject*> doorList;
     std::vector<GameObject*> switchList;
+    std::vector<GameObject*> cameraLeverList;
+    std::vector<GameObject*> cameraSwitchList;
     std::vector<GameObject*> chairList;
     double calculateDistance(std::pair<double,double> center,std::pair<double,double> lineCenter);
 };
