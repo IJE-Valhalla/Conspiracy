@@ -13,8 +13,8 @@ class CollisionManager{
 public:
     bool verifyCollisionWithWalls(GameObject* g);
     bool verifyCollisionWithWallsAndChairs(GameObject* g);
-    bool verifyCollisionWithEnemies(GameObject* g);
     bool verifyCollisionWithGuards(GameObject* g);
+    bool verifyCollisionWithCameras(GameObject* g);
     GameObject* verifyCollisionWithPapers(GameObject* g);
     GameObject* verifyCollisionWithSwitches(GameObject* g);
     GameObject* verifyCollisionWithCameraSwitches(GameObject* g);
@@ -26,7 +26,8 @@ public:
     void addGuard(GameObject* g);
     void addPaper(GameObject* g);
     void addDoor(GameObject* g);
-    void addFieldOfVision(FieldOfVision* f);
+    void addGuardFieldOfVision(FieldOfVision* f);
+    void addCameraFieldOfVision(FieldOfVision* f);
     void addSwitch(GameObject* g);
     void addChair(GameObject* g);
     void addCameraSwitch(GameObject* g);
@@ -37,10 +38,13 @@ private:
     double CCW(std::pair<int, int> a, std::pair<int, int> b, std::pair<int, int> c);
     bool verifyLineCollisionWithLine(std::pair<int, int> a, std::pair<int, int> b, std::pair<int, int> c, std::pair<int, int> d);
     bool verifyRectangleCollisionWithLine(GameObject* g, std::pair<int, int> a, std::pair<int, int> b);
+    bool verifyCollisionWithFieldsOfVision(GameObject*g, std::vector<FieldOfVision*> fields);
+    bool verifyCollisionWithGuardsBody(GameObject* g);
     std::vector<GameObject*> wallList;
     std::vector<GameObject*> guardList;
+    std::vector<FieldOfVision*> guardsVision;
     std::vector<GameObject*> paperList;
-    std::vector<FieldOfVision*> fieldsOfVision;
+    std::vector<FieldOfVision*> camerasVision;
     std::vector<GameObject*> doorList;
     std::vector<GameObject*> switchList;
     std::vector<GameObject*> cameraLeverList;

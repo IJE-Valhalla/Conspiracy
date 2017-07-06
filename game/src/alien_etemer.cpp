@@ -38,6 +38,9 @@ void Etemer::update(double timeElapsed){
         }
         moveChair();
 
+        if(CollisionManager::instance.verifyCollisionWithCameras(this)) {
+            setEnabled(false);
+        }
         animator->update();
 }
 void Etemer::specialAction(GameObject * guard, double distance){

@@ -36,7 +36,7 @@ void Bilu::update(double timeElapsed){
         }
         specialAction();
 
-        if(CollisionManager::instance.verifyCollisionWithEnemies(this)) {
+        if(CollisionManager::instance.verifyCollisionWithGuards(this) || CollisionManager::instance.verifyCollisionWithCameras(this)) {
                 setEnabled(false);
         }
 
