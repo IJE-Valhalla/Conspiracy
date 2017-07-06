@@ -83,8 +83,8 @@ void MenuScene::selectAction(){
 }
 
 void MenuScene::load(){
-        gameObjectsList.push_back(std::pair<int, GameObject*>(1, new Button("assets/fonts/font.ttf", 420, 300, 500, 500, "Jogar", 50)));
-        gameObjectsList.push_back(std::pair<int, GameObject*>(2,new Button("assets/fonts/font.ttf", 320, 400, 500, 500, "Selecionar Fase", 50)));
+        gameObjectsList.push_back(std::pair<int, GameObject*>(1, new Button("assets/fonts/font.ttf", 410, 300, 500, 500, "Jogar", 50)));
+        gameObjectsList.push_back(std::pair<int, GameObject*>(2,new Button("assets/fonts/font.ttf", 290, 400, 500, 500, "Selecionar Fase", 50)));
         gameObjectsList.push_back(std::pair<int, GameObject*>(3,new Button("assets/fonts/font.ttf", 430, 500, 500, 500, "Sair", 50)));
         backgroundMusic->play(-1);
         AnimationManager::instance.setBackgroundColor(new Color(100,100,100, 125));

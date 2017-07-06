@@ -60,12 +60,12 @@ void ChooseStageScene::update(double timeElapsed){
 }
 
 void ChooseStageScene::load(){
-        gameObjectsList.push_back(std::pair<int, GameObject*>(0,new Button("assets/fonts/font.ttf", 20, 20, 100, 100, "Back", 30)));
-        gameObjectsList.push_back(std::pair<int, GameObject*>(1,new Choice("assets/sprites/choices/stage_1.png", 50, 100, 200, 150, "Stage 1", 40)));
-        gameObjectsList.push_back(std::pair<int, GameObject*>(2,new Choice("assets/sprites/choices/stage_2.png", 720, 100, 200, 150, "Stage 2", 40)));
-        gameObjectsList.push_back(std::pair<int, GameObject*>(3,new Choice("assets/sprites/choices/stage_3.png", 50, 400, 200, 150, "Stage 3", 40)));
-        gameObjectsList.push_back(std::pair<int, GameObject*>(4,new Choice("assets/sprites/choices/stage_4.png", 720, 400, 200, 150, "Stage 4", 40)));
-        gameObjectsList.push_back(std::pair<int, GameObject*>(5,new Choice("assets/sprites/choices/stage_5.png", 400, 250, 200, 150, "Stage 5", 40)));
+        gameObjectsList.push_back(std::pair<int, GameObject*>(0,new Button("assets/fonts/font.ttf", 20, 20, 100, 100, "Voltar", 30)));
+        gameObjectsList.push_back(std::pair<int, GameObject*>(1,new Choice("assets/sprites/choices/stage_1.png", 50, 100, 200, 150, "Fase 1", 40)));
+        gameObjectsList.push_back(std::pair<int, GameObject*>(2,new Choice("assets/sprites/choices/stage_2.png", 720, 100, 200, 150, "Fase 2", 40)));
+        gameObjectsList.push_back(std::pair<int, GameObject*>(3,new Choice("assets/sprites/choices/stage_3.png", 50, 400, 200, 150, "Fase 3", 40)));
+        gameObjectsList.push_back(std::pair<int, GameObject*>(4,new Choice("assets/sprites/choices/stage_4.png", 720, 400, 200, 150, "Fase 4", 40)));
+        gameObjectsList.push_back(std::pair<int, GameObject*>(5,new Choice("assets/sprites/choices/stage_5.png", 400, 250, 200, 150, "Fase 5", 40)));
         AnimationManager::instance.setBackgroundColor(new Color(255,225,142, 125));
 }
 

@@ -12,6 +12,7 @@
 #include "stage_four.hpp"
 #include "stage_five.hpp"
 #include "choose_stage_scene.hpp"
+#include "finish_scene.hpp"
 
 using namespace engine;
 
@@ -27,6 +28,7 @@ int main(int, char**){
     LoseScene* loseScene = new LoseScene(6);
     WinScene* winScene = new WinScene(7);
     ChooseStageScene* chooseStageScene = new ChooseStageScene(8);
+    FinishScene* finishScene = new FinishScene(9);
 
     getSceneManager()->addScene(menuScene);
     getSceneManager()->addScene(stageOne);
@@ -37,6 +39,7 @@ int main(int, char**){
     getSceneManager()->addScene(loseScene);
     getSceneManager()->addScene(winScene);
     getSceneManager()->addScene(chooseStageScene);
+    getSceneManager()->addScene(finishScene);
 
     getSceneManager()->loadScene(0);
 
