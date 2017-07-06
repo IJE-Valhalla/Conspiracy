@@ -12,6 +12,7 @@ Etemer::Etemer(double positionX, double positionY) : Alien(FILENAME, positionX, 
 
         isSelected = false;
         talking = false;
+        inPosition = false;
 }
 
 void Etemer::update(double timeElapsed){
@@ -36,6 +37,14 @@ void Etemer::update(double timeElapsed){
                         animator->setInterval("idle_left");
                 }
         }
+
+        FinishPoint* finishPoint = (FinishPoint*)CollisionManager::instance.verifyCollisionWithFinishPoints(this);
+        if(finishPoint != NULL){
+            if(finishPoint->getAlienNames().find("E") != std::string::npos){
+                inPosition = true;
+            }
+        }
+
         moveChair();
 
         animator->update();

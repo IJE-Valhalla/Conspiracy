@@ -25,7 +25,6 @@ GameScene::GameScene(int id, std::string newTiledFile) : Scene(id){
     tiledFile = newTiledFile;
     skipTimer = new Timer();
     stageTimer = new Timer();
-    aliensInPosition = false;
 }
 
 void GameScene::draw(){
@@ -54,11 +53,9 @@ void GameScene::verifyWinOrLose(){
                         guards.push_back((Guard *)(gameObject));
                 }else if(typeid(*gameObject) == typeid(PaperTable)) {
                         if(!(((PaperTable*)(gameObject))->getPaper())->isEdited()) {
-                                allPapersEdited = false;
+                                //allPapersEdited = false;
                         }
-                }/*else if(typeid(*gameObject) == typeid(Player)) {
-                        player = (Player *)(gameObject);
-                }*/
+                }
         }
 
         for(Guard * guard : guards) {
@@ -66,6 +63,11 @@ void GameScene::verifyWinOrLose(){
                 guard->verifyDistance(player->getBilu());
                 ((Etemer *)(player->getEtemer()))->verifyDistance(guard);
         }
+    if((Etemer *)(player->getEtemer())->isInPosition() &&
+      (Bilu*)(player->getBilu())->isInPosition() &&
+      (Varginha*)(player->getBilu())->isInPosition()){
+          aliensInPosition = true;
+      }
 
     if(!player->isDead()){
         stageTimer->step();
@@ -76,7 +78,7 @@ void GameScene::verifyWinOrLose(){
         if(stageTimer->elapsed_time() >= 2500){
             getSceneManager()->loadScene(6);
         }
-    }else if(allPapersEdited || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skipTimer->total_elapsed_time() >= 500)){
+    }else if((allPapersEdited && aliensInPosition) || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skipTimer->total_elapsed_time() >= 500)){
         getSceneManager()->loadNextScene();
         //getSceneManager()->loadScene(3);
     }
@@ -104,11 +106,14 @@ void GameScene::initializeColliders(){
             CollisionManager::instance.addWall(((Table*)(gameObject)));
         }else if(typeid(*gameObject) == typeid(Chair)) {
             CollisionManager::instance.addChair(gameObject);
+        }else if(typeid(*gameObject) == typeid(FinishPoint)){
+            CollisionManager::instance.addFinishPoint(gameObject);
         }
     }
 }
 
 void GameScene::load(){
+    aliensInPosition = false;
     stageTimer->start();
     skipTimer->start();
     skipTimer->step();

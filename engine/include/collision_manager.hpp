@@ -19,6 +19,7 @@ public:
     GameObject* verifyCollisionWithSwitches(GameObject* g);
     GameObject* verifyCollisionWithCameraSwitches(GameObject* g);
     GameObject* verifyCollisionWithCameraLevers(GameObject* g);
+    GameObject* verifyCollisionWithFinishPoints(GameObject* g);
     bool verifyCollision(GameObject* g1, GameObject* g2);
     std::pair<std::string, GameObject *> verifyCollisionWithChairs(GameObject* g1);
     std::string verifyCollisionChair(GameObject* g1, GameObject* g2);
@@ -31,6 +32,7 @@ public:
     void addChair(GameObject* g);
     void addCameraSwitch(GameObject* g);
     void addCameraLever(GameObject* g);
+    void addFinishPoint(GameObject* g);
     void resetLists();
     static CollisionManager instance;
 private:
@@ -46,6 +48,7 @@ private:
     std::vector<GameObject*> cameraLeverList;
     std::vector<GameObject*> cameraSwitchList;
     std::vector<GameObject*> chairList;
+    std::vector<GameObject*> finishPointList;
     double calculateDistance(std::pair<double,double> center,std::pair<double,double> lineCenter);
 };
 

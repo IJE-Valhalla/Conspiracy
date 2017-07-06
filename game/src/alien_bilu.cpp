@@ -14,6 +14,7 @@ Bilu::Bilu(double positionX, double positionY) : Alien(FILENAME, positionX, posi
         hacking = false;
         editing = false;
         lastAction = false;
+        inPosition = false;
 }
 
 void Bilu::update(double timeElapsed){
@@ -37,6 +38,12 @@ void Bilu::update(double timeElapsed){
 
         if(CollisionManager::instance.verifyCollisionWithEnemies(this)) {
                 setEnabled(false);
+        }
+        FinishPoint* finishPoint = (FinishPoint*)CollisionManager::instance.verifyCollisionWithFinishPoints(this);
+        if(finishPoint != NULL){
+            if(finishPoint->getAlienNames().find("B") != std::string::npos){
+                inPosition = true;
+            }
         }
 
         animator->update();

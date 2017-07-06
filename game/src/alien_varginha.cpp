@@ -12,6 +12,7 @@ Varginha::Varginha(double positionX, double positionY) : Alien(FILENAME, positio
    animator->addAction("invisible_left", 11, 11);
    isInvisible = false;
    isSelected = false;
+   inPosition = false;
 }
 
 void Varginha::update(double timeElapsed){
@@ -35,6 +36,13 @@ void Varginha::update(double timeElapsed){
 
     if(CollisionManager::instance.verifyCollisionWithEnemies(this)){
         setEnabled(false);
+    }
+
+    FinishPoint* finishPoint = (FinishPoint*)CollisionManager::instance.verifyCollisionWithFinishPoints(this);
+    if(finishPoint != NULL){
+        if(finishPoint->getAlienNames().find("V") != std::string::npos){
+            inPosition = true;
+        }
     }
 
     animator->update();
