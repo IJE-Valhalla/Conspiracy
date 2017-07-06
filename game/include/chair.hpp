@@ -4,6 +4,8 @@
 #include "engine.hpp"
 #include "sprite.hpp"
 #include "game_object.hpp"
+#include "audio.hpp"
+#include "timer.hpp"
 
 using namespace engine;
 
@@ -18,6 +20,8 @@ public:
     void setMoving(bool move);
     void setDirection(std::string currentDirection);
 protected:
+    Timer* audioTimer;
+    Audio* chairEffect;
     Animation* animator;
     bool isMoving;
     std::string direction;
