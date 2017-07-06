@@ -10,6 +10,7 @@ public:
     Varginha(double positionX, double positionY);
     void update(double timeElapsed);
     void draw();
+    void setDefault();
 protected:
     void specialAction();
 private:

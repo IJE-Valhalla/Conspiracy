@@ -83,13 +83,16 @@ void Varginha::specialAction(){
                }
            }
    }
-   if(InputManager::instance.isKeyReleased(InputManager::KEY_PRESS_SPACE)){
-       isInvisible = false;
-       setVisible(true);
-       blockMovement = false;
+   if(InputManager::instance.isKeyReleased(InputManager::KEY_PRESS_SPACE) && isSelected){
+        setDefault();
    }
 }
 
+void Varginha::setDefault(){
+    isInvisible = false;
+    setVisible(true);
+    blockMovement = false;
+}
 
 void Varginha::draw(){
     INFO("Varginha DRAW");

@@ -22,6 +22,7 @@ private:
     void createDoorSystems();
     void createPapers();
     void createFinishPoints();
+    void createChairs();
 };
 
 #endif

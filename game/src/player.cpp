@@ -52,7 +52,7 @@ void Player::update(double timeElapsed){
                 switch(selectedAlien) {
                 case 1: etemer->setAlienSelected(); etemer_sound_effect->play(0); break;
                 case 2: bilu->setAlienSelected(); bilu_sound_effect->play(0); break;
-                case 3: varginha->setAlienSelected(); varginha_sound_effect->play(0); break;
+                case 3: varginha->setAlienSelected(); varginha_sound_effect->play(0); ((Varginha *)(varginha))->setDefault(); break;
                 }
         }
 

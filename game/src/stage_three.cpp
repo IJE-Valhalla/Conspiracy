@@ -1,4 +1,5 @@
 #include "stage_three.hpp"
+#include "chair.hpp"
 
 using namespace engine;
 #define PAPERQUANTITY 3
@@ -55,23 +56,6 @@ void StageThree::createGuards(){
 
     gameObjectsList.push_back(guard3);
 
-    std::pair <std::string, int> wayOne4 ("down", HEADER_SIZE + 600);
-    std::pair <std::string, int> wayTwo4 ("right", 950);
-    std::pair <std::string, int> wayThree4 ("up", HEADER_SIZE + 420);
-    std::pair <std::string, int> wayFour4 ("left", 720);
-    std::pair <std::string, int> wayFive4 ("down", HEADER_SIZE + 600);
-
-
-    Guard * guard4 = new Guard("assets/sprites/seguranca_sheet.png", 720, HEADER_SIZE + 420, 18, 35, "up", 2, 10);
-    guard4->addWay(1, wayOne4);
-    guard4->addWay(2, wayTwo4);
-    guard4->addWay(3, wayThree4);
-    guard4->addWay(4, wayFour4);
-    guard4->addWay(5, wayFive4);
-
-    gameObjectsList.push_back(guard4);
-
-
     CameraSwitch* cameraSwitch1 = new CameraSwitch(460, 460, "right");
     Camera* camera1 = new Camera(350,425,"upleft",80,220,120);
     CameraSystem* cameraSystem1 = new CameraSystem(camera1,cameraSwitch1);
@@ -118,4 +102,9 @@ void StageThree::createPapers(){
 
 void StageThree::createFinishPoints(){
     gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete_lateral.png", 940, 260, 34, 34, "EBV"));
+}
+
+void StageThree::createChairs(){
+    gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 300, HEADER_SIZE + 480, 20, 16));
+    gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 750, HEADER_SIZE + 120, 20, 16));
 }
