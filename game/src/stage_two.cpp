@@ -72,11 +72,18 @@ void StageTwo::createGuards(){
 
     gameObjectsList.push_back(guard3);
 
+    CameraSwitch* cameraSwitch1 = new CameraSwitch(660, 500, "right");
     Camera* camera1 = new Camera(680,510,"right");
-    gameObjectsList.push_back(camera1);
+    CameraSystem* cameraSystem1 = new CameraSystem(camera1,cameraSwitch1);
 
+    gameObjectsList.push_back(cameraSystem1);
+
+
+    CameraSwitch* cameraSwitch2 = new CameraSwitch(942, 150, "right");
     Camera* camera2 = new Camera(942,195,"left");
-    gameObjectsList.push_back(camera2);
+    CameraSystem* cameraSystem2 = new CameraSystem(camera2,cameraSwitch2);
+
+    gameObjectsList.push_back(cameraSystem2);
 }
 
 void StageTwo::createAliens(){

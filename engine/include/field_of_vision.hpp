@@ -18,6 +18,7 @@ namespace engine{
         void setAngle(double angle);
         int getRange();
         void deactivate();
+        int getAngle();
         bool isActive();
         std::vector<Line*> getLines();
         void playEffect();

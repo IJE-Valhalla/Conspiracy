@@ -70,17 +70,25 @@ void StageThree::createGuards(){
 
     gameObjectsList.push_back(guard4);
 
-    Camera* camera1 = new Camera(350,425,"upleft",80,220,120);
-    gameObjectsList.push_back(camera1);
 
-    Camera* camera2 = new Camera(450,40,"left",80,180, 245);
-    gameObjectsList.push_back(camera2);
+    CameraSwitch* cameraSwitch1 = new CameraSwitch(460, 460, "right");
+    Camera* camera1 = new Camera(350,425,"upleft",80,220,120);
+    CameraSystem* cameraSystem1 = new CameraSystem(camera1,cameraSwitch1);
+
+    gameObjectsList.push_back(cameraSystem1);
+
+
+    CameraSwitch* cameraSwitch2 = new CameraSwitch(460, 100, "right");
+    Camera* camera2 = new Camera(450,40,"left",80,180,235);
+    CameraSystem* cameraSystem2 = new CameraSystem(camera2,cameraSwitch2);
+
+    gameObjectsList.push_back(cameraSystem2);
 }
 
 void StageThree::createAliens(){
     std::pair <int, int> biluPos (280, HEADER_SIZE + 560);
     std::pair <int, int> etemerPos (300, HEADER_SIZE + 560);
-    std::pair <int, int> varginhaPos (620, HEADER_SIZE + 550);
+    std::pair <int, int> varginhaPos (575, HEADER_SIZE + 550);
 
     player = new Player(biluPos, etemerPos, varginhaPos);
     gameObjectsList.push_back(player);

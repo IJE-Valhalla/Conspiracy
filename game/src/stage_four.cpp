@@ -96,17 +96,32 @@ void StageFour::createGuards(){
 
     gameObjectsList.push_back(guard7);
 
+
+    CameraSwitch* cameraSwitch1 = new CameraSwitch(205, 80, "right");
     Camera* camera1 = new Camera(217,44,"right", 70, 220, 295);
-    gameObjectsList.push_back(camera1);
+    CameraSystem* cameraSystem1 = new CameraSystem(camera1,cameraSwitch1);
 
-    Camera* camera2 = new Camera(945,170,"left", 80, 250, 215);
-    gameObjectsList.push_back(camera2);
+    gameObjectsList.push_back(cameraSystem1);
 
-    Camera* camera3 = new Camera(2,370,"right",55,450,338);
-    gameObjectsList.push_back(camera3);
+    CameraSwitch* cameraSwitch2 = new CameraSwitch(945, 380, "right");
+    Camera* camera2 = new Camera(945,170,"left", 60, 300, 215);
+    CameraSystem* cameraSystem2 = new CameraSystem(camera2,cameraSwitch2);
 
+    gameObjectsList.push_back(cameraSystem2);
+
+    CameraSwitch* cameraSwitch3 = new CameraSwitch(5, 420, "right");
+    Camera* camera3 = new Camera(5,370,"right",55,400,338);
+    CameraSystem* cameraSystem3 = new CameraSystem(camera3,cameraSwitch3);
+
+    gameObjectsList.push_back(cameraSystem3);
+
+
+    CameraSwitch* cameraSwitch4 = new CameraSwitch(185, 600, "right");
     Camera* camera4 = new Camera(197,625,"upright");
-    gameObjectsList.push_back(camera4);
+    CameraSystem* cameraSystem4 = new CameraSystem(camera4,cameraSwitch4);
+
+    gameObjectsList.push_back(cameraSystem4);
+
 }
 
 void StageFour::createAliens(){

@@ -34,24 +34,60 @@ void StageFive::createGuards(){
 
     gameObjectsList.push_back(guard3);
 
-    Camera* camera1 = new Camera(2,450,"upright");
-    gameObjectsList.push_back(camera1);
+    //HIDDEN CAMERAS SWITCHES, CAMERAS CAN'T BE DISABLED IN STAGE 5
 
-    Camera* camera2 = new Camera(435,340,"upleft");
-    gameObjectsList.push_back(camera2);
+    CameraSwitch* cameraSwitch1 = new CameraSwitch(1000, 1000, "right");
+    CameraSwitch* cameraSwitch2 = new CameraSwitch(1000, 1000, "right");
+    CameraSwitch* cameraSwitch3 = new CameraSwitch(1000, 1000, "right");
+    CameraSwitch* cameraSwitch4 = new CameraSwitch(1000, 1000, "right");
+    CameraSwitch* cameraSwitch5 = new CameraSwitch(1000, 1000, "right");
+    CameraSwitch* cameraSwitch6 = new CameraSwitch(1000, 1000, "right");
 
-    Camera* camera3 = new Camera(600,340,"upright");
-    gameObjectsList.push_back(camera3);
+    CameraLever* cameraLever1 = new CameraLever(100,140,"right");
+    CameraLever* cameraLever2 = new CameraLever(100,160,"right");
+    CameraLever* cameraLever3 = new CameraLever(100,180,"right");
+    CameraLever* cameraLever4 = new CameraLever(180,140,"right");
+    CameraLever* cameraLever5 = new CameraLever(180,160,"right");
+    CameraLever* cameraLever6 = new CameraLever(180,180,"right");
 
-    Camera* camera4 = new Camera(945,205,"left");
-    gameObjectsList.push_back(camera4);
+    int camera_range = 200;
+    int camera_angle = 35;
+    int angleInc = 35;
+    Camera* camera1 = new Camera(2,450,"upright", camera_angle, camera_range, -1);
+    camera1->setStates(10, 80);
+    CameraSystem* cameraSystem1 = new CameraSystem(camera1,cameraSwitch1, cameraLever1);
 
-    Camera* camera5 = new Camera(430,625,"upleft");
-    gameObjectsList.push_back(camera5);
+    gameObjectsList.push_back(cameraSystem1);
 
-    Camera* camera6 = new Camera(730,625,"upleft");
-    gameObjectsList.push_back(camera6);
+    Camera* camera2 = new Camera(435,340,"upleft", camera_angle, camera_range, 175);
+    camera2->setStates(175-angleInc, 175+angleInc);
+    CameraSystem* cameraSystem2 = new CameraSystem(camera2,cameraSwitch2, cameraLever2);
 
+    gameObjectsList.push_back(cameraSystem2);
+
+    Camera* camera3 = new Camera(600,340,"upright", camera_angle, camera_range, 10);
+    camera3->setStates(10+angleInc, 10-angleInc);
+    CameraSystem* cameraSystem3 = new CameraSystem(camera3,cameraSwitch3, cameraLever3);
+
+    gameObjectsList.push_back(cameraSystem3);
+
+    Camera* camera4 = new Camera(945,225,"left", camera_angle, camera_range+80, 220);
+    camera4->setStates(220+angleInc, 230-angleInc);
+    CameraSystem* cameraSystem4 = new CameraSystem(camera4,cameraSwitch4, cameraLever4);
+
+    gameObjectsList.push_back(cameraSystem4);
+
+    Camera* camera5 = new Camera(430,625,"upleft", camera_angle, camera_range, 135);
+    camera5->setStates(135+angleInc, 135-angleInc);
+    CameraSystem* cameraSystem5 = new CameraSystem(camera5,cameraSwitch5, cameraLever5);
+
+    gameObjectsList.push_back(cameraSystem5);
+
+    Camera* camera6 = new Camera(730,625,"upleft", camera_angle, camera_range, 135);
+    camera6->setStates(135+angleInc, 135-angleInc);
+    CameraSystem* cameraSystem6 = new CameraSystem(camera6,cameraSwitch6, cameraLever6);
+
+    gameObjectsList.push_back(cameraSystem6);
 }
 
 void StageFive::createAliens(){

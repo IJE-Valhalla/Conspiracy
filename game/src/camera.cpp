@@ -23,10 +23,11 @@ Camera::Camera(double positionX, double positionY, std::string direction,
     animator->setInterval(direction);
     turnedOn = true;
 
-    initialAngle = p_initialAngle;
-
     initializeVision(p_range, p_angleOfVision, direction);
-    fieldOfVision->setAngle(initialAngle);
+    if(p_initialAngle != -1){
+        initialAngle = p_initialAngle;
+        fieldOfVision->setAngle(initialAngle);
+    }
 }
 
 Camera::~Camera(){

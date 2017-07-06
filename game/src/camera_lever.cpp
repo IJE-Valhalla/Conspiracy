@@ -13,6 +13,7 @@ CameraLever::CameraLever(double positionX, double positionY, std::string directi
     animator->addAction("mid",1,1);
     animator->addAction("down", 2,2);
     animator->setInterval("mid");
+    direction = direction;
     stateInc = 1;
     state = 1;
 }

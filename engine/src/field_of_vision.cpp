@@ -12,7 +12,9 @@ FieldOfVision::FieldOfVision(double x, double y, int size, double angle){
     numberOfLines = 10;
     createLines(x,y,range);
 }
-
+int FieldOfVision::getAngle(){
+    return centerLine->getAngle();
+}
 void FieldOfVision::resetLines(){
     //free(centerLine);
     for(auto line: lines){
@@ -33,7 +35,6 @@ void FieldOfVision::createLines(double x, double y, int size){
     centerLine = new Line(x,y,size, 0);
 
     double angleInc = ((double)totalAngle/2.0)/((double)numberOfLines/2.0);
-    WARN(angleInc);
     for(double i = 0, lineAngle = angleInc; i<numberOfLines/2; i+=1, lineAngle += angleInc){
         Line* newUpperLine = new Line(centerLine);
         newUpperLine->rotateLine(lineAngle);
@@ -66,9 +67,9 @@ void FieldOfVision::incrementAngle(double angle){
 
 void FieldOfVision::setAngle(double angle){
     centerLine->changeAngleTo(angle);
-    int angleInc = (totalAngle/2)/(numberOfLines/2);
+    double angleInc = ((double)totalAngle/2.0)/((double)numberOfLines/2.0);
 
-    int lineAngle = angle;
+    double lineAngle = angle;
     int i = 0;
     bool inverteu = false;
     for(auto line:lines){
