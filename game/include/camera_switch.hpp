@@ -2,6 +2,7 @@
 #define CAMERA_SWITCH_HPP
 
 #include "engine.hpp"
+#include "audio.hpp"
 
 using namespace engine;
 
@@ -14,6 +15,7 @@ public:
     bool isWorking();
     void turnOff();
 private:
+    Audio* switchEfffect;
     Animation* animator;
     bool working;
 };
