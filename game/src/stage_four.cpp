@@ -1,4 +1,5 @@
 #include "stage_four.hpp"
+#include "chair.hpp"
 
 using namespace engine;
 #define PAPERQUANTITY 3
@@ -169,4 +170,11 @@ void StageFour::createFinishPoints(){
     gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 100, 595, 34, 34, "V"));
     gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 540, 595, 34, 34, "B"));
     gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 740, 595, 34, 34, "E"));
+}
+
+void StageFour::createChairs(){
+    gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 800, HEADER_SIZE + 380, 20, 16));
+    gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 800, HEADER_SIZE + 480, 20, 16));
+    gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 380, HEADER_SIZE + 400, 20, 16));
+    gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 300, HEADER_SIZE + 250, 20, 16));
 }

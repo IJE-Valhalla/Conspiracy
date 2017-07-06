@@ -51,7 +51,7 @@ protected:
     virtual void createTables();
     void createGameBorders();
     void createGround();
-    void createChairs();
+    virtual void createChairs();
 };
 
 #endif

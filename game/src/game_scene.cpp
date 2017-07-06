@@ -158,9 +158,7 @@ void GameScene::unload(){
 
 void GameScene::createTables(){}
 
-void GameScene::createChairs(){
-        gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 200, HEADER_SIZE + 500, 20, 16));
-}
+void GameScene::createChairs(){}
 
 void GameScene::createGameBorders(){
         for(int i=0; i<=960; i+=5) {

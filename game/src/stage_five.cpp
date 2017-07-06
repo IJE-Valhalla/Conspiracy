@@ -1,4 +1,5 @@
 #include "stage_five.hpp"
+#include "chair.hpp"
 
 using namespace engine;
 #define PAPERQUANTITY 5
@@ -21,7 +22,7 @@ void StageFive::createGuards(){
     std::pair <std::string, int> wayOne2 ("right", 900);
     std::pair <std::string, int> wayTwo2 ("left", 450);
 
-    Guard * guard2 = new Guard("assets/sprites/seguranca_sheet.png", 800, HEADER_SIZE + 490, 18, 35, "right", 2, 10);
+    Guard * guard2 = new Guard("assets/sprites/seguranca_sheet.png", 800, HEADER_SIZE + 465, 18, 35, "right", 2, 10);
     guard2->addWay(1, wayOne2);
     guard2->addWay(2, wayTwo2);
 
@@ -117,20 +118,25 @@ void StageFive::createDoorSystems(){
 }
 
 void StageFive::createPapers(){
-    gameObjectsList.push_back(new PaperTable("Paper", 880, 570, 60, 34));
-    gameObjectsList.push_back(new PaperTable("Paper", 10, 580, 60, 34));
+    gameObjectsList.push_back(new PaperTable("Paper", 880, 550, 60, 34));
+    gameObjectsList.push_back(new PaperTable("Paper", 10, 560, 60, 34));
     gameObjectsList.push_back(new PaperTable("Paper", 530, 530, 60, 34));
     gameObjectsList.push_back(new PaperTable("Paper", 550, 100, 60, 34));
     gameObjectsList.push_back(new PaperTable("Paper", 650, 140, 60, 34));
 }
 
 void StageFive::createTables(){
-    gameObjectsList.push_back(new Table("assets/sprites/mesa.png", 890, 490, 60, 34));
-    gameObjectsList.push_back(new Table("assets/sprites/mesa.png", 828, 490, 60, 34));
+    gameObjectsList.push_back(new Table("assets/sprites/mesa.png", 890, 470, 60, 34));
+    gameObjectsList.push_back(new Table("assets/sprites/mesa.png", 828, 470, 60, 34));
 }
 
 void StageFive::createFinishPoints(){
     gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 130, 100, 34, 34, "V"));
     gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 480, 100, 34, 34, "B"));
     gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 780, 100, 34, 34, "E"));
+}
+
+void StageFive::createChairs(){
+    gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 830, HEADER_SIZE + 540, 20, 16));
+    gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 670, HEADER_SIZE + 140, 20, 16));
 }
