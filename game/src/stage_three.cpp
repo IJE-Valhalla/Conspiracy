@@ -1,7 +1,8 @@
 #include "stage_three.hpp"
 
 using namespace engine;
-
+#define PAPERQUANTITY 3
+#define STAGENUMBER 3
 StageThree::StageThree(int id, std::string newTiledFile) : GameScene (id, newTiledFile){
 
 }
@@ -90,7 +91,7 @@ void StageThree::createAliens(){
     std::pair <int, int> etemerPos (300, HEADER_SIZE + 560);
     std::pair <int, int> varginhaPos (575, HEADER_SIZE + 550);
 
-    player = new Player(biluPos, etemerPos, varginhaPos);
+    player = new Player(biluPos, etemerPos, varginhaPos, PAPERQUANTITY, STAGENUMBER);
     gameObjectsList.push_back(player);
 }
 

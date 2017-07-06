@@ -37,6 +37,7 @@ protected:
     std::string tiledFile;
     Timer* stageTimer;
     Timer* skipTimer;
+    int actualPapers;
     bool aliensInPosition;
     void initializeColliders();
     virtual void createGuards() = 0;

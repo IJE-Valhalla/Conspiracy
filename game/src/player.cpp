@@ -3,14 +3,15 @@
 using namespace engine;
 
 Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosition,
-               std::pair<int,int> varginhaPosition){
+               std::pair<int,int> varginhaPosition, int paperQuantity, int stageNumber){
 
         exclamationAnimation = new Animation("assets/sprites/exclamation2.png",1, 1, 0.5);
 
         bilu = new Bilu(biluPosition.first, biluPosition.second);
         varginha = new Varginha(varginhaPosition.first, varginhaPosition.second);
         etemer = new Etemer(etemerPosition.first, etemerPosition.second);
-        header = new Header(0,0);
+        header = new Header(0,0, paperQuantity, stageNumber);
+
         selectedAlien = 1;
 
         etemer->update(0);
@@ -69,6 +70,10 @@ void Player::draw(){
         varginha->draw();
         etemer->draw();
         header->draw();
+}
+
+void Player::updatePaperQuantity(int newValue){
+    header->updatePaperQuantity(newValue);
 }
 
 void Player::waitAnimation(int beforeAlien){
