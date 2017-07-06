@@ -10,7 +10,7 @@ Etemer::Etemer(double positionX, double positionY) : Alien(FILENAME, positionX, 
         animator->addAction("special_right",14,17);
         animator->addAction("special_left",10,13);
 
-        isSelected = false;
+        isSelected = true;
         talking = false;
 }
 
@@ -29,7 +29,7 @@ void Etemer::update(double timeElapsed){
                 walkInY(incY, incX);
         }
 
-        if(incX == 0 && incY == 0) {
+        if(incX == 0.0 && incY == 0.0 && !blockMovement) {
                 if(idleAnimationNumber) {
                         animator->setInterval("idle_right");
                 }else{
@@ -57,12 +57,14 @@ void Etemer::specialAction(GameObject * guard, double distance){
         }
 
         if(talking) {
-                if(((Guard *) (guard))->getPositionX() > getPositionX()) {
+                if(((Guard *) (guard))->getPositionX() >= getPositionX()) {
                         animator->setInterval("special_right");
                         idleAnimationNumber = 5;
+                        WARN("!" << guard->getPositionX() << " " << getPositionX());
                 }else{
                         animator->setInterval("special_left");
                         idleAnimationNumber = 0;
+                        WARN("!!!" << guard->getPositionX() << " " << getPositionX());
                 }
                 if(((Guard *) (guard))->getTalkingBarPercent() <= 0.0) {
                         talking = false;
@@ -146,5 +148,8 @@ void Etemer::walkInY(double & incY, double incX){
 
 void Etemer::verifyDistance(GameObject* guard){
         double distance = sqrt((pow(getPositionX() - guard->getPositionX(), 2.0)) +  (pow(getPositionY() - guard->getPositionY(), 2.0)));
-        specialAction(guard, distance);
+
+        if(distance < 60){
+            specialAction(guard, distance);
+        }
 }

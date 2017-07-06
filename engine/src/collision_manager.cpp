@@ -222,35 +222,35 @@ bool CollisionManager::verifyCollision( GameObject* g1, GameObject* g2){
         return true;
 }
 bool CollisionManager::verifyRectangleCollisionWithLine(GameObject* g, std::pair<int, int> a, std::pair<int, int> b){
-        std::pair<std::pair<int, int>, std::pair<int, int> > topo;
-        std::pair<std::pair<int, int>, std::pair<int, int> > direita;
-        std::pair<std::pair<int, int>, std::pair<int, int> > esquerda;
-        std::pair<std::pair<int, int>, std::pair<int, int> > embaixo;
+        std::pair<std::pair<int, int>, std::pair<int, int> > top;
+        std::pair<std::pair<int, int>, std::pair<int, int> > right;
+        std::pair<std::pair<int, int>, std::pair<int, int> > left;
+        std::pair<std::pair<int, int>, std::pair<int, int> > bottom;
 
-        topo.first.first = g->getPositionX();
-        topo.first.second = g->getPositionY();
-        topo.second.first = g->getPositionX()+g->getWidth();
-        topo.second.second= g->getPositionY();
+        top.first.first = g->getPositionX();
+        top.first.second = g->getPositionY();
+        top.second.first = g->getPositionX()+g->getWidth();
+        top.second.second= g->getPositionY();
 
-        direita.first.first = g->getPositionX()+g->getWidth();
-        direita.first.second = g->getPositionY();
-        direita.second.first = g->getPositionX()+g->getWidth();
-        direita.second.second= g->getPositionY()+g->getHeight();
+        right.first.first = g->getPositionX()+g->getWidth();
+        right.first.second = g->getPositionY();
+        right.second.first = g->getPositionX()+g->getWidth();
+        right.second.second= g->getPositionY()+g->getHeight();
 
-        esquerda.first.first = g->getPositionX();
-        esquerda.first.second = g->getPositionY();
-        esquerda.second.first = g->getPositionX();
-        esquerda.second.second= g->getPositionY()+g->getHeight();
+        left.first.first = g->getPositionX();
+        left.first.second = g->getPositionY();
+        left.second.first = g->getPositionX();
+        left.second.second= g->getPositionY()+g->getHeight();
 
-        embaixo.first.first = g->getPositionX();
-        embaixo.first.second = g->getPositionY()+g->getHeight();
-        embaixo.second.first = g->getPositionX()+g->getWidth();
-        embaixo.second.second= g->getPositionY()+g->getHeight();
+        bottom.first.first = g->getPositionX();
+        bottom.first.second = g->getPositionY()+g->getHeight();
+        bottom.second.first = g->getPositionX()+g->getWidth();
+        bottom.second.second= g->getPositionY()+g->getHeight();
 
-        if(verifyLineCollisionWithLine(topo.first,topo.second,a,b)) {return true; }
-        if(verifyLineCollisionWithLine(direita.first,direita.second,a,b)) {return true; }
-        if(verifyLineCollisionWithLine(esquerda.first,esquerda.second,a,b)) {return true; }
-        if(verifyLineCollisionWithLine(embaixo.first,embaixo.second,a,b)) {return true; }
+        if(verifyLineCollisionWithLine(top.first,top.second,a,b)) {return true; }
+        if(verifyLineCollisionWithLine(right.first,right.second,a,b)) {return true; }
+        if(verifyLineCollisionWithLine(left.first,left.second,a,b)) {return true; }
+        if(verifyLineCollisionWithLine(bottom.first,bottom.second,a,b)) {return true; }
         return false;
 }
 

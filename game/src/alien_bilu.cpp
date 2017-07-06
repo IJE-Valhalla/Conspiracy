@@ -14,6 +14,7 @@ Bilu::Bilu(double positionX, double positionY) : Alien(FILENAME, positionX, posi
         hacking = false;
         editing = false;
         lastAction = false;
+        isSelected = false;
 }
 
 void Bilu::update(double timeElapsed){

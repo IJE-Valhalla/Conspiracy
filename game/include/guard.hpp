@@ -14,7 +14,7 @@ using namespace engine;
 
 class Guard: public Enemy{
 public:
-    Guard(std::string objectName, double positionX, double positionY, int width, int height, std::string initialDirection, double newWaitingTime);
+    Guard(std::string objectName, double positionX, double positionY, int width, int height, std::string initialDirection, int newQuantityRepeatWay, double newWaitingTime);
     ~Guard();
     void update(double timeElapsed);
     void draw();
@@ -39,12 +39,15 @@ private:
     void verifyDeadLockHorizontal();
     void verifyDeadLockVertical();
     void stop(double &incX, double &incY);
+    void nextWay();
     int idleAnimationNumber;
     int wayActual;
     bool wayActive;
     bool talking;
     bool detecting;
     int range;
+    int quantityRepeatWay;
+    int currentRepeat;
     double waitingTime;
     FieldOfVision* fieldOfVision;
     Animation* animator;
