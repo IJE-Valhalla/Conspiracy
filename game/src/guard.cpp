@@ -237,7 +237,7 @@ void Guard::draw(){
                         notTalkingToETemer();
                 }
         }
-        fieldOfVision->draw();
+        //fieldOfVision->draw();
 }
 
 void Guard::addWay(int key, std::pair<std::string, int> way){

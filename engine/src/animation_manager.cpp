@@ -51,9 +51,13 @@ void AnimationManager::draw_quads(){
     clearAnimationQuads();
 }
 void AnimationManager::drawLinesOfVision(){
+
+    SDL_SetRenderDrawColor(WindowManager::getGameCanvas(), 230, 0, 0, 1);
     for(auto line: lines){
         SDL_RenderDrawLine(WindowManager::getGameCanvas(), line->getPoint1().first, line->getPoint1().second, line->getPoint2().first, line->getPoint2().second);
     }
+    int color = 100;
+    SDL_SetRenderDrawColor(WindowManager::getGameCanvas(), color, color, color, 1);
 }
 void AnimationManager::draw_colliders(){
     for(SDL_Rect * quad : colliderRects) {

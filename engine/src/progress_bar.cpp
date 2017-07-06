@@ -90,7 +90,6 @@ void ProgressBar::update(double timeElapsed){
 }
 
 void ProgressBar::draw(){
-    //std::cout << "LIXO" << std::endl;
     SDL_SetRenderDrawColor(WindowManager::getGameCanvas(), backColor.r,
                                                            backColor.g,
                                                            backColor.b,
