@@ -37,7 +37,7 @@ void StageFive::createGuards(){
     Camera* camera6 = new Camera(730,625,"upleft");
     gameObjectsList.push_back(camera6);
 
-    //gameObjectsList.push_back(guard);
+    gameObjectsList.push_back(guard);
 }
 
 void StageFive::createAliens(){

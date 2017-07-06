@@ -18,13 +18,13 @@ void StageFour::createGuards(){
     guard->addWay(3, wayThree);
     guard->addWay(4, wayFour);
 
-    Camera* camera1 = new Camera(217,40,"right");
+    Camera* camera1 = new Camera(217,44,"right", 70, 220, 295);
     gameObjectsList.push_back(camera1);
 
-    Camera* camera2 = new Camera(945,170,"left");
+    Camera* camera2 = new Camera(945,170,"left", 80, 250, 215);
     gameObjectsList.push_back(camera2);
 
-    Camera* camera3 = new Camera(2,370,"right");
+    Camera* camera3 = new Camera(2,370,"right",55,450,338);
     gameObjectsList.push_back(camera3);
 
     Camera* camera4 = new Camera(197,625,"upright");
