@@ -1,12 +1,12 @@
 #include "header.hpp"
 #include "log.h"
 
-Header::Header(std::string objectName, double positionX, double positionY,
-                         int width, int height) : GameObject(objectName,
-                                                             positionX,
-                                                             positionY,
-                                                             width, height){
-        animator = new Animation(objectName, 1, 4, 0.5);
+#define FILENAME "assets/sprites/selecao_personagens_sheet(68X20).png"
+#define WIDTH 68
+#define HEIGHT 20
+
+Header::Header(double positionX, double positionY) : GameObject(FILENAME, positionX, positionY, WIDTH, HEIGHT){
+        animator = new Animation(FILENAME, 1, 4, 0.5);
 
         animator->addAction("none", 0,0);
         animator->addAction("Etemer", 1,1);

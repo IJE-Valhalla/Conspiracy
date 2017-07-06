@@ -17,12 +17,20 @@ public:
     void update(double timeElapsed);
     void draw();
     int getRange();
+    void turnOff();
+    bool isTurnedOn();
+    void setStates(int angle2, int angle3);
+    void changeState(int state);
     FieldOfVision* getFieldOfVision();
 private:
     void initializeVision(int p_range, int p_angleOfVision, std::string direction);
     void initializeAnimator(std::string filename);
     int range;
+    bool turnedOn;
+    std::vector<int> angles;
     int angleOfVision;
+    int initialAngle;
+    int state;
     FieldOfVision* fieldOfVision;
     Animation* animator;
 };

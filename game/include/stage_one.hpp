@@ -10,6 +10,9 @@
 #include "camera.hpp"
 #include "paper_table.hpp"
 #include "door_system.hpp"
+#include "camera_lever.hpp"
+#include "camera_switch.hpp"
+#include "camera_system.hpp"
 
 #include <typeinfo>
 

@@ -11,6 +11,7 @@
 #include "progress_bar.hpp"
 #include "timer.hpp"
 #include "player.hpp"
+#include "camera_system.hpp"
 
 #include <fstream>
 #include <vector>

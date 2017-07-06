@@ -7,7 +7,7 @@ FieldOfVision::FieldOfVision(double x, double y, int size, double angle){
     totalAngle = angle;
 
     catchEffect = new Audio("assets/sounds/GUARDAVIU.wav", "EFFECT", 128);
-
+    active = true;
     //not including centerLine
     numberOfLines = 28;
     createLines(x,y,range);
@@ -19,6 +19,13 @@ void FieldOfVision::resetLines(){
         free(line);
     }
     lines.clear();
+}
+
+void FieldOfVision::deactivate(){
+    active = false;
+}
+bool FieldOfVision::isActive(){
+    return active;
 }
 
 void FieldOfVision::createLines(double x, double y, int size){
@@ -44,27 +51,28 @@ void FieldOfVision::updateCenter(double incX, double incY){
 }
 
 void FieldOfVision::draw(){
-    //AnimationManager::instance.addLine(centerLine);
-    Line* bottomLine = NULL;
-    Line* upperLine = NULL;
-    Line* frontLine = NULL;
-    int i = 0;
-    for(auto line:lines){
-        if(i++ == 0){
-            bottomLine = line;
-            upperLine = line;
+    if(active){
+        Line* bottomLine = NULL;
+        Line* upperLine = NULL;
+        Line* frontLine = NULL;
+        int i = 0;
+        for(auto line:lines){
+            if(i++ == 0){
+                bottomLine = line;
+                upperLine = line;
+            }
+            if(line->getAngle() > upperLine->getAngle()){
+                upperLine = line;
+            }
+            if(line->getAngle() < bottomLine->getAngle()){
+                bottomLine = line;
+            }
         }
-        if(line->getAngle() > upperLine->getAngle()){
-            upperLine = line;
-        }
-        if(line->getAngle() < bottomLine->getAngle()){
-            bottomLine = line;
-        }
+        frontLine = new Line(bottomLine->getPoint2().first,bottomLine->getPoint2().second,upperLine->getPoint2().first,upperLine->getPoint2().second);
+        AnimationManager::instance.addLine(bottomLine);
+        AnimationManager::instance.addLine(upperLine);
+        AnimationManager::instance.addLine(frontLine);
     }
-    frontLine = new Line(bottomLine->getPoint2().first,bottomLine->getPoint2().second,upperLine->getPoint2().first,upperLine->getPoint2().second);
-    AnimationManager::instance.addLine(bottomLine);
-    AnimationManager::instance.addLine(upperLine);
-    AnimationManager::instance.addLine(frontLine);
 
 }
 
