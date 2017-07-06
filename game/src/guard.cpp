@@ -32,7 +32,7 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
 
         idleAnimationNumber = 0;
         waitingTime = newWaitingTime;
-        wayActive = true;
+        wayActive = false;
         talking = false;
         wayActual = 1;
         direction = initialDirection;

@@ -52,14 +52,49 @@ void StageFour::createGuards(){
 
     gameObjectsList.push_back(guard3);
 
-    std::pair <std::string, int> wayOne4 ("right", 900);
-    std::pair <std::string, int> wayTwo4 ("left", 450);
+    std::pair <std::string, int> wayOne4 ("left", 450);
+    std::pair <std::string, int> wayTwo4 ("right", 900);
 
-    Guard * guard4 = new Guard("assets/sprites/seguranca_sheet.png", 750, HEADER_SIZE + 330, 18, 35, "left", 2, 10);
+    Guard * guard4 = new Guard("assets/sprites/seguranca_sheet.png", 750, HEADER_SIZE + 330, 18, 35, "right", 2, 10);
     guard4->addWay(1, wayOne4);
     guard4->addWay(2, wayTwo4);
 
     gameObjectsList.push_back(guard4);
+
+    std::pair <std::string, int> wayOne5 ("down", HEADER_SIZE + 600);
+    std::pair <std::string, int> wayTwo5 ("up", HEADER_SIZE + 300);
+
+    Guard * guard5 = new Guard("assets/sprites/seguranca_sheet.png", 650, HEADER_SIZE + 330, 18, 35, "down", 2, 10);
+    guard5->addWay(1, wayOne5);
+    guard5->addWay(2, wayTwo5);
+
+    gameObjectsList.push_back(guard5);
+
+    std::pair <std::string, int> wayOne6 ("up", HEADER_SIZE + 80);
+    std::pair <std::string, int> wayTwo6 ("left", 20);
+    std::pair <std::string, int> wayThree6 ("right",350);
+    std::pair <std::string, int> wayFour6 ("down", HEADER_SIZE + 300);
+
+    Guard * guard6 = new Guard("assets/sprites/seguranca_sheet.png", 350, HEADER_SIZE + 230, 18, 35, "down", 2, 10);
+    guard6->addWay(1, wayOne6);
+    guard6->addWay(2, wayTwo6);
+    guard6->addWay(3, wayThree6);
+    guard6->addWay(4, wayFour6);
+
+    gameObjectsList.push_back(guard6);
+
+    std::pair <std::string, int> wayOne7 ("down", HEADER_SIZE + 200);
+    std::pair <std::string, int> wayTwo7 ("right", 800);
+    std::pair <std::string, int> wayThree7 ("left", 400);
+    std::pair <std::string, int> wayFour7 ("up", HEADER_SIZE + 30);
+
+    Guard * guard7 = new Guard("assets/sprites/seguranca_sheet.png", 400, HEADER_SIZE + 30, 18, 35, "down", 2, 10);
+    guard7->addWay(1, wayOne7);
+    guard7->addWay(2, wayTwo7);
+    guard7->addWay(3, wayThree7);
+    guard7->addWay(4, wayFour7);
+
+    gameObjectsList.push_back(guard7);
 
     Camera* camera1 = new Camera(217,44,"right", 70, 220, 295);
     gameObjectsList.push_back(camera1);
