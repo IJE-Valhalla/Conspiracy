@@ -15,7 +15,7 @@ using namespace engine;
 class Player: public GameObject{
 public:
     Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosition,
-          std::pair<int,int> varginhaPosition);
+          std::pair<int,int> varginhaPosition, int paperQuantity, int stageNumber);
     ~Player();
     void update(double timeElapsed);
     void draw();
@@ -23,6 +23,7 @@ public:
     Alien * getBilu();
     Alien * getVarginha();
     Alien * getEtemer();
+    void updatePaperQuantity(int newValue);
 private:
     Animation* exclamationAnimation;
     Alien *bilu, *varginha, *etemer;

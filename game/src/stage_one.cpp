@@ -2,6 +2,8 @@
 
 using namespace engine;
 
+#define PAPERQUANTITY 2
+#define STAGENUMBER 1
 StageOne::StageOne(int id, std::string newTiledFile) : GameScene (id, newTiledFile){
 
 }
@@ -63,7 +65,7 @@ void StageOne::createAliens(){
     std::pair <int, int> etemerPos (30, HEADER_SIZE + 510);
     std::pair <int, int> varginhaPos (50, HEADER_SIZE + 500);
 
-    player = new Player(biluPos, etemerPos, varginhaPos);
+    player = new Player(biluPos, etemerPos, varginhaPos, PAPERQUANTITY, STAGENUMBER);
 
     gameObjectsList.push_back(player);
 }
