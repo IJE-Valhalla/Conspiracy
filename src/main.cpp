@@ -12,6 +12,7 @@
 #include "stage_four.hpp"
 #include "stage_five.hpp"
 #include "choose_stage_scene.hpp"
+#include "tutorial_scene.hpp"
 
 using namespace engine;
 
@@ -26,6 +27,7 @@ int main(int, char**){
     StageFive * stageFive = new StageFive(5, "assets/tiledMaps/Stage5.txt");
     LoseScene* loseScene = new LoseScene(6);
     WinScene* winScene = new WinScene(7);
+    TutorialScene* biluTutorialScene = new TutorialScene(20, "assets/sprites/tutorial_bilu.png");
     ChooseStageScene* chooseStageScene = new ChooseStageScene(8);
 
     getSceneManager()->addScene(menuScene);
@@ -36,6 +38,7 @@ int main(int, char**){
     getSceneManager()->addScene(stageFive);
     getSceneManager()->addScene(loseScene);
     getSceneManager()->addScene(winScene);
+    getSceneManager()->addScene(biluTutorialScene);
     getSceneManager()->addScene(chooseStageScene);
 
     getSceneManager()->loadScene(0);

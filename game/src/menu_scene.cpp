@@ -67,7 +67,7 @@ void MenuScene::selectAction(){
                 selectEffect->play(0);
                 switch(selectButton) {
                 case 1:
-                        getSceneManager()->loadScene(1);
+                        getSceneManager()->loadScene(20);
                         break;
                 case 2:
                         getSceneManager()->loadScene(8);
