@@ -13,6 +13,10 @@ void AnimationManager::add_collider(SDL_Rect* newQuad){
 void AnimationManager::addFieldOfVision(FieldOfVision* field){
     fields.push_back(field);
 }
+
+void AnimationManager::addGuardVision(FieldOfVision* field){
+    guardsVision.push_back(field);
+}
 void AnimationManager::addProgressBar(ProgressBar* newProgressBar){
     progressBars.push_back(newProgressBar);
 }
@@ -27,6 +31,7 @@ void AnimationManager::clearAnimationQuads(){
 
     animationQuads.clear();
     fields.clear();
+    guardsVision.clear();
     progressBars.clear();
     colliderRects.clear();
 
@@ -60,6 +65,11 @@ void AnimationManager::drawLinesOfVision(){
         }
     }else{
         for(auto field: fields){
+            for(auto line: field->getLines()){
+                drawLine(line);
+            }
+        }
+        for(auto field: guardsVision){
             for(auto line: field->getLines()){
                 drawLine(line);
             }

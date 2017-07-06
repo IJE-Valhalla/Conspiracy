@@ -237,6 +237,7 @@ void Guard::draw(){
                         notTalkingToETemer();
                 }
         }
+        AnimationManager::instance.addGuardVision(fieldOfVision);
         //fieldOfVision->draw();
 }
 
