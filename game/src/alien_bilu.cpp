@@ -3,11 +3,11 @@
 #include "paper.hpp"
 #include "door_switch.hpp"
 
-Bilu::Bilu(std::string objectName, double positionX, double positionY,
-           int width, int height) : Alien(objectName,
-                                          positionX,
-                                          positionY,
-                                          width, height){
+#define FILENAME "assets/sprites/bilu_sheet.png"
+#define WIDTH 19
+#define HEIGHT 22
+
+Bilu::Bilu(double positionX, double positionY) : Alien(FILENAME, positionX, positionY, WIDTH, HEIGHT){
         animator->addAction("special_right",14,17);
         animator->addAction("special_left",10,13);
 

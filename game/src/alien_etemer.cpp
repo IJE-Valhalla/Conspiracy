@@ -2,11 +2,11 @@
 #include "chair.hpp"
 #include "guard.hpp"
 
-Etemer::Etemer(std::string objectName, double positionX, double positionY,
-               int width, int height) : Alien(objectName,
-                                              positionX,
-                                              positionY,
-                                              width, height){
+#define FILENAME "assets/sprites/etemer_sheet.png"
+#define WIDTH 10
+#define HEIGHT 22
+
+Etemer::Etemer(double positionX, double positionY) : Alien(FILENAME, positionX, positionY, WIDTH, HEIGHT){
         animator->addAction("special_right",14,17);
         animator->addAction("special_left",10,13);
 

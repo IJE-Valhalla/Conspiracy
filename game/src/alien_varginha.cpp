@@ -1,10 +1,11 @@
 #include "alien_varginha.hpp"
 
-Varginha::Varginha(std::string objectName, double positionX, double positionY,
-                                   int width, int height) : Alien(objectName,
-                                                                       positionX,
-                                                                       positionY,
-                                                                       width, height){
+#define FILENAME "assets/sprites/varginha_sheet.png"
+#define WIDTH 10
+#define HEIGHT 15
+
+Varginha::Varginha(double positionX, double positionY) : Alien(FILENAME, positionX, positionY, WIDTH, HEIGHT){
+
    animator->addAction("special_right",12,13);
    animator->addAction("special_left",10,11);
    animator->addAction("invisible_right", 13, 13);

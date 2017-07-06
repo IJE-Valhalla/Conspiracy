@@ -7,7 +7,7 @@
 
 class Varginha: public Alien{
 public:
-    Varginha(std::string objectName, double positionX, double positionY, int width, int height);
+    Varginha(double positionX, double positionY);
     void update(double timeElapsed);
     void draw();
 protected:

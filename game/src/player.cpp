@@ -7,10 +7,10 @@ Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosit
 
         exclamationAnimation = new Animation("assets/sprites/exclamation2.png",1, 1, 0.5);
 
-        bilu = new Bilu("assets/sprites/bilu_sheet.png", biluPosition.first, biluPosition.second, 19, 22);
-        varginha = new Varginha("assets/sprites/varginha_sheet.png", varginhaPosition.first, varginhaPosition.second, 10, 15);
-        etemer = new Etemer("assets/sprites/etemer_sheet.png", etemerPosition.first, etemerPosition.second, 10, 22);
-        header = new Header("assets/sprites/selecao_personagens_sheet(68X20).png", 0,0, 68,20);
+        bilu = new Bilu(biluPosition.first, biluPosition.second);
+        varginha = new Varginha(varginhaPosition.first, varginhaPosition.second);
+        etemer = new Etemer(etemerPosition.first, etemerPosition.second);
+        header = new Header(0,0);
         selectedAlien = 1;
 
         etemer->update(0);
