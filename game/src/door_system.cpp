@@ -21,8 +21,12 @@ void DoorSystem::update(double timeElapsed){
     computerTable->update(timeElapsed);
     if(!computerTable->getDoorSwitch()->isEnabled() && !door->isOpen()){
         door->setOpen(true);
-        door->setEnabled(false);
         door->playEffect();
+        if(door->getDoorSide().compare("DOWN") == 0){
+            door->setEnabled(false);
+        }else{
+            door->setHeight(25);
+        }
     }
 }
 
