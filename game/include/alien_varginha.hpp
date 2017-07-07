@@ -4,6 +4,7 @@
 #include "alien.hpp"
 #include "camera_switch.hpp"
 #include "camera_lever.hpp"
+#include "timer.hpp"
 
 class Varginha: public Alien{
 public:
@@ -14,7 +15,10 @@ public:
 protected:
     void specialAction();
 private:
+    void verifyTurn();
     bool isInvisible;
+    bool turnOff;
+    Timer * timerTurn;
 };
 
 #endif

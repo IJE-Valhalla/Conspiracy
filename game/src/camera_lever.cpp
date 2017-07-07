@@ -3,7 +3,7 @@
 using namespace engine;
 
 #define FILENAME "assets/sprites/cenary/alavanca_sheet(17X20).png"
-#define WIDTH 5
+#define WIDTH 20
 #define HEIGHT 20
 
 CameraLever::CameraLever(double positionX, double positionY, std::string direction) : GameObject(FILENAME,positionX,positionY,

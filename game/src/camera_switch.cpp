@@ -5,7 +5,7 @@ using namespace engine;
 #define FILENAME "assets/sprites/cenary/switch_cameras(14X16).png"
 #define WIDTH 14
 #define HEIGHT 16
-#define ADJUSTX 10
+#define ADJUSTX 0
 CameraSwitch::CameraSwitch(double positionX, double positionY, std::string direction) : GameObject(FILENAME,positionX - ADJUSTX,positionY,
                                                                      WIDTH, HEIGHT){
     animator = new Animation(FILENAME, 1, 2, 0.1);
@@ -33,7 +33,9 @@ bool CameraSwitch::isWorking(){
 }
 
 void CameraSwitch::turnOff(){
-    working = false;
-    animator->setInterval("off");
-    switchEfffect->play(0);
+    if(animator->getInterval().first!="off"){
+        working = false;
+        animator->setInterval("off");
+        switchEfffect->play(0);
+    }
 }

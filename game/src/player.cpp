@@ -40,6 +40,7 @@ void Player::update(double timeElapsed){
                 selectedAlien = 2;
         } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_THREE)) {
                 selectedAlien = 3;
+                ((Varginha *)(varginha))->setDefault(); 
         }
 
         if(beforeAlien != selectedAlien) {
@@ -52,7 +53,7 @@ void Player::update(double timeElapsed){
                 switch(selectedAlien) {
                 case 1: etemer->setAlienSelected(); etemer_sound_effect->play(0); break;
                 case 2: bilu->setAlienSelected(); bilu_sound_effect->play(0); break;
-                case 3: varginha->setAlienSelected(); varginha_sound_effect->play(0); ((Varginha *)(varginha))->setDefault(); break;
+                case 3: varginha->setAlienSelected(); varginha_sound_effect->play(0);break;
                 }
         }
 
