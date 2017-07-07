@@ -74,8 +74,8 @@ void StageFive::createGuards(){
 
     gameObjectsList.push_back(cameraSystem3);
 
-    Camera* camera4 = new Camera(945,225,"left", camera_angle, camera_range+80, 220);
-    camera4->setStates(220+angleInc, 230-angleInc);
+    Camera* camera4 = new Camera(945,280,"left", camera_angle, camera_range+80, 200);
+    camera4->setStates(200+angleInc, 200-angleInc);
     CameraSystem* cameraSystem4 = new CameraSystem(camera4,cameraSwitch4, cameraLever4);
 
     gameObjectsList.push_back(cameraSystem4);

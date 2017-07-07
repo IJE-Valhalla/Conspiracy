@@ -100,13 +100,13 @@ void StageFour::createGuards(){
 
 
     CameraSwitch* cameraSwitch1 = new CameraSwitch(205, 80, "right");
-    Camera* camera1 = new Camera(217,44,"right", 70, 220, 295);
+    Camera* camera1 = new Camera(217,70,"right", 70, 220, 295);
     CameraSystem* cameraSystem1 = new CameraSystem(camera1,cameraSwitch1);
 
     gameObjectsList.push_back(cameraSystem1);
 
     CameraSwitch* cameraSwitch2 = new CameraSwitch(945, 380, "right");
-    Camera* camera2 = new Camera(945,170,"left", 60, 300, 215);
+    Camera* camera2 = new Camera(945,220,"left", 60, 300, 190);
     CameraSystem* cameraSystem2 = new CameraSystem(camera2,cameraSwitch2);
 
     gameObjectsList.push_back(cameraSystem2);

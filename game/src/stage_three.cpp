@@ -64,7 +64,7 @@ void StageThree::createGuards(){
 
 
     CameraSwitch* cameraSwitch2 = new CameraSwitch(460, 100, "right");
-    Camera* camera2 = new Camera(450,40,"left",80,180,235);
+    Camera* camera2 = new Camera(220,70,"right",80,300,320);
     CameraSystem* cameraSystem2 = new CameraSystem(camera2,cameraSwitch2);
 
     gameObjectsList.push_back(cameraSystem2);
