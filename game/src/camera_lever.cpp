@@ -2,16 +2,16 @@
 
 using namespace engine;
 
-#define FILENAME "assets/sprites/exclamation2.png"
-#define WIDTH 7
-#define HEIGHT 7
+#define FILENAME "assets/sprites/cenary/alavanca_sheet(17X20).png"
+#define WIDTH 20
+#define HEIGHT 20
 
 CameraLever::CameraLever(double positionX, double positionY, std::string direction) : GameObject(FILENAME,positionX,positionY,
                                                                      WIDTH, HEIGHT){
-    animator = new Animation(FILENAME, 2, 4, 0.1);
-    animator->addAction("up", 0,0);
+    animator = new Animation(FILENAME, 1, 3, 0.1);
+    animator->addAction("up", 2,2);
     animator->addAction("mid",1,1);
-    animator->addAction("down", 2,2);
+    animator->addAction("down", 0,0);
     animator->setInterval("mid");
     direction = direction;
     stateInc = 1;

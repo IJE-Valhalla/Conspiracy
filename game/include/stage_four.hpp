@@ -24,6 +24,7 @@ private:
     void createPapers();
     void createTables();
     void createFinishPoints();
+    void createChairs();
 };
 
 #endif

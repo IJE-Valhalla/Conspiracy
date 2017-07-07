@@ -21,7 +21,8 @@ Door::Door(std::string objectName, double positionX, double positionY,
         animator->addAction("open",5,7);
     }
 
-    door_effect = new Audio("assets/sounds/DOOR.wav", "EFFECT", 128);
+    side = doorSide;
+    door_effect = new Audio("assets/sounds/DOOR.wav", "EFFECT", 90);
 
     animator->setDrawSize(width,height);
     open = false;
@@ -31,7 +32,7 @@ Door::~Door(){}
 
 void Door::update(double timeElapsed){
     timeElapsed = timeElapsed;
-    if(animator->getCurrentPositionFrame()!=3){
+    if(animator->getCurrentPositionFrame()!=3 && animator->getCurrentPositionFrame()!=7){
         animator->update();
     }
     if(isOpen()){
@@ -61,4 +62,8 @@ void Door::setOpen(bool status){
 
 void Door::playEffect(){
     door_effect->play(0);
+}
+
+std::string Door::getDoorSide(){
+    return side;
 }

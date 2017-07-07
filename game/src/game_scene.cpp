@@ -29,7 +29,11 @@ GameScene::GameScene(int id, std::string newTiledFile) : Scene(id){
 }
 
 GameScene::GameScene(int id, std::string newTiledFile, std::string audioFile) : Scene(id){
-    background_music = new Audio(audioFile, "MUSIC", 50);
+    if(audioFile == "assets/sounds/TEMA3.wav"){
+        background_music = new Audio(audioFile, "MUSIC", 55);
+    }else{
+        background_music = new Audio(audioFile, "MUSIC", 75);
+    }
     tiledFile = newTiledFile;
     skipTimer = new Timer();
     stageTimer = new Timer();
@@ -153,14 +157,15 @@ void GameScene::load(){
 void GameScene::unload(){
     CollisionManager::instance.resetLists();
     actualPapers = 0;
+    for(GameObject* object: gameObjectsList){
+        free(object);
+    }
     gameObjectsList.clear();
 }
 
 void GameScene::createTables(){}
 
-void GameScene::createChairs(){
-        gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 200, HEADER_SIZE + 500, 20, 16));
-}
+void GameScene::createChairs(){}
 
 void GameScene::createGameBorders(){
         for(int i=0; i<=960; i+=5) {

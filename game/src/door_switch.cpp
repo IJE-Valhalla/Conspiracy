@@ -7,7 +7,7 @@ DoorSwitch::DoorSwitch(std::string objectName, double positionX, double position
                                                                          width, height){
     animator = new Animation(objectName, 1, 6, 0.5);
 
-    hacking_effect = new Audio("assets/sounds/PCNOISE.wav", "EFFECT", 128);
+    hacking_effect = new Audio("assets/sounds/PCNOISE.wav", "EFFECT", 60);
     hacking_bar = new ProgressBar(positionX-7, positionY-10, 45, 5, 0.002);
 
     animator->addAction("beingHacked", 1,5);

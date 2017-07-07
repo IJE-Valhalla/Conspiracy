@@ -28,7 +28,13 @@ int main(int, char**){
     StageFive * stageFive = new StageFive(5, "assets/tiledMaps/Stage5.txt");
     LoseScene* loseScene = new LoseScene(6);
     WinScene* winScene = new WinScene(7);
-    TutorialScene* biluTutorialScene = new TutorialScene(20, "assets/sprites/tutorial_bilu.png");
+    TutorialScene* biluTutorialScene = new TutorialScene(20, "assets/sprites/tutorial_bilu.png", 1);
+    TutorialScene* exitTutorialScene = new TutorialScene(21, "assets/sprites/tutorial_saida.png", 20);
+    TutorialScene* commandsTutorialScene = new TutorialScene(22, "assets/sprites/tutoriaL_comandos.png", 21);
+    TutorialScene* etemer1TutorialScene = new TutorialScene(24, "assets/sprites/tutorial_temer2.png", 3);
+    TutorialScene* etemer2TutorialScene = new TutorialScene(23, "assets/sprites/tutorial_temer1.png", 24);
+    TutorialScene* varginha1TutorialScene = new TutorialScene(25, "assets/sprites/tutorial_varginha1.png", 26);
+    TutorialScene* varginha2TutorialScene = new TutorialScene(26, "assets/sprites/tutorial_varginha2.png", 2);
     ChooseStageScene* chooseStageScene = new ChooseStageScene(8);
     FinishScene* finishScene = new FinishScene(9);
 
@@ -41,6 +47,12 @@ int main(int, char**){
     getSceneManager()->addScene(loseScene);
     getSceneManager()->addScene(winScene);
     getSceneManager()->addScene(biluTutorialScene);
+    getSceneManager()->addScene(exitTutorialScene);
+    getSceneManager()->addScene(etemer1TutorialScene);
+    getSceneManager()->addScene(etemer2TutorialScene);
+    getSceneManager()->addScene(varginha1TutorialScene);
+    getSceneManager()->addScene(varginha2TutorialScene);
+    getSceneManager()->addScene(commandsTutorialScene);
     getSceneManager()->addScene(chooseStageScene);
     getSceneManager()->addScene(finishScene);
 

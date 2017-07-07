@@ -92,6 +92,18 @@ std::pair<std::string, GameObject *> CollisionManager::verifyCollisionWithChairs
         return std::pair<std::string, GameObject*>(collision, NULL);
 }
 
+bool CollisionManager::verifyCollisionWithOtherChairs(GameObject* g){
+  for(GameObject * chair : chairList) {
+      if(chair != g){
+            if(verifyCollision(chair, g)) {
+                    return true;
+            }
+      }
+  }
+  return false;
+}
+
+
 bool CollisionManager::verifyCollisionWithGuardsBody(GameObject* g){
         for(GameObject * enemy : guardList) {
                 if(verifyCollision(enemy, g)) {

@@ -20,11 +20,13 @@ public:
     bool isOpen();
     void setOpen(bool status);
     void playEffect();
+    std::string getDoorSide();
 protected:
     Animation* animator;
 private:
     Audio *door_effect;
     bool open;
+    std::string side;
 };
 
 #endif
