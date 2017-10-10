@@ -12,8 +12,6 @@ using namespace engine;
 
 ChooseStageScene::ChooseStageScene(int id) : Scene(id){
     selectButton = 1;
-    select = new Color(255, 255, 255, 0);
-    notSelect = new Color(0, 0, 0, 0);
     background = new Sprite("assets/sprites/selecao_fases.png");
     soundEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);
 }
@@ -66,7 +64,7 @@ void ChooseStageScene::load(){
         gameObjectsList.push_back(std::pair<int, GameObject*>(3,new Choice("assets/sprites/choices/stage_3.png", 50, 400, 200, 150, "Fase 3", 40)));
         gameObjectsList.push_back(std::pair<int, GameObject*>(4,new Choice("assets/sprites/choices/stage_4.png", 720, 400, 200, 150, "Fase 4", 40)));
         gameObjectsList.push_back(std::pair<int, GameObject*>(5,new Choice("assets/sprites/choices/stage_5.png", 400, 250, 200, 150, "Fase 5", 40)));
-        AnimationManager::instance.setBackgroundColor(new Color(255,225,142, 125));
+        AnimationManager::instance.setBackgroundColor(Color{255,225,142, 125});
 }
 
 void ChooseStageScene::selectAction(){

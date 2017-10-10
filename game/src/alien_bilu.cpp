@@ -52,8 +52,6 @@ void Bilu::update(double timeElapsed){
 }
 
 void Bilu::specialAction(){
-        std::pair<int, int> interval;
-
         GameObject* paper = CollisionManager::instance.verifyCollisionWithPapers(this);
         GameObject* doorSwitch = CollisionManager::instance.verifyCollisionWithSwitches(this);
 

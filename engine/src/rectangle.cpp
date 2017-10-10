@@ -1,7 +1,7 @@
 #include "rectangle.hpp"
 
 Rectangle::Rectangle(std::string objectName, double positionX, double positionY,
-  int width, int height, bool newAlphaActive, Color * newColor): GameObject(objectName,
+  int width, int height, bool newAlphaActive, const Color &newColor): GameObject(objectName,
                                                  positionX,
                                                  positionY,
                                                  width, height){
@@ -51,8 +51,8 @@ void Rectangle::draw(){
 
 void Rectangle::verifyAlpha(){
     if(alphaActive){
-        SDL_SetTextureColorMod(texture, color->r, color->g, color->b);
-        SDL_SetTextureAlphaMod(texture, color->a);
+        SDL_SetTextureColorMod(texture, color.r, color.g, color.b);
+        SDL_SetTextureAlphaMod(texture, color.a);
         SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
     }
 }
@@ -65,6 +65,6 @@ bool Rectangle::getAlphaActive(){
     return alphaActive;
 }
 
-void Rectangle::setColor(Color * newColor){
+void Rectangle::setColor(const Color &newColor){
     color = newColor;
 }

@@ -11,17 +11,16 @@ using namespace engine;
 
     void Sprite::init(){
         INFO("Init sprite.");
-        SDL_Surface * image = NULL;
-        image = IMG_Load(directory.c_str());
+        SDL_Surface * image = IMG_Load(directory.c_str());
 
-        if(image == NULL){
+        if(image == nullptr){
             ERROR("INIT SPRITE ERROR.");
             exit(-1);
         }
 
         texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), image);
 
-        if(texture == NULL){
+        if(texture == nullptr){
             ERROR("CREATE TEXTURE SPRITE ERROR.");
             exit(-1);
         }
@@ -35,7 +34,7 @@ using namespace engine;
     void Sprite::shutdown(){
         INFO("Destroy sprite.");
         SDL_DestroyTexture(texture);
-        texture = NULL;
+        texture = nullptr;
     }
     void Sprite::setDrawSize(int w, int h){
         drawWidth = w;

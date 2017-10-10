@@ -7,9 +7,6 @@
 using namespace engine;
 
 MenuScene::MenuScene(int id) : Scene(id){
-        selectButton = 1;
-        select = new Color(255, 255, 255, 0);
-        notSelect = new Color(0, 0, 0, 0);
         background = new Sprite("assets/sprites/background.png");
         buttonEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);
         selectEffect = new Audio("assets/sounds/SELECT5.wav", "EFFECT", 128);
@@ -87,7 +84,7 @@ void MenuScene::load(){
         gameObjectsList.push_back(std::pair<int, GameObject*>(2,new Button("assets/fonts/font.ttf", 290, 400, 500, 500, "Selecionar Fase", 50)));
         gameObjectsList.push_back(std::pair<int, GameObject*>(3,new Button("assets/fonts/font.ttf", 430, 500, 500, 500, "Sair", 50)));
         backgroundMusic->play(-1);
-        AnimationManager::instance.setBackgroundColor(new Color(100,100,100, 125));
+        AnimationManager::instance.setBackgroundColor(Color{100,100,100, 125});
 }
 
 void MenuScene::unload(){

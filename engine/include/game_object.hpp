@@ -35,16 +35,16 @@ namespace engine{
         void setVisible(bool paramVisible);
 
     private:
-        std::string name;
+        std::string name{};
 
-        bool enabled;
+        bool enabled{false};
 
-        bool visible;
+        bool visible{false};
         // X position and Y position in pixels
-        std::pair <double, double> position;
+        std::pair <double, double> position{};
 
         // Width and Height in pixels
-        std::pair <int, int> size;
+        std::pair <int, int> size{};
 
     };
 }

@@ -17,7 +17,7 @@ namespace engine{
         int getId();
         void setId(int id);
     protected:
-        int sceneId;
+        int sceneId{0};
     };
 }
 #endif

@@ -13,9 +13,9 @@ namespace engine{
         void verifySave();
         void saveActualSituation(int unlockNumber);
     private:
-        SaveManager(): path("save.txt"){}
-        std::string path;
-        int stageNumberUnlock;
+        SaveManager() = default;
+        std::string path{"save.txt"};
+        int stageNumberUnlock{0};
       };
 }
 #endif

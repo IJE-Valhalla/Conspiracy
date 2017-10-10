@@ -31,18 +31,18 @@ namespace engine{
         void setDrawSize(int width, int height);
         std::string getCurrentAction();
     private:
-        int currentPositionFrame;
-        int quantity;
-        std::string currentAction;
-        int widthFrame, drawWidth;
-        int heightFrame, drawHeight;
-        double totalTime;
-        double startTime;
-        double timeElapsed;
-        double stepTime;
-        std::pair<std::string, std::pair<int, int>> interval;
-        std::pair<int, int> matrix; // rows and columns
-        std::unordered_map<std::string, std::pair<int,int>> list_actions;
+        int currentPositionFrame{0};
+        int quantity{0};
+        std::string currentAction{};
+        int widthFrame{0}, drawWidth{0};
+        int heightFrame{0}, drawHeight{0};
+        double totalTime{0.0};
+        double startTime{0.0};
+        double timeElapsed{0.0};
+        double stepTime{0.0};
+        std::pair<std::string, std::pair<int, int>> interval{};
+        std::pair<int, int> matrix{}; // rows and columns
+        std::unordered_map<std::string, std::pair<int,int>> list_actions{};
     };
 
 }

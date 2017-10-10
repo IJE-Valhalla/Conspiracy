@@ -48,7 +48,7 @@ void Varginha::update(double timeElapsed){
     }
 
     FinishPoint* finishPoint = (FinishPoint*)CollisionManager::instance.verifyCollisionWithFinishPoints(this);
-    if(finishPoint != NULL){
+    if(finishPoint != nullptr){
         if(finishPoint->getAlienNames().find("V") != std::string::npos){
             inPosition = true;
         }
@@ -58,8 +58,6 @@ void Varginha::update(double timeElapsed){
 }
 
 void Varginha::specialAction(){
-    std::pair<int, int> interval;
-
     if(isInvisible){
         if(idleAnimationNumber == 5){
             animator->setInterval("invisible_right");
@@ -67,18 +65,16 @@ void Varginha::specialAction(){
             animator->setInterval("invisible_left");
         }
     }else if(isSelected){
-            CameraSwitch* cameraSwitch = NULL;
-            CameraLever* cameraLever = NULL;
-            cameraSwitch = (CameraSwitch*)CollisionManager::instance.verifyCollisionWithCameraSwitches(this);
-            cameraLever = (CameraLever*)CollisionManager::instance.verifyCollisionWithCameraLevers(this);
+            CameraSwitch* cameraSwitch = (CameraSwitch*)CollisionManager::instance.verifyCollisionWithCameraSwitches(this);
+            CameraLever* cameraLever = (CameraLever*)CollisionManager::instance.verifyCollisionWithCameraLevers(this);
 
-            if((cameraSwitch != NULL) || (cameraLever != NULL)){
+            if((cameraSwitch != nullptr) || (cameraLever != nullptr)){
                    if(InputManager::instance.isKeyTriggered(InputManager::KEY_PRESS_SPACE)){
                        int x = 0;
-                       if(cameraSwitch!= NULL){
+                       if(cameraSwitch!= nullptr){
                            cameraSwitch->turnOff();
                            x = cameraSwitch->getPositionX();
-                       }else if(cameraLever != NULL){
+                       }else if(cameraLever != nullptr){
                            cameraLever->nextState();
                            x = cameraLever->getPositionX();
                        }

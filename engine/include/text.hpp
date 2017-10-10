@@ -12,28 +12,28 @@ namespace engine{
 
     class Text{
     public:
-        Text( std::string  newText, std::string newFontPath, int newSize, bool isHighQuality, Color* newBackground, Color* newTextColor);
+        Text( std::string  newText, std::string newFontPath, int newSize, bool isHighQuality, const Color &newBackground, const Color &newTextColor);
          ~Text(){}
 
         void init();
         void draw(int x, int y);
         void shutdown();
         void loadFont();
-        void setBackground(Color * newBackground);
-        void setTextColor(Color * newTextColor);
+        void setBackground(const Color &newBackground);
+        void setTextColor(const Color &newTextColor);
     protected:
-        SDL_Texture * texture;
-        TTF_Font * font;
+        SDL_Texture * texture{nullptr};
+        TTF_Font * font{nullptr};
 
-        std::string text;
-        std::string fontPath;
-        int size;
-        bool highQuality;
+        std::string text{};
+        std::string fontPath{};
+        int size{0};
+        bool highQuality{false};
 
-        Color *background;
-        Color *textColor;
-        int width;
-        int height;
+        Color background{0,0,0,0};
+        Color textColor{0,0,0,0};
+        int width{0};
+        int height{0};
     };
 }
 

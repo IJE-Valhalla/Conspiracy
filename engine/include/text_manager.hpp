@@ -16,8 +16,8 @@ namespace engine{
       void unload();
       static TextManager instance;
   private:
-      TextManager(){}
-      std::map<std::pair<std::string, int>, TTF_Font *> listFont;
+      TextManager() = default;
+      std::map<std::pair<std::string, int>, TTF_Font *> listFont{};
   };
 }
 

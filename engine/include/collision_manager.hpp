@@ -43,17 +43,19 @@ private:
     bool verifyLineCollisionWithLine(std::pair<int, int> a, std::pair<int, int> b, std::pair<int, int> c, std::pair<int, int> d);
     bool verifyRectangleCollisionWithLine(GameObject* g, std::pair<int, int> a, std::pair<int, int> b);
     bool verifyCollisionWithFieldsOfVision(GameObject*g, std::vector<FieldOfVision*> fields);
-    std::vector<GameObject*> wallList;
-    std::vector<GameObject*> guardList;
-    std::vector<FieldOfVision*> guardsVision;
-    std::vector<GameObject*> paperList;
-    std::vector<FieldOfVision*> camerasVision;
-    std::vector<GameObject*> doorList;
-    std::vector<GameObject*> switchList;
-    std::vector<GameObject*> cameraLeverList;
-    std::vector<GameObject*> cameraSwitchList;
-    std::vector<GameObject*> chairList;
-    std::vector<GameObject*> finishPointList;
+
+    std::vector<GameObject*> wallList{};
+    std::vector<GameObject*> guardList{};
+    std::vector<FieldOfVision*> guardsVision{};
+    std::vector<GameObject*> paperList{};
+    std::vector<FieldOfVision*> camerasVision{};
+    std::vector<GameObject*> doorList{};
+    std::vector<GameObject*> switchList{};
+    std::vector<GameObject*> cameraLeverList{};
+    std::vector<GameObject*> cameraSwitchList{};
+    std::vector<GameObject*> chairList{};
+    std::vector<GameObject*> finishPointList{};
+
     double calculateDistance(std::pair<double,double> center,std::pair<double,double> lineCenter);
 };
 

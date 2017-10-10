@@ -24,9 +24,9 @@ public:
     void rotateLine(double angle);
     void changeAngleTo(double angle);
 private:
-    std::pair<double,double> point1;
-    std::pair<double,double> point2;
-    double angle;
+    std::pair<double,double> point1{};
+    std::pair<double,double> point2{};
+    double angle{0.0};
 };
 
 }

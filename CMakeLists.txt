@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(conspiracy LANGUAGES CXX)
 
-
+set(CXX_STANDARD 11)
+set(CXX_STANDARD_REQUIRED ON)
 
 # Set directory folders
 set (PROJECT_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include")
@@ -55,7 +56,7 @@ add_executable(conspiracy ${SOURCES})
 
 target_link_libraries(conspiracy
                       engine
-		              game
+                  game
                       SDL2 SDL2_image SDL2_ttf SDL2_mixer)
 
 

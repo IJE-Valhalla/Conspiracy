@@ -16,8 +16,8 @@ namespace engine{
         void resume();
         void stop();
     private:
-        Mix_Music* audioMusic = NULL;
-        Mix_Chunk* audioEffect = NULL;
+        Mix_Music* audioMusic{nullptr};
+        Mix_Chunk* audioEffect{nullptr};
     };
 }
 #endif
