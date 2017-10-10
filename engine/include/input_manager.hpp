@@ -35,10 +35,10 @@ namespace engine{
         bool isKeyReleased(int iKeyCode);
 
     private:
-        InputManager(): quitRequest(false){}
-        bool quitRequest;
-        std::unordered_map<int, bool> keyActive;
-        std::unordered_map<int, bool> keyPrevious;
+        InputManager() = default;
+        bool quitRequest{false};
+        std::unordered_map<int, bool> keyActive{};
+        std::unordered_map<int, bool> keyPrevious{};
     };
 }
 #endif

@@ -14,8 +14,8 @@ namespace engine {
         unsigned int elapsed_time();
         unsigned int total_elapsed_time();
     private:
-        unsigned int ticks;
-        unsigned int step_ticks;
+        unsigned int ticks{};
+        unsigned int step_ticks{};
     };
 }
 #endif

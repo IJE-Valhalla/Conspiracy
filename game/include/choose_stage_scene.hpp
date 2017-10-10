@@ -23,12 +23,12 @@ public:
     void unload();
 private:
     void selectAction();
-    int selectButton;
-    std::vector<std::pair<int, GameObject*>> gameObjectsList;
-    Sprite * background;
-    Color * select;
-    Color * notSelect;
-    Audio * soundEffect;
+    int selectButton{0};
+    std::vector<std::pair<int, GameObject*>> gameObjectsList{};
+    Sprite * background{nullptr};
+    Color select{255, 255, 255, 0};
+    Color notSelect{0,0,0,0};
+    Audio * soundEffect{nullptr};
 };
 
 #endif

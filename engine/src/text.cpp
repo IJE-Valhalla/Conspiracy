@@ -5,11 +5,10 @@
 
 using namespace engine;
 
-Text::Text( std::string  newText, std::string newFontPath, int newSize, bool isHighQuality, Color *newBackground, Color *newTextColor){
+Text::Text( std::string  newText, std::string newFontPath, int newSize, bool isHighQuality, const Color &newBackground, const Color &newTextColor){
     text = newText;
     fontPath = newFontPath;
     size = newSize;
-    font = NULL;
     highQuality = isHighQuality;
     background = newBackground;
     textColor = newTextColor;
@@ -26,10 +25,10 @@ void Text::init(){
 
     font = TextManager::instance.loadFont(fontPath, size);
 
-    SDL_Color color = {textColor->r, textColor->g, textColor->b, textColor->a};
-    SDL_Color bg_color = {background->r, background->g, background->b, background->a};
+    SDL_Color color{textColor.r, textColor.g, textColor.b, textColor.a};
+    SDL_Color bg_color{background.r, background.g, background.b, background.a};
 
-    SDL_Surface * surface = NULL;
+    SDL_Surface * surface = nullptr;
 
     if (highQuality && bg_color.a == 0x00){
         surface = TTF_RenderText_Blended(
@@ -47,17 +46,17 @@ void Text::init(){
         );
     }
 
-    if(surface == NULL){
+    if(surface == nullptr){
         exit(-1);
     }
 
-    if(texture != NULL){
-		SDL_DestroyTexture(texture);
-	}
+    if(texture != nullptr){
+                SDL_DestroyTexture(texture);
+        }
 
     texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), surface);
 
-    if (texture == NULL){
+    if (texture == nullptr){
         exit(-1);
     }
 
@@ -71,9 +70,9 @@ void Text::shutdown(){
     INFO("Shutdown Text");
 
     SDL_DestroyTexture(texture);
-    texture = NULL;
+    texture = nullptr;
 
-    font = NULL;
+    font = nullptr;
 
 }
 
@@ -86,12 +85,12 @@ void Text::draw(int x, int y){
 }
 
 
-void Text::setBackground(Color * newBackground){
+void Text::setBackground(const Color &newBackground){
     background = newBackground;
     init();
 }
 
-void Text::setTextColor(Color * newTextColor){
+void Text::setTextColor(const Color &newTextColor){
     textColor = newTextColor;
     init();
 }

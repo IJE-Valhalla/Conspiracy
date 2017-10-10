@@ -12,8 +12,7 @@ Choice::Choice(std::string objectName, double positionX, double positionY,
     padlock = new Sprite("assets/sprites/padlock.png");
     chosen = false;
     unlock = false;
-    Color *color = new Color(0, 0, 0, 150);
-    rectangle = new Rectangle("Rectangle", positionX, positionY, width, height, true, color);
+    rectangle = new Rectangle("Rectangle", positionX, positionY, width, height, true, Color{0, 0, 0, 150});
 }
 
 Choice::~Choice(){}
@@ -38,11 +37,11 @@ void Choice::draw(){
     rectangle->draw();
 }
 
-void Choice::setTextColor(Color * newTextColor){
+void Choice::setTextColor(const Color &newTextColor){
     button->setTextColor(newTextColor);
 }
 
-void Choice::setBackgroundColor(Color * newBackgroundColor){
+void Choice::setBackgroundColor(const Color &newBackgroundColor){
     button->setTextColor(newBackgroundColor);
 }
 

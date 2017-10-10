@@ -150,7 +150,7 @@ void GameScene::load(){
     createFinishPoints();
 
     initializeColliders();
-    AnimationManager::instance.setBackgroundColor(new Color(100,100,100, 125));
+    AnimationManager::instance.setBackgroundColor(Color{100,100,100, 125});
 
 }
 

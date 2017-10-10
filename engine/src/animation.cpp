@@ -17,17 +17,16 @@ Animation::~Animation(){
 
 void Animation::init(){
     INFO("Init sprite.");
-    SDL_Surface * image = NULL;
-    image = IMG_Load(directory.c_str());
+    SDL_Surface *image = IMG_Load(directory.c_str());
 
-    if(image == NULL){
+    if(image == nullptr){
         ERROR("INIT SPRITE ERROR.");
         exit(-1);
     }
 
     texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), image);
 
-    if(texture == NULL){
+    if(texture == nullptr){
         ERROR("CREATE TEXTURE SPRITE ERROR.");
         exit(-1);
     }
@@ -124,7 +123,7 @@ void Animation::setTotalTime(double newTotalTime){
 void Animation::shutdown(){
     INFO("Destroy sprite.");
     SDL_DestroyTexture(texture);
-    texture = NULL;
+    texture = nullptr;
 }
 
 std::pair<std::string, std::pair<int, int>> Animation::getInterval(){

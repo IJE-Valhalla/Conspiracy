@@ -115,10 +115,9 @@ bool CollisionManager::verifyCollisionWithGuardsBody(GameObject* g){
 
 
 bool CollisionManager::verifyCollisionWithGuards(GameObject* g1){
-    bool status = false;
+    bool status = verifyCollisionWithGuardsBody(g1);
 
-        status = verifyCollisionWithGuardsBody(g1);
-        if(status){
+    if(status){
             return status;
         }else{
             status = verifyCollisionWithFieldsOfVision(g1, guardsVision);
@@ -127,9 +126,7 @@ bool CollisionManager::verifyCollisionWithGuards(GameObject* g1){
 }
 
 bool CollisionManager::verifyCollisionWithCameras(GameObject* g1){
-    bool status = false;
-    status = verifyCollisionWithFieldsOfVision(g1, camerasVision);
-    return status;
+    return verifyCollisionWithFieldsOfVision(g1, camerasVision);
 }
 
 bool CollisionManager::verifyCollisionWithFieldsOfVision(GameObject* g1, std::vector<FieldOfVision*> fields){

@@ -9,7 +9,7 @@
 
 Header::Header(double positionX, double positionY, int maxPapers, int stageNumber) : GameObject(FILENAME, positionX, positionY, WIDTH, HEIGHT){
 
-        stageText = new Text("Stage "+std::to_string(stageNumber),"assets/fonts/font.ttf", 40, true, new Color(100,100,100,1), new Color(0,0,0,0));
+  stageText = new Text("Stage "+std::to_string(stageNumber),"assets/fonts/font.ttf", 40, true, Color{100,100,100,1}, Color{0,0,0,0});
         paperIcon = new Animation("assets/sprites/papeis(19X21).png", 1, 4, 0.5);
         paperIcon->setDrawSize(40,50);
         paperIcon->addAction("static", 0,0);
@@ -50,7 +50,7 @@ void Header::updatePaperQuantity(int newValue){
 }
 
 Text* Header::convertToText(int newValue){
-    return new Text(std::to_string(newValue)+"/"+std::to_string(totalPapers),"assets/fonts/font.ttf", 40, true, new Color(100,100,100,1), new Color(0,0,0,0));
+    return new Text(std::to_string(newValue)+"/"+std::to_string(totalPapers),"assets/fonts/font.ttf", 40, true, Color{100,100,100,1}, Color{0,0,0,0});
 }
 void Header::verifySelect(){
         switch(alienSelect) {

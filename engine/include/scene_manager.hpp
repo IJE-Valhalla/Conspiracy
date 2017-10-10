@@ -15,10 +15,10 @@ namespace engine{
         int getBeforeSceneId();
         void setCurrentSceneId(int id);
     private:
-        std::unordered_map< int, Scene *> scenes;
-        Scene * currentScene;
-        int currentSceneId;
-        int beforeSceneId;
+        std::unordered_map< int, Scene *> scenes{};
+        Scene * currentScene{nullptr};
+        int currentSceneId{0};
+        int beforeSceneId{0};
     };
 }
 #endif

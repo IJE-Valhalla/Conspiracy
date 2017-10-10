@@ -16,9 +16,9 @@ public:
     double x;
     double y;
 private:
-    SDL_Rect* renderQuad;
-    SDL_Rect* clipRect;
-    SDL_Texture* texture;
+    SDL_Rect* renderQuad{nullptr};
+    SDL_Rect* clipRect{nullptr};
+    SDL_Texture* texture{nullptr};
 };
 }
 #endif

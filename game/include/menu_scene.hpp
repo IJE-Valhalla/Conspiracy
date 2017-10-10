@@ -24,14 +24,14 @@ public:
     void selectAction();
 
 private:
-    int selectButton;
-    std::vector<std::pair<int, GameObject*>> gameObjectsList;
-    Sprite * background;
-    Color * select;
-    Color * notSelect;
-    Audio * buttonEffect;
-    Audio * selectEffect;
-    Audio * backgroundMusic;
+    int selectButton{1};
+    std::vector<std::pair<int, GameObject*>> gameObjectsList{};
+    Sprite * background{nullptr};
+    Color select{255,255,255,0};
+    Color notSelect{0,0,0,0};
+    Audio * buttonEffect{nullptr};
+    Audio * selectEffect{nullptr};
+    Audio * backgroundMusic{nullptr};
 };
 
 #endif

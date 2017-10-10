@@ -23,16 +23,18 @@ namespace engine{
         std::vector<Line*> getLines();
         void playEffect();
     private:
-        Line* centerLine;
-        Audio* catchEffect;
-        std::vector<Line*> lines;
-        std::pair<double,double> center;
+        bool active{false};
+        int range{0};
+        int numberOfLines{0};
+        double totalAngle{0.0};
+        Line* centerLine{nullptr};
+        Audio* catchEffect{nullptr};
+        std::vector<Line*> lines{};
+        std::pair<double,double> center{};
+
         void resetLines();
         void createLines(double x, double y, int range);
-        int range;
-        double totalAngle;
-        int numberOfLines;
-        bool active;
+
     };
 }
 #endif

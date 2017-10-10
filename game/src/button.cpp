@@ -6,7 +6,7 @@ Button::Button(std::string objectName, double positionX, double positionY,
                                                                          positionY,
                                                                          width, height){
 
-    text = new Text(title, objectName, sizeTitle, true, new Color(0,0,0,0), new Color(0,0,0,0));
+    text = new Text(title, objectName, sizeTitle, true, Color{0,0,0,0}, Color{0,0,0,0});
 }
 
 Button::~Button(){}
@@ -22,7 +22,7 @@ void Button::draw(){
     text->draw(getPositionX(), getPositionY());
 }
 
-void Button::setTextColor(Color * newTextColor){
+void Button::setTextColor(const Color &newTextColor){
     text->setTextColor(newTextColor);
 }
 

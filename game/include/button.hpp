@@ -13,7 +13,7 @@ public:
     Button(std::string objectName, double positionX, double positionY, int width, int height, std::string title, int sizeTitle);
     ~Button();
     void update(double timeElapsed);
-    void setTextColor(Color * newTextColor);
+    void setTextColor(const Color &newTextColor);
     void draw();
     Text * getText();
 protected:

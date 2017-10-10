@@ -20,15 +20,15 @@ namespace engine{
         void resetPercent();
 
     private:
-        double percent;
-        double progressIncrement;
-        int pw;
-        int px;
-        SDL_Rect *backRect;
-        SDL_Rect *frontRect;
-        SDL_Color backColor;
-        SDL_Color frontColor;
-        SDL_Color oldColor;
+        double percent{0.0};
+        double progressIncrement{0.0};
+        int pw{0};
+        int px{0};
+        SDL_Rect *backRect{nullptr};
+        SDL_Rect *frontRect{nullptr};
+        SDL_Color backColor{};
+        SDL_Color frontColor{};
+        SDL_Color oldColor{};
     };
 }
 

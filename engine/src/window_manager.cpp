@@ -10,7 +10,7 @@ bool WindowManager::createWindow(std::string windowTitle, std::pair<int, int> wi
     SDL_WINDOWPOS_CENTERED, windowSize.first,
     windowSize.second, SDL_WINDOW_SHOWN);
 
-    if(gameWindow == NULL){
+    if(gameWindow == nullptr){
         return false;
     }
 
@@ -18,7 +18,7 @@ bool WindowManager::createWindow(std::string windowTitle, std::pair<int, int> wi
     gameCanvas = SDL_CreateRenderer(gameWindow, -1,
         SDL_RENDERER_ACCELERATED);
 
-        if(gameCanvas == NULL){
+        if(gameCanvas == nullptr){
             return false;
         }
 
@@ -33,11 +33,11 @@ bool WindowManager::createWindow(std::string windowTitle, std::pair<int, int> wi
     bool WindowManager::destroyWindow(){
         INFO("Destroying canvas");
         SDL_DestroyRenderer(gameCanvas);
-        gameCanvas = NULL;
+        gameCanvas = nullptr;
 
         INFO("Destroying window");
         SDL_DestroyWindow(gameWindow);
-        gameWindow = NULL;
+        gameWindow = nullptr;
 
         return true;
     }
@@ -50,13 +50,12 @@ bool WindowManager::createWindow(std::string windowTitle, std::pair<int, int> wi
     SDL_Renderer* WindowManager::getGameCanvas(){
         return gameCanvas;
     }
-    
+
     void WindowManager::setImageIcon(){
       // TODO Change image icon.
-      SDL_Surface * image = NULL;
-      image = IMG_Load(std::string("assets/sprites/alien.png").c_str());
+      SDL_Surface * image = IMG_Load(std::string("assets/sprites/alien.png").c_str());
 
-      if(image == NULL){
+      if(image == nullptr){
             exit(-1);
       }
 

@@ -25,16 +25,16 @@ public:
     void addFieldOfVision(FieldOfVision* field);
     void addGuardVision(FieldOfVision* field);
     void addLine(Line* line);
-    void setBackgroundColor(Color* backgroundColor);
+    void setBackgroundColor(const Color &backgroundColor);
 private:
-    AnimationManager(): color(new Color(100,100,100,0)){};
-    bool isActive;
-    Color * color;
-    std::vector<AnimationQuad*> animationQuads;
-    std::vector<SDL_Rect*> colliderRects;
-    std::vector<ProgressBar*> progressBars;
-    std::vector<FieldOfVision*> fields;
-    std::vector<FieldOfVision*> guardsVision;
+    AnimationManager() = default;
+    bool isActive{false};
+    Color color{100,100,100,0};
+    std::vector<AnimationQuad*> animationQuads{};
+    std::vector<SDL_Rect*> colliderRects{};
+    std::vector<ProgressBar*> progressBars{};
+    std::vector<FieldOfVision*> fields{};
+    std::vector<FieldOfVision*> guardsVision{};
     void clearAnimationQuads();
     void draw_colliders();
     void drawLinesOfVision();
