@@ -26,7 +26,7 @@ class GameScene: public Scene{
 public:
     GameScene(int id, std::string newTiledFile);
     GameScene(int id, std::string newTiledFile, std::string music);
-    ~GameScene();
+    virtual ~GameScene() = default;
     void load();
     void draw();
     void update(double timeElapsed);

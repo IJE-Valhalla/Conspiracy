@@ -12,11 +12,8 @@ set (PROJECT_ASSETS_DIR  "${PROJECT_SOURCE_DIR}/assets")
 # Gets the list of files inside the src directory
 file(GLOB_RECURSE SOURCES "${PROJECT_SRC_DIR}/*.cpp"
                           "${PROJECT_SRC_DIR}/*.c")
-
 # Include Headers
 include_directories("${PROJECT_INCLUDE_DIR}")
-
-
 
 #### Compilation ####
 
@@ -24,17 +21,15 @@ include_directories("${PROJECT_INCLUDE_DIR}")
 set(COMPILE_FLAGS "")
 
 if (${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
-    set(COMPILE_FLAGS "${COMPILE_FLAGS} -std=c++11 -W -Wall -pedantic -std=c++11 -Wshadow -O2 -g")
+    set(COMPILE_FLAGS "${COMPILE_FLAGS} -std=c++11 -W -Wall -fstack-protector-all -pedantic -Wshadow -O2 -g")
 elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
-    set(COMPILE_FLAGS "${COMPILE_FLAGS} -std=c++11 -W -Wall -pedantic -std=c++11 -Wshadow -O2 -g")
+    set(COMPILE_FLAGS "${COMPILE_FLAGS} -std=c++11 -W -Wall -fstack-protector-all -pedantic -Wshadow -O2 -g")
 elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
-    set(COMPILE_FLAGS "${COMPILE_FLAGS} /Wall")
+    set(COMPILE_FLAGS "${COMPILE_FLAGS} /Wall /W4")
 endif()
 
 # Cmake compilation flags redefinition
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMPILE_FLAGS}")
-
-
 
 #### Dependencies ####
 
@@ -48,18 +43,14 @@ set (PROJECT_GAME_DIR "${PROJECT_SOURCE_DIR}/game")
 add_subdirectory(${PROJECT_GAME_DIR})
 include_directories(${GAME_INCLUDE_DIR})
 
-
-
 #### Executable ####
 
 add_executable(conspiracy ${SOURCES})
 
 target_link_libraries(conspiracy
                       engine
-                  game
+                      game
                       SDL2 SDL2_image SDL2_ttf SDL2_mixer)
-
-
 
 #### Custom Commands ####
 
