@@ -11,3 +11,9 @@ include_directories("${GAME_INCLUDE_DIR}")
 add_library(game STATIC ${SOURCES})
 
 target_link_libraries(game engine)
+
+install(TARGETS game
+  RUNTIME DESTINATION bin
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+)

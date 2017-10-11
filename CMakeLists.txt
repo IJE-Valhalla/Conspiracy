@@ -8,6 +8,7 @@ set(CXX_STANDARD_REQUIRED ON)
 set (PROJECT_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include")
 set (PROJECT_SRC_DIR     "${PROJECT_SOURCE_DIR}/src")
 set (PROJECT_ASSETS_DIR  "${PROJECT_SOURCE_DIR}/assets")
+set (CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/install)
 
 # Gets the list of files inside the src directory
 file(GLOB_RECURSE SOURCES "${PROJECT_SRC_DIR}/*.cpp"
@@ -58,3 +59,19 @@ target_link_libraries(conspiracy
 add_custom_command(TARGET conspiracy POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
                    ${PROJECT_ASSETS_DIR} ${CMAKE_BINARY_DIR}/assets)
+
+#### Install/Packaging ####
+
+install(TARGETS conspiracy
+  RUNTIME DESTINATION bin
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+)
+
+install(DIRECTORY ${PROJECT_ASSETS_DIR}
+  DESTINATION bin/assets
+)
+
+#TODO: Add SDL2 libraries to the install phase
+
+include(CPack.cmake)
