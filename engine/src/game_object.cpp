@@ -22,10 +22,6 @@ GameObject::GameObject(double positionX, double positionY,int width, int height)
     setEnabled(true);
 }
 
-GameObject::GameObject(){}
-
-GameObject::~GameObject(){}
-
 //void GameObject::update(double timeElapsed){}
 
 std::string GameObject::getName(){

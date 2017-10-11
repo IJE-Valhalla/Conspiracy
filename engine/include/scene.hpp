@@ -9,7 +9,7 @@ namespace engine{
     class Scene{
     public:
         Scene(int id);
-        ~Scene(){}
+        virtual ~Scene() = default;
         virtual void load();
         virtual void draw();
         virtual void update(double timeElapsed) = 0;
