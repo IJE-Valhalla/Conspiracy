@@ -1,25 +1,26 @@
 #include "engine.hpp"
+#include <memory>
 
 namespace engine{
 
     const std::string GAME_NAME = "Conspiracy";
     const std::pair <int, int> WINDOW_SIZE (960, 640);
 
-    SceneManager* sceneManager;
-    WindowManager* windowManager;
-    SDLManager* sdlManager;
+    std::shared_ptr<SceneManager> sceneManager{nullptr};
+    std::shared_ptr<WindowManager> windowManager{nullptr};
+    std::shared_ptr<SDLManager> sdlManager{nullptr};
     double startTime;
     double stepTime;
     double timeElapsed;
     double frameTime;
     double frameRate = 60.0;
     SceneManager* getSceneManager(){
-        return sceneManager;
+        return sceneManager.get();
     }
     void loadEngine(){
-        sceneManager = new SceneManager();
-        windowManager = new WindowManager();
-        sdlManager = new SDLManager();
+        sceneManager = std::make_shared<SceneManager>();
+        windowManager = std::make_shared<WindowManager>();
+        sdlManager = std::make_shared<SDLManager>();
         startTime = SDL_GetTicks();
         stepTime = startTime;
         frameTime = 1000.0/frameRate;

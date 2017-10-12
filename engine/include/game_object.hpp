@@ -11,8 +11,8 @@ namespace engine{
     public:
         GameObject(std::string objectName, double positionX, double positionY,int width, int height);
         GameObject(double positionX, double positionY,int width, int height);
-        GameObject();
-        ~GameObject();
+        GameObject() = default;
+        virtual ~GameObject() = default;
 
         virtual void draw() = 0;
         virtual void update(double timeElapsed) = 0;

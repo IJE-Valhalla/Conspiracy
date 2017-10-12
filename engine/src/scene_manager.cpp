@@ -6,14 +6,15 @@ using namespace engine;
 
 SceneManager::SceneManager(){
     beforeSceneId = 0;
-    currentSceneId = 0;  
+    currentSceneId = 0;
 }
 
-void SceneManager::addScene(Scene* scene){
-    if(scenes.find(scene->getId()) != scenes.end()){
+void SceneManager::addScene(std::shared_ptr<Scene> &&scene){
+    auto current_scene = std::move(scene);
+    if(scenes.find(current_scene->getId()) != scenes.end()){
         INFO("Failed to load scene");
     }else{
-        scenes[scene->getId()] = scene;
+        scenes[current_scene->getId()] = std::move(current_scene);
     }
 }
 
@@ -21,8 +22,8 @@ void SceneManager::loadScene(int id){
     if(scenes.find(id) == scenes.end()){
         INFO("Invalid Scene ID to Load");
     }else{
-        Scene* scene = currentScene;
-        if(scene != NULL){
+        auto scene = currentScene;
+        if(scene){
             scene->unload();
         }
         currentScene = scenes[id];
@@ -36,7 +37,7 @@ void SceneManager::loadScene(int id){
 }
 
 Scene* SceneManager::getCurrentScene(){
-    return currentScene;
+    return currentScene.get();
 }
 
 int SceneManager::getCurrentSceneId(){

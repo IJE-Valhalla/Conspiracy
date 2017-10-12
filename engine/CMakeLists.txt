@@ -9,3 +9,11 @@ file(GLOB_RECURSE SOURCES "${PROJECT_SRC_DIR}/*.cpp" "${PROJECT_SRC_DIR}/*.c")
 include_directories("${ENGINE_INCLUDE_DIR}")
 
 add_library(engine STATIC ${SOURCES})
+
+#### Install ####
+
+install(TARGETS engine
+  RUNTIME DESTINATION bin
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+)

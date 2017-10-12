@@ -18,7 +18,11 @@ using namespace engine;
             exit(-1);
         }
 
-        texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), image);
+        texture = std::shared_ptr<SDL_Texture>(SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), image), [=](SDL_Texture *t)
+        {
+            INFO("Destroy sprite.");
+            SDL_DestroyTexture(t);
+        });
 
         if(texture == nullptr){
             ERROR("CREATE TEXTURE SPRITE ERROR.");
@@ -32,9 +36,7 @@ using namespace engine;
     }
 
     void Sprite::shutdown(){
-        INFO("Destroy sprite.");
-        SDL_DestroyTexture(texture);
-        texture = nullptr;
+
     }
     void Sprite::setDrawSize(int w, int h){
         drawWidth = w;
@@ -49,5 +51,5 @@ using namespace engine;
         // Rendering in screen
         renderQuad = {axis.first, axis.second, drawWidth, drawHeight };
 
-        SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
+        SDL_RenderCopy(WindowManager::getGameCanvas(), texture.get(), &clipRect, &renderQuad);
     }

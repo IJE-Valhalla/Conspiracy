@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <memory>
 
 #include "sdl2includes.hpp"
 
@@ -19,7 +20,7 @@ namespace engine{
         virtual void shutdown();
         void setDrawSize(int w, int h);
     protected:
-        SDL_Texture * texture{nullptr};
+        std::shared_ptr<SDL_Texture> texture{nullptr};
         std::string directory{};
         std::pair<int, int> lenght{}; // Width and height from image.
         std::pair<int, int> axis{};

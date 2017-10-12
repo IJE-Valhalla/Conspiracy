@@ -39,6 +39,7 @@ GameScene::GameScene(int id, std::string newTiledFile, std::string audioFile) : 
     stageTimer = new Timer();
     actualPapers = 0;
 }
+
 void GameScene::draw(){
         for(auto gameObject : gameObjectsList) {
                 (*gameObject).draw();

@@ -11,7 +11,7 @@ class CameraSystem: public GameObject{
 public:
     CameraSystem(Camera* camera, CameraSwitch* cameraSwitch);
     CameraSystem(Camera* camera, CameraSwitch* cameraSwitch, CameraLever* cameraLever);
-    ~CameraSystem();
+    ~CameraSystem() = default;
     void update(double timeElapsed);
     void draw();
     Camera* getCamera();

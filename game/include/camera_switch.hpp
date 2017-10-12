@@ -9,7 +9,7 @@ using namespace engine;
 class CameraSwitch: public GameObject{
 public:
     CameraSwitch(double positionX, double positionY, std::string direction);
-    ~CameraSwitch();
+    ~CameraSwitch() = default;
     void update(double timeElapsed);
     void draw();
     bool isWorking();
