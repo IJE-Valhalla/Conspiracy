@@ -69,7 +69,7 @@ install(TARGETS conspiracy
 )
 
 install(DIRECTORY ${PROJECT_ASSETS_DIR}
-  DESTINATION bin/assets
+  DESTINATION bin/
 )
 
 #TODO: Add SDL2 libraries to the install phase
