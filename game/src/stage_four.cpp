@@ -18,7 +18,7 @@ void StageFour::createGuards(){
     std::pair <std::string, int> waySeven1 ("left", 220);
 
 
-    Guard * guard1 = new Guard("assets/sprites/seguranca_sheet.png", 20, HEADER_SIZE + 400, 18, 35, "right", 2, 10);
+    Guard * guard1 = new Guard(GUARDASSET, 20, HEADER_SIZE + 400, 18, 35, "right", 2, 10);
     guard1->addWay(1, wayOne1);
     guard1->addWay(2, wayTwo1);
     guard1->addWay(3, wayThree1);
@@ -32,7 +32,7 @@ void StageFour::createGuards(){
     std::pair <std::string, int> wayOne2 ("left", 450);
     std::pair <std::string, int> wayTwo2 ("right", 900);
 
-    Guard * guard2 = new Guard("assets/sprites/seguranca_sheet.png", 750, HEADER_SIZE + 400, 18, 35, "left", 2, 10);
+    Guard * guard2 = new Guard(GUARDASSET, 750, HEADER_SIZE + 400, 18, 35, "left", 2, 10);
     guard2->addWay(1, wayOne2);
     guard2->addWay(2, wayTwo2);
 
@@ -45,7 +45,7 @@ void StageFour::createGuards(){
     std::pair <std::string, int> wayFive3 ("up", HEADER_SIZE + 200);
 
 
-    Guard * guard3 = new Guard("assets/sprites/seguranca_sheet.png", 550, HEADER_SIZE + 420, 18, 35, "up", 2, 10);
+    Guard * guard3 = new Guard(GUARDASSET, 550, HEADER_SIZE + 420, 18, 35, "up", 2, 10);
     guard3->addWay(1, wayOne3);
     guard3->addWay(2, wayTwo3);
     guard3->addWay(3, wayThree3);
@@ -57,7 +57,7 @@ void StageFour::createGuards(){
     std::pair <std::string, int> wayOne4 ("left", 450);
     std::pair <std::string, int> wayTwo4 ("right", 900);
 
-    Guard * guard4 = new Guard("assets/sprites/seguranca_sheet.png", 750, HEADER_SIZE + 330, 18, 35, "right", 2, 10);
+    Guard * guard4 = new Guard(GUARDASSET, 750, HEADER_SIZE + 330, 18, 35, "right", 2, 10);
     guard4->addWay(1, wayOne4);
     guard4->addWay(2, wayTwo4);
 
@@ -66,7 +66,7 @@ void StageFour::createGuards(){
     std::pair <std::string, int> wayOne5 ("down", HEADER_SIZE + 600);
     std::pair <std::string, int> wayTwo5 ("up", HEADER_SIZE + 300);
 
-    Guard * guard5 = new Guard("assets/sprites/seguranca_sheet.png", 650, HEADER_SIZE + 330, 18, 35, "down", 2, 10);
+    Guard * guard5 = new Guard(GUARDASSET, 650, HEADER_SIZE + 330, 18, 35, "down", 2, 10);
     guard5->addWay(1, wayOne5);
     guard5->addWay(2, wayTwo5);
 
@@ -77,7 +77,7 @@ void StageFour::createGuards(){
     std::pair <std::string, int> wayThree6 ("right",350);
     std::pair <std::string, int> wayFour6 ("down", HEADER_SIZE + 300);
 
-    Guard * guard6 = new Guard("assets/sprites/seguranca_sheet.png", 350, HEADER_SIZE + 230, 18, 35, "down", 2, 10);
+    Guard * guard6 = new Guard(GUARDASSET, 350, HEADER_SIZE + 230, 18, 35, "down", 2, 10);
     guard6->addWay(1, wayOne6);
     guard6->addWay(2, wayTwo6);
     guard6->addWay(3, wayThree6);
@@ -90,7 +90,7 @@ void StageFour::createGuards(){
     std::pair <std::string, int> wayThree7 ("left", 400);
     std::pair <std::string, int> wayFour7 ("up", HEADER_SIZE + 30);
 
-    Guard * guard7 = new Guard("assets/sprites/seguranca_sheet.png", 400, HEADER_SIZE + 30, 18, 35, "down", 2, 10);
+    Guard * guard7 = new Guard(GUARDASSET, 400, HEADER_SIZE + 30, 18, 35, "down", 2, 10);
     guard7->addWay(1, wayOne7);
     guard7->addWay(2, wayTwo7);
     guard7->addWay(3, wayThree7);
@@ -159,22 +159,22 @@ void StageFour::createPapers(){
 }
 
 void StageFour::createTables(){
-    gameObjectsList.push_back(new Table("assets/sprites/mesa.png", 890, HEADER_SIZE + 370, 60, 24));
-    gameObjectsList.push_back(new Table("assets/sprites/mesa.png", 828, HEADER_SIZE + 370, 60, 24));
+    gameObjectsList.push_back(new Table(TABLEASSET, 890, HEADER_SIZE + 370, 60, 24));
+    gameObjectsList.push_back(new Table(TABLEASSET, 828, HEADER_SIZE + 370, 60, 24));
 
-    gameObjectsList.push_back(new Table("assets/sprites/mesa.png", 890, HEADER_SIZE + 470, 60, 24));
-    gameObjectsList.push_back(new Table("assets/sprites/mesa.png", 828, HEADER_SIZE + 470, 60, 24));
+    gameObjectsList.push_back(new Table(TABLEASSET, 890, HEADER_SIZE + 470, 60, 24));
+    gameObjectsList.push_back(new Table(TABLEASSET, 828, HEADER_SIZE + 470, 60, 24));
 }
 
 void StageFour::createFinishPoints(){
-    gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 100, 595, 34, 34, "V"));
-    gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 540, 595, 34, 34, "B"));
-    gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 740, 595, 34, 34, "E"));
+    gameObjectsList.push_back(new FinishPoint(FINISHPOINTASSET, 100, 595, 34, 34, "V"));
+    gameObjectsList.push_back(new FinishPoint(FINISHPOINTASSET, 540, 595, 34, 34, "B"));
+    gameObjectsList.push_back(new FinishPoint(FINISHPOINTASSET, 740, 595, 34, 34, "E"));
 }
 
 void StageFour::createChairs(){
-    gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 800, HEADER_SIZE + 380, 20, 16));
-    gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 800, HEADER_SIZE + 480, 20, 16));
-    gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 380, HEADER_SIZE + 400, 20, 16));
-    gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 300, HEADER_SIZE + 250, 20, 16));
+    gameObjectsList.push_back(new Chair(CHAIRASSET, 800, HEADER_SIZE + 380, 20, 16));
+    gameObjectsList.push_back(new Chair(CHAIRASSET, 800, HEADER_SIZE + 480, 20, 16));
+    gameObjectsList.push_back(new Chair(CHAIRASSET, 380, HEADER_SIZE + 400, 20, 16));
+    gameObjectsList.push_back(new Chair(CHAIRASSET, 300, HEADER_SIZE + 250, 20, 16));
 }
