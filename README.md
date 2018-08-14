@@ -86,7 +86,7 @@ $ ./conspiracy
 ```
 
 ### Arch Linux
-To install the sdl dependencies on arch linux you need this
+To install the sdl dependencies on arch linux you need those
 packages:
 
 - https://www.archlinux.org/packages/extra/x86_64/sdl2/
@@ -94,7 +94,7 @@ packages:
 - https://www.archlinux.org/packages/extra/x86_64/sdl2_ttf/
 - https://www.archlinux.org/packages/extra/x86_64/sdl2_mixer/
 
-After install this packages all you need to do is to open you
+After install those packages all you need to do is to open you
 terminal and do:
 ```
 $ cd Conspiracy
