@@ -75,13 +75,34 @@ The player has the option of killing guards and reporters, but will trigger a 60
 
 ## How to build
 
+### Debian like OS
 ```
+$ sudo apt-get install libsdl2-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-image-dev 
 $ git clone https://github.com/IJE-Valhalla/Conspiracy.git
 $ cd Conspiracy
 $ cmake .
 $ make
 $ ./conspiracy
 ```
+
+### Arch Linux
+To install the sdl dependencies on arch linux you need this
+packages:
+
+- https://www.archlinux.org/packages/extra/x86_64/sdl2/
+- https://www.archlinux.org/packages/extra/x86_64/sdl2_image/
+- https://www.archlinux.org/packages/extra/x86_64/sdl2_ttf/
+- https://www.archlinux.org/packages/extra/x86_64/sdl2_mixer/
+
+After install this packages all you need to do is to open you
+terminal and do:
+```
+$ cd Conspiracy
+$ cmake .
+$ make
+$ ./conspiracy
+```
+
 
 ## Authors
 
