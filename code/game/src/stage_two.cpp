@@ -14,7 +14,7 @@ void StageTwo::createGuards(){
     std::pair <std::string, int> wayFour1 ("down", HEADER_SIZE + 120);
     std::pair <std::string, int> wayFive1 ("right", 300);
 
-    Guard * guard1 = new Guard(GUARDASSET, 20, HEADER_SIZE + 120, 18, 35, "right", 2, 10);
+    Guard * guard1 = new Guard("assets/sprites/seguranca_sheet.png", 20, HEADER_SIZE + 120, 18, 35, "right", 2, 10);
     guard1->addWay(1, wayOne1);
     guard1->addWay(2, wayTwo1);
     guard1->addWay(3, wayThree1);
@@ -30,7 +30,7 @@ void StageTwo::createGuards(){
     std::pair <std::string, int> wayFive2 ("left", 750);
     std::pair <std::string, int> waySix2 ("up", HEADER_SIZE + 50);
 
-    Guard * guard2 = new Guard(GUARDASSET, 750, HEADER_SIZE + 50, 18, 35, "down", 2, 10);
+    Guard * guard2 = new Guard("assets/sprites/seguranca_sheet.png", 750, HEADER_SIZE + 50, 18, 35, "down", 2, 10);
     guard2->addWay(1, wayOne2);
     guard2->addWay(2, wayTwo2);
     guard2->addWay(3, wayThree2);
@@ -55,7 +55,7 @@ void StageTwo::createGuards(){
     std::pair <std::string, int> wayThirteen3 ("down", HEADER_SIZE + 210);
 
 
-    Guard * guard3 = new Guard(GUARDASSET, 500, HEADER_SIZE + 200, 18, 35, "down", 2, 10);
+    Guard * guard3 = new Guard("assets/sprites/seguranca_sheet.png", 500, HEADER_SIZE + 200, 18, 35, "down", 2, 10);
     guard3->addWay(1, wayOne3);
     guard3->addWay(2, wayTwo3);
     guard3->addWay(3, wayThree3);
@@ -115,6 +115,6 @@ void StageTwo::createPapers(){
 }
 
 void StageTwo::createFinishPoints(){
-    gameObjectsList.push_back(new FinishPoint(FINISHPOINTASSET, 550, 100, 34, 34, "EB"));
-    gameObjectsList.push_back(new FinishPoint(FINISHPOINTASSET, 250, 45, 34, 34, "V"));
+    gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 550, 100, 34, 34, "EB"));
+    gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 250, 45, 34, 34, "V"));
 }

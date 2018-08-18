@@ -2,6 +2,7 @@
 # Created by https://www.gitignore.io/api/vim,macos,c++,cmake
 
 build
+install
 
 ### C++ ###
 # Prerequisites

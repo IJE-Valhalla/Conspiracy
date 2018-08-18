@@ -13,7 +13,7 @@ void StageFive::createGuards(){
     std::pair <std::string, int> wayOne1 ("down", 900);
     std::pair <std::string, int> wayTwo1 ("up", 450);
 
-    Guard * guard1 = new Guard(GUARDASSET, 800, HEADER_SIZE + 430, 18, 35, "down", 2, 10);
+    Guard * guard1 = new Guard("assets/sprites/seguranca_sheet.png", 800, HEADER_SIZE + 430, 18, 35, "down", 2, 10);
     guard1->addWay(1, wayOne1);
     guard1->addWay(2, wayTwo1);
 
@@ -22,7 +22,7 @@ void StageFive::createGuards(){
     std::pair <std::string, int> wayOne2 ("right", 900);
     std::pair <std::string, int> wayTwo2 ("left", 450);
 
-    Guard * guard2 = new Guard(GUARDASSET, 800, HEADER_SIZE + 465, 18, 35, "right", 2, 10);
+    Guard * guard2 = new Guard("assets/sprites/seguranca_sheet.png", 800, HEADER_SIZE + 465, 18, 35, "right", 2, 10);
     guard2->addWay(1, wayOne2);
     guard2->addWay(2, wayTwo2);
 
@@ -31,7 +31,7 @@ void StageFive::createGuards(){
     std::pair <std::string, int> wayOne3 ("right", 900);
     std::pair <std::string, int> wayTwo3 ("left", 450);
 
-    Guard * guard3 = new Guard(GUARDASSET, 800, HEADER_SIZE + 100, 18, 35, "right", 2, 10);
+    Guard * guard3 = new Guard("assets/sprites/seguranca_sheet.png", 800, HEADER_SIZE + 100, 18, 35, "right", 2, 10);
     guard3->addWay(1, wayOne3);
     guard3->addWay(2, wayTwo3);
 
@@ -126,17 +126,17 @@ void StageFive::createPapers(){
 }
 
 void StageFive::createTables(){
-    gameObjectsList.push_back(new Table(TABLEASSET, 890, 470, 60, 34));
-    gameObjectsList.push_back(new Table(TABLEASSET, 828, 470, 60, 34));
+    gameObjectsList.push_back(new Table("assets/sprites/mesa.png", 890, 470, 60, 34));
+    gameObjectsList.push_back(new Table("assets/sprites/mesa.png", 828, 470, 60, 34));
 }
 
 void StageFive::createFinishPoints(){
-    gameObjectsList.push_back(new FinishPoint(FINISHPOINTASSET, 130, 100, 34, 34, "V"));
-    gameObjectsList.push_back(new FinishPoint(FINISHPOINTASSET, 480, 100, 34, 34, "B"));
-    gameObjectsList.push_back(new FinishPoint(FINISHPOINTASSET, 780, 100, 34, 34, "E"));
+    gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 130, 100, 34, 34, "V"));
+    gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 480, 100, 34, 34, "B"));
+    gameObjectsList.push_back(new FinishPoint("assets/sprites/cenary/tapete.png", 780, 100, 34, 34, "E"));
 }
 
 void StageFive::createChairs(){
-    gameObjectsList.push_back(new Chair(CHAIRASSET, 830, HEADER_SIZE + 540, 20, 16));
-    gameObjectsList.push_back(new Chair(CHAIRASSET, 670, HEADER_SIZE + 140, 20, 16));
+    gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 830, HEADER_SIZE + 540, 20, 16));
+    gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 670, HEADER_SIZE + 140, 20, 16));
 }
