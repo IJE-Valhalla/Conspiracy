@@ -4,6 +4,8 @@
 build
 install
 
+.vscode
+    
 ### C++ ###
 # Prerequisites
 *.d
