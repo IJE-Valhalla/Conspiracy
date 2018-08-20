@@ -24,7 +24,7 @@ set(COMPILE_FLAGS "")
 if (${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
     set(COMPILE_FLAGS "${COMPILE_FLAGS} -std=c++11 -W -Wall -fstack-protector-all -pedantic -Wshadow -O2 -g")
 elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
-    set(COMPILE_FLAGS "${COMPILE_FLAGS} -std=c++11 -W -Wall -Weffc++ -fstack-protector-all -pedantic -Wshadow -O2 -g")
+    set(COMPILE_FLAGS "${COMPILE_FLAGS} -std=c++11 -W -Wall -fstack-protector-all -pedantic -Wshadow -O2 -g")
 elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
     set(COMPILE_FLAGS "${COMPILE_FLAGS} /Wall /W4")
 endif()
@@ -69,7 +69,7 @@ install(TARGETS conspiracy
 )
 
 install(DIRECTORY ${PROJECT_ASSETS_DIR}
-  DESTINATION bin/assets
+  DESTINATION bin/
 )
 
 #TODO: Add SDL2 libraries to the install phase

@@ -26,7 +26,7 @@ private:
     int selectButton{0};
     std::vector<std::pair<int, GameObject*>> gameObjectsList{};
     Sprite * background{nullptr};
-    Color select{255, 255, 255, 0};
+    Color select{36,185,64,0};
     Color notSelect{0,0,0,0};
     Audio * soundEffect{nullptr};
 };
