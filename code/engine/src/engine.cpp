@@ -1,73 +1,92 @@
 #include "engine.hpp"
-#include <memory>
+#include "log.h"
 
-namespace engine{
 
-    const std::string GAME_NAME = "Conspiracy";
-    const std::pair <int, int> WINDOW_SIZE (960, 640);
+// Global static pointer to ensure a single instance of the class
+Engine* Engine::m_instance = NULL;
 
-    std::shared_ptr<SceneManager> sceneManager{nullptr};
-    std::shared_ptr<WindowManager> windowManager{nullptr};
-    std::shared_ptr<SDLManager> sdlManager{nullptr};
-    double startTime;
-    double stepTime;
-    double timeElapsed;
-    double frameTime;
-    double frameRate = 60.0;
-    SceneManager* getSceneManager(){
-        return sceneManager.get();
+double step_time = 0;
+double time_elapsed = 0;
+
+const int IMG_FLAGS = IMG_INIT_PNG;
+const double FRAME_RATE = 60.0;
+const double FRAME_TIME = 1000.0/FRAME_RATE;
+
+
+Engine* Engine::instance() {
+    if(!m_instance) {
+        m_instance = new Engine;
+        m_instance->window_manager = WindowManager();
+        m_instance->input_manager = InputManager::instance();
     }
-    void loadEngine(){
-        sceneManager = std::make_shared<SceneManager>();
-        windowManager = std::make_shared<WindowManager>();
-        sdlManager = std::make_shared<SDLManager>();
-        startTime = SDL_GetTicks();
-        stepTime = startTime;
-        frameTime = 1000.0/frameRate;
+    return m_instance;
+}
 
-        if(!sdlManager->initSDL()){
-            ERROR("ERRO AO INICIAR SDL");
-            exit(-1);
-        }else if(!windowManager->createWindow(GAME_NAME, WINDOW_SIZE)){
-            ERROR("ERRO AO CRIAR JANELA");
-            exit(-1);
+void Engine::init() {
+    INFO("Initialising SDL");
+
+    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0){
+        ERROR("Failed to initialise SDL Sound and Video" + SDL_GetError());
+        exit(-1);
+    }
+
+    if(!(IMG_Init(IMG_FLAGS) & IMG_FLAGS)){
+        ERROR("Failed to initialise SDL Image" + SDL_GetError());
+        exit(-1);
+    }
+
+    if(TTF_Init() == -1){
+        ERROR("Failed to initialise SDL TTF" + SDL_GetError());
+        exit(-1);
+    }
+
+    if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0){
+        ERROR("Failed to initialise SDL Mixer" + SDL_GetError());
+        exit(-1);
+    }
+}
+
+void Engine::finalize() {
+    INFO("Finalising SDL");
+
+    INFO("Finalizing Mixer");
+    Mix_Quit();
+
+    INFO("Finalizing TTF");
+    TTF_Quit();
+
+    INFO("Finalizing Mixer");
+    IMG_Quit();
+
+    INFO("Finalizing audio and video");
+    SDL_Quit();
+}
+
+void Engine::new_game(std::string game_name, std::pair<int, int> window_size) {
+    window_manager.create_window(game_name, window_size);
+}
+
+void Engine::run() {
+    bool running = true;
+    SDL_Event event;
+
+    while(running) {
+        step_time = SDL_GetTicks();
+
+        input_manager->update(event);
+        SDL_RenderClear(window_manager.canvas());
+
+        if(input_manager->quit_event()) {
+            running = false;
+            window_manager.close_window();
+            continue;
         }
-    }
 
-    void run(){
-        bool isRunning = true;
-        SDL_Event event;
+        time_elapsed = SDL_GetTicks() - step_time;
 
-        while(isRunning){
-            stepTime = SDL_GetTicks();
-
-            engine::InputManager::instance.update(event);
-            SDL_RenderClear(WindowManager::getGameCanvas());
-
-            if(engine::InputManager::instance.getQuitRequest()){
-                isRunning = false;
-                sdlManager->finalizeSDL();
-                windowManager->destroyWindow();
-                continue;
-            }
-
-
-            timeElapsed = SDL_GetTicks() - stepTime;
-            DEBUG("TICKS:" + std::to_string(SDL_GetTicks()));
-            DEBUG("frameTime:" + std::to_string(frameTime));
-            DEBUG("timeElapsed: " + std::to_string(timeElapsed));
-            if(frameTime > timeElapsed){
-                DEBUG("SDL_DELAY: " + std::to_string(frameTime - timeElapsed));
-                SDL_Delay(frameTime - timeElapsed);
-                timeElapsed = SDL_GetTicks() - stepTime;
-            }
-
-            if(sceneManager->getCurrentScene() != NULL){
-              sceneManager->getCurrentScene()->update(timeElapsed);
-              sceneManager->getCurrentScene()->draw();
-            }
-            AnimationManager::instance.draw_quads();
-            SDL_RenderPresent(WindowManager::getGameCanvas());
+        if(FRAME_TIME > time_elapsed) {
+            SDL_Delay(FRAME_TIME - time_elapsed);
+                time_elapsed = SDL_GetTicks() - step_time;
         }
     }
 }

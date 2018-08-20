@@ -1,25 +1,28 @@
 #ifndef ENGINE_HPP
 #define ENGINE_HPP
 
-#include <utility>
-#include "log.h"
-#include "window_manager.hpp"
-#include "sdl_manager.hpp"
+#include <string>
 #include "sdl2includes.hpp"
-#include "scene_manager.hpp"
-#include "sprite.hpp"
-#include "scene_manager.hpp"
+#include "window_manager.hpp"
 #include "input_manager.hpp"
-#include "game_object.hpp"
-#include "animation.hpp"
-#include "animation_manager.hpp"
-#include <vector>
-#include <iostream>
 
-namespace engine{
 
-  void run();
-  void loadEngine();
-  SceneManager* getSceneManager();
-}
+class Engine {
+    public:
+        static Engine* instance();
+        void init();
+        void finalize();
+        void new_game(std::string game_name, std::pair<int, int> window_size);
+        void run();
+
+    private:
+        Engine(){}; // block construction
+        Engine(Engine const&){}; // block copies
+        Engine& operator=(Engine const&){}; // block assigns
+        static Engine* m_instance;
+
+        WindowManager window_manager;
+        InputManager *input_manager;
+};
+
 #endif

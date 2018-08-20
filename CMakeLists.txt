@@ -1,20 +1,17 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(conspiracy LANGUAGES CXX)
+project(conspiracy)
 
 set(CXX_STANDARD 11)
 set(CXX_STANDARD_REQUIRED ON)
 
 # Set directory folders
-set (PROJECT_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include")
-set (PROJECT_SRC_DIR     "${PROJECT_SOURCE_DIR}/src")
-set (PROJECT_ASSETS_DIR  "${PROJECT_SOURCE_DIR}/assets")
+set (SRC_DIR     "${PROJECT_SOURCE_DIR}/code")
+set (ASSETS_DIR  "${PROJECT_SOURCE_DIR}/assets")
 set (CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/install)
 
 # Gets the list of files inside the src directory
-file(GLOB_RECURSE SOURCES "${PROJECT_SRC_DIR}/*.cpp"
-                          "${PROJECT_SRC_DIR}/*.c")
-# Include Headers
-include_directories("${PROJECT_INCLUDE_DIR}")
+file(GLOB_RECURSE SOURCES "${SRC_DIR}/*.cpp"
+                          "${SRC_DIR}/*.c")
 
 #### Compilation ####
 
@@ -35,14 +32,14 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMPILE_FLAGS}")
 #### Dependencies ####
 
 # Add engine
-set (PROJECT_ENGINE_DIR "${PROJECT_SOURCE_DIR}/engine")
-add_subdirectory(${PROJECT_ENGINE_DIR})
+set (ENGINE_DIR "${PROJECT_SOURCE_DIR}/code/engine")
+add_subdirectory(${ENGINE_DIR})
 include_directories(${ENGINE_INCLUDE_DIR})
 
 # Add game
-set (PROJECT_GAME_DIR "${PROJECT_SOURCE_DIR}/game")
-add_subdirectory(${PROJECT_GAME_DIR})
-include_directories(${GAME_INCLUDE_DIR})
+#set (GAME_DIR "${PROJECT_SOURCE_DIR}/code/game")
+#add_subdirectory(${GAME_DIR})
+#include_directories(${GAME_INCLUDE_DIR})
 
 #### Executable ####
 
@@ -50,7 +47,7 @@ add_executable(conspiracy ${SOURCES})
 
 target_link_libraries(conspiracy
                       engine
-                      game
+                      #game
                       SDL2 SDL2_image SDL2_ttf SDL2_mixer)
 
 #### Custom Commands ####
@@ -58,7 +55,7 @@ target_link_libraries(conspiracy
 # Copy assets folder to build
 add_custom_command(TARGET conspiracy POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
-                   ${PROJECT_ASSETS_DIR} ${CMAKE_BINARY_DIR}/assets)
+                   ${ASSETS_DIR} ${CMAKE_BINARY_DIR}/assets)
 
 #### Install/Packaging ####
 

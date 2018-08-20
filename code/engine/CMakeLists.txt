@@ -1,10 +1,10 @@
-set(BASE_DIR "${PROJECT_SOURCE_DIR}/engine")
+set(BASE_DIR "${PROJECT_SOURCE_DIR}/code/engine")
 
 set (ENGINE_INCLUDE_DIR "${BASE_DIR}/include" CACHE INTERNAL "")
-set (PROJECT_SRC_DIR     "${BASE_DIR}/src")
+set (SRC_DIR     "${BASE_DIR}/src")
 
 # Gets the list of files inside the src directory
-file(GLOB_RECURSE SOURCES "${PROJECT_SRC_DIR}/*.cpp" "${PROJECT_SRC_DIR}/*.c")
+file(GLOB_RECURSE SOURCES "${SRC_DIR}/*.cpp" "${SRC_DIR}/*.c")
 
 include_directories("${ENGINE_INCLUDE_DIR}")
 

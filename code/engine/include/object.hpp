@@ -3,8 +3,8 @@
 * All objects in a game should be represented by this class.
 */
 
-#ifndef OBJECT_H
-#define OBJECT_H
+#ifndef OBJECT_HPP
+#define OBJECT_HPP
 
 #include <utility>
 
@@ -43,7 +43,7 @@ class Object {
         void set_active(bool status);
         void set_visible(bool status);
     
-    private:
+    protected:
         bool active;
         bool visible;
 

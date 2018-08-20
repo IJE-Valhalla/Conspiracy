@@ -3,7 +3,7 @@
 * in a game.
 */
 
-#include "object.h"
+#include "object.hpp"
 #include "log.h"
 
 

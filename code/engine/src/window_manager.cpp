@@ -1,65 +1,47 @@
 #include "window_manager.hpp"
-using namespace engine;
 
-SDL_Window *gameWindow;
-SDL_Renderer *gameCanvas;
+void WindowManager::create_window(std::string name, std::pair<int, int> size, std::string icon_path) {
+    m_window = SDL_CreateWindow(
+        name.c_str(),
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        size.first,
+        size.second,
+        SDL_WINDOW_SHOWN
+    );
 
-bool WindowManager::createWindow(std::string windowTitle, std::pair<int, int> windowSize){
-    INFO("Create window");
-    gameWindow = SDL_CreateWindow(windowTitle.c_str(), SDL_WINDOWPOS_CENTERED,
-    SDL_WINDOWPOS_CENTERED, windowSize.first,
-    windowSize.second, SDL_WINDOW_SHOWN);
-
-    if(gameWindow == nullptr){
-        return false;
+    if(m_window == nullptr) {
+        ERROR("UNABLE TO OPEN A WINDOW!" + SDL_GetError());
+        exit(-1);
     }
 
-    INFO("Create canvas");
-    gameCanvas = SDL_CreateRenderer(gameWindow, -1,
-        SDL_RENDERER_ACCELERATED);
+    set_window_icon(icon_path);
 
-        if(gameCanvas == nullptr){
-            return false;
-        }
+    m_surface = SDL_GetWindowSurface(m_window);
 
-        SDL_SetRenderDrawColor(gameCanvas, 100, 100, 100, 255);
-        SDL_RenderClear(gameCanvas);
-        SDL_RenderPresent(gameCanvas);
-        setImageIcon();
-        return true;
-    }
+    // Black screen
+    SDL_FillRect(m_surface, NULL, SDL_MapRGB(m_surface->format, 0x00, 0x00, 0x00));
 
+    //Update the surface
+    SDL_UpdateWindowSurface(m_window);
+}
 
-    bool WindowManager::destroyWindow(){
-        INFO("Destroying canvas");
-        SDL_DestroyRenderer(gameCanvas);
-        gameCanvas = nullptr;
+void WindowManager::close_window() {
+     SDL_DestroyWindow(m_window);
+     free(m_window);
+}
 
-        INFO("Destroying window");
-        SDL_DestroyWindow(gameWindow);
-        gameWindow = nullptr;
+void WindowManager::set_window_icon(std::string path) {
+    SDL_Surface * image = IMG_Load(path.c_str());
 
-        return true;
-    }
+    SDL_SetWindowIcon(m_window, image);
+    SDL_FreeSurface(image);
+}
 
-    SDL_Window* WindowManager::GetGameWindow(){
-        return gameWindow;
-    }
+SDL_Window* WindowManager::window() {
+    return m_window;
+}
 
-
-    SDL_Renderer* WindowManager::getGameCanvas(){
-        return gameCanvas;
-    }
-
-    void WindowManager::setImageIcon(){
-      // TODO Change image icon.
-      SDL_Surface * image = IMG_Load(std::string("assets/sprites/alien.png").c_str());
-
-      if(image == nullptr){
-            exit(-1);
-      }
-
-      SDL_SetWindowIcon(gameWindow, image);
-      SDL_FreeSurface(image);
-
-    }
+SDL_Renderer* WindowManager::canvas() {
+    return m_canvas;
+}

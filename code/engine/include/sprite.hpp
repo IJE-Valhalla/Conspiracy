@@ -1,34 +1,31 @@
-#ifndef ENGINE_SPRITE_HPP
-#define ENGINE_SPRITE_HPP
+/*
+*
+*/
 
-#include <iostream>
+#ifndef SPRITE_HPP
+#define SPRITE_HPP
+
 #include <string>
 #include <memory>
 
+#include "object.hpp"
 #include "sdl2includes.hpp"
+// #include "canvas.hpp"
 
-namespace engine{
+class Sprite: public Object {
 
-    class Sprite{
     public:
-        Sprite(){}
-        Sprite(std::string newDirectory);
-        virtual ~Sprite(){}
+        Sprite(std::string path);
+        Sprite(std::string path, std::pair<double, double> position);
 
-        virtual void init();
-        virtual void draw(int x, int y);
-        virtual void shutdown();
-        void setDrawSize(int w, int h);
-    protected:
-        std::shared_ptr<SDL_Texture> texture{nullptr};
-        std::string directory{};
-        std::pair<int, int> lenght{}; // Width and height from image.
-        std::pair<int, int> axis{};
-        SDL_Rect renderQuad{};
-        SDL_Rect clipRect{};
-        int drawWidth{0};
-        int drawHeight{0};
-    };
-}
+        virtual ~Sprite() = default;
 
+        void init();
+
+    private:
+        std::string m_path;
+        std::pair<double, double> m_size;
+        std::shared_ptr<SDL_Texture> m_texture {nullptr};
+};
+  
 #endif
