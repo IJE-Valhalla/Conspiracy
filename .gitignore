@@ -101,3 +101,7 @@ tags
 conspiracy
 
 *save.txt
+
+CPackConfig\.cmake
+
+CPackSourceConfig\.cmake

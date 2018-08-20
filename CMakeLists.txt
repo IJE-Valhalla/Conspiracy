@@ -34,12 +34,14 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMPILE_FLAGS}")
 # Add engine
 set (ENGINE_DIR "${PROJECT_SOURCE_DIR}/code/engine")
 add_subdirectory(${ENGINE_DIR})
+set (ENGINE_INCLUDE_DIR "${ENGINE_DIR}/include")
 include_directories(${ENGINE_INCLUDE_DIR})
 
 # Add game
-#set (GAME_DIR "${PROJECT_SOURCE_DIR}/code/game")
-#add_subdirectory(${GAME_DIR})
-#include_directories(${GAME_INCLUDE_DIR})
+set (GAME_DIR "${PROJECT_SOURCE_DIR}/code/game")
+set (GAME_INCLUDE_DIR "${GAME_DIR}/include")
+add_subdirectory(${GAME_DIR})
+include_directories(${GAME_INCLUDE_DIR})
 
 #### Executable ####
 
