@@ -4,7 +4,6 @@
 #include "engine.hpp"
 #include "input_manager.hpp"
 #include "animation.hpp"
-#include "enemy.hpp"
 #include "collision_manager.hpp"
 #include "field_of_vision.hpp"
 #include "progress_bar.hpp"
@@ -12,7 +11,7 @@
 
 using namespace engine;
 
-class Guard: public Enemy{
+class Guard: public GameObject{
 public:
     Guard(double positionX, double positionY, int width, int height, std::string initialDirection, double newWaitingTime);
     ~Guard();

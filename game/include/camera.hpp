@@ -4,12 +4,11 @@
 #include "engine.hpp"
 #include "input_manager.hpp"
 #include "animation.hpp"
-#include "enemy.hpp"
 #include "field_of_vision.hpp"
 
 using namespace engine;
 
-class Camera: public Enemy{
+class Camera: public GameObject{
 public:
     Camera(double positionX, double positionY, std::string direction);
     Camera(double positionX, double positionY, std::string direction, int angleOfVision, int range, int initialAngle);
