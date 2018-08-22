@@ -14,11 +14,11 @@ using namespace engine;
 
 class Guard: public Enemy{
 public:
-    Guard(std::string objectName, double positionX, double positionY, int width, int height, std::string initialDirection, int newQuantityRepeatWay, double newWaitingTime);
+    Guard(double positionX, double positionY, int width, int height, std::string initialDirection, double newWaitingTime);
     ~Guard();
     void update(double timeElapsed);
     void draw();
-    void addWay(int key, std::pair<std::string, int> way);
+    void addWay(int key, std::string p_direction, int point);
     void setWayActive(bool isActive);
     void verifyDistance(GameObject* alien);
     void talkingToETemer(std::string status);

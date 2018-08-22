@@ -21,7 +21,6 @@
 #endif
 
 //Defining constants for assets
-#define GUARDASSET "assets/sprites/seguranca_sheet.png"
 #define TABLEASSET "assets/sprites/mesa.png"
 #define FINISHPOINTASSET "assets/sprites/cenary/tapete.png"
 #define CHAIRASSET "assets/sprites/cadeira_sheet(20X27).png"

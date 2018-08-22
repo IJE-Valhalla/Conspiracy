@@ -1,12 +1,18 @@
 #include "guard.hpp"
+#define GUARDSPRITE "assets/sprites/seguranca_sheet.png"
 
-Guard::Guard(std::string objectName, double positionX, double positionY,
-             int width, int height, std::string initialDirection,int newQuantityRepeatWay, double newWaitingTime) : Enemy(objectName,
-                                                                          positionX,
-                                                                          positionY,
-                                                                          width, height){
+Guard::Guard(double positionX,
+             double positionY,
+             int width,
+             int height,
+             std::string initialDirection,
+             double newWaitingTime): Enemy(GUARDSPRITE,
+                                            positionX,
+                                            positionY,
+                                            width,
+                                            height){
 
-        animator = new Animation(objectName, 1, 10, 0.5);
+        animator = new Animation(GUARDSPRITE, 1, 10, 0.5);
         exclamation = new Animation("assets/sprites/exclamation.png",1, 1, 0.5);
 
         animator->addAction("right",6,9);
@@ -20,7 +26,7 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
 
         range = 150;
         int angleOfVision = 60;
-        quantityRepeatWay = newQuantityRepeatWay;
+        quantityRepeatWay = 2;
         currentRepeat = 0;
 
         fieldOfVision = new FieldOfVision(positionX+width/2,positionY-7, range, angleOfVision);
@@ -241,7 +247,8 @@ void Guard::draw(){
         //fieldOfVision->draw();
 }
 
-void Guard::addWay(int key, std::pair<std::string, int> way){
+void Guard::addWay(int key, std::string p_direction, int point){
+        std::pair<std::string, int> way(p_direction, point);
         ways[key] = way;
 }
 

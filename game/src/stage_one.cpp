@@ -9,40 +9,28 @@ StageOne::StageOne(int id, std::string newTiledFile) : GameScene (id, newTiledFi
 }
 
 void StageOne::createGuards(){
-    std::pair <std::string, int> wayOne1 ("right", 470);
-    std::pair <std::string, int> wayTwo1 ("up", HEADER_SIZE + 30);
-    std::pair <std::string, int> wayThree1 ("left", 220);
-    std::pair <std::string, int> wayFour1 ("down", HEADER_SIZE + 120);
-    std::pair <std::string, int> wayFive1 ("right", 470);
 
-    Guard * guard1 = new Guard(GUARDASSET, 220, HEADER_SIZE + 120, 18, 35, "right", 2, 15);
-    guard1->addWay(1, wayOne1);
-    guard1->addWay(2, wayTwo1);
-    guard1->addWay(3, wayThree1);
-    guard1->addWay(4, wayFour1);
-    guard1->addWay(5, wayFive1);
+    Guard * guard1 = new Guard(220, HEADER_SIZE + 120, 18, 35, "right", 15);
+    guard1->addWay(1, "right", 470);
+    guard1->addWay(2, "up", HEADER_SIZE + 30);
+    guard1->addWay(3, "left", 220);
+    guard1->addWay(4, "down", HEADER_SIZE + 120);
+    guard1->addWay(5, "right", 470);
 
     gameObjectsList.push_back(guard1);
 
-    std::pair <std::string, int> wayOne2 ("right", 920);
-    std::pair <std::string, int> wayTwo2 ("down", HEADER_SIZE + 550);
-    std::pair <std::string, int> wayThree2 ("left", 860);
-    std::pair <std::string, int> wayFour2 ("up", HEADER_SIZE + 50);
-    std::pair <std::string, int> wayFive2 ("right", 880);
-    std::pair <std::string, int> waySix2 ("down", HEADER_SIZE + 550);
+    Guard * guard2 = new Guard(880, HEADER_SIZE + 50, 18, 35, "down", 15);
+    guard2->addWay(1, "right", 920);
+    guard2->addWay(2, "down", HEADER_SIZE + 550);
+    guard2->addWay(3, "left", 860);
+    guard2->addWay(4, "up", HEADER_SIZE + 50);
 
-    Guard * guard2 = new Guard(GUARDASSET, 880, HEADER_SIZE + 50, 18, 35, "down", 2, 15);
-    guard2->addWay(1, wayOne2);
-    guard2->addWay(2, wayTwo2);
-    guard2->addWay(3, wayThree2);
-    guard2->addWay(4, wayFour2);
-
-    guard2->addWay(5, wayOne2);
-    guard2->addWay(6, wayTwo2);
-    guard2->addWay(7, wayThree2);
-    guard2->addWay(8, wayFour2);
-    guard2->addWay(9, wayFive2);
-    guard2->addWay(10, waySix2);
+    guard2->addWay(5, "right", 920);
+    guard2->addWay(6, "down", HEADER_SIZE + 550);
+    guard2->addWay(7, "left", 860);
+    guard2->addWay(8, "up", HEADER_SIZE + 50);
+    guard2->addWay(9, "right", 880);
+    guard2->addWay(10, "down", HEADER_SIZE + 550);
 
     gameObjectsList.push_back(guard2);
 
