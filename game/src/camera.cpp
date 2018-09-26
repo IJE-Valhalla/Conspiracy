@@ -5,7 +5,7 @@
 #define WIDTH 11
 #define HEIGHT 8
 
-Camera::Camera(double positionX, double positionY, std::string direction) : Enemy(FILENAME,positionX,positionY,
+Camera::Camera(double positionX, double positionY, std::string direction) : GameObject(FILENAME,positionX,positionY,
                                                                      WIDTH, HEIGHT){
     initializeAnimator(FILENAME);
     animator->setInterval(direction);
@@ -17,7 +17,7 @@ Camera::Camera(double positionX, double positionY, std::string direction) : Enem
 }
 
 Camera::Camera(double positionX, double positionY, std::string direction,
-               int p_angleOfVision, int p_range, int p_initialAngle): Enemy(FILENAME,positionX,positionY,
+               int p_angleOfVision, int p_range, int p_initialAngle): GameObject(FILENAME,positionX,positionY,
                                                                      WIDTH, HEIGHT){
     initializeAnimator(FILENAME);
     animator->setInterval(direction);

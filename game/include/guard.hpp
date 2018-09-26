@@ -4,7 +4,6 @@
 #include "engine.hpp"
 #include "input_manager.hpp"
 #include "animation.hpp"
-#include "enemy.hpp"
 #include "collision_manager.hpp"
 #include "field_of_vision.hpp"
 #include "progress_bar.hpp"
@@ -12,13 +11,13 @@
 
 using namespace engine;
 
-class Guard: public Enemy{
+class Guard: public GameObject{
 public:
-    Guard(std::string objectName, double positionX, double positionY, int width, int height, std::string initialDirection, int newQuantityRepeatWay, double newWaitingTime);
+    Guard(double positionX, double positionY, int width, int height, std::string initialDirection, double newWaitingTime);
     ~Guard();
     void update(double timeElapsed);
     void draw();
-    void addWay(int key, std::pair<std::string, int> way);
+    void addWay(int key, std::string p_direction, int point);
     void setWayActive(bool isActive);
     void verifyDistance(GameObject* alien);
     void talkingToETemer(std::string status);
