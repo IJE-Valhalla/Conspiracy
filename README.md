@@ -1,4 +1,4 @@
-# Conspiracy
+![Header](https://github.com/IJE-Valhalla/Conspiracy/assets/8556291/eb1ac6fd-e619-4cdf-9a88-8e373ff8504f)
 
 Conspiracy is a game developed for students of the course IJE of UnB-FGA college. The game has the puzzle genre.
 
@@ -36,6 +36,8 @@ Interactions occur between a character and an element during the game. The inter
 ## Characters
 The game has three alternate characters and unique abilities.
 
+![characters](https://github.com/IJE-Valhalla/Conspiracy/assets/8556291/e37f973d-d70d-41c5-b974-08971c48da98)
+
 * E.T. Bilu: He is the head of the team, being responsible for the intellectual work of the coup. He also wrote the future speeches of E. Temer for the aftermath of the aliens. Bilu is able to alter documents and intrude on security systems in buildings.
 
 * E.T de Varginha: He is less agile than the others, but, his fame amplified his powers. The E.T de Varginha is capable of lowering and being undetectable by humans, even in recorded images the human brain is not able to perceive it.
@@ -43,6 +45,8 @@ The game has three alternate characters and unique abilities.
 * E.Temer: This alien may not be the smartest, or even not be able to stay invisible. But his oratorical skills impress even the most elegant journalist. Despite its exotic appearance, E. Temer was able to obtain a very convincing mask for interacting with humans and distracting them during the activities of the coup.
 
 ## Enemies
+
+![Enemies](https://github.com/IJE-Valhalla/Conspiracy/assets/8556291/127a7e48-0b75-417d-8bf2-2b42e780d2f7)
 
 The enemies are the same in all phases, changing only the amount in each of them and their positions. There are 3 types of enemies, the guards of the ministry, reporters and the local security cameras.
 
